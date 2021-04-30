@@ -13,7 +13,7 @@ from django.contrib.auth.models import User
 
 # ----------------------------------------------------- index -----------------
 
-#@login_required()
+@login_required()
 def index(request):
     context = {'x': 0 }
     return render(request, 'index.html', context)

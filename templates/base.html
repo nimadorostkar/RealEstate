@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 
     {% load static %}
-  
+
 
     <head>
         <meta charset="utf-8">
@@ -91,7 +91,7 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse yamm" id="navigation">
                     <div class="button navbar-right">
-                        <button class="navbar-btn nav-button wow bounceInRight login" onclick=" window.open('register.html')" data-wow-delay="0.45s">Login</button>
+                        <button class="navbar-btn nav-button wow bounceInRight login" data-wow-delay="0.45s"><a href="{% url 'account_login' %}"> Login </a> </button>
                         <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('submit-property.html')" data-wow-delay="0.48s">Submit</button>
                     </div>
                     <ul class="main-nav nav navbar-nav navbar-right">
