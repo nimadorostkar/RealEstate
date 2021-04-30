@@ -40,8 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'app',               # Enable the inner app
-    'mptt',              # https://django-mptt.readthedocs.io/en/latest/index.html
-    'bootstrapform',     # https://django-bootstrap-form.readthedocs.io/en/latest/
+    #'bootstrapform',     # https://django-bootstrap-form.readthedocs.io/en/latest/
     'allauth',           # Third Party - 1) All Auth
     'allauth.account',
     'allauth.socialaccount'
