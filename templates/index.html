@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>GARO ESTATE | Home page</title>
+        <title> Real State {% block title %} | Home page {% endblock %} </title>
         <meta name="description" content="GARO is a real-estate template">
         <meta name="author" content="Kimarotec">
         <meta name="keyword" content="html5, css, bootstrap, property, real-estate theme , bootstrap template">
@@ -24,11 +24,11 @@
         <link href="assets/fonts/icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet">
         <link href="assets/fonts/icon-7-stroke/css/helper.css" rel="stylesheet">
         <link href="assets/css/animate.css" rel="stylesheet" media="screen">
-        <link rel="stylesheet" href="assets/css/bootstrap-select.min.css"> 
+        <link rel="stylesheet" href="assets/css/bootstrap-select.min.css">
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="assets/css/icheck.min_all.css">
         <link rel="stylesheet" href="assets/css/price-range.css">
-        <link rel="stylesheet" href="assets/css/owl.carousel.css">  
+        <link rel="stylesheet" href="assets/css/owl.carousel.css">
         <link rel="stylesheet" href="assets/css/owl.theme.css">
         <link rel="stylesheet" href="assets/css/owl.transitions.css">
         <link rel="stylesheet" href="assets/css/style.css">
@@ -66,7 +66,7 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
         <!--End top header -->
 
         <nav class="navbar navbar-default ">
@@ -146,7 +146,7 @@
                                                     <li><a href="contact.html">Contact style (1)</a> </li>
                                                     <li><a href="contact-3.html">Contact style (2)</a> </li>
                                                     <li><a href="contact_3.html">Contact style (3)</a> </li>
-                                                    <li><a href="faq.html">FAQ page</a> </li> 
+                                                    <li><a href="faq.html">FAQ page</a> </li>
                                                     <li><a href="404.html">404 page</a>  </li>
                                                 </ul>
                                             </div>
@@ -160,17 +160,17 @@
 
                                                 <h5>Properties list</h5>
                                                 <ul>
-                                                    <li><a href="properties.html">Properties list style (1)</a> </li> 
-                                                    <li><a href="properties-2.html">Properties list style (2)</a> </li> 
-                                                    <li><a href="properties-3.html">Properties list style (3)</a> </li> 
-                                                </ul>                                               
+                                                    <li><a href="properties.html">Properties list style (1)</a> </li>
+                                                    <li><a href="properties-2.html">Properties list style (2)</a> </li>
+                                                    <li><a href="properties-3.html">Properties list style (3)</a> </li>
+                                                </ul>
                                             </div>
                                             <div class="col-sm-3">
                                                 <h5>Property process</h5>
-                                                <ul> 
+                                                <ul>
                                                     <li><a href="submit-property.html">Submit - step 1</a> </li>
                                                     <li><a href="submit-property.html">Submit - step 2</a> </li>
-                                                    <li><a href="submit-property.html">Submit - step 3</a> </li> 
+                                                    <li><a href="submit-property.html">Submit - step 3</a> </li>
                                                 </ul>
                                                 <h5>User account</h5>
                                                 <ul>
@@ -218,7 +218,7 @@
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Key word">
                                 </div>
-                                <div class="form-group">                                   
+                                <div class="form-group">
                                     <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Select your city">
 
                                         <option>New york, CA</option>
@@ -229,12 +229,12 @@
                                         <option>kyoto , shibua</option>
                                     </select>
                                 </div>
-                                <div class="form-group">                                     
+                                <div class="form-group">
                                     <select id="basic" class="selectpicker show-tick form-control">
                                         <option> -Status- </option>
                                         <option>Rent </option>
                                         <option>Boy</option>
-                                        <option>used</option>  
+                                        <option>used</option>
 
                                     </select>
                                 </div>
@@ -242,54 +242,54 @@
 
                                 <div style="display: none;" class="search-toggle">
 
-                                    <div class="search-row">   
+                                    <div class="search-row">
 
                                         <div class="form-group mar-r-20">
                                             <label for="price-range">Price range ($):</label>
-                                            <input type="text" class="span2" value="" data-slider-min="0" 
-                                                   data-slider-max="600" data-slider-step="5" 
+                                            <input type="text" class="span2" value="" data-slider-min="0"
+                                                   data-slider-max="600" data-slider-step="5"
                                                    data-slider-value="[0,450]" id="price-range" ><br />
-                                            <b class="pull-left color">2000$</b> 
+                                            <b class="pull-left color">2000$</b>
                                             <b class="pull-right color">100000$</b>
                                         </div>
-                                        <!-- End of  -->  
+                                        <!-- End of  -->
 
                                         <div class="form-group mar-l-20">
                                             <label for="property-geo">Property geo (m2) :</label>
-                                            <input type="text" class="span2" value="" data-slider-min="0" 
-                                                   data-slider-max="600" data-slider-step="5" 
+                                            <input type="text" class="span2" value="" data-slider-min="0"
+                                                   data-slider-max="600" data-slider-step="5"
                                                    data-slider-value="[50,450]" id="property-geo" ><br />
-                                            <b class="pull-left color">40m</b> 
+                                            <b class="pull-left color">40m</b>
                                             <b class="pull-right color">12000m</b>
                                         </div>
-                                        <!-- End of  --> 
+                                        <!-- End of  -->
                                     </div>
 
                                     <div class="search-row">
 
                                         <div class="form-group mar-r-20">
                                             <label for="price-range">Min baths :</label>
-                                            <input type="text" class="span2" value="" data-slider-min="0" 
-                                                   data-slider-max="600" data-slider-step="5" 
+                                            <input type="text" class="span2" value="" data-slider-min="0"
+                                                   data-slider-max="600" data-slider-step="5"
                                                    data-slider-value="[250,450]" id="min-baths" ><br />
-                                            <b class="pull-left color">1</b> 
+                                            <b class="pull-left color">1</b>
                                             <b class="pull-right color">120</b>
                                         </div>
-                                        <!-- End of  --> 
+                                        <!-- End of  -->
 
                                         <div class="form-group mar-l-20">
                                             <label for="property-geo">Min bed :</label>
-                                            <input type="text" class="span2" value="" data-slider-min="0" 
-                                                   data-slider-max="600" data-slider-step="5" 
+                                            <input type="text" class="span2" value="" data-slider-min="0"
+                                                   data-slider-max="600" data-slider-step="5"
                                                    data-slider-value="[250,450]" id="min-bed" ><br />
-                                            <b class="pull-left color">1</b> 
+                                            <b class="pull-left color">1</b>
                                             <b class="pull-right color">120</b>
                                         </div>
-                                        <!-- End of  --> 
+                                        <!-- End of  -->
 
                                     </div>
                                     <br>
-                                    <div class="search-row">  
+                                    <div class="search-row">
 
                                         <div class="form-group">
                                             <div class="checkbox">
@@ -298,7 +298,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <!-- End of  -->  
+                                        <!-- End of  -->
 
                                         <div class="form-group">
                                             <div class="checkbox">
@@ -307,7 +307,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <!-- End of  --> 
+                                        <!-- End of  -->
 
                                         <div class="form-group">
                                             <div class="checkbox">
@@ -316,10 +316,10 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <!-- End of  --> 
+                                        <!-- End of  -->
                                     </div>
 
-                                    <div class="search-row">  
+                                    <div class="search-row">
 
                                         <div class="form-group">
                                             <div class="checkbox">
@@ -328,7 +328,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <!-- End of  -->  
+                                        <!-- End of  -->
 
                                         <div class="form-group">
                                             <div class="checkbox">
@@ -337,7 +337,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <!-- End of  --> 
+                                        <!-- End of  -->
 
                                         <div class="form-group">
                                             <div class="checkbox">
@@ -346,10 +346,10 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <!-- End of  --> 
-                                    </div>                                    
+                                        <!-- End of  -->
+                                    </div>
 
-                                    <div class="search-row">  
+                                    <div class="search-row">
 
                                         <div class="form-group">
                                             <div class="checkbox">
@@ -358,7 +358,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <!-- End of  -->  
+                                        <!-- End of  -->
 
                                         <div class="form-group">
                                             <div class="checkbox">
@@ -367,7 +367,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <!-- End of  --> 
+                                        <!-- End of  -->
 
                                         <div class="form-group">
                                             <div class="checkbox">
@@ -376,12 +376,12 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <!-- End of  --> 
+                                        <!-- End of  -->
                                         <br>
                                         <hr>
-                                    </div>                             
-                                    <button class="btn search-btn prop-btm-sheaerch" type="submit"><i class="fa fa-search"></i></button>  
-                                </div>                    
+                                    </div>
+                                    <button class="btn search-btn prop-btm-sheaerch" type="submit"><i class="fa fa-search"></i></button>
+                                </div>
 
                             </form>
                         </div>
@@ -593,7 +593,7 @@
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
                         <!-- /.feature title -->
-                        <h2>Our Customers Said  </h2> 
+                        <h2>Our Customers Said  </h2>
                     </div>
                 </div>
 
@@ -602,16 +602,16 @@
                         <div class="col-md-12">
                             <div id="testimonial-slider">
                                 <div class="item">
-                                    <div class="client-text">                                
+                                    <div class="client-text">
                                         <p>Nulla quis dapibus nisl. Suspendisse llam sed arcu ultried arcu ultricies !</p>
                                         <h4><strong>Ohidul Islam, </strong><i>Web Designer</i></h4>
                                     </div>
-                                    <div class="client-face wow fadeInRight" data-wow-delay=".9s"> 
+                                    <div class="client-face wow fadeInRight" data-wow-delay=".9s">
                                         <img src="assets/img/client-face1.png" alt="">
                                     </div>
                                 </div>
                                 <div class="item">
-                                    <div class="client-text">                                
+                                    <div class="client-text">
                                         <p>Nulla quis dapibus nisl. Suspendisse llam sed arcu ultried arcu ultricies !</p>
                                         <h4><strong>Ohidul Islam, </strong><i>Web Designer</i></h4>
                                     </div>
@@ -620,7 +620,7 @@
                                     </div>
                                 </div>
                                 <div class="item">
-                                    <div class="client-text">                                
+                                    <div class="client-text">
                                         <p>Nulla quis dapibus nisl. Suspendisse llam sed arcu ultried arcu ultricies !</p>
                                         <h4><strong>Ohidul Islam, </strong><i>Web Designer</i></h4>
                                     </div>
@@ -629,7 +629,7 @@
                                     </div>
                                 </div>
                                 <div class="item">
-                                    <div class="client-text">                                
+                                    <div class="client-text">
                                         <p>Nulla quis dapibus nisl. Suspendisse llam sed arcu ultried arcu ultricies !</p>
                                         <h4><strong>Ohidul Islam, </strong><i>Web Designer</i></h4>
                                     </div>
@@ -651,7 +651,7 @@
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
                         <!-- /.feature title -->
-                        <h2>You can trust Us </h2> 
+                        <h2>You can trust Us </h2>
                     </div>
                 </div>
                 <div class="row">
@@ -677,8 +677,8 @@
                                         <h2 class="percent" id="counter1">0</h2>
                                         <h5>Properties in stock</h5>
                                     </div>
-                                </div> 
-                            </div> 
+                                </div>
+                            </div>
                             <div class="col-sm-3 col-xs-6">
                                 <div class="count-item">
                                     <div class="count-item-circle">
@@ -688,8 +688,8 @@
                                         <h2 class="percent" id="counter2">0</h2>
                                         <h5>City registered </h5>
                                     </div>
-                                </div> 
-                            </div> 
+                                </div>
+                            </div>
                             <div class="col-sm-3 col-xs-6">
                                 <div class="count-item">
                                     <div class="count-item-circle">
@@ -699,7 +699,7 @@
                                         <h2 class="percent"  id="counter3">5000</h2>
                                         <h5>DEALER BRANCHES</h5>
                                     </div>
-                                </div> 
+                                </div>
 
                             </div>
                         </div>
@@ -720,7 +720,7 @@
                             </div>
                             <div class="asks-first-info">
                                 <h2>ARE YOU LOOKING FOR A Property?</h2>
-                                <p> varius od lio eget conseq uat blandit, lorem auglue comm lodo nisl no us nibh mas lsa</p>                                        
+                                <p> varius od lio eget conseq uat blandit, lorem auglue comm lodo nisl no us nibh mas lsa</p>
                             </div>
                             <div class="asks-first-arrow">
                                 <a href="properties.html"><span class="fa fa-angle-right"></span></a>
@@ -774,12 +774,12 @@
                                 <h4>Quick links </h4>
                                 <div class="footer-title-line"></div>
                                 <ul class="footer-menu">
-                                    <li><a href="properties.html">Properties</a>  </li> 
-                                    <li><a href="#">Services</a>  </li> 
-                                    <li><a href="submit-property.html">Submit property </a></li> 
-                                    <li><a href="contact.html">Contact us</a></li> 
-                                    <li><a href="faq.html">fqa</a>  </li> 
-                                    <li><a href="faq.html">Terms </a>  </li> 
+                                    <li><a href="properties.html">Properties</a>  </li>
+                                    <li><a href="#">Services</a>  </li>
+                                    <li><a href="submit-property.html">Submit property </a></li>
+                                    <li><a href="contact.html">Contact us</a></li>
+                                    <li><a href="faq.html">fqa</a>  </li>
+                                    <li><a href="faq.html">Terms </a>  </li>
                                 </ul>
                             </div>
                         </div>
@@ -797,10 +797,10 @@
 
                                         </div>
                                         <div class="col-md-8  col-sm-8 col-xs-8  blg-entry">
-                                            <h6> <a href="single.html">Add news functions </a></h6> 
+                                            <h6> <a href="single.html">Add news functions </a></h6>
                                             <p style="line-height: 17px; padding: 8px 2px;">Lorem ipsum dolor sit amet, nulla ...</p>
                                         </div>
-                                    </li> 
+                                    </li>
 
                                     <li>
                                         <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
@@ -811,10 +811,10 @@
 
                                         </div>
                                         <div class="col-md-8  col-sm-8 col-xs-8  blg-entry">
-                                            <h6> <a href="single.html">Add news functions </a></h6> 
+                                            <h6> <a href="single.html">Add news functions </a></h6>
                                             <p style="line-height: 17px; padding: 8px 2px;">Lorem ipsum dolor sit amet, nulla ...</p>
                                         </div>
-                                    </li> 
+                                    </li>
 
                                     <li>
                                         <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
@@ -825,10 +825,10 @@
 
                                         </div>
                                         <div class="col-md-8  col-sm-8 col-xs-8  blg-entry">
-                                            <h6> <a href="single.html">Add news functions </a></h6> 
+                                            <h6> <a href="single.html">Add news functions </a></h6>
                                             <p style="line-height: 17px; padding: 8px 2px;">Lorem ipsum dolor sit amet, nulla ...</p>
                                         </div>
-                                    </li> 
+                                    </li>
 
 
                                 </ul>
@@ -848,16 +848,16 @@
                                         </span>
                                     </div>
                                     <!-- /input-group -->
-                                </form> 
+                                </form>
 
-                                <div class="social pull-right"> 
+                                <div class="social pull-right">
                                     <ul>
                                         <li><a class="wow fadeInUp animated" href="https://twitter.com/kimarotec"><i class="fa fa-twitter"></i></a></li>
                                         <li><a class="wow fadeInUp animated" href="https://www.facebook.com/kimarotec" data-wow-delay="0.2s"><i class="fa fa-facebook"></i></a></li>
                                         <li><a class="wow fadeInUp animated" href="https://plus.google.com/kimarotec" data-wow-delay="0.3s"><i class="fa fa-google-plus"></i></a></li>
                                         <li><a class="wow fadeInUp animated" href="https://instagram.com/kimarotec" data-wow-delay="0.4s"><i class="fa fa-instagram"></i></a></li>
                                         <li><a class="wow fadeInUp animated" href="https://instagram.com/kimarotec" data-wow-delay="0.6s"><i class="fa fa-dribbble"></i></a></li>
-                                    </ul> 
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -870,15 +870,15 @@
                 <div class="container">
                     <div class="row">
                         <div class="pull-left">
-                            <span> (C) <a href="http://www.KimaroTec.com">KimaroTheme</a> , All rights reserved 2016  </span> 
-                        </div> 
-                        <div class="bottom-menu pull-right"> 
-                            <ul> 
+                            <span> (C) <a href="http://www.KimaroTec.com">KimaroTheme</a> , All rights reserved 2016  </span>
+                        </div>
+                        <div class="bottom-menu pull-right">
+                            <ul>
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">Home</a></li>
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s">Property</a></li>
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.4s">Faq</a></li>
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s">Contact</a></li>
-                            </ul> 
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -888,7 +888,7 @@
 
         <script src="assets/js/modernizr-2.6.2.min.js"></script>
 
-        <script src="assets/js/jquery-1.10.2.min.js"></script> 
+        <script src="assets/js/jquery-1.10.2.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="assets/js/bootstrap-select.min.js"></script>
         <script src="assets/js/bootstrap-hover-dropdown.js"></script>
