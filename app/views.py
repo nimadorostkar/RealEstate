@@ -1,5 +1,3 @@
-from django.shortcuts import render
-
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
@@ -15,11 +13,7 @@ from django.contrib.auth.models import User
 
 # ----------------------------------------------------- index -----------------
 
-@login_required()
+#@login_required()
 def index(request):
-
-    context = {}
-    context['segment'] = 'index'
-
-    html_template = loader.get_template( 'index.html' )
-    return HttpResponse(html_template.render(context, request))
+    context = {'x': 0 }
+    return render(request, 'index.html', context)
