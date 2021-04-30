@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'app',               # Enable the inner app
-    #'bootstrapform',     # https://django-bootstrap-form.readthedocs.io/en/latest/
     'allauth',           # Third Party - 1) All Auth
     'allauth.account',
     'allauth.socialaccount'
