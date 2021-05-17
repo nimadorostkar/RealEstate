@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'app',               # Enable the inner app
+    'import_export',
     'allauth',           # Third Party - 1) All Auth
     'allauth.account',
     'allauth.socialaccount'

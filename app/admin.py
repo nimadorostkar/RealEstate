@@ -3,7 +3,7 @@ from . import models
 from django.contrib.admin.models import LogEntry
 from .models import Item
 from import_export import resources
-from import_export.admin import ImportExportModelAdmin, ImportExportMixin
+from import_export.admin import ImportExportModelAdmin
 
 
 
