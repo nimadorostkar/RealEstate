@@ -8,8 +8,8 @@ from import_export.admin import ImportExportModelAdmin
 
 
 
-admin.site.site_header= "tttttt"
-admin.site.site_title= "ttttt"
+admin.site.site_header= "املاک"
+admin.site.site_title= "املاک"
 
 admin.site.register(LogEntry)
 
