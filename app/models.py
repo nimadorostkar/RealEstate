@@ -14,11 +14,11 @@ from django.template.defaultfilters import truncatechars
 #------------------------------------------------------------------------------
 class Item(models.Model):
     code = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    CHOICES1 = ( ('اجاره','Rent'), ('خرید','Buy'), ('رهن','Mortgage') )
+    CHOICES1 = ( ('اجاره','اجاره'), ('خرید','خرید'), ('رهن','رهن') )
     buy_status = models.CharField(max_length=10,choices=CHOICES1,verbose_name = "وضعیت خرید")
-    CHOICES2 = ( ('مسکونی','Residential'), ('تجاری','Commercial') )
+    CHOICES2 = ( ('مسکونی','مسکونی'), ('تجاری','تجاری') )
     estate_status = models.CharField(max_length=15,choices=CHOICES2,verbose_name = "وضعیت ملک")
-    CHOICES3 = ( ('ویلایی','Villa'), ('اپارتمانی','Apartment') )
+    CHOICES3 = ( ('ویلایی','ویلایی'), ('اپارتمانی','اپارتمانی') )
     building_status = models.CharField(max_length=10,choices=CHOICES3,verbose_name = "وضعیت ساختمان")
     area_size = models.IntegerField(null=True,blank=True, verbose_name = "متراژ")
     room_qty = models.IntegerField(null=True,blank=True, verbose_name = "تعداد اتاق")
