@@ -13,7 +13,7 @@ from django.template.defaultfilters import truncatechars
 
 #------------------------------------------------------------------------------
 class Item(models.Model):
-    #code =
+    code = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, k=5)
     CHOICES1 = ( ('اجاره','Rent'), ('خرید','Buy'), ('رهن','Mortgage') )
     buy_status = models.CharField(max_length=10,choices=CHOICES1,verbose_name = "وضعیت خرید")
     CHOICES2 = ( ('مسکونی','Residential'), ('تجاری','Commercial') )
