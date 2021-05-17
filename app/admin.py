@@ -21,9 +21,8 @@ class ItemAdmin(ImportExportModelAdmin):
 
     fields = (
         ('buy_status', 'estate_status', 'building_status'),
-        ('area_size', 'roomـqty', 'building_age'),
-        ('parking', 'storage_room', 'elevator', 'balcony', 'remote_door', 'lobby'),
-        ('guard', 'pool', 'air_conditioning_system', 'wall_cupboard', 'master_bath', 'toilet'),
+        ('area_size', 'room_qty', 'building_age'),
+        ('parking', 'storage_room', 'elevator', 'balcony', 'remote_door', 'lobby', 'guard', 'pool', 'air_conditioning_system', 'wall_cupboard', 'master_bath', 'toilet'),
         ('deposit', 'rent', 'price'),
         ('city', 'neighbourhood'),
         'image',
