@@ -17,7 +17,7 @@ admin.site.register(LogEntry)
 
 class ItemAdmin(ImportExportModelAdmin):
     list_display = ('name', 'area_size', 'city', 'neighbourhood', 'buy_status', 'estate_status', 'building_status', 'parking', 'image_tag')
-    list_filter = ("city", "neighbourhood", "buy_status", "estate_status", "building_status", "area_size", 'parking' )
+    list_filter = ("city", "neighbourhood", "buy_status", "estate_status", "building_status", "area_size", 'parking', 'elevator' )
 
     fields = (
         ('buy_status', 'estate_status', 'building_status'),
