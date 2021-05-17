@@ -14,12 +14,12 @@ from django.template.defaultfilters import truncatechars
 #------------------------------------------------------------------------------
 class Item(models.Model):
     #code =
-    CHOICES1 = ( ('R','Rent'), ('B','Buy'), ('M','Mortgage') )
-    buy_status = models.CharField(max_length=1,choices=CHOICES1,verbose_name = "وضعیت خرید")
-    CHOICES2 = ( ('R','Residential'), ('C','Commercial') )
-    estate_status = models.CharField(max_length=1,choices=CHOICES2,verbose_name = "وضعیت ملک")
-    CHOICES3 = ( ('V','Villa'), ('A','Apartment') )
-    building_status = models.CharField(max_length=1,choices=CHOICES3,verbose_name = "وضعیت ساختمان")
+    CHOICES1 = ( ('Rent','Rent'), ('Buy','Buy'), ('Mortgage','Mortgage') )
+    buy_status = models.CharField(max_length=10,choices=CHOICES1,verbose_name = "وضعیت خرید")
+    CHOICES2 = ( ('Residential','Residential'), ('Commercial','Commercial') )
+    estate_status = models.CharField(max_length=15,choices=CHOICES2,verbose_name = "وضعیت ملک")
+    CHOICES3 = ( ('Villa','Villa'), ('Apartment','Apartment') )
+    building_status = models.CharField(max_length=10,choices=CHOICES3,verbose_name = "وضعیت ساختمان")
     area_size = models.IntegerField(null=True,blank=True, verbose_name = "متراژ")
     roomـqty = models.IntegerField(null=True,blank=True, verbose_name = "تعداد اتاق")
     parking = models.BooleanField(default=True, verbose_name = "پارکینگ" )
@@ -40,10 +40,10 @@ class Item(models.Model):
         verbose_name_plural = "املاک"
 
     def __str__(self):
-        return str(self.buy_status + self.estate_status + self.building_status + self.area_size + self.neighbourhood )
+        return str(self.buy_status +" "+ self.estate_status +" "+ self.building_status +" "+ self.neighbourhood )
 
     def name(self):
-        return str(self.buy_status + self.estate_status + self.building_status + self.area_size + self.neighbourhood )
+        return str(self.buy_status +" "+ self.estate_status +" "+ self.building_status +" "+ self.neighbourhood )
 
     #def get_absolute_url(self):
         #return reverse('app:item_detail',args=[self.id])
