@@ -45,8 +45,8 @@ class Item(models.Model):
     def name(self):
         return str(self.buy_status +" "+ self.building_status +" "+ self.estate_status +" "+ self.neighbourhood )
 
-    #def get_absolute_url(self):
-        #return reverse('app:item_detail',args=[self.id])
+    def get_absolute_url(self):
+        return reverse('app:item_detail',args=[self.id])
 
     def image_tag(self):
         return format_html("<img width=50 src='{}'>".format(self.image.url))
