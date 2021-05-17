@@ -14,11 +14,11 @@ from django.template.defaultfilters import truncatechars
 #------------------------------------------------------------------------------
 class Item(models.Model):
     #code =
-    CHOICES1 = ( ('Rent','Rent'), ('Buy','Buy'), ('Mortgage','Mortgage') )
+    CHOICES1 = ( ('اجاره','Rent'), ('خرید','Buy'), ('رهن','Mortgage') )
     buy_status = models.CharField(max_length=10,choices=CHOICES1,verbose_name = "وضعیت خرید")
-    CHOICES2 = ( ('Residential','Residential'), ('Commercial','Commercial') )
+    CHOICES2 = ( ('مسکونی','Residential'), ('تجاری','Commercial') )
     estate_status = models.CharField(max_length=15,choices=CHOICES2,verbose_name = "وضعیت ملک")
-    CHOICES3 = ( ('Villa','Villa'), ('Apartment','Apartment') )
+    CHOICES3 = ( ('ویلایی','Villa'), ('اپارتمانی','Apartment') )
     building_status = models.CharField(max_length=10,choices=CHOICES3,verbose_name = "وضعیت ساختمان")
     area_size = models.IntegerField(null=True,blank=True, verbose_name = "متراژ")
     roomـqty = models.IntegerField(null=True,blank=True, verbose_name = "تعداد اتاق")
@@ -40,10 +40,10 @@ class Item(models.Model):
         verbose_name_plural = "املاک"
 
     def __str__(self):
-        return str(self.buy_status +" "+ self.estate_status +" "+ self.building_status +" "+ self.neighbourhood )
+        return str(self.buy_status +" "+ self.building_status +" "+ self.estate_status +" "+ self.neighbourhood )
 
     def name(self):
-        return str(self.buy_status +" "+ self.estate_status +" "+ self.building_status +" "+ self.neighbourhood )
+        return str(self.buy_status +" "+ self.building_status +" "+ self.estate_status +" "+ self.neighbourhood )
 
     #def get_absolute_url(self):
         #return reverse('app:item_detail',args=[self.id])
