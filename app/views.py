@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from . import models
 from django.contrib.auth.models import User
-#from .models import Profile, Ticket, Order
+from .models import Item
 #from .forms import ProfileForm, UserForm, TicketForm
 
 
@@ -15,5 +15,6 @@ from django.contrib.auth.models import User
 
 @login_required()
 def index(request):
-    context = {'x': 0 }
+    items = models.Item.objects.all()
+    context = { 'items': items }
     return render(request, 'index.html', context)

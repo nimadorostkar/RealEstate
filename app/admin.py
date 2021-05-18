@@ -1,7 +1,7 @@
 from django.contrib import admin
 from . import models
 from django.contrib.admin.models import LogEntry
-from .models import Item, City
+from .models import Item, City, Neighbourhood
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
@@ -17,13 +17,13 @@ admin.site.register(LogEntry)
 
 
 class CityAdmin(ImportExportModelAdmin):
-    list_display = ('name', '')
+    list_display = ('name', 'name')
 admin.site.register(models.City, CityAdmin)
 
 
 
 class NeighbourhoodAdmin(ImportExportModelAdmin):
-    list_display = ('name', '')
+    list_display = ('name', 'name')
 admin.site.register(models.Neighbourhood, NeighbourhoodAdmin)
 
 
