@@ -1,24 +1,36 @@
 from django.contrib import admin
 from . import models
 from django.contrib.admin.models import LogEntry
-from .models import Item
+from .models import Item, City
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
-
-
 
 
 admin.site.site_header= "املاک"
 admin.site.site_title= "املاک"
 
+
+
+
 admin.site.register(LogEntry)
+
+
+
+class CityAdmin(ImportExportModelAdmin):
+    list_display = ('name', '')
+admin.site.register(models.City, CityAdmin)
+
+
+
+class NeighbourhoodAdmin(ImportExportModelAdmin):
+    list_display = ('name', '')
+admin.site.register(models.Neighbourhood, NeighbourhoodAdmin)
 
 
 
 class ItemAdmin(ImportExportModelAdmin):
     list_display = ('name', 'area_size', 'city', 'neighbourhood', 'buy_status', 'estate_status', 'building_status', 'parking', 'image_tag')
     list_filter = ("city", "neighbourhood", "buy_status", "estate_status", "building_status", "area_size", 'parking', 'elevator' )
-
     fields = (
         ('buy_status', 'estate_status', 'building_status'),
         ('area_size', 'room_qty', 'building_age'),
@@ -27,6 +39,5 @@ class ItemAdmin(ImportExportModelAdmin):
         ('city', 'neighbourhood'),
         'image',
         'additional_information'
-    )
-
+        )
 admin.site.register(models.Item, ItemAdmin)
