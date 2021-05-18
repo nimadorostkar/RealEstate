@@ -12,6 +12,35 @@ from django.template.defaultfilters import truncatechars
 
 
 #------------------------------------------------------------------------------
+class City(models.Model):
+    name=models.CharField(max_length=200,verbose_name = "نام")
+
+    class Meta:
+        verbose_name = "شهر"
+        verbose_name_plural = "شهر ها"
+
+    def __str__(self):
+        return self.name
+
+
+
+#------------------------------------------------------------------------------
+class Neighbourhood(models.Model):
+    name=models.CharField(max_length=200,verbose_name = "نام")
+
+    class Meta:
+        verbose_name = "محله"
+        verbose_name_plural = "محله ها"
+
+    def __str__(self):
+        return self.name
+
+
+
+
+
+
+#------------------------------------------------------------------------------
 class Item(models.Model):
     code = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     CHOICES1 = ( ('اجاره','اجاره'), ('خرید','خرید'), ('رهن','رهن') )
@@ -40,8 +69,8 @@ class Item(models.Model):
     price = models.IntegerField(null=True,blank=True, verbose_name = "قیمت خرید ")
     image = models.ImageField(upload_to='media', default='media/Default.png' ,null=True, blank=True,verbose_name = "تصویر")
     additional_information = models.TextField(max_length=1000,null=True, blank=True,verbose_name = "اطلاعات تکمیلی")
-    city = models.CharField(max_length=50,null=True, blank=True,verbose_name = "شهر")
-    neighbourhood = models.CharField(max_length=50,null=True, blank=True,verbose_name = "محله")
+    city = models.ForeignKey(City, on_delete=models.CASCADE,null=True, blank=True,verbose_name = "شهر")
+    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE,null=True, blank=True,verbose_name = "محله")
     #location = LocationField(null=True,blank=True)
 
 
