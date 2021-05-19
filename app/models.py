@@ -87,7 +87,7 @@ class Item(models.Model):
     additional_information = models.TextField(max_length=1000,null=True, blank=True,verbose_name = "اطلاعات تکمیلی")
     city = models.ForeignKey(City, on_delete=models.CASCADE,null=True, blank=True,verbose_name = "شهر")
     neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE,null=True, blank=True,verbose_name = "محله")
-    tags = models.ForeignKey(Tags, on_delete=models.CASCADE,null=True, blank=True,verbose_name = "برچسب")
+    tags = models.ManyToManyField(Tags, blank=True,verbose_name = "برچسب")
     #location = LocationField(null=True,blank=True)
 
 
