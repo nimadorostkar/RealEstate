@@ -5,14 +5,10 @@ from .models import Item, City, Neighbourhood, Tags
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-
 admin.site.site_header= "املاک"
 admin.site.site_title= "املاک"
-
-
-
-
 admin.site.register(LogEntry)
+
 
 
 
@@ -20,7 +16,6 @@ admin.site.register(LogEntry)
 class TagsAdmin(ImportExportModelAdmin):
     list_display = ('name', 'descriptions')
 admin.site.register(models.Tags, TagsAdmin)
-
 
 
 #------------------------------------------------------------------------------
@@ -49,8 +44,6 @@ class ItemAdmin(ImportExportModelAdmin):
         'additional_information',
         'tags'
         )
-
-
 admin.site.register(models.Item, ItemAdmin)
 
 

@@ -10,6 +10,7 @@ from django.template.defaultfilters import truncatechars
 
 
 
+
 #------------------------------------------------------------------------------
 class Tags(models.Model):
     name=models.CharField(max_length=200,verbose_name = "برچسب")
@@ -50,8 +51,6 @@ class Neighbourhood(models.Model):
 
 
 
-
-
 #------------------------------------------------------------------------------
 class Item(models.Model):
     code = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -79,38 +78,35 @@ class Item(models.Model):
     deposit = models.IntegerField(null=True,blank=True, verbose_name = "پول پیش")
     rent = models.IntegerField(null=True,blank=True, verbose_name = "اجاره")
     price = models.IntegerField(null=True,blank=True, verbose_name = "قیمت خرید ")
-    image1 = models.ImageField(upload_to='media', default='media/Default.png' ,null=True, blank=True ,verbose_name = "1تصویر")
+    image1 = models.ImageField(upload_to='media', default='media/Default.png' ,null=True, blank=True ,verbose_name = "تصویر اصلی")
     image2 = models.ImageField(upload_to='media', default='media/Default.png' ,null=True, blank=True ,verbose_name = "2تصویر")
     image3 = models.ImageField(upload_to='media', default='media/Default.png' ,null=True, blank=True ,verbose_name = "3تصویر")
     image4 = models.ImageField(upload_to='media', default='media/Default.png' ,null=True, blank=True ,verbose_name = "4تصویر")
-    #image = models.ForeignKey(Media_center, on_delete=models.CASCADE,null=True, blank=True,verbose_name = "تصویر")
     additional_information = models.TextField(max_length=1000,null=True, blank=True,verbose_name = "اطلاعات تکمیلی")
     city = models.ForeignKey(City, on_delete=models.CASCADE,null=True, blank=True,verbose_name = "شهر")
     neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE,null=True, blank=True,verbose_name = "محله")
     tags = models.ManyToManyField(Tags, blank=True,verbose_name = "برچسب")
     #location = LocationField(null=True,blank=True)
 
-
     class Meta:
         verbose_name = "ملک"
         verbose_name_plural = "املاک"
 
     def __str__(self):
-        return str(self.buy_status +" "+ self.building_status +" "+ self.estate_status +" "+ self.neighbourhood )
+        return str(self.buy_status +" "+ self.building_status +" "+ self.estate_status +" "+ self.neighbourhood.name )
 
     def name(self):
-        return str(self.buy_status +" "+ self.building_status +" "+ self.estate_status +" "+ self.neighbourhood )
+        return str(self.buy_status +" "+ self.building_status +" "+ self.estate_status +" "+ self.neighbourhood.name )
 
     def get_absolute_url(self):
         return reverse('app:item_detail',args=[self.id])
 
     def image_tag(self):
-        return format_html("<img width=50 src='{}'>".format(self.image.url))
+        return format_html("<img width=50 src='{}'>".format(self.image1.url))
 
     @property
     def short_description(self):
         return truncatechars(self.additional_Information, 70)
-
 
 
 
