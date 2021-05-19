@@ -10,10 +10,23 @@ from django.template.defaultfilters import truncatechars
 
 
 
+#------------------------------------------------------------------------------
+class Tags(models.Model):
+    name=models.CharField(max_length=200,verbose_name = "برچسب")
+    descriptions = models.TextField(max_length=500,null=True, blank=True,verbose_name = "توضیحات")
+
+    class Meta:
+        verbose_name = "برچسب"
+        verbose_name_plural = "برچسب ها"
+
+    def __str__(self):
+        return self.name
+
 
 #------------------------------------------------------------------------------
 class City(models.Model):
     name=models.CharField(max_length=200,verbose_name = "نام")
+    descriptions = models.TextField(max_length=500,null=True, blank=True,verbose_name = "توضیحات")
 
     class Meta:
         verbose_name = "شهر"
@@ -23,10 +36,10 @@ class City(models.Model):
         return self.name
 
 
-
 #------------------------------------------------------------------------------
 class Neighbourhood(models.Model):
     name=models.CharField(max_length=200,verbose_name = "نام")
+    descriptions = models.TextField(max_length=500,null=True, blank=True,verbose_name = "توضیحات")
 
     class Meta:
         verbose_name = "محله"
@@ -34,7 +47,6 @@ class Neighbourhood(models.Model):
 
     def __str__(self):
         return self.name
-
 
 
 
@@ -67,12 +79,16 @@ class Item(models.Model):
     deposit = models.IntegerField(null=True,blank=True, verbose_name = "پول پیش")
     rent = models.IntegerField(null=True,blank=True, verbose_name = "اجاره")
     price = models.IntegerField(null=True,blank=True, verbose_name = "قیمت خرید ")
-    image = models.ImageField(upload_to='media', default='media/Default.png' ,null=True, blank=True,verbose_name = "تصویر")
+    image1 = models.ImageField(upload_to='media', default='media/Default.png' ,null=True, blank=True ,verbose_name = "1تصویر")
+    image2 = models.ImageField(upload_to='media', default='media/Default.png' ,null=True, blank=True ,verbose_name = "2تصویر")
+    image3 = models.ImageField(upload_to='media', default='media/Default.png' ,null=True, blank=True ,verbose_name = "3تصویر")
+    image4 = models.ImageField(upload_to='media', default='media/Default.png' ,null=True, blank=True ,verbose_name = "4تصویر")
+    #image = models.ForeignKey(Media_center, on_delete=models.CASCADE,null=True, blank=True,verbose_name = "تصویر")
     additional_information = models.TextField(max_length=1000,null=True, blank=True,verbose_name = "اطلاعات تکمیلی")
     city = models.ForeignKey(City, on_delete=models.CASCADE,null=True, blank=True,verbose_name = "شهر")
     neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE,null=True, blank=True,verbose_name = "محله")
+    tags = models.ForeignKey(Tags, on_delete=models.CASCADE,null=True, blank=True,verbose_name = "برچسب")
     #location = LocationField(null=True,blank=True)
-
 
 
     class Meta:
@@ -87,9 +103,6 @@ class Item(models.Model):
 
     def get_absolute_url(self):
         return reverse('app:item_detail',args=[self.id])
-
-    def image_tag(self):
-        return format_html("<img width=50 src='{}'>".format(self.image.url))
 
     @property
     def short_description(self):
