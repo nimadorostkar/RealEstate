@@ -104,6 +104,9 @@ class Item(models.Model):
     def get_absolute_url(self):
         return reverse('app:item_detail',args=[self.id])
 
+    def image_tag(self):
+        return format_html("<img width=50 src='{}'>".format(self.image.url))
+
     @property
     def short_description(self):
         return truncatechars(self.additional_Information, 70)
