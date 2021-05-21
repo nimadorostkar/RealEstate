@@ -12,9 +12,17 @@ from .models import Item
 
 
 # ----------------------------------------------------- index -----------------
-
 @login_required()
 def index(request):
     items = models.Item.objects.all()
     context = { 'items': items }
     return render(request, 'index.html', context)
+
+
+
+# --------------------------------------------------- properties --------------
+@login_required()
+def properties(request):
+    items = models.Item.objects.all()
+    context = { 'items': items }
+    return render(request, 'properties.html', context)

@@ -8,4 +8,5 @@ app_name='app'
 
 urlpatterns = [
     path('', views.index, name='home'),
+    path('properties', views.properties, name='properties'),   
 ]
