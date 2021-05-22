@@ -23,7 +23,22 @@ def index(request):
 
 # --------------------------------------------------- properties --------------
 @login_required()
-def properties(request):
+def items(request):
     items = models.Item.objects.all()
     context = { 'items': items }
-    return render(request, 'properties.html', context)
+    return render(request, 'items.html', context)
+
+
+
+# --------------------------------------------------- properties --------------
+@login_required()
+def items_detail(request, id):
+    item = get_object_or_404(models.Item, id=id)
+    context = { 'item': item }
+    return render(request, 'items_detail.html', context)
+
+
+
+
+
+# End

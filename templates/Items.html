@@ -305,11 +305,11 @@
                           <div class="col-sm-6 col-md-4 p0">
                                   <div class="box-two proerty-item">
                                       <div class="item-thumb">
-                                          <a href="property-1.html" ><img src="{{ Item.image1.url }}"></a>
+                                          <a href="{{ Item.get_absolute_url }}" ><img src="{{ Item.image1.url }}"></a>
                                       </div>
 
                                       <div class="item-entry overflow" align="right" dir="rtl">
-                                          <h5><a href="property-1.html"> {{ Item.name }} </a></h5>
+                                          <h5><a href="{{ Item.get_absolute_url }}"> {{ Item.name }} </a></h5>
                                           <div class="dot-hr"></div>
                                           <span class="pull-left"><b> متراژ :</b> {{ Item.area_size }} متر </span>
                                           <span class="proerty-price pull-right"> 30000000 تومان </span>

@@ -53,7 +53,7 @@ class Neighbourhood(models.Model):
 
 #------------------------------------------------------------------------------
 class Item(models.Model):
-    code = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    #code = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     CHOICES1 = ( ('اجاره','اجاره'), ('خرید','خرید'), ('رهن','رهن') )
     buy_status = models.CharField(max_length=10,choices=CHOICES1,verbose_name = "وضعیت خرید")
     CHOICES2 = ( ('مسکونی','مسکونی'), ('تجاری','تجاری') )
@@ -99,7 +99,7 @@ class Item(models.Model):
         return str(self.buy_status +" "+ self.building_status +" "+ self.estate_status +" "+ self.neighbourhood.name )
 
     def get_absolute_url(self):
-        return reverse('app:item_detail',args=[self.id])
+        return reverse('app:items_detail',args=[self.id])
 
     def image_tag(self):
         return format_html("<img width=50 src='{}'>".format(self.image1.url))
