@@ -11,6 +11,30 @@ from django.template.defaultfilters import truncatechars
 
 
 
+
+
+#------------------------------------------------------------------------------
+class Info(models.Model):
+    logo = models.ImageField(upload_to='media', default='media/logo.png' ,null=True, blank=True ,verbose_name = "لوگو ")
+    name = models.CharField(max_length=200,null=True, blank=True,verbose_name = "نام")
+    descriptions = models.TextField(max_length=500,null=True, blank=True,verbose_name = "توضیحات")
+    phone = models.CharField(max_length=200,null=True, blank=True,verbose_name = "تلفن")
+    email = models.CharField(max_length=200,null=True, blank=True,verbose_name = "ایمیل")
+    manager = models.CharField(max_length=200,null=True, blank=True,verbose_name = "مدیر")
+    address = models.CharField(max_length=200,null=True, blank=True,verbose_name = "آدرس")
+    #location = LocationField(null=True,blank=True)
+
+
+
+    class Meta:
+        verbose_name = "برچسب"
+        verbose_name_plural = "برچسب ها"
+
+    def __str__(self):
+        return self.name
+
+
+
 #------------------------------------------------------------------------------
 class Tags(models.Model):
     name=models.CharField(max_length=200,verbose_name = "برچسب")
