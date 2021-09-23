@@ -26,8 +26,6 @@ admin.site.register(models.Profile, ProfileAdmin)
 
 
 
-
-
 #------------------------------------------------------------------------------
 class ItemImageInline(admin.TabularInline):
     model = ItemImage
@@ -41,3 +39,44 @@ class ItemAdmin(ImportExportModelAdmin):
     inlines = [ ItemImageInline, ]
 
 admin.site.register(models.Item, ItemAdmin)
+
+
+
+
+
+
+
+
+#------------------------------------------------------------------------------
+class TagsAdmin(ImportExportModelAdmin):
+    list_display = ('name','name')
+    search_fields = ['name']
+
+admin.site.register(models.Tags, TagsAdmin)
+
+
+
+
+
+
+
+
+
+#------------------------------------------------------------------------------
+class AreaMPTTModelAdmin(ImportExportMixin, MPTTModelAdmin, TreeRelatedFieldListFilter):
+    mptt_level_indent = 15
+
+admin.site.register(Area, DraggableMPTTAdmin,
+    list_display=('tree_actions', 'indented_title'),
+    list_display_links=('indented_title',),)
+
+
+
+
+
+
+
+
+
+
+#End
