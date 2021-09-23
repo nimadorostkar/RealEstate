@@ -1,0 +1,153 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} UI Tables {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+
+    <!-- [ Main Content ] start -->
+    <section class="pcoded-main-container">
+        <div class="pcoded-content">
+          <!-- [ breadcrumb ] start -->
+          <div class="page-header">
+            <div class="page-block">
+              <div class="row align-items-center">
+                <div class="col-md-12">
+                  <div class="page-header-title" align="right" dir="rtl">
+                    <h5 class="m-b-10"> نود ها </h5>
+                  </div>
+                  <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                    <li class="breadcrumb-item"><a href="#!"> IOT </a></li>
+                    <li class="breadcrumb-item"><a href="#!"> نود ها </a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- [ breadcrumb ] end -->
+
+
+
+          <div align="right" dir="rtl">
+              <a href="#!" class="badge badge-secondary collapsible"> افزودن نود  <i class="feather icon-box"></i> </a>
+              <div class="collapsiblecontent">
+                   <form action="/nodes" method="post" class="form-inline">
+                     {% csrf_token %}
+                       <div class="form-group mx-sm-3 mb-2">
+                           <input name="UUID" type="text" class="form-control" placeholder=" UUID ">
+                       </div>
+                       <button type="submit" class="btn  btn-primary mb-2"> ذخیره </button>
+                   </form>
+              </div>
+           </div>
+
+
+
+          <br>
+
+
+
+        <div class="row">
+          {% for Rom in devices %}
+
+              <div id="exampleModalCenter{{ Rom.UUID }}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalCenterTitle"> تغییر نام نود </h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/nodes" method="post" class="form-inline">
+                          {% csrf_token %}
+                           <div class="row" align="right" dir="rtl">
+                              <div class="col-md-3 pr-md-1">
+                                <div class="form-group">
+                                  <label> UUID </label>
+                                  <input name="Device_UUID" type="text" class="form-control" value="{{ Rom.UUID }}" readonly>
+                                </div>
+                              </div>
+                              <div class="col-md-2 pr-md-1"> &nbsp;&nbsp;&nbsp; </div>
+                              <div class="col-md-3 px-md-1">
+                                <div class="form-group">
+                                  <label> نام </label>
+                                  <input name="Device_name" type="text" class="form-control">
+                                </div>
+                              </div>
+                            </div>
+                            <button type="submit" class="btn  btn-primary mb-2"> ذخیره </button>
+                        </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            <div class="col-sm-3">
+                <div class="card bg-c-blue order-card">
+                    <div class="card-body">
+                        <p class="m-b-0">
+                          <a href="{{ Rom.get_absolute_url }}">{{ Rom.name }}</a>
+                          <a class="badge badge-light-primary" data-toggle="modal" data-target="#exampleModalCenter{{ Rom.UUID }}"> <i class="fa fa-pencil" style="font-size:10px"></i> </a>
+                          <span class="float-right"> آنلاین <i style="font-size:10px;" class="fas fa-circle text-success"></i> </span>
+                        </p>
+                        <div class="row">
+                          <div class="col-md-7">
+                            <p>
+                              <small>
+                                 &nbsp;&nbsp;<span class="text-muted">Sensors:</span> 3
+                                 <br>
+                                 &nbsp;&nbsp;<span class="text-muted">UUID:</span> {{ Rom.UUID }}
+                               </small>
+                             </p>
+                          </div>
+                          <div class="col-md-5">
+                            <img src="/static/assets/images/user/device.png" width="60px" class="img-radius float-right" alt="User-Profile-Image">
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+          {% endfor %}
+
+
+        </div>
+
+
+
+
+
+
+
+     </div>
+ </section>
+ <!-- [ Main Content ] end -->
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+          coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight){
+              content.style.maxHeight = null;
+            } else {
+              content.style.maxHeight = content.scrollHeight + "px";
+            }
+          });
+        }
+    </script>
+
+{% endblock javascripts %}

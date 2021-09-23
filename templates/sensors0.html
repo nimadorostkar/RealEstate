@@ -1,0 +1,806 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} UI Tables {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <!-- [ Main Content ] start -->
+    <section class="pcoded-main-container">
+        <div class="pcoded-content">
+
+          <!-- [ breadcrumb ] start -->
+          <div class="page-header">
+            <div class="page-block">
+              <div class="row align-items-center">
+                <div class="col-md-12">
+                  <div class="page-header-title" align="right" dir="rtl">
+                    <h5 class="m-b-10"> سنسور ها</h5>
+                  </div>
+                  <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                    <li class="breadcrumb-item"><a href="#!"> IOT </a></li>
+                    <li class="breadcrumb-item"><a href="#!">  سنسور ها  </a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- [ breadcrumb ] end -->
+
+
+
+          <div class="container">
+        		<div class="row">
+
+              <div class="col-sm-4">
+                    <div class="card bg-green text-white">
+                        <div class="card-body bg-patern-white">
+                            <div class="row">
+                                <div class="col-auto">
+                                  <img src="/static/assets/images/sensors/gps.png" width="25px">
+                                  <span>GPS</span>
+                                </div>
+                                <div class="col text-right">
+                                  <small>
+                                    lat: <span style="font-size: 14px;" class="text-warning">35.670824</span>
+                                    &nbsp;
+                                    long: <span style="font-size: 14px;" class="text-warning">51.482061</span>
+                                  </small>
+                                </div>
+                            </div>
+                            <div align="center">
+                              <a href="#!" class="badge badge-secondary collapsible">Extend <i class="feather icon-map"></i> </a>
+                              <div class="collapsiblecontent">
+                                <iframe
+                                  width="300"
+                                  height="270"
+                                  frameborder="0"
+                                  scrolling="yes"
+                                  marginheight="0"
+                                  marginwidth="0"
+                                  src="https://maps.google.com/maps?q=35.670824,51.482061&hl=es&z=14&amp;output=embed">
+                                 </iframe>
+                              </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <h3 class="m-0 text-white">
+                                      <div class="spinner-grow text-success" role="status"> <span class="sr-only">Loading...</span> </div>
+                                    </h3>
+                                    <small class="ml-3"> 12 second ago </small>
+                                </div>
+                                <div class="col">
+                                    <a href="#"><h4 class="m-0 text-white text-right"> sensor name  </h4></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        			</div>
+
+        			<div class="col-sm-4">
+                    <div class="card bg-primary text-white">
+                        <div class="card-body bg-patern-white">
+                            <div class="row">
+                                <div class="col-auto">
+                                  <img src="/static/assets/images/sensors/temp.png" width="25px">
+                                  <span>Temperature</span>
+                                </div>
+                                <div class="col text-right">
+                                    <span class="text-white"> 72° <i class="feather icon-arrow-up ml-1 text-success"></i></span>
+                                    <span class="text-white"> 48° <i class="feather icon-arrow-down ml-1 text-danger"></i></span>
+                                    <span class="text-white"> 62° &nbsp;&nbsp;<span style="font-size: 20px;" class="text-warning">~</span> </span>
+                                </div>
+                            </div>
+                            <div align="center">
+                              <a href="#!" class="badge badge-secondary collapsible">Extend <i class="feather icon-pie-chart"></i> </a>
+                              <div class="collapsiblecontent" style="background-color:#ffffff4f;">
+                                  <div class="text-dark" id="line-chart-temp"></div>
+                              </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <h3 class="m-0 text-white">
+                                      <div class="spinner-grow text-success" role="status"> <span class="sr-only">Loading...</span> </div>
+                                      48°
+                                    </h3>
+                                    <small class="ml-3"> 12 second ago </small>
+                                </div>
+                                <div class="col">
+                                    <a href="#"><h4 class="m-0 text-white text-right"> sensor name  </h4></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        			</div>
+
+              <div class="col-sm-4">
+                    <div class="card bg-pppurple text-white">
+                        <div class="card-body bg-patern-white">
+                            <div class="row">
+                                <div class="col-auto">
+                                  <img src="/static/assets/images/sensors/humidity.png" width="25px">
+                                  <span>H&T</span>
+                                </div>
+                                <div class="col text-right">
+                                    <span class="text-white"> 25% 72° <i class="feather icon-arrow-up ml-1 text-success"></i></span>
+                                    <span class="text-white"> 12% 48° <i class="feather icon-arrow-down ml-1 text-danger"></i></span>
+                                    <span class="text-white"> 19% 62° &nbsp;&nbsp;<span style="font-size: 20px;" class="text-warning">~</span> </span>
+                                </div>
+                            </div>
+                            <div align="center">
+                              <a href="#!" class="badge badge-secondary collapsible">Extend <i class="feather icon-pie-chart"></i> </a>
+                              <div class="collapsiblecontent" style="background-color:#ffffff4f;">
+                                  <div class="text-dark" id="line-chart-ht"></div>
+                              </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <h4 class="m-0 text-white">
+                                      <div class="spinner-grow text-success" role="status"> <span class="sr-only">Loading...</span> </div>
+                                      18% 48°
+                                    </h4>
+                                    <small class="ml-3"> 12 second ago </small>
+                                </div>
+                                <div class="col">
+                                    <a href="#"><h4 class="m-0 text-white text-right"> sensor name  </h4></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        			</div>
+
+
+              <div class="col-sm-4">
+                    <div class="card bg-orange text-white">
+                        <div class="card-body bg-patern-white">
+                            <div class="row">
+                                <div class="col-auto">
+                                  <img src="/static/assets/images/sensors/pressure.png" width="25px">
+                                  <span>Pressure</span>
+                                </div>
+                                <div class="col text-right">
+                                    <span class="text-white"> 42 P <i class="feather icon-arrow-up ml-1 text-success"></i></span>
+                                    <span class="text-white"> 18 P <i class="feather icon-arrow-down ml-1 text-danger"></i></span>
+                                    <span class="text-white"> 33 P &nbsp;&nbsp;<span style="font-size: 20px;" class="text-warning">~</span> </span>
+                                </div>
+                            </div>
+                            <div align="center">
+                              <a href="#!" class="badge badge-secondary collapsible">Extend <i class="feather icon-pie-chart"></i> </a>
+                              <div class="collapsiblecontent" style="background-color:#ffffff4f;">
+                                  <div class="text-dark" id="radialBar-chart-pressure"></div>
+                              </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <h3 class="m-0 text-white">
+                                      <div class="spinner-grow text-success" role="status"> <span class="sr-only">Loading...</span> </div>
+                                      31 P
+                                    </h3>
+                                    <small class="ml-3"> 12 second ago </small>
+                                </div>
+                                <div class="col">
+                                    <a href="#"><h4 class="m-0 text-white text-right"> sensor name  </h4></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        			</div>
+
+
+              <div class="col-sm-4">
+                    <div class="card bg-grey text-white">
+                        <div class="card-body bg-patern-white">
+                            <div class="row">
+                                <div class="col-auto">
+                                  <img src="/static/assets/images/sensors/node.png" width="30px">
+                                  <span>Node</span>
+                                </div>
+                                <div class="col text-right">
+                                  <small>
+                                    <span style="font-size: 12px;" class="text-warning">Tamper</span>
+                                    &nbsp;
+                                    <span style="font-size: 12px;" class="text-warning">Moves</span>
+                                    &nbsp;
+                                    <span style="font-size: 12px;" class="text-warning">HMI</span>
+                                    &nbsp;
+                                    <span style="font-size: 12px;" class="text-warning">USB</span>
+                                  </small>
+                                  <br>
+                                  <span style="font-size: 20px;" class="text-success">45°</span>
+                                  &nbsp;&nbsp;
+                                  <span style="font-size: 20px;" class="text-success">Charging</span>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <h5 class="m-0 text-success">
+                                      <div class="spinner-grow text-success" role="status"> <span class="sr-only">Loading...</span> </div>
+                                      Ready
+                                    </h5>
+                                    <small class="ml-3"> 12 second ago </small>
+                                </div>
+                                <div class="col">
+                                    <a href="#"><h4 class="m-0 text-white text-right"> sensor name  </h4></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        			</div>
+
+
+              <div class="col-sm-4">
+                    <div class="card bg-primary text-white">
+                        <div class="card-body bg-patern-white">
+                            <div class="row">
+                                <div class="col-auto">
+                                  <img src="/static/assets/images/sensors/tempcontrol.png" width="30px">
+                                  <span>Temp Control</span>
+                                </div>
+                                <div class="col text-right">
+                                  <small>
+                                    <span style="font-size: 10px;" class="text-warning">Setpoint:</span> 44°
+                                    &nbsp;
+                                    <span style="font-size: 10px;" class="text-warning">Windowsize:</span> 7°
+                                  </small>
+                                </div>
+                            </div>
+                            <div align="center">
+                              <a href="#!" class="badge badge-secondary collapsible">Extend <i class="feather icon-pie-chart"></i> </a>
+                              <div class="collapsiblecontent" style="background-color:#ffffff4f;">
+                                  <div class="text-dark" id="line-chart-tc"></div>
+                              </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <h5 class="m-0 text-white">
+                                      <div class="spinner-grow text-success" role="status"> <span class="sr-only">Loading...</span> </div>
+                                       43° &nbsp;<span style="font-size: 12px;" class="text-warning">cooler</span>
+                                    </h5>
+                                    <small class="ml-3"> 12 second ago </small>
+                                </div>
+                                <div class="col">
+                                    <a href="#"><h4 class="m-0 text-white text-right"> sensor name  </h4></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        			</div>
+
+
+              <div class="col-sm-4">
+                    <div class="card bg-green text-white">
+                        <div class="card-body bg-patern-white">
+                            <div class="row">
+                                <div class="col-auto">
+                                  <img src="/static/assets/images/sensors/digital4.png" width="25px">
+                                  <span>Digital Input 4</span>
+                                </div>
+                            </div>
+                            <div class="custom-control custom-checkbox" align="center">
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                    <label class="custom-control-label" for="customCheck1">Check 1</label>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                    <label class="custom-control-label" for="customCheck1">Check 2</label>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                    <label class="custom-control-label" for="customCheck1">Check 3</label>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                    <label class="custom-control-label" for="customCheck1">Check 4</label>
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <h3 class="m-0 text-white">
+                                      <div class="spinner-grow text-success" role="status"> <span class="sr-only">Loading...</span> </div>
+                                    </h3>
+                                    <small class="ml-3"> 12 second ago </small>
+                                </div>
+                                <div class="col">
+                                    <a href="#"><h4 class="m-0 text-white text-right"> sensor name  </h4></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        			</div>
+
+
+              <div class="col-sm-4">
+                    <div class="card bg-pppurple text-white">
+                        <div class="card-body bg-patern-white">
+                            <div class="row">
+                                <div class="col-auto">
+                                  <img src="/static/assets/images/sensors/digital8.png" width="25px">
+                                  <span>Digital Input 8</span>
+                                </div>
+                            </div>
+                              <div class="custom-control custom-checkbox" align="center">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                      <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                      <label class="custom-control-label" for="customCheck1"> 1</label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                      <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                      <label class="custom-control-label" for="customCheck1"> 2</label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                      <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                      <label class="custom-control-label" for="customCheck1"> 3</label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                      <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                      <label class="custom-control-label" for="customCheck1"> 4</label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                      <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                      <label class="custom-control-label" for="customCheck1"> 5</label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                      <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                      <label class="custom-control-label" for="customCheck1"> 6</label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                      <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                      <label class="custom-control-label" for="customCheck1"> 7</label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                      <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                      <label class="custom-control-label" for="customCheck1"> 8</label>
+                                    </div>
+                                </div>
+                              </div>
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <h3 class="m-0 text-white">
+                                      <div class="spinner-grow text-success" role="status"> <span class="sr-only">Loading...</span> </div>
+                                    </h3>
+                                    <small class="ml-3"> 12 second ago </small>
+                                </div>
+                                <div class="col">
+                                    <a href="#"><h4 class="m-0 text-white text-right"> sensor name  </h4></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        			</div>
+
+
+              <div class="col-sm-4">
+                    <div class="card bg-grey text-white">
+                        <div class="card-body bg-patern-white">
+                            <div class="row">
+                                <div class="col-auto">
+                                  <img src="/static/assets/images/sensors/SoilHumidity.png" width="30px">
+                                  <span> Soil Humidity </span>
+                                </div>
+                                <div class="col text-right">
+                                    <span class="text-white"> 62° <i class="feather icon-arrow-up ml-1 text-success"></i></span>
+                                    <span class="text-white"> 48° <i class="feather icon-arrow-down ml-1 text-danger"></i></span>
+                                    <span class="text-white"> 53° &nbsp;&nbsp;<span style="font-size: 20px;" class="text-warning">~</span> </span>
+                                </div>
+                            </div>
+                            <div align="center">
+                              <a href="#!" class="badge badge-secondary collapsible">Extend <i class="feather icon-pie-chart"></i> </a>
+                              <div class="collapsiblecontent" style="background-color:#ffffff4f;">
+                                  <div class="text-dark" id="line-chart-sh"></div>
+                              </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <h3 class="m-0 text-white">
+                                      <div class="spinner-grow text-success" role="status"> <span class="sr-only">Loading...</span> </div>
+                                      52°
+                                    </h3>
+                                    <small class="ml-3"> 12 second ago </small>
+                                </div>
+                                <div class="col">
+                                    <a href="#"><h4 class="m-0 text-white text-right"> sensor name  </h4></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        			</div>
+
+
+
+
+              <div class="col-sm-4">
+                    <div class="card bg-orange text-white">
+                        <div class="card-body bg-patern-white">
+                            <div class="row">
+                                <div class="col-auto">
+                                  <img src="/static/assets/images/sensors/switch8.png" width="30px">
+                                  <span> Switch 8 </span>
+                                </div>
+                            </div>
+                              <div class="custom-control custom-switch" align="center">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                      <input type="checkbox" class="custom-control-input" id="customswitch1">
+                                      <label class="custom-control-label" for="customswitch1"> 1</label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                      <input type="checkbox" class="custom-control-input" id="customswitch2">
+                                      <label class="custom-control-label" for="customswitch2"> 2</label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                      <input type="checkbox" class="custom-control-input" id="customswitch3">
+                                      <label class="custom-control-label" for="customswitch3"> 3</label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                      <input type="checkbox" class="custom-control-input" id="customswitch4">
+                                      <label class="custom-control-label" for="customswitch4"> 4</label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                      <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                      <label class="custom-control-label" for="customCheck1"> 5</label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                      <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                      <label class="custom-control-label" for="customCheck1"> 6</label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                      <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                      <label class="custom-control-label" for="customCheck1"> 7</label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                      <input type="checkbox" class="custom-control-input" id="customswitch8">
+                                      <label class="custom-control-label" for="customswitch8"> 8</label>
+                                    </div>
+                                </div>
+                              </div>
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <h3 class="m-0 text-white">
+                                      <div class="spinner-grow text-success" role="status"> <span class="sr-only">Loading...</span> </div>
+                                    </h3>
+                                    <small class="ml-3"> 12 second ago </small>
+                                </div>
+                                <div class="col">
+                                    <a href="#"><h4 class="m-0 text-white text-right"> sensor name  </h4></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        			</div>
+
+
+
+              <div class="col-sm-4">
+                    <div class="card bg-primary text-white">
+                        <div class="card-body bg-patern-white">
+                            <div class="row">
+                                <div class="col-auto">
+                                  <img src="/static/assets/images/sensors/switch4.png" width="30px">
+                                  <span> Switch 4 </span>
+                                </div>
+                            </div>
+                              <div class="custom-control custom-switch" align="center">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                      <input type="checkbox" class="custom-control-input" id="customswitch1">
+                                      <label class="custom-control-label" for="customswitch1">Switch 1</label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                      <input type="checkbox" class="custom-control-input" id="customswitch2">
+                                      <label class="custom-control-label" for="customswitch2">Switch 2</label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                      <input type="checkbox" class="custom-control-input" id="customswitch3">
+                                      <label class="custom-control-label" for="customswitch3">Switch 3</label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                      <input type="checkbox" class="custom-control-input" id="customswitch4">
+                                      <label class="custom-control-label" for="customswitch4">Switch 4</label>
+                                    </div>
+                                </div>
+                              </div>
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <h3 class="m-0 text-white">
+                                      <div class="spinner-grow text-success" role="status"> <span class="sr-only">Loading...</span> </div>
+                                    </h3>
+                                    <small class="ml-3"> 12 second ago </small>
+                                </div>
+                                <div class="col">
+                                    <a href="#"><h4 class="m-0 text-white text-right"> sensor name  </h4></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        			</div>
+
+
+              <div class="col-sm-4">
+                    <div class="card bg-green text-white">
+                        <div class="card-body bg-patern-white">
+                            <div class="row">
+                                <div class="col-auto">
+                                  <img src="/static/assets/images/sensors/switch1.png" width="30px">
+                                  <span> Switch 1 </span>
+                                </div>
+                            </div>
+                              <div class="custom-control custom-switch" align="center">
+                                <input type="checkbox" class="custom-control-input" id="customswitch">
+                                <label class="custom-control-label" for="customswitch"> Switch </label>
+                              </div>
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <h3 class="m-0 text-white">
+                                      <div class="spinner-grow text-success" role="status"> <span class="sr-only">Loading...</span> </div>
+                                    </h3>
+                                    <small class="ml-3"> 12 second ago </small>
+                                </div>
+                                <div class="col">
+                                    <a href="#"><h4 class="m-0 text-white text-right"> sensor name  </h4></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        			</div>
+
+
+              <div class="col-sm-4">
+                    <div class="card bg-pppurple text-white">
+                        <div class="card-body bg-patern-white">
+                            <div class="row">
+                                <div class="col-auto">
+                                  <img src="/static/assets/images/sensors/brightness.png" width="25px">
+                                  <span>Brightness</span>
+                                </div>
+                                <div class="col text-right">
+                                    <span class="text-white"> 82 cd <i class="feather icon-arrow-up ml-1 text-success"></i></span>
+                                    <span class="text-white"> 38 cd <i class="feather icon-arrow-down ml-1 text-danger"></i></span>
+                                    <span class="text-white"> 62 cd &nbsp;&nbsp;<span style="font-size: 20px;" class="text-warning">~</span> </span>
+                                </div>
+                            </div>
+                            <div align="center">
+                              <a href="#!" class="badge badge-secondary collapsible">Extend <i class="feather icon-pie-chart"></i> </a>
+                              <div class="collapsiblecontent" style="background-color:#ffffff4f;">
+                                  <div class="text-dark" id="line-chart-brightness"></div>
+                              </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <h3 class="m-0 text-white">
+                                      <div class="spinner-grow text-success" role="status"> <span class="sr-only">Loading...</span> </div>
+                                      71 <small>cd</small>
+                                    </h3>
+                                    <small class="ml-3"> 12 second ago </small>
+                                </div>
+                                <div class="col">
+                                    <a href="#"><h4 class="m-0 text-white text-right"> sensor name  </h4></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        			</div>
+
+
+              <div class="col-sm-4">
+                    <div class="card bg-grey text-white">
+                        <div class="card-body bg-patern-white">
+                            <div class="row">
+                                <div class="col-auto">
+                                  <img src="/static/assets/images/sensors/potentiometer.png" width="35px">
+                                  <span>Potentiometer</span>
+                                </div>
+                                <div class="col text-right">
+                                  <small>
+                                     last change: <span style="font-size: 14px;" class="text-warning">8 min ago</span>
+                                  </small>
+                                </div>
+                            </div>
+                            <div align="center">
+                              <a href="#!" class="badge badge-secondary collapsible">Extend <i class="feather icon-pie-chart"></i> </a>
+                              <div class="collapsiblecontent" style="background-color:#ffffff4f;">
+                                  <div class="text-dark" id="#"></div>
+                              </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <h3 class="m-0 text-white">
+                                      <div class="spinner-grow text-success" role="status"> <span class="sr-only">Loading...</span> </div>
+                                      23
+                                    </h3>
+                                    <small class="ml-3"> 12 second ago </small>
+                                </div>
+                                <div class="col">
+                                    <a href="#"><h4 class="m-0 text-white text-right"> sensor name  </h4></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        			</div>
+
+
+
+              <div class="col-sm-4">
+                    <div class="card bg-orange text-white">
+                        <div class="card-body bg-patern-white">
+                            <div class="row">
+                                <div class="col-auto">
+                                  <img src="/static/assets/images/sensors/electricity1.png" width="35px">
+                                  <span>Electricity</span>
+                                </div>
+                                <div class="col text-right">
+                                  <small>
+                                    <span style="font-size: 12px;" class="text-success">Voltage:</span> 12
+                                    &nbsp;
+                                    <span style="font-size: 12px;" class="text-success">Current:</span> 7
+                                    <br>
+                                    <span style="font-size: 12px;" class="text-success">Phase diff:</span> 3
+                                    &nbsp;
+                                    <span style="font-size: 12px;" class="text-success">Power:</span> 11
+                                  </small>
+                                </div>
+                            </div>
+                            <div align="center">
+
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <h3 class="m-0 text-white">
+                                      <div class="spinner-grow text-success" role="status"> <span class="sr-only">Loading...</span> </div>
+                                      10
+                                    </h3>
+                                    <small class="ml-3"> 12 second ago </small>
+                                </div>
+                                <div class="col">
+                                    <a href="#"><h4 class="m-0 text-white text-right"> sensor name  </h4></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        			</div>
+
+
+              <div class="col-sm-4">
+                    <div class="card bg-primary text-white">
+                        <div class="card-body bg-patern-white">
+                            <div class="row">
+                                <div class="col-auto">
+                                  <img src="/static/assets/images/sensors/waterlevel.png" width="20px">
+                                  <span> Water level</span>
+                                </div>
+                            </div>
+                            <div align="center"></div> <br>
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <h3 class="m-0 text-white">
+                                      <div class="spinner-grow text-success" role="status"> <span class="sr-only">Loading...</span> </div>
+                                      34 <small>L</small>
+                                    </h3>
+                                    <small class="ml-3"> 12 second ago </small>
+                                </div>
+                                <div class="col">
+                                    <a href="#"><h4 class="m-0 text-white text-right"> sensor name  </h4></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        			</div>
+
+
+              <div class="col-sm-4">
+                    <div class="card bg-green text-white">
+                        <div class="card-body bg-patern-white">
+                            <div class="row">
+                                <div class="col-auto">
+                                  <img src="/static/assets/images/sensors/waterlevel.png" width="20px">
+                                  <span> Water sensing</span>
+                                </div>
+                                <div class="col text-right">
+                                    <span style="font-size: 15px;" class="text-dark">Liter:</span> 12
+                                </div>
+                            </div>
+                            <div align="center"></div> <br>
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <h3 class="m-0 text-white">
+                                      <div class="spinner-grow text-success" role="status"> <span class="sr-only">Loading...</span> </div>
+                                      100 <small>L/h</small>
+                                    </h3>
+                                    <small class="ml-3"> 12 second ago </small>
+                                </div>
+                                <div class="col">
+                                    <a href="#"><h4 class="m-0 text-white text-right"> sensor name  </h4></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        			</div>
+
+
+              <div class="col-sm-4">
+                    <div class="card bg-grey text-white">
+                        <div class="card-body bg-patern-white">
+                            <div class="row">
+                                <div class="col-auto">
+                                  <img src="/static/assets/images/sensors/sd.png" width="20px">
+                                  <span> SD card </span>
+                                </div>
+                                <div class="col text-right">
+                                  <small>
+                                     Total space: <span style="font-size: 12px;" class="text-warning">2 GB</span>
+                                     &nbsp;
+                                     Write cycle: <span style="font-size: 12px;" class="text-warning">10000</span>
+                                  </small>
+                                </div>
+                            </div>
+                            <br>
+                            <div align="center">
+                              <a href="#!" class="badge badge-secondary collapsible">Extend <i class="feather icon-pie-chart"></i> </a>
+                              <div class="collapsiblecontent" style="background-color:#ffffff4f;">
+                                  <div class="text-dark" id="pie-chart-sd"></div>
+                              </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <h5 class="m-0 text-white">
+                                      <div class="spinner-grow text-success" role="status"> <span class="sr-only">Loading...</span> </div>
+                                      200 <small> MB </small> <span style="font-size: 8px;" class="text-warning"> free space</span>
+                                    </h5>
+                                    <small class="ml-3"> 12 second ago </small>
+                                </div>
+                                <div class="col">
+                                    <a href="#"><h4 class="m-0 text-white text-right"> sensor name  </h4></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        			</div>
+
+
+
+
+
+        	</div>
+
+
+
+
+
+
+
+     </div>
+ </section>
+ <!-- [ Main Content ] end -->
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+      <script>
+          var coll = document.getElementsByClassName("collapsible");
+          var i;
+
+          for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+              this.classList.toggle("active");
+              var content = this.nextElementSibling;
+              if (content.style.maxHeight){
+                content.style.maxHeight = null;
+              } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+              }
+            });
+          }
+      </script>
+
+    <script src="/static/assets/js/plugins/apexcharts.min.js"></script>
+    <script src="/static/assets/js/pages/chart-apex.js"></script>
+{% endblock javascripts %}

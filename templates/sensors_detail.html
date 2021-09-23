@@ -1,0 +1,223 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} سنسور {{sensor.name}} {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+{% load humanize %}
+
+<!-- [ Main Content ] start -->
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+
+          <!-- [ breadcrumb ] start -->
+          <div class="page-header">
+            <div class="page-block">
+              <div class="row align-items-center">
+                <div class="col-md-12">
+                  <div class="page-header-title" align="right" dir="rtl">
+                    <h5 class="m-b-10" align="right" dir="rtl"> {{sensor.name}} <small class="text-muted"> {{sensor.UUID}} </small> </h5>
+                  </div>
+                  <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                    <li class="breadcrumb-item"><a href="#!"> IOT </a></li>
+                    <li class="breadcrumb-item"><a href="#!"> نود ها </a></li>
+                    <li class="breadcrumb-item">
+                      <a href="#!">
+                        {% for Rom in devices %}
+                        {% if Rom.UUID == sensor.node_id %}
+                         {{ Rom.name }}
+                        {% endif %}
+                        {% endfor %}
+                      </a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#!"> {{sensor.name}} </a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- [ breadcrumb ] end -->
+
+
+          <!-- [ Main Content ] start -->
+    			<div class="row">
+
+            <!-- [ stiped-table ] start -->
+            <div class="col-xl-12">
+                <div class="card" align="right" dir="rtl">
+                    <div class="card-header">
+                        <span class="d-block m-t-5"> اطلاعات سنسور <b> {{sensor.name}} </b>
+                          {% if sensor.family_id == '28' %}
+                            <span class="badge badge-light-primary">سنسور دما</span>
+                          {% elif sensor.family_id == '15' %}
+                            <span class="badge badge-light-primary"> سنسور GPS </span>
+                          {% endif %}
+                        </span>
+                    </div>
+                    <div class="card-body table-border-style">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th> دما فعلی </th>
+                                        <th> بالا ترین دما </th>
+                                        <th> پایین ترین دما </th>
+                                        <th> میانگین دما </th>
+                                        <th> آخرین به روز رسانی </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td> {{Temp12_value}} </td>
+                                        <td> {{max}} </td>
+                                        <td> {{min}} </td>
+                                        <td> {{avg|floatformat:1}} </td>
+                                        <td dir="rtl"> {{last_update|naturaltime}} </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [ stiped-table ] end -->
+
+
+            <!-- [ chart ] start -->
+            <div class="col-xl-12">
+                <div class="card" align="right" dir="rtl">
+                    <div class="card-header">
+                        <span class="d-block m-t-5"> نمودار </span>
+                    </div>
+                    <div class="card-body table-border-style">
+                          <div class="text-dark" id="chart-temp"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- [ chart ] end -->
+
+
+            <!-- [ alarms ] start -->
+            <div class="col-xl-8">
+                <div class="card" align="right" dir="rtl">
+                    <div class="card-header">
+                        <span class="d-block m-t-5"> هشدار تغیرات دمایی </span>
+                    </div>
+                    <div class="card-body table-border-style">
+                       IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+                    </div>
+                </div>
+            </div>
+            <!-- [ alarms ] end -->
+            <!-- [ rename ] start -->
+            <div class="col-xl-4">
+                <div class="card" align="right" dir="rtl">
+                    <div class="card-header">
+                        <span class="d-block m-t-5"> تغییر نام سنسور </span>
+                    </div>
+                    <div class="card-body table-border-style">
+                      <form action="#" method="post" class="form-inline">
+                        {% csrf_token %}
+                          &nbsp;&nbsp;
+                          <input name="Sensor_name" type="text" class="form-control" placeholder="{{sensor.name}}">
+                          &nbsp;&nbsp;
+                          <button type="submit" class="btn  btn-primary mb-2"> ذخیره </button>
+                      </form>
+                    </div>
+                </div>
+            </div>
+            <!-- [ rename ] end -->
+
+
+
+
+    			</div>
+    			<!-- [ Main Content ] end -->
+
+
+
+
+
+
+
+     </div>
+ </section>
+ <!-- [ Main Content ] end -->
+
+
+{% endblock content %}
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<script>
+
+
+$(document).ready(function() {
+    setTimeout(function() {
+
+      var last7 = {{last7|safe}};
+
+      $(function() {
+
+          var options = {
+              chart: {
+                  height: 250,
+                  type: 'line',
+                  zoom: {
+                      enabled: false
+                  }
+              },
+              dataLabels: {
+                  enabled: false,
+                  width: 2,
+              },
+              stroke: {
+                  curve: 'straight',
+              },
+              colors: ["#ea680b"],
+              fill: {
+                  type: "gradient",
+                  gradient: {
+                      shade: 'light'
+                  },
+              },
+              series: [{
+                  name: "temp",
+                  data: last7
+              }],
+              title: {
+                  text: '',
+                  align: 'left'
+              },
+              grid: {
+                  row: {
+                      colors: ['transparent', 'transparent'], // takes an array which will be repeated on columns
+                      opacity: 0.5
+                  },
+              },
+              xaxis: {
+                  categories: ['شنبه', '۱شنبه', '۲شنبه', '۳شنبه', '۴شنبه', '۵شنبه', 'جمعه'],
+              }
+          }
+          var chart = new ApexCharts(
+              document.querySelector("#chart-temp"),
+              options
+          );
+          chart.render();
+      });
+
+
+    }, 700);
+});
+
+</script>
+
+
+
+<script src="/static/assets/js/plugins/apexcharts.min.js"></script>
+<script src="/static/assets/js/pages/chart-apex.js"></script>
+{% endblock javascripts %}
