@@ -34,10 +34,10 @@ class ItemImageInline(admin.TabularInline):
     extra = 1
 
 class ItemAdmin(ImportExportModelAdmin):
-    list_display = ('buy_status','estate_status','building_status','area_size','area', '')
-    list_filter = ("Type", "Cavities_qty")
-    search_fields = ['Name', 'Code']
-    raw_id_fields = ('Category', 'Type', 'Piece_id', 'Manufacturer')
-    inlines = [ MoldImageInline, ]
+    list_display = ('buy_status','estate_status','building_status','area_size','area', 'date')
+    list_filter = ("buy_status", "estate_status", "building_status", "date")
+    search_fields = ['area', 'area_size', 'additional_information']
+    raw_id_fields = ('area', 'tags')
+    inlines = [ ItemImageInline, ]
 
 admin.site.register(models.Item, ItemAdmin)
