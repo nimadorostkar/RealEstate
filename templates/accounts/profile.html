@@ -7,117 +7,100 @@
 
 {% block content %}
 
-	<!-- [ Main Content ] start -->
-	<div class="pcoded-main-container">
-		<div class="pcoded-content">
-			<!-- [ breadcrumb ] start -->
-			<div class="page-header">
-				<div class="page-block">
-					<div class="row align-items-center">
-						<div class="col-md-12">
-							<div class="page-header-title" align="right" dir="rtl">
-								<h5 class="m-b-10"> پروفایل کاربری </h5>
-							</div>
-							<ul class="breadcrumb">
-								<li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
-								<li class="breadcrumb-item"><a href="#!"> پروفایل </a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- [ breadcrumb ] end -->
 
 
 
-			<div class="row">
-
-				<div class="col-md-3">
-					<div align="center" dir="rtl" style=" padding-right:5%; padding-left:5%; padding-top:5%; background-color:#fff; padding:20px25px; border-radius:5px;">
-                <img class="avatar" src="{{ request.user.profile.user_photo.url }}" style="max-width:100%;">
-								<br><br>
-								<h4 class="text-muted"> {{ request.user.first_name }} {{ request.user.last_name }} </h4>
-								<br>
-					</div>
-				</div>
-
-				<div class="col-md-9">
-					<div align="right" dir="rtl" style="margin-right:5%; margin-left:5%; padding-right:5%; padding-left:5%; padding-top:5%; background-color:#fff; padding:20px25px; border-radius:5px;">
-			         <form method="post" enctype="multipart/form-data">
-			           {% csrf_token %}
-			          <div class="row">
-			            <div class="col-md-6 pr-md-1">
-			              <div class="form-group">
-			                <label> نام کاربری </label>
-			                <input name="username" type="text" class="form-control" value="{{ request.user.username }}">
-			              </div>
-			            </div>
-			          </div>
-			          <div class="row">
-			            <div class="col-md-6 pr-md-1">
-			              <div class="form-group">
-			                <label> نام </label>
-			                <input name="first_name" type="text" class="form-control" value="{{ request.user.first_name }}">
-			              </div>
-			            </div>
-			            <div class="col-md-6 pl-md-1">
-			              <div class="form-group">
-			                <label> نام خانوادگی </label>
-			                <input name="last_name" type="text" class="form-control" value="{{ request.user.last_name }}">
-			              </div>
-			            </div>
-			          </div>
-			          <div class="row">
-			            <div class="col-md-12 pr-md-1">
-			              <div class="form-group">
-			                <label> ایمیل </label>
-			                <input name="email" type="text" class="form-control" placeholder="email" value="{{ request.user.email }}">
-			              </div>
-			            </div>
-			          </div>
-								<div class="row">
-			            <div class="col-md-12 pr-md-1">
-			              <div class="form-group">
-			                <label> آدرس </label>
-			                <input name="address" type="text" class="form-control" placeholder="address" value="{{ request.user.profile.address }}">
-			              </div>
-			            </div>
-			          </div>
-								<div class="row">
-			            <div class="col-md-6 pr-md-1">
-			              <div class="form-group">
-			                <label> شماره تماس </label>
-			                <input name="phone" type="text" class="form-control" placeholder="City" value="{{ request.user.profile.phone }}">
-			              </div>
-			            </div>
-			            <div class="col-md-6 px-md-1">
-			                <label> تصویر کاربری </label>
-			                <input name="user_photo" type="file" class="form-control">
-			            </div>
-			          </div>
-			          <div class="row">
-			            <div class="col-md-6 pr-md-1">
-			              <div class="form-group">
-			                <label> رمز عبور </label>
-			                <input name="password1" type="password" class="form-control" value="{{ request.user.password1 }}">
-			              </div>
-			            </div>
-			            <div class="col-md-6 px-md-1">
-			              <div class="form-group">
-			                <label> تکرار رمز عبور </label>
-			                <input name="password2" type="password" class="form-control" value="{{ request.user.password2 }}">
-			              </div>
-			            </div>
-			          </div>
-			          <div class="card-footer">
-			            <button type="submit" class="btn btn-fill btn-primary"> ذخیره </button>
-			          </div>
-			        </form>
-					</div>
-				</div>
 
 
-			</div>
+<div class="page-head">
+  <div class="container">
+      <div class="row">
+          <div class="page-head-content">
+              <h1 dir="rtl" class="page-title"> سلام <span class="orange strong"> {{ request.user.first_name }} </span></h1>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- End page header -->
+
+<!-- property area -->
+<div class="content-area user-profiel" style="background-color: #FCFCFC;">&nbsp;
+      <div class="container" dir="rtl" align="right">
+          <div class="row">
+              <div class="col-sm-10 col-sm-offset-1 profiel-container">
+
+                  <form role="form" action="{% url 'app:profile' %}" method="post" enctype="multipart/form-data">
+									 	{% csrf_token %}
+                      <div class="profiel-header">
+                          <h3>
+                               پروفایل خود را ویرایش کنید <br>
+                              <small>این اطلاعات ما را بیشتر در مورد شما آگاه خواهد کرد</small>
+                          </h3>
+                          <hr>
+                      </div>
+
+                      <div class="clear">
+                          <div class="col-sm-3 col-sm-offset-1">
+                              <div class="picture-container">
+                                  <div class="picture">
+                                      <img src="{{ request.user.profile.user_photo.url }}" class="picture-src" id="wizardPicturePreview" title=""/>
+                                      <input name="user_photo" type="file" id="wizard-picture">
+                                  </div>
+                                  <h6>تصویر را انتخاب کنید</h6>
+                              </div>
+                          </div>
+													<div class="col-sm-3 padding-top-25">
+                              <div class="form-group">
+                                  <label>  نام کاربری  <small>(ضروری)</small></label>
+                                  <input name="username" type="text" class="form-control" value="{{ request.user.username }}">
+                              </div>
+                              <div class="form-group">
+                                  <label> نام <small>(ضروری)</small></label>
+                                  <input name="first_name" type="text" class="form-control" value="{{ request.user.first_name }}">
+                              </div>
+                              <div class="form-group">
+                                  <label>  نام خانوادگی  <small>(ضروری)</small></label>
+                                  <input name="last_name" type="text" class="form-control" value="{{ request.user.last_name }}">
+                              </div>
+                          </div>
+													<div class="col-sm-3 padding-top-25">
+                              <div class="form-group">
+                                  <label> ایمیل <small>(ضروری)</small></label>
+                                  <input name="email" type="email" class="form-control" value="{{ request.user.email }}"">
+                              </div>
+                              <div class="form-group">
+                                  <label>  آدرس  <small>(ضروری)</small></label>
+                                  <input name="text" type="text" class="form-control" value="{{ request.user.profile.address }}">
+                              </div>
+                              <div class="form-group">
+                                  <label>  شماره تماس  <small>(ضروری)</small></label>
+                                  <input name="phone" type="text" class="form-control" value="{{ request.user.profile.phone }}">
+                              </div>
+                          </div>
+                          <div class="col-sm-3 padding-top-25">
+                              <div class="form-group">
+                                  <label> کلمه عبور <small>(ضروری)</small></label>
+                                  <input name="Password1" type="password" class="form-control" value="{{ request.user.password1 }}">
+                              </div>
+                              <div class="form-group">
+                                  <label> تکرار رمزعبور <small>(ضروری)</small></label>
+                                  <input type="password2" type="password" class="form-control" value="{{ request.user.password2 }}">
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="col-sm-5 col-sm-offset-1">
+                          <br>
+                          <button type="submit" class="btn btn-fill btn-primary"> ذخیره </button>
+                      </div>
+                      <br>
+                  </form>
+
+          </div>
+      </div><!-- end row -->
+
+  </div>
+</div>
 
 
 
@@ -125,33 +108,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		</div>
-	</div>
-	<!-- [ Main Content ] end -->
 
 {% endblock content %}
 

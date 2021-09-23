@@ -41,7 +41,7 @@ def profile(request):
             user_photo = profile_form.cleaned_data['user_photo']
             user_form.save()
             profile_form.save()
-            context = {'user_form':user_form, 'profile_form':profile_form, 'devices':devices}
+            context = {'user_form':user_form, 'profile_form':profile_form }
             context['segment'] = 'profile'
 
             html_template = loader.get_template( 'accounts/profile.html' )
