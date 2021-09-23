@@ -20,23 +20,3 @@ class UserForm(UserCreationForm):
 	class Meta:
 		model = User
 		fields = ['username','first_name','last_name','email','password1','password2']
-
-
-
-#------------------------------------------------------------------------------
-class User_uuidForm(forms.ModelForm):
-	class Meta:
-		model = User_uuid
-		fields = ['UUID']
-
-
-
-#------------------------------------------------------------------------------
-class Device_name_Form(forms.Form):
-	Device_UUID = forms.CharField(max_length=20)
-	Device_name = forms.CharField(max_length=20)
-
-
-#------------------------------------------------------------------------------
-class Sensor_name_Form(forms.Form):
-	Sensor_name = forms.CharField(max_length=20)
