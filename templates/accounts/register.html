@@ -28,23 +28,51 @@
 						<div class="box-for overflow">
 								<div class="col-md-12 col-xs-12 register-blocks">
 										<h2>New account : </h2>
-										<form action="" method="post">
+										<span class="mb-0 text-muted">
+											{% if msg %}
+												{{ msg | safe }}
+											{% else %}
+												Add your credentials
+											{% endif %}
+										</span>
+										<!-- dummy spacer -->
+										<p> <br /> </p>
+
+										<!-- Hide the form on success -->
+										{% if not success %}
+										<form role="form" method="post" action="">
+										{% csrf_token %}
 												<div class="form-group">
 														<label for="name">Name</label>
-														<input type="text" class="form-control" id="name">
+														{{ form.username }}
+														<span class="text-error">{{ form.username.errors }}</span>
 												</div>
 												<div class="form-group">
 														<label for="email">Email</label>
-														<input type="text" class="form-control" id="email">
+														{{ form.email }}
+														<span class="text-error">{{ form.email.errors }}</span>
 												</div>
 												<div class="form-group">
 														<label for="password">Password</label>
-														<input type="password" class="form-control" id="password">
+														{{ form.password1 }}
+														<span class="text-error">{{ form.password1.errors }}</span>
+												</div>
+												<div class="form-group">
+														<label for="password">Check Password</label>
+														{{ form.password2 }}
+														<span class="text-error">{{ form.password2.errors }}</span>
+												</div>
+												<div class="form-group text-left mt-2">
+													<div class="checkbox checkbox-primary d-inline">
+														<input type="checkbox" name="checkbox-fill-2" id="checkbox-fill-2" checked="">
+														<label for="checkbox-fill-2" class="cr">I agree with <a href="#">terms</a>.</label>
+													</div>
 												</div>
 												<div class="text-center">
 														<button type="submit" class="btn btn-default">Register</button>
 												</div>
 										</form>
+										{% endif %}
 								</div>
 						</div>
 				</div>
@@ -54,6 +82,7 @@
 								<div class="col-md-12 col-xs-12 login-blocks">
 										<h2>Login : </h2>
 										<form action="" method="post">
+										{% csrf_token %}
 												<div class="form-group">
 														<label for="email">Email</label>
 														<input type="text" class="form-control" id="email">
@@ -82,111 +111,6 @@
 
 		</div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-<br><br>
-<hr><hr>
-
-
-	<!-- [ auth-signup ] start -->
-	<div class="auth-wrapper">
-		<div class="auth-content">
-			<div class="card">
-				<div class="row align-items-center text-center">
-					<div class="col-md-12">
-						<div class="card-body">
-							<img src="/static/assets/images/logo-dark.png" alt="" class="img-fluid mb-4">
-							<h4 class="mb-3 f-w-400">
-								<h4 class="mb-3 f-w-400">
-									Sign UP
-								</h4>
-							</h4>
-							<span class="mb-0 text-muted">
-								{% if msg %}
-									{{ msg | safe }}
-								{% else %}
-									Add your credentials
-								{% endif %}
-							</span>
-							<!-- dummy spacer -->
-							<p> <br /> </p>
-
-							<!-- Hide the form on success -->
-							{% if not success %}
-								<form role="form" method="post" action="">
-
-									{% csrf_token %}
-
-									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<span class="input-group-text"><i class="feather icon-user"></i></span>
-										</div>
-										{{ form.username }}
-									</div>
-									<span class="text-error">{{ form.username.errors }}</span>
-
-									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<span class="input-group-text"><i class="feather icon-mail"></i></span>
-										</div>
-										{{ form.email }}
-									</div>
-									<span class="text-error">{{ form.email.errors }}</span>
-
-									<div class="input-group mb-4">
-										<div class="input-group-prepend">
-											<span class="input-group-text"><i class="feather icon-lock"></i></span>
-										</div>
-										{{ form.password1 }}
-									</div>
-									<span class="text-error">{{ form.password1.errors }}</span>
-
-									<div class="input-group mb-4">
-										<div class="input-group-prepend">
-											<span class="input-group-text"><i class="feather icon-lock"></i></span>
-										</div>
-										{{ form.password2 }}
-									</div>
-									<span class="text-error">{{ form.password2.errors }}</span>
-
-									<div class="form-group text-left mt-2">
-										<div class="checkbox checkbox-primary d-inline">
-											<input type="checkbox" name="checkbox-fill-2" id="checkbox-fill-2" checked="">
-											<label for="checkbox-fill-2" class="cr">I agree with <a href="#">terms</a>.</label>
-										</div>
-									</div>
-									<button type="submit" name="register" class="btn btn-primary btn-block mb-4">Sign up</button>
-
-								</form>
-
-								<p class="mb-0 text-muted">Have an account? <a href="{% url 'login' %}" class="f-w-400">Login</a></p>
-							{% endif %}
-
-							<p class="mb-2 text-muted">
-								<br />
-								&copy; <a target="_blank" rel="noopener" href="https://bit.ly/37fF9RT" class="f-w-400">CodedThemes</a>
-								- <a target="_blank" rel="noopener"
-								     href="https://appseed.us/admin-dashboards/django-dashboard-gradientable" class="f-w-400">Django Gradient</a>
-							</p>
-
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- [ auth-signup ] end -->
-
 
 
 
