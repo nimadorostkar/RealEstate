@@ -69,6 +69,9 @@ TEMPLATES = [
     },
 ]
 
+SITE_ID = 1
+
+
 WSGI_APPLICATION = 'core.wsgi.application'
 
 # Database
