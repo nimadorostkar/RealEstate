@@ -12,7 +12,6 @@ from django.db.models import Count, Max, Min, Avg
 
 
 #------------------------------------------------------------------------------
-@login_required(login_url="/login/")
 def index(request):
     context = {}
     context['segment'] = 'index'
