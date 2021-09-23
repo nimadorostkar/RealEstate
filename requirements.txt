@@ -1,0 +1,14 @@
+asgiref
+autopep8
+django
+pycodestyle
+pytz
+sqlparse
+Unipath
+dj-database-url
+python-decouple
+gunicorn
+whitenoise
+Pillow
+django-bootstrap-form
+ 
