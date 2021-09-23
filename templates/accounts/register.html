@@ -22,17 +22,17 @@
 									{{ msg | safe }}
 								{% else %}
 									Add your credentials
-								{% endif %} 
+								{% endif %}
 							</span>
 							<!-- dummy spacer -->
-							<p> <br /> </p>		
-							
+							<p> <br /> </p>
+
 							<!-- Hide the form on success -->
 							{% if not success %}
 								<form role="form" method="post" action="">
 
-									{% csrf_token %}  
-															
+									{% csrf_token %}
+
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
 											<span class="input-group-text"><i class="feather icon-user"></i></span>
@@ -64,7 +64,7 @@
 										{{ form.password2 }}
 									</div>
 									<span class="text-error">{{ form.password2.errors }}</span>
-									
+
 									<div class="form-group text-left mt-2">
 										<div class="checkbox checkbox-primary d-inline">
 											<input type="checkbox" name="checkbox-fill-2" id="checkbox-fill-2" checked="">
@@ -72,7 +72,7 @@
 										</div>
 									</div>
 									<button type="submit" name="register" class="btn btn-primary btn-block mb-4">Sign up</button>
-								
+
 								</form>
 
 								<p class="mb-0 text-muted">Have an account? <a href="{% url 'login' %}" class="f-w-400">Login</a></p>
@@ -81,7 +81,7 @@
 							<p class="mb-2 text-muted">
 								<br />
 								&copy; <a target="_blank" rel="noopener" href="https://bit.ly/37fF9RT" class="f-w-400">CodedThemes</a>
-								- <a target="_blank" rel="noopener" 
+								- <a target="_blank" rel="noopener"
 								     href="https://appseed.us/admin-dashboards/django-dashboard-gradientable" class="f-w-400">Django Gradient</a>
 							</p>
 
@@ -100,4 +100,4 @@
 
 	<script src="/static/assets/js/waves.min.js"></script>
 
-{% endblock javascripts %} 
+{% endblock javascripts %}
