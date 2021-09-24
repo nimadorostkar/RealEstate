@@ -38,6 +38,7 @@ class ItemAdmin(ModelAdminJalaliMixin,ImportExportModelAdmin):
     raw_id_fields = ('area', 'tags')
     inlines = [ ItemImageInline, ]
 
+
 admin.site.register(models.Item, ItemAdmin)
 
 
