@@ -28,11 +28,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'bootstrapform',
     'authentication',
     'django.contrib.humanize',
     'import_export',
     'bootstrapform',
+    'extra_settings',
     'mptt',
     'jalali_date',
     'app'

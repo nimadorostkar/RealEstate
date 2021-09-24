@@ -47,7 +47,7 @@ class Profile(models.Model):
 
 
 
-
+'''
 #------------------------------------------------------------------------------
 class Info(models.Model):
     logo = models.ImageField(upload_to='media', default='media/logo.png' ,null=True, blank=True ,verbose_name = "لوگو ")
@@ -69,7 +69,7 @@ class Info(models.Model):
 
     def __str__(self):
         return self.name
-
+'''
 
 
 
