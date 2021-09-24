@@ -92,7 +92,6 @@ class Tags(models.Model):
 
 
 
-
 #------------------------------------------------------------------------------
 class Area(MPTTModel):
     name = models.CharField(max_length=200, unique=True, verbose_name = "نام")
