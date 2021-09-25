@@ -170,6 +170,18 @@ class ItemImage(models.Model):
 
 
 
+#------------------------------------------------------------------------------
+class Slider(models.Model):
+    Image = models.ImageField(upload_to='media', default='media/Default.png', null=True, blank=True, verbose_name = "تصویر")
+
+    class Meta:
+        verbose_name = "اسلایر"
+        verbose_name_plural = "اسلایر ها"
+
+
+
+
+
 
 
 

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from . import models
 from django.contrib.admin.models import LogEntry
-from .models import Profile, Tags, Area, Item, ItemImage
+from .models import Profile, Tags, Area, Item, ItemImage, Slider
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin, ImportExportMixin
 from mptt.admin import MPTTModelAdmin, TreeRelatedFieldListFilter, DraggableMPTTAdmin
@@ -73,6 +73,17 @@ admin.site.register(Area, DraggableMPTTAdmin,
 
 
 
+
+
+
+
+
+
+#------------------------------------------------------------------------------
+class SliderAdmin(ImportExportModelAdmin):
+    list_display = ('Image','Image')
+
+admin.site.register(models.Slider, SliderAdmin)
 
 
 
