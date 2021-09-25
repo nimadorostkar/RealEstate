@@ -13,7 +13,8 @@ from django.db.models import Count, Max, Min, Avg
 
 #------------------------------------------------------------------------------
 def index(request):
-    context = {}
+    img = models.Slider.objects.all()
+    context = {'img':img}
     context['segment'] = 'index'
     html_template = loader.get_template( 'index.html' )
     return HttpResponse(html_template.render(context, request))
