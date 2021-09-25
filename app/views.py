@@ -4,7 +4,7 @@ from django.template import loader
 from django.http import HttpResponse
 from django import template
 from . import models
-from .models import Profile, Item, Slider
+from .models import Profile, Item, Slider, ItemImage
 from .forms import ProfileForm, UserForm
 from django.db.models import Count, Max, Min, Avg
 
@@ -14,8 +14,9 @@ from django.db.models import Count, Max, Min, Avg
 #------------------------------------------------------------------------------
 def index(request):
     img = models.Slider.objects.all()
+    item_img = models.ItemImage.objects.all()
     items = models.Item.objects.all().order_by("-date")[:11]
-    context = {'img':img, 'items':items}
+    context = {'img':img, 'items':items, 'item_img':item_img}
     context['segment'] = 'index'
     html_template = loader.get_template( 'index.html' )
     return HttpResponse(html_template.render(context, request))
