@@ -224,15 +224,15 @@
               {% for Item in items %}
                 <div class="col-sm-6 col-md-3 p0">
                     <div class="box-two proerty-item">
-                        <div class="item-thumb">
-                            <a href="property-1.html">
-                              {% for ItemImage in item_img %}
-                              {% if ItemImage.item == Item %}
-                               <img src=" {{ ItemImage.Image.url }} ">
-                              {% endif %}
-                              {% endfor %}
-                            </a>
-                        </div>
+                         <div class="item-thumb">
+                            {% for ItemImage in item_img %}
+                            {% if ItemImage.item == Item %}
+
+                                 <img src="{{ ItemImage.Image.url }}">
+
+                            {% endif %}
+                            {% endfor %}
+                         </div>
                         <div class="item-entry overflow">
                             <h5><a href="property-1.html"> {{ Item }} </a></h5>
                             <div class="dot-hr"></div>
@@ -501,4 +501,6 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %} {% endblock javascripts %}
+{% block javascripts %}
+
+{% endblock javascripts %}
