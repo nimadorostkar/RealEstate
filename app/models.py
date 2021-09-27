@@ -140,6 +140,7 @@ class Item(models.Model):
     tags = models.ManyToManyField(Tags, blank=True,verbose_name = "برچسب")
     additional_information = models.TextField(max_length=1000,null=True, blank=True,verbose_name = "اطلاعات تکمیلی")
     date = models.DateField(null=True, blank=True, verbose_name = "تاریخ آگهی")
+    Image = models.ImageField(upload_to='media', default='media/Default.png', null=True, blank=True, verbose_name = "تصویر")
 
 
     class Meta:
