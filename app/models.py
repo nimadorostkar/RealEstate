@@ -152,7 +152,7 @@ class Item(models.Model):
 
 
     def image_tag(self):
-        return format_html("<img width=50 src='{}'>".format(self.synch_to.image.url))
+        return format_html("<img width=50 src='{}'>".format(self.image.url))
 
 
     #def get_absolute_url(self):
@@ -178,6 +178,9 @@ class ItemImage(models.Model):
 #------------------------------------------------------------------------------
 class Slider(models.Model):
     Image = models.ImageField(upload_to='media', default='media/Default.png', null=True, blank=True, verbose_name = "تصویر")
+
+    def __str__(self):
+        return "اسلایدر " + str(self.id)
 
     class Meta:
         verbose_name = "اسلایر"

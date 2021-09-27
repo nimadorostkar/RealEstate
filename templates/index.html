@@ -225,16 +225,7 @@
                 <div class="col-sm-6 col-md-3 p0">
                     <div class="box-two proerty-item">
                          <div class="item-thumb">
-
-
-                            {% for ItemImage in item_img %}
-                            {% if ItemImage.item == Item %}
-                                 <img src="{{ ItemImage.Image.url }}">
-                            {% endif %}
-                            {% endfor %}
-
-
-
+                          <img src="{{ Item.image.url }}">
                          </div>
                         <div class="item-entry overflow">
                             <h5><a href="property-1.html"> {{ Item }} </a></h5>
