@@ -98,6 +98,9 @@
                 {% if user.is_authenticated %}
                 <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('{% url 'logout' %}')" data-wow-delay="0.5s"> خروج </button>
                 <button class="navbar-btn nav-button wow fadeInRight login" onclick=" window.open('{% url 'app:profile' %}')" data-wow-delay="0.5s"> پروفایل </button>
+                  {% if request.user.is_superuser %}
+                  <button class="navbar-btn nav-button wow fadeInRight login" onclick=" window.open('{% url 'admin:index' %}')" data-wow-delay="0.5s"> پنل مدیریت </button>
+                  {% endif %}
                 {% else %}
                 <button class="navbar-btn nav-button wow bounceInRight" onclick="window.open('{% url 'register' %}')" data-wow-delay="0.4s"> ثبت نام </button>
                 <button class="navbar-btn nav-button wow fadeInRight login" onclick=" window.open('{% url 'login' %}')" data-wow-delay="0.5s"> ورود </button>
