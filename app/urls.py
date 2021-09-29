@@ -7,4 +7,5 @@ urlpatterns = [
     # The home page
     path('', views.index, name='home'),
     path('profile', views.profile, name='profile'),
+    path('items', views.profile, name='profile'),
 ]

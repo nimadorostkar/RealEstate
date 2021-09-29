@@ -64,6 +64,18 @@ def profile(request):
 
 
 
+#------------------------------------------------------------------------------
+def items(request):
+    context = {}
+    context['segment'] = 'items'
+    html_template = loader.get_template( 'items.html' )
+    return HttpResponse(html_template.render(context, request))
+
+
+
+
+
+
 
 
 # End
