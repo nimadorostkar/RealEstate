@@ -120,7 +120,7 @@
                         </div>
 
                         <div class="similar-post-section padding-top-40">
-                          <h4 class="s-property-title" dir="rtl"> موارد مشابه </h4>
+                          <h4 class="s-property-title" dir="rtl"> سایر موارد موجود در این منطقه </h4>
                             <div id="prop-smlr-slide_0">
 
                               {% for Item in similar_items %}
@@ -181,12 +181,12 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4 p0">
+                    <div class="col-md-4 p0" dir="rtl">
                         <aside class="sidebar sidebar-property blog-asside-right property-style2">
                             <div class="dealer-widget">
                                 <div class="dealer-content">
                                     <div class="inner-wrapper">
-                                        <div class="single-property-header" dir="rtl">
+                                        <div class="single-property-header">
                                             <h1 class="property-title"> {{ Item }} </h1>
                                             <span class="property-price">
                                               {% if Item.buy_status == 'خرید' %}
@@ -273,12 +273,12 @@
 
                                         </div>
                                         <div class="dealer-section-space">
-                                            <span>Dealer information</span>
+                                            <span>اطلاعات تماس ما</span>
                                         </div>
                                         <div class="clear">
                                             <div class="col-xs-4 col-sm-4 dealer-face">
                                                 <a href="">
-                                                    <img src="assets/img/client-face1.png" class="img-circle">
+                                                    <img src="{% static 'assets/img/logo.png' %}">
                                                 </a>
                                             </div>
                                             <div class="col-xs-8 col-sm-8 ">
@@ -322,166 +322,26 @@
 
 
                             <div class="panel panel-default sidebar-menu wow fadeInRight animated">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">Ads her  </h3>
-                                </div>
                                 <div class="panel-body recent-property-widget">
-                                    <img src="assets/img/ads.jpg">
+                                    <img src="{% static 'assets/img/ads.jpg' %}">
                                 </div>
                             </div>
 
                             <div class="panel panel-default sidebar-menu wow fadeInRight animated" >
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Smart search</h3>
+                                    <h3 class="panel-title"> تماس </h3>
+                                    <p> درخواست تماس برای این مورد ، لطفا با ما تماس بگیرید و یا شماره خود را وارد کنید تا کارشناسان ما با شما تماس بگیرند </p>
                                 </div>
                                 <div class="panel-body search-widget">
                                     <form action="" class=" form-inline">
-                                        <fieldset>
-                                            <div class="row">
-                                                <div class="col-xs-12">
-                                                    <input type="text" class="form-control" placeholder="Key word">
-                                                </div>
-                                            </div>
-                                        </fieldset>
 
                                         <fieldset>
                                             <div class="row">
-                                                <div class="col-xs-6">
-
-                                                    <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Select Your City">
-
-                                                        <option>New york, CA</option>
-                                                        <option>Paris</option>
-                                                        <option>Casablanca</option>
-                                                        <option>Tokyo</option>
-                                                        <option>Marraekch</option>
-                                                        <option>kyoto , shibua</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-xs-6">
-
-                                                    <select id="basic" class="selectpicker show-tick form-control">
-                                                        <option> -Status- </option>
-                                                        <option>Rent </option>
-                                                        <option>Boy</option>
-                                                        <option>used</option>
-
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-
-                                        <fieldset class="padding-5">
-                                            <div class="row">
-                                                <div class="col-xs-6">
-                                                    <label for="price-range">Price range ($):</label>
-                                                    <input type="text" class="span2" value="" data-slider-min="0"
-                                                           data-slider-max="600" data-slider-step="5"
-                                                           data-slider-value="[0,450]" id="price-range" ><br />
-                                                    <b class="pull-left color">2000$</b>
-                                                    <b class="pull-right color">100000$</b>
-                                                </div>
-                                                <div class="col-xs-6">
-                                                    <label for="property-geo">Property geo (m2) :</label>
-                                                    <input type="text" class="span2" value="" data-slider-min="0"
-                                                           data-slider-max="600" data-slider-step="5"
-                                                           data-slider-value="[50,450]" id="property-geo" ><br />
-                                                    <b class="pull-left color">40m</b>
-                                                    <b class="pull-right color">12000m</b>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-
-                                        <fieldset class="padding-5">
-                                            <div class="row">
-                                                <div class="col-xs-6">
-                                                    <label for="price-range">Min baths :</label>
-                                                    <input type="text" class="span2" value="" data-slider-min="0"
-                                                           data-slider-max="600" data-slider-step="5"
-                                                           data-slider-value="[250,450]" id="min-baths" ><br />
-                                                    <b class="pull-left color">1</b>
-                                                    <b class="pull-right color">120</b>
-                                                </div>
-
-                                                <div class="col-xs-6">
-                                                    <label for="property-geo">Min bed :</label>
-                                                    <input type="text" class="span2" value="" data-slider-min="0"
-                                                           data-slider-max="600" data-slider-step="5"
-                                                           data-slider-value="[250,450]" id="min-bed" ><br />
-                                                    <b class="pull-left color">1</b>
-                                                    <b class="pull-right color">120</b>
-
-                                                </div>
-                                            </div>
-                                        </fieldset>
-
-                                        <fieldset class="padding-5">
-                                            <div class="row">
-                                                <div class="col-xs-6">
-                                                    <div class="checkbox">
-                                                        <label> <input type="checkbox" checked> Fire Place</label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xs-6">
-                                                    <div class="checkbox">
-                                                        <label> <input type="checkbox"> Dual Sinks</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-
-                                        <fieldset class="padding-5">
-                                            <div class="row">
-                                                <div class="col-xs-6">
-                                                    <div class="checkbox">
-                                                        <label> <input type="checkbox" checked> Swimming Pool</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-6">
-                                                    <div class="checkbox">
-                                                        <label> <input type="checkbox" checked> 2 Stories </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-
-                                        <fieldset class="padding-5">
-                                            <div class="row">
-                                                <div class="col-xs-6">
-                                                    <div class="checkbox">
-                                                        <label><input type="checkbox"> Laundry Room </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-6">
-                                                    <div class="checkbox">
-                                                        <label> <input type="checkbox"> Emergency Exit</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-
-                                        <fieldset class="padding-5">
-                                            <div class="row">
-                                                <div class="col-xs-6">
-                                                    <div class="checkbox">
-                                                        <label>  <input type="checkbox" checked> Jog Path </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-6">
-                                                    <div class="checkbox">
-                                                        <label>  <input type="checkbox"> 26' Ceilings </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-
-                                        <fieldset class="padding-5">
-                                            <div class="row">
                                                 <div class="col-xs-12">
-                                                    <div class="checkbox">
-                                                        <label>  <input type="checkbox"> Hurricane Shutters </label>
-                                                    </div>
+                                                    <input type="text" class="form-control" placeholder="شماره تماس">
+                                                </div>
+                                                <div class="col-xs-12">
+                                                    <input type="text" class="form-control" placeholder="متن درخواست">
                                                 </div>
                                             </div>
                                         </fieldset>
@@ -489,7 +349,7 @@
                                         <fieldset >
                                             <div class="row">
                                                 <div class="col-xs-12">
-                                                    <input class="button btn largesearch-btn" value="Search" type="submit">
+                                                    <input class="button btn largesearch-btn" value="ارسال درخواست تماس" type="submit">
                                                 </div>
                                             </div>
                                         </fieldset>
