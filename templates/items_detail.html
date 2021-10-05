@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %} {{ item }} {% endblock %}
+{% block title %} {{ Item }} {% endblock %}
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}
@@ -15,7 +15,7 @@
             <div class="container">
                 <div class="row" dir="rtl">
                     <div class="page-head-content">
-                        <h1 class="page-title"> {{ item }} </h1>
+                        <h1 class="page-title"> {{ Item }} </h1>
                     </div>
                 </div>
             </div>
@@ -43,18 +43,16 @@
                                         </div>
 
                                         <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
-                                            <li data-thumb="{% static 'assets/img/property-1/property1.jpg' %}">
-                                                <img src="{% static 'assets/img/property-1/property1.jpg' %}" />
-                                            </li>
-                                            <li data-thumb="{% static 'assets/img/property-1/property2.jpg' %}">
-                                                <img src="{% static 'assets/img/property-1/property3.jpg' %}" />
-                                            </li>
-                                            <li data-thumb="{% static 'assets/img/property-1/property3.jpg' %}">
-                                                <img src="{% static 'assets/img/property-1/property3.jpg' %}" />
-                                            </li>
-                                            <li data-thumb="{% static 'assets/img/property-1/property4.jpg' %}">
-                                                <img src="{% static 'assets/img/property-1/property4.jpg' %}" />
-                                            </li>
+
+                                           {% for ItemImage in item_img %}
+                                             <li data-thumb="{{ ItemImage.Image.url }}">
+                                                 <img src="{{ ItemImage.Image.url }}"/>
+                                             </li>
+                                           {% endfor %}
+                                           <li data-thumb="{{ Item.image.url }}">
+                                               <img src="{{ Item.image.url }}"/>
+                                           </li>
+
                                         </ul>
                                     </div>
                                 </div>

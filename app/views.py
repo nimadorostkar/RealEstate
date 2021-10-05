@@ -75,8 +75,9 @@ def items(request):
 
 
 def items_detail(request, id):
-    item = get_object_or_404(models.Item, id=id)
-    context = {'item':item}
+    Item = get_object_or_404(models.Item, id=id)
+    item_img = models.ItemImage.objects.filter(item=Item)
+    context = {'Item':Item , 'item_img':item_img}
     return render(request, 'items_detail.html', context)
 
 
