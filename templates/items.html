@@ -74,11 +74,34 @@
                                       <small> <span class="proerty-price pull-right"> پیش:{{ Item.deposit }} اجاره:{{ Item.rent }} تومان</span> </small>
                                       {% endif %}
                                     </span>
-                                    <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
+                                    <p style="display: none;"> {{ Item.additional_information|slice:":120" }}...  </p>
                                     <div class="property-icon">
-                                        <img src="{% static 'assets/img/icon/bed.png' %}">(5)|
-                                        <img src="{% static 'assets/img/icon/shawer.png' %}">(2)|
-                                        <img src="{% static 'assets/img/icon/cars.png' %}">(1)
+                                        <img src="{% static 'assets/img/icon/bed-orange.png' %}">[{{ Item.room_qty }}]
+
+                                        {% if Item.parking %}
+                                          <img src="{% static 'assets/img/icon/cars-orange.png' %}">
+                                        {% else %}
+                                          <img src="{% static 'assets/img/icon/cars.png' %}">
+                                        {% endif %}
+
+                                        {% if Item.elevator %}
+                                          <img src="{% static 'assets/img/icon/elevator.png' %}">
+                                        {% else %}
+                                          <img src="{% static 'assets/img/icon/elevator-orange.png' %}">
+                                        {% endif %}
+
+                                        {% if Item.storage_room %}
+                                          <img src="{% static 'assets/img/icon/warehouse-orange.png' %}">
+                                        {% else %}
+                                          <img src="{% static 'assets/img/icon/warehouse.png' %}">
+                                        {% endif %}
+
+                                        {% if Item.balcony %}
+                                          <img src="{% static 'assets/img/icon/balcony-orange.png' %}">
+                                        {% else %}
+                                          <img src="{% static 'assets/img/icon/balcony.png' %}">
+                                        {% endif %}
+
                                     </div>
                                 </div>
                             </div>
