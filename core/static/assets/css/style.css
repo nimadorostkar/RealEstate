@@ -755,6 +755,11 @@ label small{
     -ms-transition: all 0.4s ease;
     transition: all 0.4s ease;
 }
+.nav-button.admin{
+    background-color: #1c7aa9d1;
+    margin-right: 5px;
+}
+
 .nav-button.login{
     background-color: #FDC600;
     margin-right: 5px;
