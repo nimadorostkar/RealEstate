@@ -66,7 +66,8 @@ def profile(request):
 
 #------------------------------------------------------------------------------
 def items(request):
-    context = {}
+    items = models.Item.objects.all().order_by("-date")
+    context = {'items':items}
     context['segment'] = 'items'
     html_template = loader.get_template( 'items.html' )
     return HttpResponse(html_template.render(context, request))
