@@ -203,16 +203,24 @@
                             <div class="dealer-widget">
                                 <div class="dealer-content">
                                     <div class="inner-wrapper">
-                                        <div class="single-property-header">
-                                            <h1 class="property-title">Villa in Coral Gables</h1>
-                                            <span class="property-price">$825,000</span>
+                                        <div class="single-property-header" dir="rtl">
+                                            <h1 class="property-title"> {{ Item }} </h1>
+                                            <span class="property-price">
+                                              {% if Item.buy_status == 'خرید' %}
+                                               <span class="proerty-price pull-right"> {{ Item.price }} تومان </span>
+                                              {% elif Item.buy_status == 'رهن' %}
+                                               <span class="proerty-price pull-right"> {{ Item.deposit }} تومان </span>
+                                              {% elif Item.buy_status == 'اجاره' %}
+                                              <small> <span class="proerty-price pull-right"> پیش:{{ Item.deposit }} اجاره:{{ Item.rent }} تومان</span> </small>
+                                              {% endif %}
+                                            </span>
                                         </div>
 
                                         <div class="property-meta entry-meta clearfix ">
 
                                             <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
                                                 <span class="property-info-icon icon-tag">
-                                                    <img src="assets/img/icon/sale-orange.png">
+                                                    <img src="{% static 'assets/img/icon/sale-orange.png' %}">
                                                 </span>
                                                 <span class="property-info-entry">
                                                     <span class="property-info-label">Status</span>
@@ -222,7 +230,7 @@
 
                                             <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
                                                 <span class="property-info icon-area">
-                                                    <img src="assets/img/icon/room-orange.png">
+                                                    <img src="{% static 'assets/img/icon/room-orange.png' %}">
                                                 </span>
                                                 <span class="property-info-entry">
                                                     <span class="property-info-label">Area</span>
@@ -232,7 +240,7 @@
 
                                             <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
                                                 <span class="property-info-icon icon-bed">
-                                                    <img src="assets/img/icon/bed-orange.png">
+                                                    <img src="{% static 'assets/img/icon/bed-orange.png' %}">
                                                 </span>
                                                 <span class="property-info-entry">
                                                     <span class="property-info-label">Bedrooms</span>
@@ -242,7 +250,7 @@
 
                                             <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
                                                 <span class="property-info-icon icon-bath">
-                                                    <img src="assets/img/icon/cars-orange.png">
+                                                    <img src="{% static 'assets/img/icon/cars-orange.png' %}">
                                                 </span>
                                                 <span class="property-info-entry">
                                                     <span class="property-info-label">Bathrooms</span>
@@ -251,7 +259,7 @@
                                             </div>
                                             <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
                                                 <span class="property-info-icon icon-bath">
-                                                    <img src="assets/img/icon/os-orange.png">
+                                                    <img src="{% static 'assets/img/icon/os-orange.png' %}">
                                                 </span>
                                                 <span class="property-info-entry">
                                                     <span class="property-info-label">Bathrooms</span>
@@ -261,7 +269,7 @@
 
                                             <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
                                                 <span class="property-info-icon icon-garage">
-                                                    <img src="assets/img/icon/room-orange.png">
+                                                    <img src="{% static 'assets/img/icon/room-orange.png' %}">
                                                 </span>
                                                 <span class="property-info-entry">
                                                     <span class="property-info-label">Garages</span>
@@ -271,7 +279,7 @@
 
                                             <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
                                                 <span class="property-info-icon icon-garage">
-                                                    <img src="assets/img/icon/shawer-orange.png">
+                                                    <img src="{% static 'assets/img/icon/shawer-orange.png' %}">
                                                 </span>
                                                 <span class="property-info-entry">
                                                     <span class="property-info-label">Garages</span>
