@@ -10,6 +10,10 @@
 
 {% block content %}
 
+{% load jalali_tags %}
+
+
+
 
         <div class="page-head">
             <div class="container">
@@ -57,143 +61,82 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="single-property-wrapper">
+                            <div class="single-property-wrapper" dir="rtl">
 
                                 <div class="section">
-                                    <h4 class="s-property-title">Description</h4>
+                                    <h4 class="s-property-title"> توضیحات </h4>
                                     <div class="s-property-content">
-                                        <p>Nulla quis dapibus nisl. Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium. Nullam sed arcu ultricies commodo arcu nec pretium. Nullam sed arcu ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium. Nullam sed arcu ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium. Nullam sed arcu ultricies                                </p>
+                                        <p> {{ Item.additional_information|linebreaks }} </p>
                                     </div>
                                 </div>
                                 <!-- End description area  -->
 
                                 <div class="section additional-details">
 
-                                    <h4 class="s-property-title">Additional Details</h4>
+                                    <h4 class="s-property-title"> جزئیات تکمیلی </h4>
 
                                     <ul class="additional-details-list clearfix">
                                         <li>
-                                            <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Waterfront</span>
-                                            <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">Yes</span>
+                                            <span class="col-xs-6 col-sm-4 col-md-4 add-d-title"> سن بنا </span>
+                                            <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"> {{ Item.building_age }} </span>
                                         </li>
 
                                         <li>
-                                            <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Built In</span>
-                                            <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">2003</span>
+                                            <span class="col-xs-6 col-sm-4 col-md-4 add-d-title"> متراژ </span>
+                                            <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"> {{ Item.area_size }} </span>
                                         </li>
                                         <li>
-                                            <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Parking</span>
-                                            <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">2 Or More Spaces,Covered Parking,Valet Parking</span>
+                                            <span class="col-xs-6 col-sm-4 col-md-4 add-d-title"> منطقه </span>
+                                            <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"> {{ Item.area }} </span>
                                         </li>
 
                                         <li>
-                                            <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Waterfront</span>
-                                            <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">Yes</span>
+                                            <span class="col-xs-6 col-sm-4 col-md-4 add-d-title"> برچسب </span>
+                                            <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"> {% for tags in Item.tags.all %}{{ tags }} , {% endfor %} </span>
                                         </li>
 
                                         <li>
-                                            <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">View</span>
-                                            <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">Intracoastal View,Direct ew</span>
+                                            <span class="col-xs-6 col-sm-4 col-md-4 add-d-title"> تاریخ آگهی </span>
+                                            <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"> {{ Item.date|to_jalali:'%Y/%m/%d'  }} </span>
                                         </li>
 
-                                        <li>
-                                            <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Waterfront Description:</span>
-                                            <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">Intracoastal Front,Ocean Access</span>
-                                        </li>
 
                                     </ul>
                                 </div>
                                 <!-- End additional-details area  -->
 
-                                <div class="section property-features">
-
-                                    <h4 class="s-property-title">Features</h4>
-                                    <ul>
-                                        <li><a href="properties.html">Swimming Pool</a></li>
-                                        <li><a href="properties.html">3 Stories</a></li>
-                                        <li><a href="properties.html">Central Cooling</a></li>
-                                        <li><a href="properties.html">Jog Path 2</a></li>
-                                        <li><a href="properties.html">2 Lawn</a></li>
-                                        <li><a href="properties.html">Bike Path</a></li>
-                                    </ul>
-
-                                </div>
-                                <!-- End features area  -->
 
                                 <div class="section property-video">
-                                    <h4 class="s-property-title">Property Video</h4>
+                                    <h4 class="s-property-title"> ویدئو </h4>
                                     <div class="video-thumb">
                                         <a class="video-popup" href="yout" title="Virtual Tour">
-                                            <img src="assets/img/property-video.jpg" class="img-responsive wp-post-image" alt="Exterior">
+                                            <img src="{% static 'assets/img/property-video.jpg' %}" class="img-responsive wp-post-image" alt="Exterior">
                                         </a>
                                     </div>
                                 </div>
                                 <!-- End video area  -->
 
-                                <div class="section property-share">
-                                    <h4 class="s-property-title">Share width your friends </h4>
-                                    <div class="roperty-social">
-                                        <ul>
-                                            <li><a title="Share this on dribbble " href="#"><img src="assets/img/social_big/dribbble_grey.png"></a></li>
-                                            <li><a title="Share this on facebok " href="#"><img src="assets/img/social_big/facebook_grey.png"></a></li>
-                                            <li><a title="Share this on delicious " href="#"><img src="assets/img/social_big/delicious_grey.png"></a></li>
-                                            <li><a title="Share this on tumblr " href="#"><img src="assets/img/social_big/tumblr_grey.png"></a></li>
-                                            <li><a title="Share this on digg " href="#"><img src="assets/img/social_big/digg_grey.png"></a></li>
-                                            <li><a title="Share this on twitter " href="#"><img src="assets/img/social_big/twitter_grey.png"></a></li>
-                                            <li><a title="Share this on linkedin " href="#"><img src="assets/img/social_big/linkedin_grey.png"></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- End video area  -->
                             </div>
                         </div>
 
                         <div class="similar-post-section padding-top-40">
+                          <h4 class="s-property-title" dir="rtl"> موارد مشابه </h4>
                             <div id="prop-smlr-slide_0">
+
+
                                 <div class="box-two proerty-item">
                                     <div class="item-thumb">
                                         <a href="property-1.html" ><img src="assets/img/similar/property-1.jpg"></a>
                                     </div>
                                     <div class="item-entry overflow">
-                                        <h5><a href="property-1.html"> Super nice villa </a></h5>
+                                        <h5><a href="property-1.html"> gggggg </a></h5>
                                         <div class="dot-hr"></div>
                                         <span class="pull-left"><b> Area :</b> 120m </span>
                                         <span class="proerty-price pull-right"> $ 300,000</span>
                                     </div>
                                 </div>
-                                <div class="box-two proerty-item">
-                                    <div class="item-thumb">
-                                        <a href="property-1.html" ><img src="assets/img/similar/property-2.jpg"></a>
-                                    </div>
-                                    <div class="item-entry overflow">
-                                        <h5><a href="property-1.html"> Super nice villa </a></h5>
-                                        <div class="dot-hr"></div>
-                                        <span class="pull-left"><b> Area :</b> 120m </span>
-                                        <span class="proerty-price pull-right"> $ 300,000</span>
-                                    </div>
-                                </div>
-                                <div class="box-two proerty-item">
-                                    <div class="item-thumb">
-                                        <a href="property-1.html" ><img src="assets/img/similar/property-3.jpg"></a>
-                                    </div>
-                                    <div class="item-entry overflow">
-                                        <h5><a href="property-1.html"> Super nice villa </a></h5>
-                                        <div class="dot-hr"></div>
-                                        <span class="pull-left"><b> Area :</b> 120m </span>
-                                        <span class="proerty-price pull-right"> $ 300,000</span>
-                                    </div>
-                                </div>
-                                <div class="box-two proerty-item">
-                                    <div class="item-thumb">
-                                        <a href="property-1.html" ><img src="assets/img/similar/property-1.jpg"></a>
-                                    </div>
-                                    <div class="item-entry overflow">
-                                        <h5><a href="property-1.html"> Super nice villa </a></h5>
-                                        <div class="dot-hr"></div>
-                                        <span class="pull-left"><b> Area :</b> 120m </span>
-                                        <span class="proerty-price pull-right"> $ 300,000</span>
-                                    </div>
-                                </div>
+
+
                             </div>
                         </div>
                     </div>
