@@ -74,6 +74,13 @@ def items(request):
 
 
 
+def items_detail(request, id):
+    item = get_object_or_404(models.Item, id=id)
+    context = {'item':item}
+    return render(request, 'items_detail.html', context)
+
+
+
 
 
 

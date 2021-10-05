@@ -155,8 +155,8 @@ class Item(models.Model):
         return format_html("<img width=50 src='{}'>".format(self.image.url))
 
 
-    #def get_absolute_url(self):
-        #return reverse('app:items_detail',args=[self.id])
+    def get_absolute_url(self):
+        return reverse('app:items_detail',args=[self.id])
 
 
 
