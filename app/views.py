@@ -77,7 +77,8 @@ def items(request):
 def items_detail(request, id):
     Item = get_object_or_404(models.Item, id=id)
     item_img = models.ItemImage.objects.filter(item=Item)
-    context = {'Item':Item , 'item_img':item_img}
+    similar_items = models.Item.objects.filter(area=Item.area).order_by("-date")
+    context = {'Item':Item , 'item_img':item_img , 'similar_items':similar_items}
     return render(request, 'items_detail.html', context)
 
 
