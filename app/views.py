@@ -85,6 +85,13 @@ def items_detail(request, id):
 
 
 
+#------------------------------------------------------------------------------
+def contact(request):
+    context = {}
+    context['segment'] = 'contact'
+    html_template = loader.get_template( 'contact.html' )
+    return HttpResponse(html_template.render(context, request))
+
 
 
 
