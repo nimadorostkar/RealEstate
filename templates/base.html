@@ -110,76 +110,66 @@
   								<li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="{% url 'app:items' %}"> جستجوی املاک </a></li>
   								<li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="property.html"> وبلاگ </a></li>
   								<li class="dropdown yamm-fw" data-wow-delay="0.1s">
-  										<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200"><b class="caret"></b> درمورد ما </a>
+  										<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200"><b class="caret"></b> موارد پیشنهادی </a>
   										<ul class="dropdown-menu">
   												<li>
   														<div class="yamm-content">
-  																<div class="row">
-  																		<div class="col-sm-3">
-  																				<h5>Home pages</h5>
-  																				<ul>
-  																						<li>
-  																								<a href="index.html">Home Style 1</a>
-  																						</li>
-  																						<li>
-  																								<a href="index-2.html">Home Style 2</a>
-  																						</li>
-  																						<li>
-  																								<a href="index-3.html">Home Style 3</a>
-  																						</li>
-  																						<li>
-  																								<a href="index-4.html">Home Style 4</a>
-  																						</li>
-  																						<li>
-  																								<a href="index-5.html">Home Style 5</a>
-  																						</li>
-  																				</ul>
-  																		</div>
-  																		<div class="col-sm-3">
-  																				<h5>Pages and blog</h5>
-  																				<ul>
-  																						<li><a href="blog.html">Blog listing</a>  </li>
-  																						<li><a href="single.html">Blog Post (full)</a>  </li>
-  																						<li><a href="single-right.html">Blog Post (Right)</a>  </li>
-  																						<li><a href="single-left.html">Blog Post (left)</a>  </li>
-  																						<li><a href="contact.html">Contact style (1)</a> </li>
-  																						<li><a href="contact-3.html">Contact style (2)</a> </li>
-  																						<li><a href="contact_3.html">Contact style (3)</a> </li>
-  																						<li><a href="faq.html">FAQ page</a> </li>
-  																						<li><a href="404.html">404 page</a>  </li>
-  																				</ul>
-  																		</div>
-  																		<div class="col-sm-3">
-  																				<h5>Property</h5>
-  																				<ul>
-  																						<li><a href="property-1.html">Property pages style (1)</a> </li>
-  																						<li><a href="property-2.html">Property pages style (2)</a> </li>
-  																						<li><a href="property-3.html">Property pages style (3)</a> </li>
-  																				</ul>
+  																<div class="row" dir="rtl" align="center">
 
-  																				<h5>Properties list</h5>
-  																				<ul>
-  																						<li><a href="properties.html">Properties list style (1)</a> </li>
-  																						<li><a href="properties-2.html">Properties list style (2)</a> </li>
-  																						<li><a href="properties-3.html">Properties list style (3)</a> </li>
-  																				</ul>
-  																		</div>
-  																		<div class="col-sm-3">
-  																				<h5>Property process</h5>
-  																				<ul>
-  																						<li><a href="submit-property.html">Submit - step 1</a> </li>
-  																						<li><a href="submit-property.html">Submit - step 2</a> </li>
-  																						<li><a href="submit-property.html">Submit - step 3</a> </li>
-  																				</ul>
-  																				<h5>User account</h5>
-  																				<ul>
-  																						<li><a href="register.html">Register / login</a>   </li>
-  																						<li><a href="user-properties.html">Your properties</a>  </li>
-  																						<li><a href="submit-property.html">Submit property</a>  </li>
-  																						<li><a href="change-password.html">Change password</a> </li>
-  																						<li><a href="user-profile.html">Your profile</a>  </li>
-  																				</ul>
-  																		</div>
+                                      {% for Item in items %}
+                                          <div class="col-sm-3">
+                                            <div class="box-two proerty-item">
+
+                                                <div class="item-entry overflow" dir="rtl">
+                                                    <h6><a href="{{ Item.get_absolute_url }}"> {{ Item }} </a></h6>
+                                                    <div class="dot-hr"></div>
+                                                    <h6 style="padding: 1px 25px 1px;">
+                                                      <span class="pull-left"> {{ Item.area_size }} متر  </span>
+                                                      <span class="proerty-price pull-right">
+                                                        {% if Item.buy_status == 'خرید' %}
+                                                         <span class="proerty-price pull-right"> {{ Item.price }} تومان </span>
+                                                        {% elif Item.buy_status == 'رهن' %}
+                                                         <span class="proerty-price pull-right"> {{ Item.deposit }} تومان </span>
+                                                        {% elif Item.buy_status == 'اجاره' %}
+                                                        <small> <span class="proerty-price pull-right"> پیش:{{ Item.deposit }} اجاره:{{ Item.rent }} تومان</span> </small>
+                                                        {% endif %}
+                                                      </span>
+                                                    </h6>
+                                                    <p style="display: none;"> {{ Item.additional_information|slice:":120" }}...  </p>
+                                                    <div class="property-icon">
+                                                        <img src="{% static 'assets/img/icon/bed-orange.png' %}">[{{ Item.room_qty }}]
+
+                                                        {% if Item.parking %}
+                                                          <img src="{% static 'assets/img/icon/cars-orange.png' %}">
+                                                        {% else %}
+                                                          <img src="{% static 'assets/img/icon/cars.png' %}">
+                                                        {% endif %}
+
+                                                        {% if Item.elevator %}
+                                                          <img src="{% static 'assets/img/icon/elevator-orange.png' %}">
+                                                        {% else %}
+                                                          <img src="{% static 'assets/img/icon/elevator.png' %}">
+                                                        {% endif %}
+
+                                                        {% if Item.storage_room %}
+                                                          <img src="{% static 'assets/img/icon/warehouse-orange.png' %}">
+                                                        {% else %}
+                                                          <img src="{% static 'assets/img/icon/warehouse.png' %}">
+                                                        {% endif %}
+
+                                                        {% if Item.balcony %}
+                                                          <img src="{% static 'assets/img/icon/balcony-orange.png' %}">
+                                                        {% else %}
+                                                          <img src="{% static 'assets/img/icon/balcony.png' %}">
+                                                        {% endif %}
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                      {% endfor %}
+
+
   																</div>
   														</div>
   														<!-- /.yamm-content -->
@@ -188,6 +178,7 @@
   								</li>
 
   								<li class="wow fadeInDown" data-wow-delay="0.4s"><a href="{% url 'app:contact' %}"> تماس با ما </a></li>
+                  <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="{% url 'app:contact' %}"> مورد علاقه ها </a></li>
   						</ul>
   				</div><!-- /.navbar-collapse -->
   		</div><!-- /.container-fluid -->
