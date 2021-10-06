@@ -284,9 +284,9 @@
                             <i class="fa fa-th"></i>
                         </div>
                         <div class="more-entry overflow">
-                            <h5><a href="property-1.html" > نمیتونی تصمیم بگیری؟ </a></h5>
-                            <h5 class="tree-sub-ttl"> نمایش تمام آیتم ها </h5>
-                            <button class="btn border-btn more-black" value="All properties"> تمام آیتم ها </button>
+                            <h5><a href="{% url 'app:items' %}" > نمیتونی تصمیم بگیری؟ </a></h5>
+                            <h5 class="tree-sub-ttl"><a href="{% url 'app:items' %}" >  نمایش تمام آیتم ها </a> </h5>
+                            <button class="btn border-btn more-black" value="All properties" onclick="window.open('{% url 'app:items' %}')" > تمام آیتم ها </button>
                         </div>
                     </div>
                 </div>
