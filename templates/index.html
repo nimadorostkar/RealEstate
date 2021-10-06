@@ -224,30 +224,55 @@
 
               {% for Item in items %}
                 <div class="col-sm-6 col-md-3 p0">
-                    <div class="box-two proerty-item">
-                       <div class="favorite-and-print">
-                         <h5 dir="rtl" align="right"><a href="property-1.html" style="color:#ffffff;"> {{ Item }} </a></h5>
-
+                  <div class="box-two proerty-item">
+                      <div class="item-thumb">
+                          <a href="property-1.html" ><img src="{{ Item.image.url }}"></a>
                       </div>
-                         <div class="item-thumb">
-                          <img src="{{ Item.image.url }}">
-                         </div>
-                        <div class="item-entry overflow">
-                          <small dir="rtl">
+
+                      <div class="item-entry overflow" dir="rtl">
+                          <h6><a href="{{ Item.get_absolute_url }}"> {{ Item }} </a></h6>
+                          <div class="dot-hr"></div>
+                          <span class="pull-left"> {{ Item.area_size }} متر  </span>
+                          <span class="proerty-price pull-right">
                             {% if Item.buy_status == 'خرید' %}
                              <span class="proerty-price pull-right"> {{ Item.price }} تومان </span>
                             {% elif Item.buy_status == 'رهن' %}
                              <span class="proerty-price pull-right"> {{ Item.deposit }} تومان </span>
                             {% elif Item.buy_status == 'اجاره' %}
-                             <span class="proerty-price pull-right"> پیش: {{ Item.deposit }} اجاره:{{ Item.rent }} تومان</span>
+                            <small> <span class="proerty-price pull-right"> پیش:{{ Item.deposit }} اجاره:{{ Item.rent }} تومان</span> </small>
                             {% endif %}
-                            <h5> &nbsp; </h5>
-                            <div class="dot-hr"></div>
-                            <span class="pull-left"><b>متراژ :</b> {{ Item.area_size }} متر </span>
-                            <span class="pull-right"> اتاق: {{ Item.room_qty }} </span>
-                          </small>
-                        </div>
-                    </div>
+                          </span>
+                          <p style="display: none;"> {{ Item.additional_information|slice:":120" }}...  </p>
+                          <div class="property-icon">
+                              <img src="{% static 'assets/img/icon/bed-orange.png' %}">[{{ Item.room_qty }}]
+
+                              {% if Item.parking %}
+                                <img src="{% static 'assets/img/icon/cars-orange.png' %}">
+                              {% else %}
+                                <img src="{% static 'assets/img/icon/cars.png' %}">
+                              {% endif %}
+
+                              {% if Item.elevator %}
+                                <img src="{% static 'assets/img/icon/elevator-orange.png' %}">
+                              {% else %}
+                                <img src="{% static 'assets/img/icon/elevator.png' %}">
+                              {% endif %}
+
+                              {% if Item.storage_room %}
+                                <img src="{% static 'assets/img/icon/warehouse-orange.png' %}">
+                              {% else %}
+                                <img src="{% static 'assets/img/icon/warehouse.png' %}">
+                              {% endif %}
+
+                              {% if Item.balcony %}
+                                <img src="{% static 'assets/img/icon/balcony-orange.png' %}">
+                              {% else %}
+                                <img src="{% static 'assets/img/icon/balcony.png' %}">
+                              {% endif %}
+
+                          </div>
+                      </div>
+                  </div>
                 </div>
                 {% endfor %}
 
