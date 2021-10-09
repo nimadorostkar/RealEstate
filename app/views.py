@@ -4,13 +4,15 @@ from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django import template
 from . import models
-from .models import Profile, Item, Slider, ItemImage
+from .models import Profile, Item, Slider, ItemImage, Area
 from .forms import ProfileForm, UserForm
 from django.db.models import Count, Max, Min, Avg, Q
 from itertools import chain
 from django.contrib.auth import get_user_model
 from django.db import transaction
 from django.urls import reverse
+from django.contrib import messages
+
 
 
 
@@ -32,12 +34,11 @@ def index(request):
 #------------------------------------------------------------------------------
 def search(request):
     if request.method=="POST":
-        search = request.POST['text']
+        search_text = request.POST['text']
+        search_area = request.POST['area']
+        search_buy_status = request.POST['buy_status']
         if search:
-            material = models.Material.objects.filter(Q(name__icontains=search) | Q(description__icontains=search))
-            product = models.Product.objects.filter(Q(name__icontains=search))
-            station = models.Station.objects.filter(Q(name__icontains=search) | Q(description__icontains=search))
-            match = chain(material, product, station)
+            match = models.Item.objects.filter( Q(buy_status__icontains=search_buy_status) & Q(area__name__icontains=search_area) & Q(additional_information__icontains=search_text) )
             if match:
                 return render(request,'search.html', {'sr': match})
             else:

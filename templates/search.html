@@ -59,26 +59,11 @@
             <br>
           </div>
         </div>
-        <div class="card-body" align="right" dir="rtl">
-          <div class="table-full-width table-responsive">
-            <table class="table">
-              <tbody>
 
-                {% for Station in sr %}
-                <tr>
-                  <td>
-                    <p class="title"> <a href="{{ Station.get_absolute_url }}"> {{ Station.name }} </a>  </p>
-                  </td>
-                  <td>
-                    <p class="text-muted"> {{ Station.description|slice:":120" }}... </p>
-                  </td>
-                </tr>
-                {% endfor %}
+            {% for Item in sr %}
+                <p class="title" dir="rtl" align="right"> <a href="{{ Item.get_absolute_url }}"> {{ Item }} </a>  </p>
+            {% endfor %}
 
-              </tbody>
-            </table>
-          </div>
-        </div>
       </div>
     </div>
   </div>
