@@ -1,12 +1,16 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import loader
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django import template
 from . import models
 from .models import Profile, Item, Slider, ItemImage
 from .forms import ProfileForm, UserForm
-from django.db.models import Count, Max, Min, Avg
+from django.db.models import Count, Max, Min, Avg, Q
+from itertools import chain
+from django.contrib.auth import get_user_model
+from django.db import transaction
+from django.urls import reverse
 
 
 
@@ -16,7 +20,8 @@ def index(request):
     img = models.Slider.objects.all()
     item_img = models.ItemImage.objects.all()
     items = models.Item.objects.all().order_by("-date")[:11]
-    context = {'img':img, 'items':items, 'item_img':item_img}
+    areas = models.Area.objects.all()
+    context = {'img':img, 'items':items, 'item_img':item_img, 'areas':areas}
     context['segment'] = 'index'
     html_template = loader.get_template( 'index.html' )
     return HttpResponse(html_template.render(context, request))
@@ -27,7 +32,7 @@ def index(request):
 #------------------------------------------------------------------------------
 def search(request):
     if request.method=="POST":
-        search = request.POST['q']
+        search = request.POST['text']
         if search:
             material = models.Material.objects.filter(Q(name__icontains=search) | Q(description__icontains=search))
             product = models.Product.objects.filter(Q(name__icontains=search))
