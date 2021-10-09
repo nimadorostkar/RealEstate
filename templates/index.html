@@ -26,10 +26,12 @@
                 <p> برای جستجو ملک ، نوع معامله و شهر مربوط را انتخاب کرده و بر روی دکمه جستجو کلیک نمایید.تمام امکانات کاملا رایگان می باشد. لطفا قبل از بازدید از ملک و یا عقد هرگونه قرارداد، با آگهی دهنده تماس حاصل نمایید و از صحت فایل اطمینان حاصل نمایید. </p>
                 <div class="search-form wow pulse" data-wow-delay="0.8s">
 
-                    <form action="" class=" form-inline">
+                    <form action="{% url 'app:search' %}" method="post" class="form-inline">
+                    {% csrf_token %}
                         <button class="btn  toggle-btn" type="button"><i class="fa fa-bars"></i></button>
 
                         <div class="form-group">
+                            <input name="q" type="search" class="form-control" id="inlineFormInputGroup" placeholder="جستجو...">
                             <input type="text" class="form-control" placeholder="Key word">
                         </div>
                         <div class="form-group">

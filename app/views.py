@@ -25,6 +25,26 @@ def index(request):
 
 
 #------------------------------------------------------------------------------
+def search(request):
+    if request.method=="POST":
+        search = request.POST['q']
+        if search:
+            material = models.Material.objects.filter(Q(name__icontains=search) | Q(description__icontains=search))
+            product = models.Product.objects.filter(Q(name__icontains=search))
+            station = models.Station.objects.filter(Q(name__icontains=search) | Q(description__icontains=search))
+            match = chain(material, product, station)
+            if match:
+                return render(request,'search.html', {'sr': match})
+            else:
+                messages.error(request,  '   چیزی یافت نشد ، لطفا مجددا جستجو کنید ' )
+        else:
+            return HttpResponseRedirect('/search')
+    return render(request, 'search.html', {})
+
+
+
+
+#------------------------------------------------------------------------------
 
 @login_required(login_url="/login/")
 def profile(request):
