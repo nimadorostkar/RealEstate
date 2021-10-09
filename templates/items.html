@@ -282,67 +282,67 @@
                         </div>
                     </div>
 
-                    <div class="panel panel-default sidebar-menu wow fadeInRight animated">
+                    <div class="panel panel-default sidebar-menu wow fadeInRight animated" dir="rtl">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Recommended</h3>
+                            <h3 class="panel-title"> موارد پیشنهادی </h3>
                         </div>
                         <div class="panel-body recent-property-widget">
-                            <ul>
-                                <li>
-                                    <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                        <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
-                                        <span class="property-seeker">
-                                            <b class="b-1">A</b>
-                                            <b class="b-2">S</b>
-                                        </span>
-                                    </div>
-                                    <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                                        <h6> <a href="single.html">Super nice villa </a></h6>
-                                        <span class="property-price">3000000$</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="col-md-3 col-sm-3  col-xs-3 blg-thumb p0">
-                                        <a href="single.html"><img src="assets/img/demo/small-property-1.jpg"></a>
-                                        <span class="property-seeker">
-                                            <b class="b-1">A</b>
-                                            <b class="b-2">S</b>
-                                        </span>
-                                    </div>
-                                    <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                                        <h6> <a href="single.html">Super nice villa </a></h6>
-                                        <span class="property-price">3000000$</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                        <a href="single.html"><img src="assets/img/demo/small-property-3.jpg"></a>
-                                        <span class="property-seeker">
-                                            <b class="b-1">A</b>
-                                            <b class="b-2">S</b>
-                                        </span>
-                                    </div>
-                                    <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                                        <h6> <a href="single.html">Super nice villa </a></h6>
-                                        <span class="property-price">3000000$</span>
-                                    </div>
-                                </li>
 
-                                <li>
-                                    <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                        <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
-                                        <span class="property-seeker">
-                                            <b class="b-1">A</b>
-                                            <b class="b-2">S</b>
-                                        </span>
-                                    </div>
-                                    <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                                        <h6> <a href="single.html">Super nice villa </a></h6>
-                                        <span class="property-price">3000000$</span>
-                                    </div>
-                                </li>
+                          <div class="row" dir="rtl" align="center">
+                              {% for Item in items %}
+                                  <div class="col-sm-12">
+                                    <div class="box-two proerty-item">
 
-                            </ul>
+                                        <div class="item-entry overflow" dir="rtl">
+                                            <h6><a href="{{ Item.get_absolute_url }}"> {{ Item }} </a></h6>
+                                            <div class="dot-hr"></div>
+                                            <h6 style="padding: 1px 25px 1px;">
+                                              <span class="pull-left"> {{ Item.area_size }} متر  </span>
+                                              <span class="proerty-price pull-right">
+                                                {% if Item.buy_status == 'خرید' %}
+                                                 <span class="proerty-price pull-right"> {{ Item.price }} تومان </span>
+                                                {% elif Item.buy_status == 'رهن' %}
+                                                 <span class="proerty-price pull-right"> {{ Item.deposit }} تومان </span>
+                                                {% elif Item.buy_status == 'اجاره' %}
+                                                <small> <span class="proerty-price pull-right"> پیش:{{ Item.deposit }} اجاره:{{ Item.rent }} تومان</span> </small>
+                                                {% endif %}
+                                              </span>
+                                            </h6>
+                                            <p style="display: none;"> {{ Item.additional_information|slice:":120" }}...  </p>
+                                            <div class="property-icon">
+                                                <img src="{% static 'assets/img/icon/bed-orange.png' %}">[{{ Item.room_qty }}]
+
+                                                {% if Item.parking %}
+                                                  <img src="{% static 'assets/img/icon/cars-orange.png' %}">
+                                                {% else %}
+                                                  <img src="{% static 'assets/img/icon/cars.png' %}">
+                                                {% endif %}
+
+                                                {% if Item.elevator %}
+                                                  <img src="{% static 'assets/img/icon/elevator-orange.png' %}">
+                                                {% else %}
+                                                  <img src="{% static 'assets/img/icon/elevator.png' %}">
+                                                {% endif %}
+
+                                                {% if Item.storage_room %}
+                                                  <img src="{% static 'assets/img/icon/warehouse-orange.png' %}">
+                                                {% else %}
+                                                  <img src="{% static 'assets/img/icon/warehouse.png' %}">
+                                                {% endif %}
+
+                                                {% if Item.balcony %}
+                                                  <img src="{% static 'assets/img/icon/balcony-orange.png' %}">
+                                                {% else %}
+                                                  <img src="{% static 'assets/img/icon/balcony.png' %}">
+                                                {% endif %}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                              {% endfor %}
+                          </div>
+
                         </div>
                     </div>
                 </div>
