@@ -6,8 +6,11 @@ app_name='app'
 urlpatterns = [
     # The home page
     path('', views.index, name='home'),
+    # etc
     path('profile', views.profile, name='profile'),
+    path('contact', views.contact, name='contact'),
+    path('search',views.search,name='search'),
+    # Items
     path('items', views.items, name='items'),
     path('items_detail/<int:id>/',views.items_detail,name='items_detail'),
-    path('contact', views.contact, name='contact'),
 ]
