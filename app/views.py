@@ -49,6 +49,17 @@ def search(request):
         #
         search_area_size = request.POST['area_size']
         search_area_size_rage = search_area_size.split(',')
+        #
+        search_parking = request.POST.get('parking')
+        search_elevator = request.POST.get('elevator')
+        search_storage_room = request.POST.get('storage_room')
+
+        print('------')
+        print(search_parking)
+        print('------')
+        print(search_elevator)
+        print('------')
+        print(search_storage_room)
 
         if search:
             general_match = models.Item.objects.filter( Q(buy_status__icontains=search_buy_status) & Q(area__name__icontains=search_area) & Q(additional_information__icontains=search_text) )

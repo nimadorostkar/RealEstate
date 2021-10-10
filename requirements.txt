@@ -15,26 +15,3 @@ django-import-export
 django-mptt
 django-jalali-date
 django-extra-settings
-
-
-
-
-
-
-
-
-
-
-
-            print('-----------------')
-            print('general_match:')
-            print(general_match)
-            print('-----------------')
-            print('partial_match:')
-            print(partial_match)
-            print('-----------------')
-            print('price_match:')
-            print(price_match)
-            print('-----------------')
-            print('match:')
-            print(match)
