@@ -23,7 +23,8 @@ def index(request):
     item_img = models.ItemImage.objects.all()
     items = models.Item.objects.all().order_by("-date")[:11]
     areas = models.Area.objects.all()
-    context = {'img':img, 'items':items, 'item_img':item_img, 'areas':areas}
+    fav = models.Fav.objects.all()
+    context = {'img':img, 'items':items, 'item_img':item_img, 'areas':areas, 'fav':fav}
     context['segment'] = 'index'
     html_template = loader.get_template( 'index.html' )
     return HttpResponse(html_template.render(context, request))

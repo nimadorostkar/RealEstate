@@ -115,14 +115,14 @@
   														<div class="yamm-content">
   																<div class="row">
 
-                                      {% for Item in items %}
+                                      {% for Item in fav %}
 
                                       <div class="col-md-2" align="center" dir="rtl">
                                           <div class="item-thumb-small">
-                                              <a href="property-1.html"><img src="{{ Item.image.url }}"></a>
+                                              <a href="{{ Item.item.get_absolute_url }}"><img src="{{ Item.item.image.url }}"></a>
                                           </div>
                                           <div class="item-entry-small overflow">
-                                             <a href="{{ Item.get_absolute_url }}"> <p> <small> {{ Item }} </small> </p> </a>
+                                             <a href="{{ Item.item.get_absolute_url }}"> <p> <small> {{ Item.item }} </small> </p> </a>
                                           </div>
                                       </div>
 
