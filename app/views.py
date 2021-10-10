@@ -38,16 +38,14 @@ def search(request):
         search_area = request.POST['area']
         search_buy_status = request.POST['buy_status']
         search_rent = request.POST['rent']
-        print("---------")
-        print(search_rent.split())
-
+        search_rent_rage = search_rent.split(',')
 
         if search:
             match = models.Item.objects.filter(
               Q(buy_status__icontains=search_buy_status)
             & Q(area__name__icontains=search_area)
             & Q(additional_information__icontains=search_text)
-            & Q(rent__range=(1,100000000) )
+            & Q(rent__range=(search_rent_rage[0],search_rent_rage[1]))
             )
             if match:
                 return render(request,'search.html', {'sr': match})
