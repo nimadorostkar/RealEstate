@@ -1,7 +1,7 @@
 from django.contrib import admin
 from . import models
 from django.contrib.admin.models import LogEntry
-from .models import Profile, Tags, Area, Item, ItemImage, Slider
+from .models import Profile, Tags, Area, Item, ItemImage, Slider, Favorite
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin, ImportExportMixin
 from mptt.admin import MPTTModelAdmin, TreeRelatedFieldListFilter, DraggableMPTTAdmin
@@ -60,9 +60,6 @@ admin.site.register(models.Tags, TagsAdmin)
 
 
 
-
-
-
 #------------------------------------------------------------------------------
 class AreaMPTTModelAdmin(ImportExportMixin, MPTTModelAdmin, TreeRelatedFieldListFilter):
     mptt_level_indent = 15
@@ -70,8 +67,6 @@ class AreaMPTTModelAdmin(ImportExportMixin, MPTTModelAdmin, TreeRelatedFieldList
 admin.site.register(Area, DraggableMPTTAdmin,
     list_display=('tree_actions', 'indented_title'),
     list_display_links=('indented_title',),)
-
-
 
 
 
