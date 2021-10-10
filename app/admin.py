@@ -58,8 +58,6 @@ admin.site.register(models.Tags, TagsAdmin)
 
 
 
-
-
 #------------------------------------------------------------------------------
 class AreaMPTTModelAdmin(ImportExportMixin, MPTTModelAdmin, TreeRelatedFieldListFilter):
     mptt_level_indent = 15
@@ -72,13 +70,29 @@ admin.site.register(Area, DraggableMPTTAdmin,
 
 
 
-
-
 #------------------------------------------------------------------------------
 class SliderAdmin(ImportExportModelAdmin):
     list_display = ('Image','Image')
 
 admin.site.register(models.Slider, SliderAdmin)
+
+
+
+
+
+#------------------------------------------------------------------------------
+class FavoriteAdmin(ImportExportModelAdmin):
+    list_display = ('user','item')
+    list_filter = ("user", "item")
+
+admin.site.register(models.Favorite, FavoriteAdmin)
+
+
+
+
+
+
+
 
 
 
