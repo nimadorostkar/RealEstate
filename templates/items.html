@@ -113,171 +113,81 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 pl0 padding-top-40" dir="rtl">
+            <div class="col-md-3 pl0 padding-top-40">
                 <div class="blog-asside-right pl0">
                     <div class="panel panel-default sidebar-menu wow fadeInRight animated" >
-                        <div class="panel-heading">
+                        <div class="panel-heading" dir="rtl">
                             <h3 class="panel-title"> جستجوی پیشرفته </h3>
                         </div>
                         <div class="panel-body search-widget">
-                            <form action="" class=" form-inline">
-                                <fieldset>
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <input type="text" class="form-control" placeholder="Key word">
-                                        </div>
-                                    </div>
-                                </fieldset>
 
-                                <fieldset>
-                                    <div class="row">
-                                        <div class="col-xs-6">
+                              <form action="{% url 'app:search' %}" method="post" class="form-inline">
+                              {% csrf_token %}
 
-                                            <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Select Your City">
+                              <fieldset>
+                                  <div class="row">
+                                      <div class="col-xs-12">
+                                         <input name="text" type="text" class="form-control" placeholder=" کلید واژه ">
+                                      </div>
+                                  </div>
+                              </fieldset>
 
-                                                <option>New york, CA</option>
-                                                <option>Paris</option>
-                                                <option>Casablanca</option>
-                                                <option>Tokyo</option>
-                                                <option>Marraekch</option>
-                                                <option>kyoto , shibua</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-xs-6">
+                              <fieldset>
+                                  <div class="row">
+                                      <div class="col-xs-6">
+                                        <select name="area" id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="منطقه">
+                                          {% for Area in areas %}
+                                            <option> {{ Area }} </option>
+                                          {% endfor %}
+                                        </select>
+                                      </div>
+                                      <div class="col-xs-6">
+                                        <select name="buy_status" id="basic" class="selectpicker show-tick form-control" title="وضعیت خرید">
+                                            <option>رهن</option>
+                                            <option>اجاره</option>
+                                            <option>خرید</option>
+                                        </select>
+                                      </div>
+                                  </div>
+                              </fieldset>
 
-                                            <select id="basic" class="selectpicker show-tick form-control">
-                                                <option> -Status- </option>
-                                                <option>Rent </option>
-                                                <option>Boy</option>
-                                                <option>used</option>
+                              <fieldset class="padding-5">
+                                  <div class="row">
+                                      <div class="col-xs-12">
+                                        <label for="price-range" dir="rtl" align="center"> <h4 dir="rtl" align="center"> اجاره: </h4> </label>
+                                        <input name="rent" type="text" class="span2" value="0,100000000" data-slider-min="0" data-slider-max="100000000" data-slider-step="100" data-slider-value="[0,100000000]" id="price-range"> <br>
+                                        <b dir="rtl" class="pull-left color"> ۰ تومان</b>
+                                        <b dir="rtl" class="pull-right color"> ۱۰۰ میلیون تومان </b>
+                                      </div>
+                                      <div class="col-xs-12">
+                                        <label for="property-geo" dir="rtl" align="center"> رهن: </label>
+                                        <input name="mortgage" type="text" class="span2" value="0,10000000000" data-slider-min="0" data-slider-max="10000000000" data-slider-step="500" data-slider-value="[0,10000000000]" id="property-geo"> <br>
+                                        <b dir="rtl" class="pull-left color"> ۰ تومان</b>
+                                        <b dir="rtl" class="pull-right color"> ۱۰ میلیارد تومان </b>
+                                      </div>
+                                      <div class="col-xs-12">
+                                        <label for="min-baths" dir="rtl" align="center"> خرید: </label>
+                                        <input name="price" type="text" class="span2" value="0,100000000000" data-slider-min="0" data-slider-max="100000000000" data-slider-step="1000" data-slider-value="[0,100000000000]" id="min-baths"> <br>
+                                        <b dir="rtl" class="pull-left color"> ۰ تومان</b>
+                                        <b dir="rtl" class="pull-right color"> ۱۰۰ میلیارد تومان </b>
+                                      </div>
+                                      <div class="col-xs-12">
+                                        <label for="min-bed" dir="rtl" align="center"> متراژ: </label>
+                                        <input name="area_size" type="text" class="span2" value="10,10000" data-slider-min="10" data-slider-max="10000" data-slider-step="10" data-slider-value="[10,10000]" id="min-bed"> <br>
+                                        <b dir="rtl" class="pull-left color"> ۱۰ متر </b>
+                                        <b dir="rtl" class="pull-right color"> ۱۰۰۰۰ متر </b>
+                                      </div>
+                                  </div>
+                              </fieldset>
 
-                                            </select>
-                                        </div>
-                                    </div>
-                                </fieldset>
+                              <fieldset>
+                                  <div class="row">
+                                      <div class="col-xs-12">
+                                          <input class="button btn largesearch-btn" value="جستجو" type="submit">
+                                      </div>
+                                  </div>
+                              </fieldset>
 
-                                <fieldset class="padding-5">
-                                    <div class="row">
-                                        <div class="col-xs-6">
-                                            <label for="price-range">Price range ($):</label>
-                                            <input type="text" class="span2" value="" data-slider-min="0"
-                                                   data-slider-max="600" data-slider-step="5"
-                                                   data-slider-value="[0,450]" id="price-range" ><br />
-                                            <b class="pull-left color">2000$</b>
-                                            <b class="pull-right color">100000$</b>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <label for="property-geo">Property geo (m2) :</label>
-                                            <input type="text" class="span2" value="" data-slider-min="0"
-                                                   data-slider-max="600" data-slider-step="5"
-                                                   data-slider-value="[50,450]" id="property-geo" ><br />
-                                            <b class="pull-left color">40m</b>
-                                            <b class="pull-right color">12000m</b>
-                                        </div>
-                                    </div>
-                                </fieldset>
-
-                                <fieldset class="padding-5">
-                                    <div class="row">
-                                        <div class="col-xs-6">
-                                            <label for="price-range">Min baths :</label>
-                                            <input type="text" class="span2" value="" data-slider-min="0"
-                                                   data-slider-max="600" data-slider-step="5"
-                                                   data-slider-value="[250,450]" id="min-baths" ><br />
-                                            <b class="pull-left color">1</b>
-                                            <b class="pull-right color">120</b>
-                                        </div>
-
-                                        <div class="col-xs-6">
-                                            <label for="property-geo">Min bed :</label>
-                                            <input type="text" class="span2" value="" data-slider-min="0"
-                                                   data-slider-max="600" data-slider-step="5"
-                                                   data-slider-value="[250,450]" id="min-bed" ><br />
-                                            <b class="pull-left color">1</b>
-                                            <b class="pull-right color">120</b>
-
-                                        </div>
-                                    </div>
-                                </fieldset>
-
-                                <fieldset class="padding-5">
-                                    <div class="row">
-                                        <div class="col-xs-6">
-                                            <div class="checkbox">
-                                                <label> <input type="checkbox" checked> Fire Place</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xs-6">
-                                            <div class="checkbox">
-                                                <label> <input type="checkbox"> Dual Sinks</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-
-                                <fieldset class="padding-5">
-                                    <div class="row">
-                                        <div class="col-xs-6">
-                                            <div class="checkbox">
-                                                <label> <input type="checkbox" checked> Swimming Pool</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <div class="checkbox">
-                                                <label> <input type="checkbox" checked> 2 Stories </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-
-                                <fieldset class="padding-5">
-                                    <div class="row">
-                                        <div class="col-xs-6">
-                                            <div class="checkbox">
-                                                <label><input type="checkbox"> Laundry Room </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <div class="checkbox">
-                                                <label> <input type="checkbox"> Emergency Exit</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-
-                                <fieldset class="padding-5">
-                                    <div class="row">
-                                        <div class="col-xs-6">
-                                            <div class="checkbox">
-                                                <label>  <input type="checkbox" checked> Jog Path </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <div class="checkbox">
-                                                <label>  <input type="checkbox"> 26' Ceilings </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-
-                                <fieldset class="padding-5">
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <div class="checkbox">
-                                                <label>  <input type="checkbox"> Hurricane Shutters </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-
-                                <fieldset >
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <input class="button btn largesearch-btn" value="Search" type="submit">
-                                        </div>
-                                    </div>
-                                </fieldset>
                             </form>
                         </div>
                     </div>

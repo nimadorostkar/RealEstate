@@ -49,25 +49,28 @@ def search(request):
         #
         search_area_size = request.POST['area_size']
         search_area_size_rage = search_area_size.split(',')
-        #
+
+        '''
         if request.POST.get('parking'):
             search_parking = True
         else:
             search_parking = False
-        #
+
         if request.POST.get('elevator'):
             search_elevator = True
         else:
             search_elevator = False
-        #
+
         if request.POST.get('storage_room'):
             search_storage_room = True
         else:
             search_storage_room = False
+        '''
 
         if search:
             general_match = models.Item.objects.filter( Q(buy_status__icontains=search_buy_status) & Q(area__name__icontains=search_area) & Q(additional_information__icontains=search_text) )
-            partial_match = models.Item.objects.filter( Q(area_size__range=(search_area_size_rage[0],search_area_size_rage[1])) & Q(parking=search_parking) & Q(elevator=search_elevator) & Q(storage_room=search_storage_room) )
+            partial_match = models.Item.objects.filter( Q(area_size__range=(search_area_size_rage[0],search_area_size_rage[1])) )
+            #checkbox_match = models.Item.objects.filter( Q(parking=search_parking) & Q(elevator=search_elevator) & Q(storage_room=search_storage_room) )
             if search_buy_status == 'اجاره':
                 price_match = models.Item.objects.filter( Q(rent__range=(search_rent_rage[0],search_rent_rage[1])) & Q(deposit__range=(search_mortgage_rage[0],search_mortgage_rage[1])) )
             elif search_buy_status == 'خرید':
@@ -77,7 +80,7 @@ def search(request):
             else:
                 price_match = models.Item.objects.filter( Q(rent__range=(search_rent_rage[0],search_rent_rage[1])) & Q(deposit__range=(search_mortgage_rage[0],search_mortgage_rage[1])) & Q(price__range=(search_price_rage[0],search_price_rage[1])) )
 
-            match = list(chain(general_match & partial_match & price_match))
+            match = list(chain(general_match & partial_match & price_match ))
 
             if match:
                 return render(request,'search.html', {'sr': match})
@@ -133,7 +136,8 @@ def profile(request):
 #------------------------------------------------------------------------------
 def items(request):
     items = models.Item.objects.all().order_by("-date")
-    context = {'items':items}
+    areas = models.Area.objects.all()
+    context = {'items':items, 'areas':areas}
     context['segment'] = 'items'
     html_template = loader.get_template( 'items.html' )
     return HttpResponse(html_template.render(context, request))
