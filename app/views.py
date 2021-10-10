@@ -4,7 +4,7 @@ from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django import template
 from . import models
-from .models import Profile, Item, Slider, ItemImage, Area
+from .models import Profile, Item, Slider, ItemImage, Area, Fav
 from .forms import ProfileForm, UserForm
 from django.db.models import Count, Max, Min, Avg, Q
 from itertools import chain
@@ -148,6 +148,11 @@ def items_detail(request, id):
     Item = get_object_or_404(models.Item, id=id)
     item_img = models.ItemImage.objects.filter(item=Item)
     similar_items = models.Item.objects.filter(area=Item.area).order_by("-date")
+    if request.method == 'POST':
+        obj = Fav()
+        obj.user = request.user
+        obj.item = Item
+        obj.save()
     context = {'Item':Item , 'item_img':item_img , 'similar_items':similar_items}
     return render(request, 'items_detail.html', context)
 

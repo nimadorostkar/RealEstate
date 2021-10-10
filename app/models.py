@@ -194,8 +194,8 @@ class Slider(models.Model):
 
 
 #------------------------------------------------------------------------------
-class Favorite(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE,verbose_name = "کاربر")
+class Fav(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE,verbose_name = "کاربر")
     item = models.ForeignKey(Item, on_delete=models.CASCADE,verbose_name = "آیتم")
 
     class Meta:
