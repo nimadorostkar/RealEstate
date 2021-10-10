@@ -34,19 +34,35 @@ def index(request):
 #------------------------------------------------------------------------------
 def search(request):
     if request.method=="POST":
+        search_buy_status = request.POST['buy_status']
         search_text = request.POST['text']
         search_area = request.POST['area']
-        search_buy_status = request.POST['buy_status']
+        #
+        search_area_size = request.POST['area_size']
+        search_area_size_rage = search_area_size.split(',')
+        #
         search_rent = request.POST['rent']
         search_rent_rage = search_rent.split(',')
+        #
+        search_mortgage = request.POST['mortgage']
+        search_mortgage_rage = search_mortgage.split(',')
+        #
+        search_price = request.POST['price']
+        search_price_rage = search_price.split(',')
 
         if search:
-            match = models.Item.objects.filter(
-              Q(buy_status__icontains=search_buy_status)
-            & Q(area__name__icontains=search_area)
-            & Q(additional_information__icontains=search_text)
-            & Q(rent__range=(search_rent_rage[0],search_rent_rage[1]))
-            )
+            general_match = models.Item.objects.filter( Q(buy_status__icontains=search_buy_status) & Q(area__name__icontains=search_area) & Q(additional_information__icontains=search_text) )
+            partial_match = models.Item.objects.filter( Q(area_size__range=(search_area_size_rage[0],search_area_size_rage[1])) )
+            if search_buy_status == 'اجاره':
+                price_match = models.Item.objects.filter( Q(rent__range=(search_rent_rage[0],search_rent_rage[1])) & Q(deposit__range=(search_mortgage_rage[0],search_mortgage_rage[1])) )
+            elif search_buy_status == 'خرید':
+                price_match = models.Item.objects.filter( Q(price__range=(search_price_rage[0],search_price_rage[1])) )
+            elif search_buy_status == 'رهن':
+                price_match = models.Item.objects.filter( Q(deposit__range=(search_mortgage_rage[0],search_mortgage_rage[1])) )
+            else:
+                price_match = models.Item.objects.filter( Q(rent__range=(search_rent_rage[0],search_rent_rage[1])) & Q(deposit__range=(search_mortgage_rage[0],search_mortgage_rage[1])) & Q(price__range=(search_price_rage[0],search_price_rage[1])) )
+
+            match = chain(general_match, partial_match, price_match)
             if match:
                 return render(request,'search.html', {'sr': match})
             else:
