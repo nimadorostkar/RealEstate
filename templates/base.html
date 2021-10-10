@@ -109,63 +109,25 @@
   								<li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="{% url 'app:items' %}"> جستجوی املاک </a></li>
   								<li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="property.html"> وبلاگ </a></li>
   								<li class="dropdown yamm-fw" data-wow-delay="0.1s">
-  										<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200"><b class="caret"></b> موارد پیشنهادی </a>
+  										<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200"><b class="caret"></b> مورد علاقه ها  </a>
   										<ul class="dropdown-menu">
   												<li>
   														<div class="yamm-content">
-  																<div class="row" dir="rtl" align="center">
+  																<div class="row">
 
                                       {% for Item in items %}
-                                          <div class="col-sm-3">
-                                            <div class="box-two proerty-item">
 
-                                                <div class="item-entry overflow" dir="rtl">
-                                                    <h6><a href="{{ Item.get_absolute_url }}"> {{ Item }} </a></h6>
-                                                    <div class="dot-hr"></div>
-                                                    <h6 style="padding: 1px 25px 1px;">
-                                                      <span class="pull-left"> {{ Item.area_size }} متر  </span>
-                                                      <span class="proerty-price pull-right">
-                                                        {% if Item.buy_status == 'خرید' %}
-                                                         <span class="proerty-price pull-right"> {{ Item.price }} تومان </span>
-                                                        {% elif Item.buy_status == 'رهن' %}
-                                                         <span class="proerty-price pull-right"> {{ Item.deposit }} تومان </span>
-                                                        {% elif Item.buy_status == 'اجاره' %}
-                                                        <small> <span class="proerty-price pull-right"> پیش:{{ Item.deposit }} اجاره:{{ Item.rent }} تومان</span> </small>
-                                                        {% endif %}
-                                                      </span>
-                                                    </h6>
-                                                    <p style="display: none;"> {{ Item.additional_information|slice:":120" }}...  </p>
-                                                    <div class="property-icon">
-                                                        <img src="{% static 'assets/img/icon/bed-orange.png' %}">[{{ Item.room_qty }}]
+                                      <div class="col-md-2" align="center" dir="rtl">
+                                          <div class="item-thumb-small">
+                                              <a href="property-1.html"><img src="{{ Item.image.url }}"></a>
+                                          </div>
+                                          <div class="item-entry-small overflow">
+                                             <a href="{{ Item.get_absolute_url }}"> <p> <small> {{ Item }} </small> </p> </a>
+                                          </div>
+                                      </div>
 
-                                                        {% if Item.parking %}
-                                                          <img src="{% static 'assets/img/icon/cars-orange.png' %}">
-                                                        {% else %}
-                                                          <img src="{% static 'assets/img/icon/cars.png' %}">
-                                                        {% endif %}
 
-                                                        {% if Item.elevator %}
-                                                          <img src="{% static 'assets/img/icon/elevator-orange.png' %}">
-                                                        {% else %}
-                                                          <img src="{% static 'assets/img/icon/elevator.png' %}">
-                                                        {% endif %}
 
-                                                        {% if Item.storage_room %}
-                                                          <img src="{% static 'assets/img/icon/warehouse-orange.png' %}">
-                                                        {% else %}
-                                                          <img src="{% static 'assets/img/icon/warehouse.png' %}">
-                                                        {% endif %}
-
-                                                        {% if Item.balcony %}
-                                                          <img src="{% static 'assets/img/icon/balcony-orange.png' %}">
-                                                        {% else %}
-                                                          <img src="{% static 'assets/img/icon/balcony.png' %}">
-                                                        {% endif %}
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                       {% endfor %}
 
 
@@ -177,7 +139,6 @@
   								</li>
 
   								<li class="wow fadeInDown" data-wow-delay="0.4s"><a href="{% url 'app:contact' %}"> تماس با ما </a></li>
-                  <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="{% url 'app:contact' %}"> مورد علاقه ها </a></li>
   						</ul>
   				</div><!-- /.navbar-collapse -->
   		</div><!-- /.container-fluid -->

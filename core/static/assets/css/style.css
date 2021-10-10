@@ -156,6 +156,21 @@ input[type="search"]::-webkit-search-decoration {
     -webkit-appearance: none;
 }
 
+.item-thumb-small img {
+    opacity: 0.7;
+    height: 90px;
+    vertical-align: middle;
+    border: 0px none;
+    width: auto;
+    padding-right: 25px;
+}
+
+.item-entry-small p {
+    font-weight: 400;
+    font-size: 14px;
+}
+
+
 .btn:focus,
 .btn:hover,
 .btn:active{
@@ -1767,6 +1782,7 @@ proerty-th
 /*=====================================
 proerty-th-list
 ======================================*/
+
 .proerty-th-list{
     margin-left: -9px;
 }
