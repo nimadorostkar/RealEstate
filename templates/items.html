@@ -28,31 +28,15 @@
             <div class="col-md-9 padding-top-40 properties-page">
                 <div class="section clear">
                     <div class="col-xs-10 page-subheader sorting pl0">
-                        <ul class="sort-by-list">
-                            <li class="active">
-                                <a href="javascript:void(0);" class="order_by_date" data-orderby="property_date" data-order="ASC">
-                                    بر اساس تاریخ <i class="fa fa-sort-amount-asc"></i>
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="javascript:void(0);" class="order_by_price" data-orderby="property_price" data-order="DESC">
-                                    بر اساس قیمت <i class="fa fa-sort-numeric-desc"></i>
-                                </a>
-                            </li>
-                        </ul><!--/ .sort-by-list-->
-
+                      <div class="col-xs-2 layout-switcher">
+                          <a class="layout-list" href="javascript:void(0);"> <i class="fa fa-th-list"></i>  </a>
+                          <a class="layout-grid active" href="javascript:void(0);"> <i class="fa fa-th"></i> </a>
+                      </div><!--/ .layout-switcher-->
                     </div>
-
-                    <div class="col-xs-2 layout-switcher">
-                        <a class="layout-list" href="javascript:void(0);"> <i class="fa fa-th-list"></i>  </a>
-                        <a class="layout-grid active" href="javascript:void(0);"> <i class="fa fa-th"></i> </a>
-                    </div><!--/ .layout-switcher-->
                 </div>
 
                 <div class="section clear">
                     <div id="list-type" class="proerty-th">
-
-
 
                       {% for Item in items %}
                         <div class="col-sm-6 col-md-4 p0">
@@ -154,25 +138,26 @@
                               <fieldset class="padding-5">
                                   <div class="row">
                                       <div class="col-xs-12">
-                                        <label for="price-range" dir="rtl" align="center"> <h4 dir="rtl" align="center"> اجاره: </h4> </label>
+                                        <label for="price-range" dir="rtl" align="right"> <h4> اجاره: </h4> </label>
                                         <input name="rent" type="text" class="span2" value="0,100000000" data-slider-min="0" data-slider-max="100000000" data-slider-step="100" data-slider-value="[0,100000000]" id="price-range"> <br>
                                         <b dir="rtl" class="pull-left color"> ۰ تومان</b>
                                         <b dir="rtl" class="pull-right color"> ۱۰۰ میلیون تومان </b>
                                       </div>
+                                      <hr>
                                       <div class="col-xs-12">
-                                        <label for="property-geo" dir="rtl" align="center"> رهن: </label>
+                                        <label for="property-geo" dir="rtl" align="right"> <h4> رهن: </h4> </label>
                                         <input name="mortgage" type="text" class="span2" value="0,10000000000" data-slider-min="0" data-slider-max="10000000000" data-slider-step="500" data-slider-value="[0,10000000000]" id="property-geo"> <br>
                                         <b dir="rtl" class="pull-left color"> ۰ تومان</b>
                                         <b dir="rtl" class="pull-right color"> ۱۰ میلیارد تومان </b>
                                       </div>
                                       <div class="col-xs-12">
-                                        <label for="min-baths" dir="rtl" align="center"> خرید: </label>
+                                        <label for="min-baths" dir="rtl" align="right"> <h4> خرید: </h4> </label>
                                         <input name="price" type="text" class="span2" value="0,100000000000" data-slider-min="0" data-slider-max="100000000000" data-slider-step="1000" data-slider-value="[0,100000000000]" id="min-baths"> <br>
                                         <b dir="rtl" class="pull-left color"> ۰ تومان</b>
                                         <b dir="rtl" class="pull-right color"> ۱۰۰ میلیارد تومان </b>
                                       </div>
                                       <div class="col-xs-12">
-                                        <label for="min-bed" dir="rtl" align="center"> متراژ: </label>
+                                        <label for="min-bed" dir="rtl" align="right"> <h4> متراژ: </h4> </label>
                                         <input name="area_size" type="text" class="span2" value="10,10000" data-slider-min="10" data-slider-max="10000" data-slider-step="10" data-slider-value="[10,10000]" id="min-bed"> <br>
                                         <b dir="rtl" class="pull-left color"> ۱۰ متر </b>
                                         <b dir="rtl" class="pull-right color"> ۱۰۰۰۰ متر </b>
