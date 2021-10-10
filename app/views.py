@@ -50,24 +50,6 @@ def search(request):
         search_area_size = request.POST['area_size']
         search_area_size_rage = search_area_size.split(',')
 
-        print('search_buy_status:'+search_buy_status)
-        print('---------------------')
-        print('search_text:'+search_text)
-        print('---------------------')
-        print('search_area:'+search_area)
-        print('---------------------')
-        print('search_rent_rage:')
-        print(search_rent_rage)
-        print('---------------------')
-        print('search_area_size_rage:')
-        print(search_area_size_rage)
-        print('---------------------')
-        print('search_mortgage_rage:')
-        print(search_mortgage_rage)
-        print('---------------------')
-        print('search_price_rage:')
-        print(search_price_rage)
-
         if search:
             general_match = models.Item.objects.filter( Q(buy_status__icontains=search_buy_status) & Q(area__name__icontains=search_area) & Q(additional_information__icontains=search_text) )
             partial_match = models.Item.objects.filter( Q(area_size__range=(search_area_size_rage[0],search_area_size_rage[1])) )
@@ -79,6 +61,16 @@ def search(request):
                 price_match = models.Item.objects.filter( Q(deposit__range=(search_mortgage_rage[0],search_mortgage_rage[1])) )
             else:
                 price_match = models.Item.objects.filter( Q(rent__range=(search_rent_rage[0],search_rent_rage[1])) & Q(deposit__range=(search_mortgage_rage[0],search_mortgage_rage[1])) & Q(price__range=(search_price_rage[0],search_price_rage[1])) )
+
+            print('-----------------')
+            print('general_match:')
+            print(general_match)
+            print('-----------------')
+            print('partial_match:')
+            print(partial_match)
+            print('-----------------')
+            print('price_match:')
+            print(price_match)
 
             match = chain(general_match, partial_match, price_match)
             if match:
