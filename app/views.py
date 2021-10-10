@@ -38,9 +38,6 @@ def search(request):
         search_text = request.POST['text']
         search_area = request.POST['area']
         #
-        search_area_size = request.POST['area_size']
-        search_area_size_rage = search_area_size.split(',')
-        #
         search_rent = request.POST['rent']
         search_rent_rage = search_rent.split(',')
         #
@@ -49,6 +46,27 @@ def search(request):
         #
         search_price = request.POST['price']
         search_price_rage = search_price.split(',')
+        #
+        search_area_size = request.POST['area_size']
+        search_area_size_rage = search_area_size.split(',')
+
+        print('search_buy_status:'+search_buy_status)
+        print('---------------------')
+        print('search_text:'+search_text)
+        print('---------------------')
+        print('search_area:'+search_area)
+        print('---------------------')
+        print('search_rent_rage:')
+        print(search_rent_rage)
+        print('---------------------')
+        print('search_area_size_rage:')
+        print(search_area_size_rage)
+        print('---------------------')
+        print('search_mortgage_rage:')
+        print(search_mortgage_rage)
+        print('---------------------')
+        print('search_price_rage:')
+        print(search_price_rage)
 
         if search:
             general_match = models.Item.objects.filter( Q(buy_status__icontains=search_buy_status) & Q(area__name__icontains=search_area) & Q(additional_information__icontains=search_text) )
