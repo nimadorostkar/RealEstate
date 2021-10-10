@@ -62,17 +62,8 @@ def search(request):
             else:
                 price_match = models.Item.objects.filter( Q(rent__range=(search_rent_rage[0],search_rent_rage[1])) & Q(deposit__range=(search_mortgage_rage[0],search_mortgage_rage[1])) & Q(price__range=(search_price_rage[0],search_price_rage[1])) )
 
-            print('-----------------')
-            print('general_match:')
-            print(general_match)
-            print('-----------------')
-            print('partial_match:')
-            print(partial_match)
-            print('-----------------')
-            print('price_match:')
-            print(price_match)
+            match = list(chain(general_match & partial_match & price_match))
 
-            match = chain(general_match, partial_match, price_match)
             if match:
                 return render(request,'search.html', {'sr': match})
             else:
