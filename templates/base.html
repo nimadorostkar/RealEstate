@@ -116,20 +116,15 @@
   																<div class="row">
 
                                       {% for Item in fav %}
-
-                                      <div class="col-md-2" align="center" dir="rtl">
-                                          <div class="item-thumb-small">
+                                        <div class="col-md-2" align="center" dir="rtl">
+                                          <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
                                               <a href="{{ Item.item.get_absolute_url }}"><img src="{{ Item.item.image.url }}"></a>
                                           </div>
-                                          <div class="item-entry-small overflow">
-                                             <a href="{{ Item.item.get_absolute_url }}"> <p> <small> {{ Item.item }} </small> </p> </a>
-                                          </div>
-                                      </div>
-
-
-
+                                            <div class="item-entry-small overflow">
+                                               <a href="{{ Item.item.get_absolute_url }}"> <p> <small> {{ Item.item }} </small> </p> </a>
+                                            </div>
+                                        </div>
                                       {% endfor %}
-
 
   																</div>
   														</div>
