@@ -149,6 +149,16 @@ def items_detail(request, id):
     Item = get_object_or_404(models.Item, id=id)
     item_img = models.ItemImage.objects.filter(item=Item)
     similar_items = models.Item.objects.filter(area=Item.area).order_by("-date")
+    fav = models.Fav.objects.all()
+
+    check_fav = request.user.username+'-'+str(Item.id)
+
+    print(fav)
+    print(check_fav)
+    #if (check_fav in fav):
+        #print ("yeeeeeeeeeeeeeeeees")
+
+
     if request.method == 'POST':
         obj = Fav()
         obj.user = request.user

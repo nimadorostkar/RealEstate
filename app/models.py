@@ -203,7 +203,7 @@ class Fav(models.Model):
         verbose_name_plural = "مورد علاقه ها"
 
     def __str__(self):
-        return self.user.username + '--' + str(self.item.buy_status +" "+ self.item.building_status +" "+ self.item.estate_status +" "+ self.item.area.name )
+        return self.user.username+'-'+str(self.item.id)
 
 
 
