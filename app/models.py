@@ -175,6 +175,9 @@ class ItemImage(models.Model):
 class Slider(models.Model):
     Image = models.ImageField(upload_to='media', default='media/Default.png', null=True, blank=True, verbose_name = "تصویر")
 
+    def image_tag(self):
+        return format_html("<img width=50 src='{}'>".format(self.Image.url))
+
     def __str__(self):
         return "اسلایدر " + str(self.id)
 
@@ -198,24 +201,6 @@ class Fav(models.Model):
 
     def __str__(self):
         return self.user.username+'-'+str(self.item.id)
-
-
-
-
-
-
-
-#------------------------------------------------------------------------------
-class Call_req(models.Model):
-    phone_number = models.CharField(max_length=20 , verbose_name = "شماره تلفن")
-    item = models.ForeignKey(Item, on_delete=models.CASCADE,verbose_name = "آیتم")
-
-    def __str__(self):
-        return "درخواست برای: " + str(self.item)
-
-    class Meta:
-        verbose_name = "درخواست تماس"
-        verbose_name_plural = "درخواست های تماس"
 
 
 

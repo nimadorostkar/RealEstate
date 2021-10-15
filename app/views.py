@@ -4,8 +4,8 @@ from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django import template
 from . import models
-from .models import Profile, Item, Slider, ItemImage, Area, Fav, Call_req
-from .forms import ProfileForm, UserForm, Call_req_Form
+from .models import Profile, Item, Slider, ItemImage, Area, Fav
+from .forms import ProfileForm, UserForm
 from django.db.models import Count, Max, Min, Avg, Q
 from itertools import chain
 from django.contrib.auth import get_user_model
@@ -150,13 +150,6 @@ def items_detail(request, id):
     Item = get_object_or_404(models.Item, id=id)
     item_img = models.ItemImage.objects.filter(item=Item)
     similar_items = models.Item.objects.filter(area=Item.area).order_by("-date")
-    call_req_form = Call_req_Form(request.POST)
-
-    if call_req_form.is_valid():
-        req = Call_req()
-        req.item = Item
-        req.phone_number = call_req_form.cleaned_data['phone_number']
-        req.save()
 
     if request.user.is_authenticated:
         item_fav = list(models.Fav.objects.filter(user=request.user).values_list('item', flat=True))
@@ -174,7 +167,7 @@ def items_detail(request, id):
                 return redirect(Item.get_absolute_url())
     else:
         item_fav=""
-    context = {'Item':Item , 'item_img':item_img , 'similar_items':similar_items, 'item_fav':item_fav, 'call_req_form':call_req_form}
+    context = {'Item':Item , 'item_img':item_img , 'similar_items':similar_items, 'item_fav':item_fav}
     return render(request, 'items_detail.html', context)
 
 
