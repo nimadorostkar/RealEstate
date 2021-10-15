@@ -10,6 +10,7 @@
 
 {% block content %}
 
+{% load bootstrap %}
 {% load jalali_tags %}
 
 
@@ -340,12 +341,12 @@
                                     <p> درخواست تماس برای این مورد ، لطفا با ما تماس بگیرید و یا شماره خود را وارد کنید تا کارشناسان ما با شما تماس بگیرند </p>
                                 </div>
                                 <div class="panel-body search-widget">
-                                    <form action="" class=" form-inline">
+                                    <form action="#" method="post" dir="rtl" align="right">
 
                                         <fieldset>
                                             <div class="row">
                                                 <div class="col-xs-12">
-                                                    <input name="phone-number" type="text" class="form-control" placeholder="شماره تماس">
+                                                    {{ call_req_form.phone_number|bootstrap }}
                                                 </div>
                                             </div>
                                         </fieldset>

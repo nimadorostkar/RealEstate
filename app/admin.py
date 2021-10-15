@@ -91,7 +91,7 @@ admin.site.register(models.Fav, FavAdmin)
 
 #------------------------------------------------------------------------------
 class Call_reqAdmin(ImportExportModelAdmin):
-    list_display = ('phone_number',)
+    list_display = ('item','phone_number')
 
 admin.site.register(models.Call_req, Call_reqAdmin)
 
