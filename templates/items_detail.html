@@ -207,15 +207,15 @@
                                             </span>
                                         </div>
 
-                                        <div class="property-meta entry-meta clearfix ">
+                                        <div class="property-meta entry-meta clearfix">
 
                                             <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
                                                 <span class="property-info-icon icon-tag">
                                                     <img src="{% static 'assets/img/icon/sale-orange.png' %}">
                                                 </span>
                                                 <span class="property-info-entry">
-                                                    <span class="property-info-label">Status</span>
-                                                    <span class="property-info-value">For Sale</span>
+                                                    <span class="property-info-label"> وضعیت </span>
+                                                    <span class="property-info-value"> {{ Item.buy_status }} </span>
                                                 </span>
                                             </div>
 
@@ -224,8 +224,8 @@
                                                     <img src="{% static 'assets/img/icon/room-orange.png' %}">
                                                 </span>
                                                 <span class="property-info-entry">
-                                                    <span class="property-info-label">Area</span>
-                                                    <span class="property-info-value">3500<b class="property-info-unit">Sq Ft</b></span>
+                                                    <span class="property-info-label"> متراژ </span>
+                                                    <span class="property-info-value"> {{ Item.area_size }} <b class="property-info-unit">متر مربع</b></span>
                                                 </span>
                                             </div>
 
@@ -234,8 +234,8 @@
                                                     <img src="{% static 'assets/img/icon/bed-orange.png' %}">
                                                 </span>
                                                 <span class="property-info-entry">
-                                                    <span class="property-info-label">Bedrooms</span>
-                                                    <span class="property-info-value">3</span>
+                                                    <span class="property-info-label"> تعداد اتاق </span>
+                                                    <span class="property-info-value"> {{ Item.room_qty }} </span>
                                                 </span>
                                             </div>
 
@@ -244,37 +244,37 @@
                                                     <img src="{% static 'assets/img/icon/cars-orange.png' %}">
                                                 </span>
                                                 <span class="property-info-entry">
-                                                    <span class="property-info-label">Bathrooms</span>
-                                                    <span class="property-info-value">3.5</span>
+                                                    <span class="property-info-label"> پارکینگ </span>
+                                                    <span class="property-info-value">{% if Item.parking %} دارد {% else %} ندارد {% endif %}</span>
                                                 </span>
                                             </div>
                                             <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
                                                 <span class="property-info-icon icon-bath">
-                                                    <img src="{% static 'assets/img/icon/os-orange.png' %}">
+                                                    <img src="{% static 'assets/img/icon/elevator-orange.png' %}">
                                                 </span>
                                                 <span class="property-info-entry">
-                                                    <span class="property-info-label">Bathrooms</span>
-                                                    <span class="property-info-value">3.5</span>
+                                                    <span class="property-info-label">آسانسور</span>
+                                                    <span class="property-info-value">{% if Item.elevator %} دارد {% else %} ندارد {% endif %} </span>
                                                 </span>
                                             </div>
 
                                             <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
                                                 <span class="property-info-icon icon-garage">
-                                                    <img src="{% static 'assets/img/icon/room-orange.png' %}">
+                                                    <img src="{% static 'assets/img/icon/warehouse-orange.png' %}">
                                                 </span>
                                                 <span class="property-info-entry">
-                                                    <span class="property-info-label">Garages</span>
-                                                    <span class="property-info-value">2</span>
+                                                    <span class="property-info-label">انباری</span>
+                                                    <span class="property-info-value"> {% if Item.storage_room %} دارد {% else %} ندارد {% endif %}</span>
                                                 </span>
                                             </div>
 
                                             <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
                                                 <span class="property-info-icon icon-garage">
-                                                    <img src="{% static 'assets/img/icon/shawer-orange.png' %}">
+                                                    <img src="{% static 'assets/img/icon/balcony-orange.png' %}">
                                                 </span>
                                                 <span class="property-info-entry">
-                                                    <span class="property-info-label">Garages</span>
-                                                    <span class="property-info-value">2</span>
+                                                    <span class="property-info-label"> بالکن </span>
+                                                    <span class="property-info-value">  {% if Item.balcony %} دارد {% else %} ندارد {% endif %} </span>
                                                 </span>
                                             </div>
 
