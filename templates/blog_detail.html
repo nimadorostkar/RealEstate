@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>{{post.title_tag}}</title>
+{% endblock %}
+{% block content %}
+<div class="card">
+  <img src="{{post.img.url}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <ul class="post-meta" style="list-style-type: none; padding-left: 0px;">
+      <li><i class="fa fa-tag"></i><a>{{post.category}}</a></li>
+      <li><i class="fa fa-comment"></i><a>{{ post.comments.all.count }} Comments</a></li>
+      <li><i class="fa fa-user"></i><a>Post By {{post.author.first_name}}</a></li>
+      <li><i class="fa fa-clock-o"></i><a>{{post.post_date | date:'d F'}}</a></li>
+    </ul>
+    <h5 class="card-title">{{post.title}}</h5>
+    <p class="card-text">{{post.body | safe}}</p>
+  </div>
+</div>
+
+
+
+{% if not request.user.is_authenticated %}
+<div class="alert alert-danger">To comment, first <a href="/login">log in</a> to your account</div>
+{% endif %}
+
+{% if request.user.is_authenticated %}
+  <div class="card">
+    <form action="{% url 'send_comment' post.slug %}" method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="post_id" value="{{ post.id }}">
+      <textarea name="message" cols="120" rows="10"></textarea>
+      <button type="submit" class="btn btn-lg btn-dark">Add Comment</button>
+    </form>
+  </div>
+{% endif %}
+
+<div class="card">
+  {% for comment in post.comments.all %}
+  <div class="alert alert-success">
+    <h4>Commented by <strong>{{ comment.sender.first_name}}</strong></h4>
+    <p>Comment: <strong>{{ comment.message }}</strong></p>
+  </div>
+  {% empty %}
+    <div class="alert alert-danger">There is no comment</div>
+  {% endfor %}
+</div>
+
+{% endblock %}
