@@ -1,7 +1,7 @@
 from django.contrib import admin
 from . import models
 from django.contrib.admin.models import LogEntry
-from .models import Profile, Tags, Area, Item, ItemImage, Slider, Fav
+from .models import Profile, Tags, Area, Item, ItemImage, Slider, Fav, Call_req
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin, ImportExportMixin
 from mptt.admin import MPTTModelAdmin, TreeRelatedFieldListFilter, DraggableMPTTAdmin
@@ -86,6 +86,15 @@ class FavAdmin(ImportExportModelAdmin):
     list_filter = ("user", "item")
 
 admin.site.register(models.Fav, FavAdmin)
+
+
+
+#------------------------------------------------------------------------------
+class Call_reqAdmin(ImportExportModelAdmin):
+    list_display = ('phone_number',)
+
+admin.site.register(models.Call_req, Call_reqAdmin)
+
 
 
 

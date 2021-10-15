@@ -206,11 +206,12 @@ class Fav(models.Model):
 
 
 #------------------------------------------------------------------------------
-class Call_request(models.Model):
+class Call_req(models.Model):
     phone_number = models.CharField(max_length=20 , verbose_name = "شماره تلفن")
+    item = models.ForeignKey(Item, on_delete=models.CASCADE,verbose_name = "آیتم")
 
     def __str__(self):
-        return self.phone_number
+        return "درخواست برای: " + str(self.item)
 
     class Meta:
         verbose_name = "درخواست تماس"
