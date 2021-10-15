@@ -37,16 +37,21 @@
                             <div class="row">
                                 <div class="light-slide-item">
                                     <div class="clearfix">
-                                        <div class="favorite-and-print">
-                                            <form action="" method="post">
-                                            {% csrf_token %}
-                                              {% if Item.id in item_fav %}
-                                               <button type="submit"> <i class="fa fa-star" style="color:orange; font-size:25px;"></i> </button>
+
+                                          <div class="favorite-and-print">
+                                            {% if user.is_authenticated %}
+                                              <form action="" method="post">
+                                              {% csrf_token %}
+                                                {% if Item.id in item_fav %}
+                                                 <button type="submit"> <i class="fa fa-star" style="color:orange; font-size:25px;"></i> </button>
+                                                {% else %}
+                                                 <button type="submit"> <i class="fa fa-star" style="font-size:25px;"></i> </button>
+                                                {% endif %}
+                                              </form>
                                               {% else %}
-                                               <button type="submit"> <i class="fa fa-star" style="font-size:25px;"></i> </button>
+                                                <p dir="rtl"> <i class="fa fa-star" style="font-size:15px;"></i>  برای ذخیره در لیست مورد علاقه ها لطفا <a href="{% url 'login' %}">وارد</a> شوید </p>
                                               {% endif %}
-                                            </form>
-                                        </div>
+                                          </div>
 
                                         <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
 

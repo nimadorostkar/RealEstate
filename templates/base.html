@@ -94,45 +94,21 @@
   				<div class="collapse navbar-collapse yamm" id="navigation">
   						<div class="button navbar-right">
                 {% if user.is_authenticated %}
-                <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('{% url 'logout' %}')" data-wow-delay="0.5s"> خروج </button>
-                <button class="navbar-btn nav-button wow fadeInRight login" onclick=" window.open('{% url 'app:profile' %}')" data-wow-delay="0.5s"> پروفایل </button>
+                <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.location.replace('{% url 'logout' %}')" data-wow-delay="0.5s"> خروج </button>
+                <button class="navbar-btn nav-button wow fadeInRight login" onclick=" window.location.replace('{% url 'app:profile' %}')" data-wow-delay="0.5s"> پروفایل </button>
                   {% if request.user.is_superuser %}
                    <a href="{% url 'admin:index' %}">  پنل مدیریت  <i class="fa fa-dashboard" style="font-size:20px"></i> </a>
                   {% endif %}
                 {% else %}
-                <button class="navbar-btn nav-button wow bounceInRight" onclick="window.open('{% url 'register' %}')" data-wow-delay="0.4s"> ثبت نام </button>
-                <button class="navbar-btn nav-button wow fadeInRight login" onclick=" window.open('{% url 'login' %}')" data-wow-delay="0.5s"> ورود </button>
+                <button class="navbar-btn nav-button wow bounceInRight" onclick="window.location.replace('{% url 'register' %}')" data-wow-delay="0.4s"> ثبت نام </button>
+                <button class="navbar-btn nav-button wow fadeInRight login" onclick=" window.location.replace('{% url 'login' %}')" data-wow-delay="0.5s"> ورود </button>
                 {% endif %}
   						</div>
   						<ul class="main-nav nav navbar-nav navbar-right">
   								<li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="{% url 'app:home' %}"> صفحه اصلی </a> </li>
   								<li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="{% url 'app:items' %}"> جستجوی املاک </a></li>
   								<li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="property.html"> وبلاگ </a></li>
-  								<li class="dropdown yamm-fw" data-wow-delay="0.1s">
-  										<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200"><b class="caret"></b> مورد علاقه ها  </a>
-  										<ul class="dropdown-menu">
-  												<li>
-  														<div class="yamm-content">
-  																<div class="row">
-
-                                      {% for Item in fav %}
-                                        <div class="col-md-2" align="center" dir="rtl">
-                                          <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
-                                              <a href="{{ Item.item.get_absolute_url }}"><img src="{{ Item.item.image.url }}"></a>
-                                          </div>
-                                            <div class="item-entry-small overflow">
-                                               <a href="{{ Item.item.get_absolute_url }}"> <p> <small> {{ Item.item }} </small> </p> </a>
-                                            </div>
-                                        </div>
-                                      {% endfor %}
-
-  																</div>
-  														</div>
-  														<!-- /.yamm-content -->
-  												</li>
-  										</ul>
-  								</li>
-
+  								<li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="{% url 'app:favs' %}"> مورد علاقه ها  </a></li>
   								<li class="wow fadeInDown" data-wow-delay="0.4s"><a href="{% url 'app:contact' %}"> تماس با ما </a></li>
   						</ul>
   				</div><!-- /.navbar-collapse -->

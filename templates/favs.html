@@ -1,0 +1,260 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} index {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+
+
+<div class="page-head">
+    <div class="container">
+        <div class="row" dir="rtl">
+            <div class="page-head-content">
+                <h1 class="page-title">  مورد علاقه ها </h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End page header -->
+
+<!-- property area -->
+<div class="properties-area recent-property" style="background-color: #FFF;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 padding-top-40 properties-page">
+                <div class="section clear">
+                    <div class="col-xs-10 page-subheader sorting pl0">
+                      <div class="col-xs-2 layout-switcher">
+                          <a class="layout-list" href="javascript:void(0);"> <i class="fa fa-th-list"></i>  </a>
+                          <a class="layout-grid active" href="javascript:void(0);"> <i class="fa fa-th"></i> </a>
+                      </div><!--/ .layout-switcher-->
+                    </div>
+                </div>
+
+                <div class="section clear">
+                    <div id="list-type" class="proerty-th">
+
+                      {% for Fav in favs %}
+                        <div class="col-sm-6 col-md-4 p0">
+                            <div class="box-two proerty-item">
+                                <div class="item-thumb">
+                                    <a href="property-1.html" ><img src="{{ Fav.item.image.url }}"></a>
+                                </div>
+
+                                <div class="item-entry overflow" dir="rtl">
+                                    <h6><a href="{{ Fav.item.get_absolute_url }}"> {{ Fav.item }} </a></h6>
+                                    <div class="dot-hr"></div>
+                                    <span class="pull-left"> {{ Fav.item.area_size }} متر  </span>
+                                    <span class="proerty-price pull-right">
+                                      {% if Fav.item.buy_status == 'خرید' %}
+                                       <span class="proerty-price pull-right"> {{ Fav.item.price }} تومان </span>
+                                      {% elif Fav.item.buy_status == 'رهن' %}
+                                       <span class="proerty-price pull-right"> {{ Fav.item.deposit }} تومان </span>
+                                      {% elif Fav.item.buy_status == 'اجاره' %}
+                                      <small> <span class="proerty-price pull-right"> پیش:{{ Item.deposit }} اجاره:{{ Item.rent }} تومان</span> </small>
+                                      {% endif %}
+                                    </span>
+                                    <p style="display: none;"> {{ Fav.item.additional_information|slice:":120" }}...  </p>
+                                    <div class="property-icon">
+                                        <img src="{% static 'assets/img/icon/bed-orange.png' %}">[{{ Fav.item.room_qty }}]
+
+                                        {% if Fav.item.parking %}
+                                          <img src="{% static 'assets/img/icon/cars-orange.png' %}">
+                                        {% else %}
+                                          <img src="{% static 'assets/img/icon/cars.png' %}">
+                                        {% endif %}
+
+                                        {% if Fav.item.elevator %}
+                                          <img src="{% static 'assets/img/icon/elevator-orange.png' %}">
+                                        {% else %}
+                                          <img src="{% static 'assets/img/icon/elevator.png' %}">
+                                        {% endif %}
+
+                                        {% if Fav.item.storage_room %}
+                                          <img src="{% static 'assets/img/icon/warehouse-orange.png' %}">
+                                        {% else %}
+                                          <img src="{% static 'assets/img/icon/warehouse.png' %}">
+                                        {% endif %}
+
+                                        {% if Fav.item.balcony %}
+                                          <img src="{% static 'assets/img/icon/balcony-orange.png' %}">
+                                        {% else %}
+                                          <img src="{% static 'assets/img/icon/balcony.png' %}">
+                                        {% endif %}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      {% endfor %}
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 pl0 padding-top-40">
+                <div class="blog-asside-right pl0">
+                    <div class="panel panel-default sidebar-menu wow fadeInRight animated" >
+                        <div class="panel-heading" dir="rtl">
+                            <h3 class="panel-title"> جستجوی پیشرفته </h3>
+                        </div>
+                        <div class="panel-body search-widget">
+
+                              <form action="{% url 'app:search' %}" method="post" class="form-inline">
+                              {% csrf_token %}
+
+                              <fieldset>
+                                  <div class="row">
+                                      <div class="col-xs-12">
+                                         <input name="text" type="text" class="form-control" placeholder=" کلید واژه ">
+                                      </div>
+                                  </div>
+                              </fieldset>
+
+                              <fieldset>
+                                  <div class="row">
+                                      <div class="col-xs-6">
+                                        <select name="area" id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="منطقه">
+                                          {% for Area in areas %}
+                                            <option> {{ Area }} </option>
+                                          {% endfor %}
+                                        </select>
+                                      </div>
+                                      <div class="col-xs-6">
+                                        <select name="buy_status" id="basic" class="selectpicker show-tick form-control" title="وضعیت خرید">
+                                            <option>رهن</option>
+                                            <option>اجاره</option>
+                                            <option>خرید</option>
+                                        </select>
+                                      </div>
+                                  </div>
+                              </fieldset>
+
+                              <fieldset class="padding-5">
+                                  <div class="row">
+                                      <div class="col-xs-12">
+                                        <label for="price-range" dir="rtl" align="right"> <h4> اجاره: </h4> </label>
+                                        <input name="rent" type="text" class="span2" value="0,100000000" data-slider-min="0" data-slider-max="100000000" data-slider-step="100" data-slider-value="[0,100000000]" id="price-range"> <br>
+                                        <b dir="rtl" class="pull-left color"> ۰ تومان</b>
+                                        <b dir="rtl" class="pull-right color"> ۱۰۰ میلیون تومان </b>
+                                      </div>
+                                      <hr>
+                                      <div class="col-xs-12">
+                                        <label for="property-geo" dir="rtl" align="right"> <h4> رهن: </h4> </label>
+                                        <input name="mortgage" type="text" class="span2" value="0,10000000000" data-slider-min="0" data-slider-max="10000000000" data-slider-step="500" data-slider-value="[0,10000000000]" id="property-geo"> <br>
+                                        <b dir="rtl" class="pull-left color"> ۰ تومان</b>
+                                        <b dir="rtl" class="pull-right color"> ۱۰ میلیارد تومان </b>
+                                      </div>
+                                      <div class="col-xs-12">
+                                        <label for="min-baths" dir="rtl" align="right"> <h4> خرید: </h4> </label>
+                                        <input name="price" type="text" class="span2" value="0,100000000000" data-slider-min="0" data-slider-max="100000000000" data-slider-step="1000" data-slider-value="[0,100000000000]" id="min-baths"> <br>
+                                        <b dir="rtl" class="pull-left color"> ۰ تومان</b>
+                                        <b dir="rtl" class="pull-right color"> ۱۰۰ میلیارد تومان </b>
+                                      </div>
+                                      <div class="col-xs-12">
+                                        <label for="min-bed" dir="rtl" align="right"> <h4> متراژ: </h4> </label>
+                                        <input name="area_size" type="text" class="span2" value="10,10000" data-slider-min="10" data-slider-max="10000" data-slider-step="10" data-slider-value="[10,10000]" id="min-bed"> <br>
+                                        <b dir="rtl" class="pull-left color"> ۱۰ متر </b>
+                                        <b dir="rtl" class="pull-right color"> ۱۰۰۰۰ متر </b>
+                                      </div>
+                                  </div>
+                              </fieldset>
+
+                              <fieldset>
+                                  <div class="row">
+                                      <div class="col-xs-12">
+                                          <input class="button btn largesearch-btn" value="جستجو" type="submit">
+                                      </div>
+                                  </div>
+                              </fieldset>
+
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default sidebar-menu wow fadeInRight animated" dir="rtl">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">  مورد علاقه ها </h3>
+                        </div>
+                        <div class="panel-body recent-property-widget">
+
+                          <div class="row" dir="rtl" align="center">
+                              {% for Item in items %}
+                                  <div class="col-sm-12">
+                                    <div class="box-two proerty-item">
+
+                                        <div class="item-entry overflow" dir="rtl">
+                                            <h6><a href="{{ Item.get_absolute_url }}"> {{ Item }} </a></h6>
+                                            <div class="dot-hr"></div>
+                                            <h6 style="padding: 1px 25px 1px;">
+                                              <span class="pull-left"> {{ Item.area_size }} متر  </span>
+                                              <span class="proerty-price pull-right">
+                                                {% if Item.buy_status == 'خرید' %}
+                                                 <span class="proerty-price pull-right"> {{ Item.price }} تومان </span>
+                                                {% elif Item.buy_status == 'رهن' %}
+                                                 <span class="proerty-price pull-right"> {{ Item.deposit }} تومان </span>
+                                                {% elif Item.buy_status == 'اجاره' %}
+                                                <small> <span class="proerty-price pull-right"> پیش:{{ Item.deposit }} اجاره:{{ Item.rent }} تومان</span> </small>
+                                                {% endif %}
+                                              </span>
+                                            </h6>
+                                            <p style="display: none;"> {{ Item.additional_information|slice:":120" }}...  </p>
+                                            <div class="property-icon">
+                                                <img src="{% static 'assets/img/icon/bed-orange.png' %}">[{{ Item.room_qty }}]
+
+                                                {% if Item.parking %}
+                                                  <img src="{% static 'assets/img/icon/cars-orange.png' %}">
+                                                {% else %}
+                                                  <img src="{% static 'assets/img/icon/cars.png' %}">
+                                                {% endif %}
+
+                                                {% if Item.elevator %}
+                                                  <img src="{% static 'assets/img/icon/elevator-orange.png' %}">
+                                                {% else %}
+                                                  <img src="{% static 'assets/img/icon/elevator.png' %}">
+                                                {% endif %}
+
+                                                {% if Item.storage_room %}
+                                                  <img src="{% static 'assets/img/icon/warehouse-orange.png' %}">
+                                                {% else %}
+                                                  <img src="{% static 'assets/img/icon/warehouse.png' %}">
+                                                {% endif %}
+
+                                                {% if Item.balcony %}
+                                                  <img src="{% static 'assets/img/icon/balcony-orange.png' %}">
+                                                {% else %}
+                                                  <img src="{% static 'assets/img/icon/balcony.png' %}">
+                                                {% endif %}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                              {% endfor %}
+                          </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% endblock javascripts %}
