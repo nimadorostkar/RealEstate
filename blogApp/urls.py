@@ -3,6 +3,7 @@ from . import views
 from .views import blog, search, CategoryView, blogdetail
 
 
+
 urlpatterns = [
 path('', blog.as_view(), name="blog"),
 path('search', search, name="search"),
