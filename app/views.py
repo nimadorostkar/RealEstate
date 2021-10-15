@@ -149,22 +149,21 @@ def items_detail(request, id):
     Item = get_object_or_404(models.Item, id=id)
     item_img = models.ItemImage.objects.filter(item=Item)
     similar_items = models.Item.objects.filter(area=Item.area).order_by("-date")
-    fav = models.Fav.objects.all()
 
-    check_fav = request.user.username+'-'+str(Item.id)
-
-    print(fav)
-    print(check_fav)
-    #if (check_fav in fav):
-        #print ("yeeeeeeeeeeeeeeeees")
-
-
-    if request.method == 'POST':
-        obj = Fav()
-        obj.user = request.user
-        obj.item = Item
-        obj.save()
-    context = {'Item':Item , 'item_img':item_img , 'similar_items':similar_items}
+    item_fav = list(models.Fav.objects.filter(user=request.user).values_list('item', flat=True))
+    if (Item.id in item_fav):
+        if request.method=="POST":
+            obj = get_object_or_404(models.Fav, item=Item.id)
+            obj.delete()
+            return redirect(Item.get_absolute_url())
+    else:
+        if request.method == 'POST':
+            obj = Fav()
+            obj.user = request.user
+            obj.item = Item
+            obj.save()
+            return redirect(Item.get_absolute_url())
+    context = {'Item':Item , 'item_img':item_img , 'similar_items':similar_items, 'item_fav':item_fav}
     return render(request, 'items_detail.html', context)
 
 

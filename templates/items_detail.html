@@ -40,7 +40,11 @@
                                         <div class="favorite-and-print">
                                             <form action="" method="post">
                                             {% csrf_token %}
-                                              <button type="submit"> <i class="fa fa-star-o"></i> </button>
+                                              {% if Item.id in item_fav %}
+                                               <button type="submit"> <i class="fa fa-star" style="color:orange; font-size:25px;"></i> </button>
+                                              {% else %}
+                                               <button type="submit"> <i class="fa fa-star" style="font-size:25px;"></i> </button>
+                                              {% endif %}
                                             </form>
                                         </div>
 
