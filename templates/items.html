@@ -10,6 +10,7 @@
 
 
 
+
 <div class="page-head">
     <div class="container">
         <div class="row" dir="rtl">
@@ -179,66 +180,35 @@
 
                     <div class="panel panel-default sidebar-menu wow fadeInRight animated" dir="rtl">
                         <div class="panel-heading">
-                            <h3 class="panel-title">  مورد علاقه ها </h3>
+                            <h3 class="panel-title">  آخرین اخبار  </h3>
                         </div>
-                        <div class="panel-body recent-property-widget">
 
-                          <div class="row" dir="rtl" align="center">
-                              {% for Item in items %}
-                                  <div class="col-sm-12">
-                                    <div class="box-two proerty-item">
+                            <ul class="footer-blog" align="right" dir="rtl">
+                              <li>
+                                  <div class="col-md-12  col-sm-1 col-xs-1">
+                                      <h6> <a href="single.html"> دستگاه چاپ تامپو رومیزی </a></h6>
+                                      <p style="line-height: 17px; padding: 8px 2px;">Lorem ipsum dolor sit Lorem ipsum dolor sit am Lorem ipsum dolor sit am amet, nulla ...</p>
+                                      <hr><span class="blg-date">12-12-2016</span>
+                                  </div>
+                              </li>
+                              <li>
+                                  <div class="col-md-12  col-sm-1 col-xs-1">
+                                      <h6> <a href="single.html"> دستگاه چاپ تامپو رومیزی </a></h6>
+                                      <p style="line-height: 17px; padding: 8px 2px;">Lorem ipsum dolor sit Lorem ipsum dolor sit am Lorem ipsum dolor sit am amet, nulla ...</p>
+                                      <hr><span class="blg-date">12-12-2016</span>
+                                  </div>
+                              </li>
+                              <li>
+                                  <div class="col-md-12  col-sm-1 col-xs-1">
+                                      <h6> <a href="single.html"> دستگاه چاپ تامپو رومیزی </a></h6>
+                                      <p style="line-height: 17px; padding: 8px 2px;">Lorem ipsum dolor sit Lorem ipsum dolor sit am Lorem ipsum dolor sit am amet, nulla ...</p>
+                                      <hr><span class="blg-date">12-12-2016</span>
+                                  </div>
+                              </li>
 
-                                        <div class="item-entry overflow" dir="rtl">
-                                            <h6><a href="{{ Item.get_absolute_url }}"> {{ Item }} </a></h6>
-                                            <div class="dot-hr"></div>
-                                            <h6 style="padding: 1px 25px 1px;">
-                                              <span class="pull-left"> {{ Item.area_size }} متر  </span>
-                                              <span class="proerty-price pull-right">
-                                                {% if Item.buy_status == 'خرید' %}
-                                                 <span class="proerty-price pull-right"> {{ Item.price }} تومان </span>
-                                                {% elif Item.buy_status == 'رهن' %}
-                                                 <span class="proerty-price pull-right"> {{ Item.deposit }} تومان </span>
-                                                {% elif Item.buy_status == 'اجاره' %}
-                                                <small> <span class="proerty-price pull-right"> پیش:{{ Item.deposit }} اجاره:{{ Item.rent }} تومان</span> </small>
-                                                {% endif %}
-                                              </span>
-                                            </h6>
-                                            <p style="display: none;"> {{ Item.additional_information|slice:":120" }}...  </p>
-                                            <div class="property-icon">
-                                                <img src="{% static 'assets/img/icon/bed-orange.png' %}">[{{ Item.room_qty }}]
+                            </ul>
 
-                                                {% if Item.parking %}
-                                                  <img src="{% static 'assets/img/icon/cars-orange.png' %}">
-                                                {% else %}
-                                                  <img src="{% static 'assets/img/icon/cars.png' %}">
-                                                {% endif %}
 
-                                                {% if Item.elevator %}
-                                                  <img src="{% static 'assets/img/icon/elevator-orange.png' %}">
-                                                {% else %}
-                                                  <img src="{% static 'assets/img/icon/elevator.png' %}">
-                                                {% endif %}
-
-                                                {% if Item.storage_room %}
-                                                  <img src="{% static 'assets/img/icon/warehouse-orange.png' %}">
-                                                {% else %}
-                                                  <img src="{% static 'assets/img/icon/warehouse.png' %}">
-                                                {% endif %}
-
-                                                {% if Item.balcony %}
-                                                  <img src="{% static 'assets/img/icon/balcony-orange.png' %}">
-                                                {% else %}
-                                                  <img src="{% static 'assets/img/icon/balcony.png' %}">
-                                                {% endif %}
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                              {% endfor %}
-                          </div>
-
-                        </div>
                     </div>
                 </div>
             </div>
