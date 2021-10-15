@@ -5,7 +5,7 @@ from ckeditor.fields import RichTextField
 from django.db.models.base import Model
 from django.db.models.signals import pre_save
 from core.utils import unique_slug_generator
-
+from extensions.utils import jalali_converter
 
 
 
@@ -49,6 +49,9 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title + ' | ' + str(self.author)
+
+    def j_post_date(self):
+        return jalali_converter(self.post_date)
 
 def slug_generator(sender, instance, *args, **kwargs):
     if not instance.slug:

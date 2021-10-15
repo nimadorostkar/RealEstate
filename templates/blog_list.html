@@ -1,20 +1,76 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% for post in posts %}
-<div class="card">
-  <img src="{{post.img.url}}" class="card-img-top" alt="...">
-  <div class="card-body">
-    <ul class="post-meta" style="list-style-type: none; padding-left: 0px;">
-      <li><i class="fa fa-tag"></i><a>{{post.category}}</a></li>
-      <li><i class="fa fa-comment"></i><a>{{ post.comments.all.count }} Comments</a></li>
-      <li><i class="fa fa-user"></i><a>Post By {{post.author.first_name}}</a></li>
-      <li><i class="fa fa-clock-o"></i><a>{{post.post_date | date:'d F'}}</a></li>
-    </ul>
-    <a style="text-decoration:none; color:black" href="{% url 'blog-detail' post.slug %}"><h5 class="card-title">{{post.title}}</h5></a>
-    <p class="card-text">{{post.body | slice:':250' | safe}}...</p>
-    <a href="{% url 'blog-detail' post.slug %}"><button type="button" class="btn btn-lg btn-dark">Read More</button></a>
-  </div>
+
+
+
+
+<div class="page-head">
+    <div class="container">
+        <div class="row" dir="rtl" align="right">
+            <div class="page-head-content">
+                <h1 class="page-title"> وبلاگ و اخبار </h1>
+            </div>
+        </div>
+    </div>
 </div>
-{% endfor %}
+<!-- End page header -->
+<br>
+
+
+
+
+<div class="content-area blog-page padding-top-40" style="background-color: #FCFCFC; padding-bottom: 55px;">
+    <div class="container">
+        <div class="row">
+            <div class="blog-lst col-md-12 pl0">
+
+               {% for post in posts %}
+                <section class="post">
+                    <div class="text-center padding-b-50">
+                        <h2 class="wow fadeInLeft animated" dir="rtl"> {{post.title}} </h2>
+                        <div class="title-line wow fadeInRight animated"></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p class="author-category">
+                                By <a href="#"> {{post.author.first_name}} </a>
+                                category <a href="#"> {{post.category}} </a>
+                            </p>
+                        </div>
+                        <div class="col-sm-6 right" >
+                            <p class="date-comments">
+                                <a href="#"><i class="fa fa-calendar-o"></i> {{post.post_date }} </a>
+                                <a href="#"><i class="fa fa-comment-o"></i> {{ post.comments.all.count }} Comments</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="image wow fadeInLeft animated">
+                        <a href="single.html">
+                            <img src="{{post.img.url}}" class="img-responsive" alt="Example blog post alt">
+                        </a>
+                    </div>
+                    <div dir="rtl" align="right">
+                      <p class="intro"> {{post.body | slice:':250' | safe}}... </p>
+                    </div>
+                    <p dir="rtl" align="left">
+                        <a href="{% url 'blog-detail' post.slug %}" class="btn btn-default btn-border"> ادامه مطلب </a>
+                    </p>
+                    <hr>
+                </section>
+               {% endfor %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
 {% endblock %}
