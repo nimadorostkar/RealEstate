@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django import template
 from . import models
 from .models import Profile, Item, Slider, ItemImage, Area, Fav
-from .forms import ProfileForm, UserForm
+from .forms import ProfileForm, UserForm, PhoneForm
 from django.db.models import Count, Max, Min, Avg, Q
 from itertools import chain
 from django.contrib.auth import get_user_model
@@ -150,6 +150,8 @@ def items_detail(request, id):
     Item = get_object_or_404(models.Item, id=id)
     item_img = models.ItemImage.objects.filter(item=Item)
     similar_items = models.Item.objects.filter(area=Item.area).order_by("-date")
+    phone_form = PhoneForm(request.POST)
+
     if request.user.is_authenticated:
         item_fav = list(models.Fav.objects.filter(user=request.user).values_list('item', flat=True))
         if (Item.id in item_fav):

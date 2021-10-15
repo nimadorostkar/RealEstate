@@ -96,7 +96,6 @@ class Area(MPTTModel):
     name = models.CharField(max_length=200, unique=True, verbose_name = "نام")
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children',verbose_name = "والد")
 
-
     class MPTTMeta:
         level_attr = 'mptt_level'
         order_insertion_by = ['name']
@@ -144,7 +143,6 @@ class Item(models.Model):
     # video
     # active or not
 
-
     class Meta:
         verbose_name = "ملک"
         verbose_name_plural = "املاک"
@@ -152,15 +150,11 @@ class Item(models.Model):
     def __str__(self):
         return str(self.buy_status +" "+ self.building_status +" "+ self.estate_status +" "+ self.area.name )
 
-
     def image_tag(self):
         return format_html("<img width=50 src='{}'>".format(self.image.url))
 
-
     def get_absolute_url(self):
         return reverse('app:items_detail',args=[self.id])
-
-
 
 class ItemImage(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='images')
@@ -204,6 +198,23 @@ class Fav(models.Model):
 
     def __str__(self):
         return self.user.username+'-'+str(self.item.id)
+
+
+
+
+
+
+
+#------------------------------------------------------------------------------
+class Call_request(models.Model):
+    phone_number = models.CharField(max_length=20 , verbose_name = "شماره تلفن")
+
+    def __str__(self):
+        return self.phone_number
+
+    class Meta:
+        verbose_name = "درخواست تماس"
+        verbose_name_plural = "درخواست های تماس"
 
 
 
