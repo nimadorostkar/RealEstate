@@ -6,13 +6,14 @@ from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.http import HttpResponseNotFound, Http404
+from django.views import generic
 
 
 
 
 
 #------------------------------------------------------------------------------
-class blog(ListView):
+class blog(generic.ListView):
    model = Post
    template_name = 'blog_list.html'
    context_object_name = 'posts'
@@ -27,6 +28,8 @@ class blog(ListView):
       context["cat_list"] = cat_list
       context["latestpost_list"] = latestpost_list
       return context
+
+
 
 
 
