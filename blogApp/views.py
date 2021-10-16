@@ -19,7 +19,7 @@ class blog(generic.ListView):
    context_object_name = 'posts'
    cats = Categories.objects.all()
    ordering = ['-post_date']
-   paginate_by = 2
+   paginate_by = 4
 
    def get_context_data(self, *args, **kwargs):
       cat_list = Categories.objects.all()

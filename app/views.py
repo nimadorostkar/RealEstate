@@ -5,6 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django import template
 from . import models
 from .models import Profile, Item, Slider, ItemImage, Area, Fav
+from blogApp.models import Post, Categories, PostComment
 from .forms import ProfileForm, UserForm
 from django.db.models import Count, Max, Min, Avg, Q
 from itertools import chain
@@ -139,7 +140,8 @@ def profile(request):
 def items(request):
     items = models.Item.objects.all().order_by("-date")
     areas = models.Area.objects.all()
-    context = {'items':items, 'areas':areas}
+    latestpost_list = Post.objects.all().order_by('-post_date')[:3]
+    context = {'items':items, 'areas':areas, 'latestpost_list':latestpost_list}
     context['segment'] = 'items'
     html_template = loader.get_template( 'items.html' )
     return HttpResponse(html_template.render(context, request))

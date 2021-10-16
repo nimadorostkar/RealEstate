@@ -22,11 +22,14 @@
 
 
 
+
+
+
 <div class="content-area blog-page padding-top-40" style="background-color: #FCFCFC; padding-bottom: 55px;">
     <div class="container">
         <div class="row">
-            <div class="blog-lst col-md-12 pl0">
 
+            <div class="blog-lst col-md-9 pl0">
                {% for post in posts %}
                 <section class="post">
                     <div class="text-center padding-b-50">
@@ -62,8 +65,49 @@
                     <hr>
                 </section>
                {% endfor %}
-
             </div>
+
+
+            {% block sidebar %} <br><br>
+            <div class="col-lg-3 sidebar" dir="rtl">
+              <ul class="list-group category">
+                <li class="list-group-item active" aria-current="true"> دسته بندی ها </li>
+                {% for categories in cat_list %}
+                <a href="{% url 'category' categories %}" style="text-decoration:none; color:black"><li class="list-group-item">{{categories}} <span class="badge bg-dark">{{categories.category_set.count}}</span></li></a>
+                {% endfor %}
+              </ul>
+              <div class="panel panel-default sidebar-menu wow fadeInRight animated" dir="rtl">
+                  <div class="panel-heading">
+                      <h3 class="panel-title">  آخرین اخبار  </h3>
+                  </div>
+                      <ul class="footer-blog" align="right" dir="rtl">
+                        {% for post in latestpost_list %}
+                        <li>
+                            <div class="col-md-12  col-sm-1 col-xs-1">
+                                <h6> <a href="{% url 'blog-detail' post.slug %}"> {{ post.title }} </a></h6>
+                                <img style="width:100px; height:80px" src="{{post.img.url}}">
+                                <p style="line-height: 17px; padding: 8px 2px;">{{post.body | slice:':100' | safe}}... </p>
+                                <hr><span class="blg-date"> {{ post.j_post_date }} </span>
+                            </div>
+                        </li>
+                        {% endfor %}
+                      </ul>
+               </div>
+               <div class="panel panel-default sidebar-menu wow fadeInRight animated" dir="rtl">
+                   <div class="panel-heading">
+                      <h3 class="panel-title"> برچسب ها </h3>
+                      <div class="button-cuz">
+                        {% for categories in cat_list %}
+                        <a href="{% url 'category' categories %}"><button type="button" class="btn btn-outline-dark">{{categories}}</button></a>
+                        {% endfor %}
+                      </div>
+                  </div>
+              </div>
+            </div>
+            {% endblock %}
+
+
+
         </div>
     </div>
 </div>
@@ -75,26 +119,27 @@
 
 
 
-
-    <ul class="pagination">
-    {% if is_paginated %}
-      {% if page_obj.has_previous %}
-        <li class="page-item"><a class="page-link" style="color:black" href="?page=1"><i class="fa fa-arrow-left" aria-hidden="true"></i></a></li>
-        <li class="page-item"><a class="page-link" style="color:black" href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
-      {% endif %}
-      {% for num in page_obj.paginator.page_range %}
-        {% if num == page_obj.number %}
-          <li class="page-item active"><a class="page-link" style="color:#ffffff; background-color: black; border-color: black;" href="?page={{num}}">{{num}}</a></li>
-        {% elif num > page_obj.number|add:'-2' and num < page_obj.number|add:'2' %}
-          <li class="page-item"><a class="page-link" style="color:black" href="?page={{num}}">{{num}}</a></li>
+        <ul class="pagination">
+        {% if is_paginated %}
+          {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" style="color:black" href="?page=1"><i class="fa fa-arrow-left" aria-hidden="true"></i></a></li>
+            <li class="page-item"><a class="page-link" style="color:black" href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+          {% endif %}
+          {% for num in page_obj.paginator.page_range %}
+            {% if num == page_obj.number %}
+              <li class="page-item active"><a class="page-link" style="color:#ffffff; background-color: black; border-color: black;" href="?page={{num}}">{{num}}</a></li>
+            {% elif num > page_obj.number|add:'-2' and num < page_obj.number|add:'2' %}
+              <li class="page-item"><a class="page-link" style="color:black" href="?page={{num}}">{{num}}</a></li>
+            {% endif %}
+          {% endfor %}
+          {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" style="color:black" href="?page={{page_obj.next_page_number}}"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+            <li class="page-item"><a class="page-link" style="color:black" href="?page={{ page_obj.paginator.num_pages }}"><i class="fa fa-arrow-right" aria-hidden="true"></i></a></li>
+          {% endif %}
         {% endif %}
-      {% endfor %}
-      {% if page_obj.has_next %}
-        <li class="page-item"><a class="page-link" style="color:black" href="?page={{page_obj.next_page_number}}"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-        <li class="page-item"><a class="page-link" style="color:black" href="?page={{ page_obj.paginator.num_pages }}"><i class="fa fa-arrow-right" aria-hidden="true"></i></a></li>
-      {% endif %}
-    {% endif %}
-    </ul>
+        </ul>
+
+
 
 
 

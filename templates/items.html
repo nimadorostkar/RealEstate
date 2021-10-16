@@ -182,34 +182,20 @@
                         <div class="panel-heading">
                             <h3 class="panel-title">  آخرین اخبار  </h3>
                         </div>
-
                             <ul class="footer-blog" align="right" dir="rtl">
+                              {% for post in latestpost_list %}
                               <li>
                                   <div class="col-md-12  col-sm-1 col-xs-1">
-                                      <h6> <a href="single.html"> دستگاه چاپ تامپو رومیزی </a></h6>
-                                      <p style="line-height: 17px; padding: 8px 2px;">Lorem ipsum dolor sit Lorem ipsum dolor sit am Lorem ipsum dolor sit am amet, nulla ...</p>
-                                      <hr><span class="blg-date">12-12-2016</span>
+                                      <h6> <a href="{% url 'blog-detail' post.slug %}"> {{ post.title }} </a></h6>
+                                      <img style="width:100px; height:80px" src="{{post.img.url}}">
+                                      <p style="line-height: 17px; padding: 8px 2px;">{{post.body | slice:':100' | safe}}... </p>
+                                      <hr><span class="blg-date"> {{ post.j_post_date }} </span>
                                   </div>
                               </li>
-                              <li>
-                                  <div class="col-md-12  col-sm-1 col-xs-1">
-                                      <h6> <a href="single.html"> دستگاه چاپ تامپو رومیزی </a></h6>
-                                      <p style="line-height: 17px; padding: 8px 2px;">Lorem ipsum dolor sit Lorem ipsum dolor sit am Lorem ipsum dolor sit am amet, nulla ...</p>
-                                      <hr><span class="blg-date">12-12-2016</span>
-                                  </div>
-                              </li>
-                              <li>
-                                  <div class="col-md-12  col-sm-1 col-xs-1">
-                                      <h6> <a href="single.html"> دستگاه چاپ تامپو رومیزی </a></h6>
-                                      <p style="line-height: 17px; padding: 8px 2px;">Lorem ipsum dolor sit Lorem ipsum dolor sit am Lorem ipsum dolor sit am amet, nulla ...</p>
-                                      <hr><span class="blg-date">12-12-2016</span>
-                                  </div>
-                              </li>
-
+                              {% endfor %}
                             </ul>
+                     </div>
 
-
-                    </div>
                 </div>
             </div>
         </div>
