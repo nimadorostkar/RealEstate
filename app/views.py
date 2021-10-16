@@ -154,19 +154,6 @@ class items(generic.ListView):
         context["latestpost_list"] = latestpost_list
         return context
 
-#def items(request):
-    #items = models.Item.objects.all().order_by("-date")
-    #areas = models.Area.objects.all()
-    #latestpost_list = Post.objects.all().order_by('-post_date')[:3]
-    #context = {'items':items, 'areas':areas, 'latestpost_list':latestpost_list}
-    #context['segment'] = 'items'
-    #html_template = loader.get_template( 'items.html' )
-    #return HttpResponse(html_template.render(context, request))
-
-
-
-
-
 
 
 def items_detail(request, id):
