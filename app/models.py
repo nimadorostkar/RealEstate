@@ -205,20 +205,6 @@ class Fav(models.Model):
 
 
 
-#------------------------------------------------------------------------------
-class Newsletter(models.Model):
-    email = models.EmailField(unique=True ,verbose_name="ایمیل")
-
-    class Meta:
-      verbose_name = "خبرنامه"
-      verbose_name_plural = "خبرنامه ها"
-
-    def __str__(self):
-        return str(self.email)
-
-
-
-
 
 #------------------------------------------------------------------------------
 class Contact(models.Model):

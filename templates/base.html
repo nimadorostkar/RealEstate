@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load bootstrap %}
 <!DOCTYPE html>
 
 <html class="no-js">
@@ -188,18 +188,6 @@
     												<h4> در ارتباط باشید </h4>
     												<div class="footer-title-line"></div>
     												<p dir="rtl">Lorem ipsum dolor sit amet, nulla  suscipit similique quisquam molestias. Vel unde, blanditiis.</p>
-
-    												<form method="post" action="/contact">
-    														<div class="input-group">
-                                  {{ newsletter_form.email }}
-                                  {% csrf_token %}
-    																<span class="input-group-btn">
-    																		<button class="btn btn-primary subscribe" type="button"><i class="pe-7s-paper-plane pe-2x"></i></button>
-    																</span>
-    														</div>
-    														<!-- /input-group -->
-    												</form>
-
     												<div class="social pull-right">
     														<ul>
     																<li><a class="wow fadeInUp animated" href="https://twitter.com/kimarotec"><i class="fa fa-whatsapp"></i></a></li>

@@ -4,9 +4,9 @@ from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django import template
 from . import models
-from .models import Profile, Item, Slider, ItemImage, Area, Fav
+from .models import Profile, Item, Slider, ItemImage, Area, Fav, Contact
 from blogApp.models import Post, Categories, PostComment
-from .forms import ProfileForm, UserForm, NewsletterForm, ContactForm
+from .forms import ProfileForm, UserForm, ContactForm
 from django.db.models import Count, Max, Min, Avg, Q
 from itertools import chain
 from django.contrib.auth import get_user_model
@@ -212,11 +212,7 @@ def contact(request):
     latestpost_list = Post.objects.all().order_by('-post_date')[:3]
 
     if request.method == "POST":
-        newsletter_form = NewsletterForm(data=request.POST)
         contact_form = ContactForm(data=request.POST)
-        if newsletter_form.is_valid():
-            obj = newsletter_form.save(commit=False)
-            obj.save()
         if contact_form.is_valid():
             obj = Contact()
             obj.name = contact_form.cleaned_data['name']
@@ -224,10 +220,9 @@ def contact(request):
             obj.body = contact_form.cleaned_data['body']
             obj.save()
     else:
-        newsletter_form = NewsletterForm()
         contact_form = ContactForm(data=request.POST)
 
-    context = {'latestpost_list':latestpost_list, 'newsletter_form':newsletter_form, 'contact_form':contact_form}
+    context = {'latestpost_list':latestpost_list,'contact_form':contact_form}
     context['segment'] = 'contact'
     html_template = loader.get_template( 'contact.html' )
     return HttpResponse(html_template.render(context, request))
