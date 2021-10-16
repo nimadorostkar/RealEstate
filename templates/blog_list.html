@@ -35,14 +35,14 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <p class="author-category">
-                                By <a href="#"> {{post.author.first_name}} </a>
-                                category <a href="#"> {{post.category}} </a>
+                                نویسنده:  <a href="#"> {{post.author.first_name}} </a> |
+                                دسته بندی:  <a href="#"> {{post.category}} </a>
                             </p>
                         </div>
-                        <div class="col-sm-6 right" >
-                            <p class="date-comments">
-                                <a href="#"><i class="fa fa-calendar-o"></i> {{post.post_date }} </a>
-                                <a href="#"><i class="fa fa-comment-o"></i> {{ post.comments.all.count }} Comments</a>
+                        <div class="col-sm-6 right">
+                            <p class="date-comments" dir="rtl">
+                                <a href="#"><i class="fa fa-calendar-o"></i> {{post.j_post_date }} </a>
+                                <a href="#"><i class="fa fa-comment-o"></i> {{ post.comments.all.count }} نظر</a>
                             </p>
                         </div>
                     </div>

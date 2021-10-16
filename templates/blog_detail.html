@@ -3,46 +3,116 @@
 <title>{{post.title_tag}}</title>
 {% endblock %}
 {% block content %}
-<div class="card">
-  <img src="{{post.img.url}}" class="card-img-top" alt="...">
-  <div class="card-body">
-    <ul class="post-meta" style="list-style-type: none; padding-left: 0px;">
-      <li><i class="fa fa-tag"></i><a>{{post.category}}</a></li>
-      <li><i class="fa fa-comment"></i><a>{{ post.comments.all.count }} Comments</a></li>
-      <li><i class="fa fa-user"></i><a>Post By {{post.author.first_name}}</a></li>
-      <li><i class="fa fa-clock-o"></i><a>{{post.post_date | date:'d F'}}</a></li>
-    </ul>
-    <h5 class="card-title">{{post.title}}</h5>
-    <p class="card-text">{{post.body | safe}}</p>
-  </div>
+
+
+
+<div class="page-head">
+    <div class="container">
+        <div class="row" dir="rtl" align="right">
+            <div class="page-head-content">
+                <h1 class="page-title"> {{post.title}} </h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End page header -->
+
+
+
+
+
+
+<div class="content-area blog-page padding-top-40" style="background-color: #FCFCFC; padding-bottom: 55px;">
+    <div class="container">
+        <div class="row">
+            <div class="blog-lst col-md-12 pl0">
+              <section class="post">
+                  <div class="text-center padding-b-50">
+                      <h2 class="wow fadeInLeft animated" dir="rtl"> </h2>
+                      <div class="title-line wow fadeInRight animated"></div>
+                  </div>
+
+                  <div class="row">
+                      <div class="col-sm-6">
+                          <p class="author-category">
+                              نویسنده:  <a href="#"> {{post.author.first_name}} </a> |
+                              دسته بندی:  <a href="#"> {{post.category}} </a>
+                          </p>
+                      </div>
+                      <div class="col-sm-6 right">
+                          <p class="date-comments" dir="rtl">
+                              <a href="#"><i class="fa fa-calendar-o"></i> {{post.j_post_date }} </a>
+                              <a href="#"><i class="fa fa-comment-o"></i> {{ post.comments.all.count }} نظر</a>
+                          </p>
+                      </div>
+                  </div>
+                  <div class="image wow fadeInLeft animated">
+                      <a href="single.html">
+                          <img src="{{post.img.url}}" class="img-responsive" alt="Example blog post alt">
+                      </a>
+                  </div>
+                  <div dir="rtl" align="right">
+                    <p class="intro"> {{post.body | safe}} </p>
+                  </div>
+
+                  <hr>
+              </section>
+
+
+
+              {% if not request.user.is_authenticated %}
+              <div class="alert alert-danger">برای اظهار نظر ، ابتدا <a href="/login"> وارد </a>  حساب کاربری خود شوید </div>
+              {% endif %}
+
+              {% if request.user.is_authenticated %}
+                <div class="card" dir="rtl">
+                  <form action="{% url 'send_comment' post.slug %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="post_id" value="{{ post.id }}">
+                    <textarea name="message" cols="100" rows="2"></textarea>
+                    <button type="submit" class="btn btn-lg btn-dark"> افزودن نظر </button>
+                  </form>
+                </div>
+              {% endif %}
+
+
+
+                <section id="comments" class="comments wow fadeInRight animated">
+                    <h4 class="text-uppercase wow fadeInLeft animated">{{ post.comments.all.count }} نظر </h4>
+
+                  {% for comment in post.comments.all %}
+                    <div class="row comment" dir="rtl" align="right">
+                        <div class="col-sm-3 col-md-2 text-center-xs">
+                            <p>
+                                <img src="{{ comment.sender.profile.user_photo.url}}" class="img-circle" style="max-width:100px;">
+                            </p>
+                        </div>
+                        <div class="col-sm-9 col-md-10">
+                            <h5 class="text-uppercase"> {{ comment.sender.first_name}} </h5>
+                            <p class="posted"><i class="fa fa-clock-o"></i> {{ comment.j_create_at }} </p>
+                            <p> {{ comment.message }} </p>
+                        </div>
+                        {% empty %}
+                          <div class="alert alert-danger"> هیچ نظری وجود ندارد </div>
+                    </div>
+                  {% endfor %}
+
+
+
+                </section>
+
+            </div>
+        </div>
+
+    </div>
 </div>
 
 
 
-{% if not request.user.is_authenticated %}
-<div class="alert alert-danger">To comment, first <a href="/login">log in</a> to your account</div>
-{% endif %}
 
-{% if request.user.is_authenticated %}
-  <div class="card">
-    <form action="{% url 'send_comment' post.slug %}" method="POST">
-      {% csrf_token %}
-      <input type="hidden" name="post_id" value="{{ post.id }}">
-      <textarea name="message" cols="120" rows="10"></textarea>
-      <button type="submit" class="btn btn-lg btn-dark">Add Comment</button>
-    </form>
-  </div>
-{% endif %}
 
-<div class="card">
-  {% for comment in post.comments.all %}
-  <div class="alert alert-success">
-    <h4>Commented by <strong>{{ comment.sender.first_name}}</strong></h4>
-    <p>Comment: <strong>{{ comment.message }}</strong></p>
-  </div>
-  {% empty %}
-    <div class="alert alert-danger">There is no comment</div>
-  {% endfor %}
-</div>
+
+
+
 
 {% endblock %}
