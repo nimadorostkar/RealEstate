@@ -166,47 +166,18 @@
     												<h4> آخرین اخبار </h4>
     												<div class="footer-title-line"></div>
     												<ul class="footer-blog">
-    														<li>
-    																<div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
-    																		<a href="single.html">
-    																				<img src="{% static 'assets/img/demo/small-proerty-2.jpg' %}">
-    																		</a>
-    																		<span class="blg-date">12-12-2016</span>
 
+                            {% for post in latestpost_list %}
+    														<li dir="rtl">
+    																<div class="col-md-3 blg-thumb p0">
+    																		<a href="{% url 'blog-detail' post.slug %}"> <img src="{{post.img.url}}"> </a>
     																</div>
     																<div class="col-md-8  col-sm-8 col-xs-8  blg-entry">
-    																		<h6> <a href="single.html"> دستگاه چاپ تامپو رومیزی </a></h6>
-    																		<p style="line-height: 17px; padding: 8px 2px;">Lorem ipsum dolor sit amet, nulla ...</p>
+    																		<h6> <a href="{% url 'blog-detail' post.slug %}"> {{ post.title | slice:':20' | safe}}... </a></h6>
+    																		{{post.body | slice:':65' | safe}}...
     																</div>
-    														</li>
-
-    														<li>
-    																<div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
-    																		<a href="single.html">
-    																				<img src="{% static 'assets/img/demo/small-proerty-2.jpg' %}">
-    																		</a>
-    																		<span class="blg-date">12-12-2016</span>
-
-    																</div>
-    																<div class="col-md-8  col-sm-8 col-xs-8  blg-entry">
-    																		<h6> <a href="single.html"> دستگاه چاپ تامپو رومیزی </a></h6>
-    																		<p style="line-height: 17px; padding: 8px 2px;">Lorem ipsum dolor sit amet, nulla ...</p>
-    																</div>
-    														</li>
-
-    														<li>
-    																<div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
-    																		<a href="single.html">
-    																				<img src="{% static 'assets/img/demo/small-proerty-2.jpg' %}">
-    																		</a>
-    																		<span class="blg-date">12-12-2016</span>
-
-    																</div>
-    																<div class="col-md-8  col-sm-8 col-xs-8  blg-entry">
-    																		<h6> <a href="single.html"> دستگاه چاپ تامپو رومیزی </a></h6>
-    																		<p style="line-height: 17px; padding: 8px 2px;">Lorem ipsum dolor sit amet, nulla ...</p>
-    																</div>
-    														</li>
+    														</li> <br>
+                            {% endfor %}
 
 
     												</ul>

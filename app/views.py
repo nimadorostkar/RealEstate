@@ -20,12 +20,13 @@ from django.contrib import messages
 
 #------------------------------------------------------------------------------
 def index(request):
+    latestpost_list = Post.objects.all().order_by('-post_date')[:3]
     img = models.Slider.objects.all()
     item_img = models.ItemImage.objects.all()
     items = models.Item.objects.all().order_by("-date")[:11]
     areas = models.Area.objects.all()
     fav = models.Fav.objects.all()
-    context = {'img':img, 'items':items, 'item_img':item_img, 'areas':areas, 'fav':fav}
+    context = {'img':img, 'items':items, 'item_img':item_img, 'areas':areas, 'fav':fav, 'latestpost_list':latestpost_list}
     context['segment'] = 'index'
     html_template = loader.get_template( 'index.html' )
     return HttpResponse(html_template.render(context, request))
@@ -35,6 +36,7 @@ def index(request):
 
 #------------------------------------------------------------------------------
 def search(request):
+    latestpost_list = Post.objects.all().order_by('-post_date')[:3]
     areas = models.Area.objects.all()
     if request.method=="POST":
         search_buy_status = request.POST['buy_status']
@@ -91,7 +93,7 @@ def search(request):
                 messages.error(request,  '   چیزی یافت نشد ، لطفا مجددا جستجو کنید ' )
         else:
             return HttpResponseRedirect('/search')
-    return render(request, 'search.html', {'areas':areas})
+    return render(request, 'search.html', {'areas':areas, 'latestpost_list':latestpost_list})
 
 
 
@@ -100,6 +102,7 @@ def search(request):
 
 @login_required(login_url="/login/")
 def profile(request):
+    latestpost_list = Post.objects.all().order_by('-post_date')[:3]
     profile = models.Profile.objects.filter(user=request.user)
     if request.method == 'POST':
         user_form = UserForm(request.POST, instance=request.user)
@@ -125,7 +128,7 @@ def profile(request):
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)
 
-    context = {'user_form':user_form, 'profile_form':profile_form}
+    context = {'user_form':user_form, 'profile_form':profile_form, 'latestpost_list':latestpost_list}
     context['segment'] = 'profile'
 
     html_template = loader.get_template( 'accounts/profile.html' )
@@ -149,6 +152,7 @@ def items(request):
 
 
 def items_detail(request, id):
+    latestpost_list = Post.objects.all().order_by('-post_date')[:3]
     Item = get_object_or_404(models.Item, id=id)
     item_img = models.ItemImage.objects.filter(item=Item)
     similar_items = models.Item.objects.filter(area=Item.area).order_by("-date")
@@ -169,7 +173,7 @@ def items_detail(request, id):
                 return redirect(Item.get_absolute_url())
     else:
         item_fav=""
-    context = {'Item':Item , 'item_img':item_img , 'similar_items':similar_items, 'item_fav':item_fav}
+    context = {'Item':Item , 'item_img':item_img , 'similar_items':similar_items, 'item_fav':item_fav, 'latestpost_list':latestpost_list}
     return render(request, 'items_detail.html', context)
 
 
@@ -185,7 +189,8 @@ def items_detail(request, id):
 def favs(request):
     favs = models.Fav.objects.filter(user=request.user)
     areas = models.Area.objects.all()
-    context = {'favs':favs, 'areas':areas}
+    latestpost_list = Post.objects.all().order_by('-post_date')[:3]
+    context = {'favs':favs, 'areas':areas, 'latestpost_list':latestpost_list}
     context['segment'] = 'items'
     html_template = loader.get_template( 'favs.html' )
     return HttpResponse(html_template.render(context, request))
@@ -202,7 +207,8 @@ def favs(request):
 
 #------------------------------------------------------------------------------
 def contact(request):
-    context = {}
+    latestpost_list = Post.objects.all().order_by('-post_date')[:3]
+    context = {'latestpost_list':latestpost_list}
     context['segment'] = 'contact'
     html_template = loader.get_template( 'contact.html' )
     return HttpResponse(html_template.render(context, request))
