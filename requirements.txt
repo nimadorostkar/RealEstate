@@ -16,3 +16,5 @@ django-mptt
 django-jalali-date
 django-extra-settings
 django-ckeditor
+graphene
+graphene-django
