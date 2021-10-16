@@ -189,9 +189,10 @@
     												<div class="footer-title-line"></div>
     												<p dir="rtl">Lorem ipsum dolor sit amet, nulla  suscipit similique quisquam molestias. Vel unde, blanditiis.</p>
 
-    												<form>
+    												<form method="post" action="/contact">
     														<div class="input-group">
-    																<input class="form-control" type="text" placeholder="E-mail ... ">
+                                  {{ newsletter_form.email }}
+                                  {% csrf_token %}
     																<span class="input-group-btn">
     																		<button class="btn btn-primary subscribe" type="button"><i class="pe-7s-paper-plane pe-2x"></i></button>
     																</span>
