@@ -13,7 +13,7 @@ from django.contrib.auth import get_user_model
 from django.db import transaction
 from django.urls import reverse
 from django.contrib import messages
-
+from django.views import generic
 
 
 
@@ -140,14 +140,32 @@ def profile(request):
 
 
 #------------------------------------------------------------------------------
-def items(request):
-    items = models.Item.objects.all().order_by("-date")
-    areas = models.Area.objects.all()
-    latestpost_list = Post.objects.all().order_by('-post_date')[:3]
-    context = {'items':items, 'areas':areas, 'latestpost_list':latestpost_list}
-    context['segment'] = 'items'
-    html_template = loader.get_template( 'items.html' )
-    return HttpResponse(html_template.render(context, request))
+class items(generic.ListView):
+    model = Item
+    template_name = 'items.html'
+    context_object_name = 'items'
+    ordering = ['-date']
+    paginate_by = 16
+
+    def get_context_data(self, *args, **kwargs):
+        areas = Area.objects.all()
+        latestpost_list = Post.objects.all().order_by('-post_date')[:3]
+        context = super(items, self).get_context_data(*args, **kwargs)
+        context["latestpost_list"] = latestpost_list
+        return context
+
+#def items(request):
+    #items = models.Item.objects.all().order_by("-date")
+    #areas = models.Area.objects.all()
+    #latestpost_list = Post.objects.all().order_by('-post_date')[:3]
+    #context = {'items':items, 'areas':areas, 'latestpost_list':latestpost_list}
+    #context['segment'] = 'items'
+    #html_template = loader.get_template( 'items.html' )
+    #return HttpResponse(html_template.render(context, request))
+
+
+
+
 
 
 
