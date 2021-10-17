@@ -113,6 +113,23 @@ JALALI_DATE_DEFAULTS = {
 
 
 
+# EXTRA SETTINGS
+# https://pypi.org/project/django-extra-settings/
+
+
+# if True the template tag will fallback to django.conf.settings,
+# very useful to retrieve conf settings such as DEBUG.
+EXTRA_SETTINGS_FALLBACK_TO_CONF_SETTINGS = True
+# the upload_to path value of settings of type 'file'
+EXTRA_SETTINGS_FILE_UPLOAD_TO = 'files'
+# the upload_to path value of settings of type 'image'
+EXTRA_SETTINGS_IMAGE_UPLOAD_TO = 'images'
+
+
+
+
+
+
 
 WSGI_APPLICATION = 'core.wsgi.application'
 

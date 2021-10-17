@@ -9,8 +9,8 @@ from jalali_date import datetime2jalali, date2jalali
 from jalali_date.admin import ModelAdminJalaliMixin, StackedInlineJalaliMixin, TabularInlineJalaliMixin
 
 
-admin.site.site_header= " آتروتک "
-admin.site.site_title= " Atrotech "
+admin.site.site_header= " دستیار املاک "
+admin.site.site_title= "  دستیار املاک  "
 admin.site.register(LogEntry)
 
 
