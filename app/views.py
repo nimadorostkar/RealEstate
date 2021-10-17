@@ -88,7 +88,7 @@ def search(request):
             match = list(chain(general_match & partial_match & price_match ))
 
             if match:
-                return render(request,'search.html', {'sr': match})
+                return render(request,'search.html', {'sr': match, 'areas':areas, 'latestpost_list':latestpost_list})
             else:
                 messages.error(request,  '   چیزی یافت نشد ، لطفا مجددا جستجو کنید ' )
         else:
@@ -152,6 +152,7 @@ class items(generic.ListView):
         latestpost_list = Post.objects.all().order_by('-post_date')[:3]
         context = super(items, self).get_context_data(*args, **kwargs)
         context["latestpost_list"] = latestpost_list
+        context["areas"] = areas
         return context
 
 

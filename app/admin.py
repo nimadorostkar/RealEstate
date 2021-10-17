@@ -93,7 +93,7 @@ admin.site.register(models.Fav, FavAdmin)
 
 #------------------------------------------------------------------------------
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ('name', 'phone', 'created_on')
+    list_display = ('name', 'phone', 'j_created_on')
     list_filter = ('name', 'created_on')
     search_fields = ('name', 'phone', 'body')
 

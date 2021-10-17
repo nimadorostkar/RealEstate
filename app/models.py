@@ -6,7 +6,7 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.template.defaultfilters import truncatechars
 from mptt.models import MPTTModel, TreeForeignKey
-
+from extensions.utils import jalali_converter
 
 
 
@@ -212,6 +212,9 @@ class Contact(models.Model):
     phone = models.CharField(max_length=50,verbose_name = " شماره تماس  ")
     body = models.TextField(verbose_name="متن پیام")
     created_on = models.DateTimeField(auto_now_add=True)
+
+    def j_created_on(self):
+        return jalali_converter(self.created_on)
 
     class Meta:
       verbose_name = "تماس"
