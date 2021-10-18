@@ -14,12 +14,14 @@ from django.db import transaction
 from django.urls import reverse
 from django.contrib import messages
 from django.views import generic
+from extra_settings.models import Setting
 
 
 
 
 #------------------------------------------------------------------------------
 def index(request):
+    logo = Setting.get('لوگو', default='django-extra-settings')
     latestpost_list = Post.objects.all().order_by('-post_date')[:3]
     img = models.Slider.objects.all()
     item_img = models.ItemImage.objects.all()
@@ -28,7 +30,7 @@ def index(request):
     all_area_count = models.Area.objects.all().count()
     areas = models.Area.objects.all()
     fav = models.Fav.objects.all()
-    context = {'img':img, 'items':items, 'item_img':item_img, 'areas':areas, 'fav':fav, 'latestpost_list':latestpost_list, 'all_items_count':all_items_count, 'all_area_count':all_area_count}
+    context = {'img':img, 'items':items, 'item_img':item_img, 'areas':areas, 'fav':fav, 'latestpost_list':latestpost_list, 'all_items_count':all_items_count, 'all_area_count':all_area_count,'logo':logo}
     context['segment'] = 'index'
     html_template = loader.get_template( 'index.html' )
     return HttpResponse(html_template.render(context, request))

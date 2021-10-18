@@ -1,5 +1,8 @@
 {% load static %}
 {% load bootstrap %}
+{% load extra_settings %}
+
+
 <!DOCTYPE html>
 
 <html class="no-js">
@@ -56,18 +59,18 @@
   						<div class="col-md-5 col-sm-8  col-xs-12">
   								<div class="header-half header-call">
   										<p>
-  												<span><i class="pe-7s-call"></i> +1 234 567 7890</span>
-                          <span><i class="pe-7s-call"></i> 0912 1833 743 </span>
+  												<span> <a href="tel:{% get_setting 'تلفن ۱' default='django-extra-settings' %}"> <i class="pe-7s-call"></i> {% get_setting 'تلفن ۱' default='django-extra-settings' %} </a> </span>
+                          <span> <a href="tel:{% get_setting 'تلفن ۲' default='django-extra-settings' %}"> <i class="pe-7s-call"></i> {% get_setting 'تلفن ۲' default='django-extra-settings' %} </a> </span>
   										</p>
   								</div>
   						</div>
   						<div class="col-md-2 col-md-offset-5  col-sm-3 col-sm-offset-1  col-xs-12">
   								<div class="header-half header-social">
   										<ul class="list-inline">
-                          <li><a href="#"><i class="fa fa-instagram" style="font-size:20px"></i></a></li>
-                          <li><a href="#"><i class="fa fa-telegram" style="font-size:20px"></i></a></li>
-  												<li><a href="#"><i class="fa fa-twitter" style="font-size:20px"></i></a></li>
-  												<li><a href="#"><i class="fa fa-whatsapp" style="font-size:20px"></i></a></li>
+                          <li><a href="{% get_setting 'لینک اینستاگرام' default='django-extra-settings' %} "><i class="fa fa-instagram" style="font-size:20px"></i></a></li>
+                          <li><a href="{% get_setting 'لینک تلگرام' default='django-extra-settings' %} "><i class="fa fa-telegram" style="font-size:20px"></i></a></li>
+  												<li><a href="{% get_setting 'لینک توییتر' default='django-extra-settings' %} "><i class="fa fa-twitter" style="font-size:20px"></i></a></li>
+  												<li><a href="{% get_setting 'لینک واتس اپ' default='django-extra-settings' %} "><i class="fa fa-whatsapp" style="font-size:20px"></i></a></li>
 
   										</ul>
   								</div>
@@ -87,7 +90,7 @@
   								<span class="icon-bar"></span>
   								<span class="icon-bar"></span>
   						</button>
-  						<a class="navbar-brand" href="{% url 'app:home' %}"><img src="{% static 'assets/img/logo.png' %}" alt=""></a>
+  						<a class="navbar-brand" href="{% url 'app:home' %}"><img src="{{ logo.url }}" alt=""></a>
   				</div>
 
   				<!-- Collect the nav links, forms, and other content for toggling -->
