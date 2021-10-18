@@ -24,9 +24,11 @@ def index(request):
     img = models.Slider.objects.all()
     item_img = models.ItemImage.objects.all()
     items = models.Item.objects.all().order_by("-date")[:11]
+    all_items_count = models.Item.objects.all().count()
+    all_area_count = models.Area.objects.all().count()
     areas = models.Area.objects.all()
     fav = models.Fav.objects.all()
-    context = {'img':img, 'items':items, 'item_img':item_img, 'areas':areas, 'fav':fav, 'latestpost_list':latestpost_list}
+    context = {'img':img, 'items':items, 'item_img':item_img, 'areas':areas, 'fav':fav, 'latestpost_list':latestpost_list, 'all_items_count':all_items_count, 'all_area_count':all_area_count}
     context['segment'] = 'index'
     html_template = loader.get_template( 'index.html' )
     return HttpResponse(html_template.render(context, request))

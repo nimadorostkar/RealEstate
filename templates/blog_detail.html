@@ -47,7 +47,7 @@
                       </div>
                   </div>
                   <div class="image wow fadeInLeft animated">
-                      <a href="single.html">
+                      <a href="{% url 'blog-detail' post.slug %}">
                           <img src="{{post.img.url}}" class="img-responsive" alt="Example blog post alt">
                       </a>
                   </div>
