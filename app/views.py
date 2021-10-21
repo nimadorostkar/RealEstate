@@ -40,6 +40,7 @@ def index(request):
 
 #------------------------------------------------------------------------------
 def search(request):
+    logo = Setting.get('لوگو', default='django-extra-settings')
     latestpost_list = Post.objects.all().order_by('-post_date')[:3]
     areas = models.Area.objects.all()
     if request.method=="POST":
@@ -106,6 +107,7 @@ def search(request):
 
 @login_required(login_url="/login/")
 def profile(request):
+    logo = Setting.get('لوگو', default='django-extra-settings')
     latestpost_list = Post.objects.all().order_by('-post_date')[:3]
     profile = models.Profile.objects.filter(user=request.user)
     if request.method == 'POST':
