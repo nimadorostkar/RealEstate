@@ -22,8 +22,8 @@
     <div class="slider-content">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
-                <h2> سامانه هوشمند خرید و فروش ، رهن و اجاره املاک </h2>
-                <p> برای جستجو ملک ، نوع معامله و شهر مربوط را انتخاب کرده و بر روی دکمه جستجو کلیک نمایید.تمام امکانات کاملا رایگان می باشد. لطفا قبل از بازدید از ملک و یا عقد هرگونه قرارداد، با آگهی دهنده تماس حاصل نمایید و از صحت فایل اطمینان حاصل نمایید. </p>
+                <h2> {% get_setting 'عنوان' default='django-extra-settings' %} </h2>
+                <p> {% get_setting 'متن زیر عنوان' default='django-extra-settings' %} </p>
                 <div class="search-form wow pulse" data-wow-delay="0.8s">
 
                     <form action="{% url 'app:search' %}" method="post" class="form-inline">

@@ -7,7 +7,7 @@
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
-
+{% load extra_settings %}
 
 
 
@@ -28,11 +28,6 @@
 
 
 
-
-
-
-
-
         <div class="content-area blog-page padding-top-40" style="background-color: #FCFCFC; padding-bottom: 55px;">
             <div class="container">
                 <div class="row" dir="rtl" align="center">
@@ -40,13 +35,11 @@
                     <div class="blog-lst col-md-12 pl0">
                       <section class="post">
                           <div class="text-center padding-b-50">
-                              <h2 class="wow fadeInLeft animated" dir="rtl"> hhhh hh hhh jjjjj j hh  </h2>
+                              <h2 class="wow fadeInLeft animated" dir="rtl"> {% get_setting 'عنوان' default='django-extra-settings' %} </h2>
                               <div class="title-line wow fadeInRight animated"></div>
                           </div>
-                            <p>
-                              سامانه هوشمند خرید و فروش ، رهن و اجاره املاک
-    برای جستجو ملک ، نوع معامله و شهر مربوط را انتخاب کرده و بر روی دکمه جستجو کلیک نمایید.تمام امکانات کاملا رایگان می باشد. لطفا قبل از بازدید از ملک و یا عقد هرگونه قرارداد، با آگهی دهنده تماس حاصل نمایید و از صحت فایل اطمینان حاصل نمایید.
-                            </p>
+                            <hr><br>
+                            <p> {% get_setting 'متن صفحه تماس با ما' default='django-extra-settings' %} </p>
                       </section>
                     </div>
 
@@ -65,40 +58,43 @@
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
                         <div class="" id="contact1">
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <h3><i class="fa fa-map-marker"></i> آدرس </h3>
-                                    <p>13/25 shibuia
-                                        <br>Tokyo
-                                        <br>45Y 73J
-                                        <br>
-                                        <strong>Japan</strong>
-                                    </p>
-                                </div>
-                                <!-- /.col-sm-4 -->
-                                <div class="col-sm-4">
-                                    <h3><i class="fa fa-phone"></i> تماس تلفنی </h3>
-                                    <p class="text-muted">This number is toll free if calling from
-                                        Great Britain otherwise we advise you to use the electronic
-                                        form of communication.</p>
-                                    <p><strong>+33 555 444 333</strong></p>
-                                </div>
-                                <!-- /.col-sm-4 -->
-                                <div class="col-sm-4">
-                                    <h3><i class="fa fa-envelope"></i> پشتیبانی الکترونیکی </h3>
-                                    <p class="text-muted">Please feel free to write an email to us or to use our electronic ticketing system.</p>
-                                    <ul>
-                                        <li><strong><a href="mailto:">info@company.com</a></strong>   </li>
-                                        <li><strong><a href="#">Ticketio</a></strong> - our ticketing support platform</li>
-                                    </ul>
-                                </div>
-                                <!-- /.col-sm-4 -->
-                            </div>
-                            <!-- /.row -->
+                          <div class="row">
+                              <div class="col-sm-4">
+                                  <h3><i class="fa fa-map-marker"></i> آدرس </h3>
+                                   <br> <p> {% get_setting 'آدرس' default='django-extra-settings' %} </p>
+                              </div>
+                              <!-- /.col-sm-4 -->
+                              <div class="col-sm-4">
+                                  <h3><i class="fa fa-phone"></i> تماس تلفنی </h3>
+                                  <br>
+                                  <p>
+                                     <a href="tel:{% get_setting 'تلفن ۱' default='django-extra-settings' %}"> <i class="pe-7s-call"></i> {% get_setting 'تلفن ۱' default='django-extra-settings' %} </a>
+                                     <br>
+                                     <a href="tel:{% get_setting 'تلفن ۲' default='django-extra-settings' %}"> <i class="pe-7s-call"></i> {% get_setting 'تلفن ۲' default='django-extra-settings' %} </a>
+                                  </p>
+                              </div>
+                              <!-- /.col-sm-4 -->
+                              <div class="col-sm-4">
+                                  <h3><i class="fa fa-envelope"></i> پشتیبانی الکترونیکی </h3>
+                                  <br>
+                                  <p> <a href="mailto:{% get_setting 'ایمیل' default='django-extra-settings' %}"> {% get_setting 'ایمیل' default='django-extra-settings' %} </a> </p>
+
+                              </div>
+                              <!-- /.col-sm-4 -->
+                          </div>
+                          <!-- /.row -->
 
 
                             <hr>
-                               <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.2104004364883!2d51.47881431531703!3d35.67182098019641!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDQwJzE4LjYiTiA1McKwMjgnNTEuNiJF!5e0!3m2!1sen!2s!4v1633505661584!5m2!1sen!2s" width="700" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                              <iframe
+                               width="700"
+                               height="350"
+                               frameborder="0"
+                               scrolling="yes"
+                               marginheight="0"
+                               marginwidth="0"
+                               src="https://maps.google.com/maps?q={% get_setting 'lat & long' default='django-extra-settings' %}&hl=es&z=14&amp;output=embed">
+                              </iframe>
                             <hr>
 
 
