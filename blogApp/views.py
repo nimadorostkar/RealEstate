@@ -23,12 +23,14 @@ class blog(generic.ListView):
 
    def get_context_data(self, *args, **kwargs):
       logo = Setting.get('لوگو', default='django-extra-settings')
+      header = Setting.get('تصویر سربرگ (header)', default='django-extra-settings')
       cat_list = Categories.objects.all()
       latestpost_list = Post.objects.all().order_by('-post_date')[:3]
       context = super(blog, self).get_context_data(*args, **kwargs)
       context["cat_list"] = cat_list
       context["latestpost_list"] = latestpost_list
       context["logo"] = logo
+      context["header"] = header
       return context
 
 
@@ -38,6 +40,7 @@ class blog(generic.ListView):
 
 #------------------------------------------------------------------------------
 def search(request):
+   header = Setting.get('تصویر سربرگ (header)', default='django-extra-settings')
    template = 'search_list.html'
    query = request.GET.get('q')
    if query:
@@ -51,7 +54,7 @@ def search(request):
    paginator = Paginator(posts, 2)
    page = request.GET.get('page')
    posts = paginator.get_page(page)
-   return render(request, template, {'posts':posts, 'cat_list': cat_list, 'latestpost_list':latestpost_list, 'query':query ,'logo':logo})
+   return render(request, template, {'posts':posts, 'cat_list': cat_list, 'latestpost_list':latestpost_list, 'query':query ,'logo':logo, 'header':header})
 
 
 
@@ -60,6 +63,7 @@ def search(request):
 #------------------------------------------------------------------------------
 def CategoryView(request, cats):
    logo = Setting.get('لوگو', default='django-extra-settings')
+   header = Setting.get('تصویر سربرگ (header)', default='django-extra-settings')
    if Categories.objects.filter(categoryname=cats).exists():
       category_posts = Post.objects.filter(category__categoryname=cats).order_by('-post_date')
       cat_list = Categories.objects.all()
@@ -67,7 +71,7 @@ def CategoryView(request, cats):
       paginator = Paginator(category_posts, 2)
       page = request.GET.get('page')
       category_posts = paginator.get_page(page)
-      return render(request, 'category_list.html', {'cats':cats, 'category_posts':category_posts, 'cat_list': cat_list, 'latestpost_list':latestpost_list,'logo':logo})
+      return render(request, 'category_list.html', {'cats':cats, 'category_posts':category_posts, 'cat_list': cat_list, 'latestpost_list':latestpost_list,'logo':logo, 'header':header})
    else:
       raise Http404
 
@@ -82,12 +86,14 @@ class blogdetail(DetailView):
 
    def get_context_data(self, *args, **kwargs):
       logo = Setting.get('لوگو', default='django-extra-settings')
+      header = Setting.get('تصویر سربرگ (header)', default='django-extra-settings')
       cat_list = Categories.objects.all()
       latestpost_list = Post.objects.all().order_by('-post_date')[:3]
       context = super(blogdetail, self).get_context_data(*args, **kwargs)
       context["cat_list"] = cat_list
       context["latestpost_list"] = latestpost_list
       context["logo"] = logo
+      context["header"] = header
       return context
 
 
