@@ -70,7 +70,7 @@ p {
     margin:0;
 }
 a {
-    color: #d27e04;
+    color: #1f2222;
     outline: 0;
     font-weight: bold;
     -webkit-transition: all .8s ease;
@@ -78,7 +78,7 @@ a {
 }
 a:hover {
     text-decoration: none;
-    color: #1f2222;
+    color: #d27e04;
     -webkit-transition: all .8s ease;
     transition: all .8s ease;
 }

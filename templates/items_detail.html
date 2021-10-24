@@ -12,7 +12,7 @@
 
 {% load bootstrap %}
 {% load jalali_tags %}
-
+{% load extra_settings %}
 
 
 
@@ -286,24 +286,16 @@
                                         <div class="clear">
                                             <div class="col-xs-4 col-sm-4 dealer-face">
                                                 <a href="">
-                                                    <img src="{% static 'assets/img/logo.png' %}">
+                                                    <img src="{{ logo.url }}">
                                                 </a>
                                             </div>
                                             <div class="col-xs-8 col-sm-8 ">
-                                                <h3 class="dealer-name"> <a href="#">Nathan James</a> </h3>
+                                                <h3 class="dealer-name"> <a href="{% url 'app:home' %}"> {% get_setting 'عنوان' default='django-extra-settings' %} </a> </h3>
                                                 <div class="dealer-social-media">
-                                                    <a class="twitter" target="_blank" href="">
-                                                        <i class="fa fa-instagram"></i>
-                                                    </a>
-                                                    <a class="facebook" target="_blank" href="">
-                                                        <i class="fa fa-whatsapp"></i>
-                                                    </a>
-                                                    <a class="gplus" target="_blank" href="">
-                                                        <i class="fa fa-telegram"></i>
-                                                    </a>
-                                                    <a class="instagram" target="_blank" href="">
-                                                        <i class="fa fa-twitter"></i>
-                                                    </a>
+                                                    <a class="twitter" target="_blank" href="{% get_setting 'لینک اینستاگرام' default='django-extra-settings' %}"> <i class="fa fa-instagram"></i> </a>
+                                                    <a class="facebook" target="_blank" href="{% get_setting 'لینک واتس اپ' default='django-extra-settings' %}"> <i class="fa fa-whatsapp"></i> </a>
+                                                    <a class="gplus" target="_blank" href="{% get_setting 'لینک تلگرام' default='django-extra-settings' %}"> <i class="fa fa-telegram"></i> </a>
+                                                    <a class="instagram" target="_blank" href="{% get_setting 'لینک توییتر' default='django-extra-settings' %}"> <i class="fa fa-twitter"></i> </a>
                                                 </div>
 
                                             </div>
@@ -311,11 +303,12 @@
 
                                         <div class="clear">
                                             <ul class="dealer-contacts">
-                                                <li><i class="pe-7s-map-marker strong"> </i> 9089 your adress her</li>
-                                                <li><i class="pe-7s-call strong"> </i> +1 908 967 5906</li>
-                                                <li><i class="pe-7s-call strong"> </i> +1 908 967 5906</li>
+                                                <li> <a href="tel:{% get_setting 'تلفن ۱' default='django-extra-settings' %}"> <i class="pe-7s-call"></i> &nbsp;&nbsp; {% get_setting 'تلفن ۱' default='django-extra-settings' %} </a> </li>
+                                                <li> <a href="tel:{% get_setting 'تلفن ۲' default='django-extra-settings' %}"> <i class="pe-7s-call"></i> &nbsp;&nbsp; {% get_setting 'تلفن ۲' default='django-extra-settings' %} </a> </li>
+                                                <li> <a href="mailto:{% get_setting 'ایمیل' default='django-extra-settings' %}"> <i class="pe-7s-mail strong"> </i> &nbsp;&nbsp; {% get_setting 'ایمیل' default='django-extra-settings' %} </a> </li>
+                                                <li> <a href="whatsapp://send?abid={% get_setting 'شماره واتساپ' default='django-extra-settings' %}&text=سلام. وقت تان بخیر! برای کسب اطلاعات بیشتر و مشاوره در مورد این ملک پیام دادم:  {% get_setting 'آدرس وبسایت' default='django-extra-settings' %}{{Item.get_absolute_url}}"> <i class="fa fa-whatsapp"></i> &nbsp;&nbsp; ارسال پیام در واتساپ برای این ملک </a> </li>
+                                                <li> <a href="#"> <i class="pe-7s-map-marker strong"> </i> &nbsp;&nbsp; {% get_setting 'آدرس' default='django-extra-settings' %} </a> </li>
                                             </ul>
-                                            <p>Duis mollis  blandit tempus porttitor curabiturDuis mollis  blandit tempus porttitor curabitur , est non…</p>
                                         </div>
 
                                     </div>
@@ -338,7 +331,7 @@
                                     <fieldset >
                                         <div class="row">
                                             <div class="col-xs-12" dir="ltr">
-                                               <a class="text-decoration-none button btn largesearch-btn" href="whatsapp://send?abid=09031875073&text=سلام. وقت تان بخیر! برای کسب اطلاعات بیشتر و مشاوره در مورد این ملک پیام دادم:  www.google.com{{Item.get_absolute_url}} "><i class="fab fa-whatsapp-square fs-4"></i> ارسال پیام </a
+                                               <a class="text-decoration-none button btn largesearch-btn" href="whatsapp://send?abid={% get_setting 'شماره واتساپ' default='django-extra-settings' %}&text=سلام. وقت تان بخیر! برای کسب اطلاعات بیشتر و مشاوره در مورد این ملک پیام دادم:  {% get_setting 'آدرس وبسایت' default='django-extra-settings' %}{{Item.get_absolute_url}}"><i class="fab fa-whatsapp-square fs-4"></i> ارسال پیام </a>
                                             </div>
                                         </div>
                                     </fieldset>
