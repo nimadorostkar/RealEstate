@@ -128,10 +128,10 @@
 <div class="content-area home-area-1 recent-property" style="background-color: #FCFCFC; padding-bottom: 55px;">
     <div class="container">
         <div class="row">
-            <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
+            <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title" dir="rtl">
                 <!-- /.feature title -->
                 <h2> آخرین موارد اضافه شده </h2>
-                <p>Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium. Nullam sed arcu ultricies . </p>
+                <p> تفاوتی نمی کند که قصد خرید، اجاره یا رهن کامل خانه را داشته باشید، ما اینجا هستیم تا با ارائه بهترین و هوشمندترین امکانات روز دنیا، شما را در این مسیر یاری دهیم. </p>
             </div>
         </div>
 
@@ -223,36 +223,23 @@
     <div class="container" dir="rtl">
         <div class="row">
 
-            <div class="col-md-6 col-sm-10 col-sm-offset-1 col-md-offset-0 col-xs-12">
+            <div class="col-md-12 col-sm-10 col-sm-offset-1 col-md-offset-0 col-xs-12">
                 <div class="asks-first">
                     <div class="asks-first-circle">
                         <span class="fa fa-search"></span>
                     </div>
                     <div class="asks-first-info">
-                        <h2> دنبال چه چیزی هستید ؟ </h2>
-                        <p>  وارد صفحه آیتم ها شوید و به صورت حرفه ای جستجو کنید </p>
+                        <h2 class="asks-call"> دنبال چه چیزی هستید ؟ </h2>
+                        <p class="asks-call"> ما به شما کمک می‌کنیم تا از بین هزاران ملک مسکونی، اداری، تجاری، از متراژ کم تا ویلایی و پنت هاوس ملک متناسب با بودجه و محله مورد نظرتان را جهت خرید پیدا کنید... </p>
                     </div>
                     <div class="asks-first-arrow">
                         <a href="properties.html"><span class="fa fa-angle-right"></span></a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-sm-10 col-sm-offset-1 col-xs-12 col-md-offset-0">
-                <div  class="asks-first">
-                    <div class="asks-first-circle">
-                        <span class="fa fa-usd"></span>
-                    </div>
-                    <div class="asks-first-info">
-                        <h2> آیا می خواهید ملکی بفروشید؟ </h2>
-                        <p> وارد صفحه فروش شوید و اطلاعات ملک خود را به پشتیبانان سایت اراعه دهید </p>
-                    </div>
-                    <div class="asks-first-arrow">
-                        <a href="properties.html"><span class="fa fa-angle-right"></span></a>
-                    </div>
-                </div>
-            </div>
+
             <div class="col-xs-12">
-                <p  class="asks-call">
+                <p class="asks-call">
                   آتروتک با برخوردارى از نيروى انسانى متخصص و پشتوانه علمى و تجربى، با استفاده از آخرين روش هاى فن آورى و مهندسى موفق به ارائه خدمات گسترده و با كيفيت براى مشتريان گرديده .توسعه و بالندگی از طریق بازنگری اهداف، تدوین برنامه‌ها، اولویت‌بندی فعالیت‌ها و بهبود مستمر سرمشق شرکت مهندسى آتروتك بوده و دستیابی به این اهداف، نیازمند ترویج فرهنگ تعالی، حفظ و بهبود ارزش‌ها و اصول اخلاقی شركت و رعایت مسئولیت‌های اجتماعی است.
                 </p>
             </div>
@@ -367,29 +354,24 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <h3><i class="fa fa-map-marker"></i> آدرس </h3>
-                            <p>13/25 shibuia
-                                <br>Tokyo
-                                <br>45Y 73J
-                                <br>
-                                <strong>Japan</strong>
-                            </p>
+                             <br> <p> {% get_setting 'آدرس' default='django-extra-settings' %} </p>
                         </div>
                         <!-- /.col-sm-4 -->
                         <div class="col-sm-4">
                             <h3><i class="fa fa-phone"></i> تماس تلفنی </h3>
-                            <p class="text-muted">This number is toll free if calling from
-                                Great Britain otherwise we advise you to use the electronic
-                                form of communication.</p>
-                            <p><strong>+33 555 444 333</strong></p>
+                            <br>
+                            <p>
+                               <a href="tel:{% get_setting 'تلفن ۱' default='django-extra-settings' %}"> <i class="pe-7s-call"></i> {% get_setting 'تلفن ۱' default='django-extra-settings' %} </a>
+                               <br>
+                               <a href="tel:{% get_setting 'تلفن ۲' default='django-extra-settings' %}"> <i class="pe-7s-call"></i> {% get_setting 'تلفن ۲' default='django-extra-settings' %} </a>
+                            </p>
                         </div>
                         <!-- /.col-sm-4 -->
                         <div class="col-sm-4">
                             <h3><i class="fa fa-envelope"></i> پشتیبانی الکترونیکی </h3>
-                            <p class="text-muted">Please feel free to write an email to us or to use our electronic ticketing system.</p>
-                            <ul>
-                                <li><strong><a href="mailto:">info@company.com</a></strong>   </li>
-                                <li><strong><a href="#">Ticketio</a></strong> - our ticketing support platform</li>
-                            </ul>
+                            <br>
+                            <p> <a href="mailto:{% get_setting 'ایمیل' default='django-extra-settings' %}"> {% get_setting 'ایمیل' default='django-extra-settings' %} </a> </p>
+
                         </div>
                         <!-- /.col-sm-4 -->
                     </div>

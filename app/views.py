@@ -93,12 +93,12 @@ def search(request):
             match = list(chain(general_match & partial_match & price_match ))
 
             if match:
-                return render(request,'search.html', {'sr': match, 'areas':areas, 'latestpost_list':latestpost_list})
+                return render(request,'search.html', {'sr': match, 'areas':areas, 'latestpost_list':latestpost_list,'logo':logo})
             else:
                 messages.error(request,  '   چیزی یافت نشد ، لطفا مجددا جستجو کنید ' )
         else:
             return HttpResponseRedirect('/search')
-    return render(request, 'search.html', {'areas':areas, 'latestpost_list':latestpost_list})
+    return render(request, 'search.html', {'areas':areas, 'latestpost_list':latestpost_list,'logo':logo})
 
 
 
@@ -125,7 +125,7 @@ def profile(request):
             user_photo = profile_form.cleaned_data['user_photo']
             user_form.save()
             profile_form.save()
-            context = {'user_form':user_form, 'profile_form':profile_form }
+            context = {'user_form':user_form, 'profile_form':profile_form , 'latestpost_list':latestpost_list,'logo':logo}
             context['segment'] = 'profile'
 
             html_template = loader.get_template( 'accounts/profile.html' )
@@ -134,7 +134,7 @@ def profile(request):
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)
 
-    context = {'user_form':user_form, 'profile_form':profile_form, 'latestpost_list':latestpost_list}
+    context = {'user_form':user_form, 'profile_form':profile_form, 'latestpost_list':latestpost_list,'logo':logo}
     context['segment'] = 'profile'
 
     html_template = loader.get_template( 'accounts/profile.html' )
@@ -154,16 +154,19 @@ class items(generic.ListView):
     paginate_by = 16
 
     def get_context_data(self, *args, **kwargs):
+        logo = Setting.get('لوگو', default='django-extra-settings')
         areas = Area.objects.all()
         latestpost_list = Post.objects.all().order_by('-post_date')[:3]
         context = super(items, self).get_context_data(*args, **kwargs)
         context["latestpost_list"] = latestpost_list
         context["areas"] = areas
+        context["logo"] = logo
         return context
 
 
 
 def items_detail(request, id):
+    logo = Setting.get('لوگو', default='django-extra-settings')
     latestpost_list = Post.objects.all().order_by('-post_date')[:3]
     Item = get_object_or_404(models.Item, id=id)
     item_img = models.ItemImage.objects.filter(item=Item)
@@ -185,7 +188,7 @@ def items_detail(request, id):
                 return redirect(Item.get_absolute_url())
     else:
         item_fav=""
-    context = {'Item':Item , 'item_img':item_img , 'similar_items':similar_items, 'item_fav':item_fav, 'latestpost_list':latestpost_list}
+    context = {'Item':Item , 'item_img':item_img , 'similar_items':similar_items, 'item_fav':item_fav, 'latestpost_list':latestpost_list,'logo':logo}
     return render(request, 'items_detail.html', context)
 
 
@@ -199,10 +202,11 @@ def items_detail(request, id):
 #------------------------------------------------------------------------------
 @login_required(login_url="/login/")
 def favs(request):
+    logo = Setting.get('لوگو', default='django-extra-settings')
     favs = models.Fav.objects.filter(user=request.user)
     areas = models.Area.objects.all()
     latestpost_list = Post.objects.all().order_by('-post_date')[:3]
-    context = {'favs':favs, 'areas':areas, 'latestpost_list':latestpost_list}
+    context = {'favs':favs, 'areas':areas, 'latestpost_list':latestpost_list,'logo':logo}
     context['segment'] = 'items'
     html_template = loader.get_template( 'favs.html' )
     return HttpResponse(html_template.render(context, request))
@@ -216,6 +220,7 @@ def favs(request):
 
 #------------------------------------------------------------------------------
 def contact(request):
+    logo = Setting.get('لوگو', default='django-extra-settings')
     latestpost_list = Post.objects.all().order_by('-post_date')[:3]
 
     if request.method == "POST":
@@ -229,7 +234,7 @@ def contact(request):
     else:
         contact_form = ContactForm(data=request.POST)
 
-    context = {'latestpost_list':latestpost_list,'contact_form':contact_form}
+    context = {'latestpost_list':latestpost_list,'contact_form':contact_form ,'logo':logo}
     context['segment'] = 'contact'
     html_template = loader.get_template( 'contact.html' )
     return HttpResponse(html_template.render(context, request))
