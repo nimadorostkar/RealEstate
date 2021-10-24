@@ -47,33 +47,6 @@ class Profile(models.Model):
 
 
 
-'''
-#------------------------------------------------------------------------------
-class Info(models.Model):
-    logo = models.ImageField(upload_to='media', default='media/logo.png' ,null=True, blank=True ,verbose_name = "لوگو ")
-    name = models.CharField(max_length=200,null=True, blank=True,verbose_name = "نام")
-    descriptions = models.TextField(max_length=500,null=True, blank=True,verbose_name = "توضیحات")
-    phone = models.CharField(max_length=200,null=True, blank=True,verbose_name = "تلفن")
-    email = models.CharField(max_length=200,null=True, blank=True,verbose_name = "ایمیل")
-    manager = models.CharField(max_length=200,null=True, blank=True,verbose_name = "مدیر")
-    address = models.CharField(max_length=200,null=True, blank=True,verbose_name = "آدرس")
-    instagram = models.CharField(max_length=200,null=True, blank=True,verbose_name = "instagram")
-    twitter = models.CharField(max_length=200,null=True, blank=True,verbose_name = "twitter")
-    telegram = models.CharField(max_length=200,null=True, blank=True,verbose_name = "telegram")
-    whatsapp = models.CharField(max_length=200,null=True, blank=True,verbose_name = "whatsapp")
-
-
-    class Meta:
-        verbose_name = "اطلاعات"
-        verbose_name_plural = "اطلاعات"
-
-    def __str__(self):
-        return self.name
-'''
-
-
-
-
 #------------------------------------------------------------------------------
 class Tags(models.Model):
     name=models.CharField(max_length=200,verbose_name = "برچسب")
@@ -119,6 +92,7 @@ class Area(MPTTModel):
 
 #------------------------------------------------------------------------------
 class Item(models.Model):
+    available = models.BooleanField(default=True, verbose_name = "موجود" )
     CHOICES1 = ( ('اجاره','اجاره'), ('خرید','خرید'), ('رهن','رهن') )
     buy_status = models.CharField(max_length=10,choices=CHOICES1,verbose_name = "وضعیت خرید")
     CHOICES2 = ( ('مسکونی','مسکونی'), ('تجاری','تجاری') )
@@ -140,8 +114,9 @@ class Item(models.Model):
     additional_information = models.TextField(max_length=1000,null=True, blank=True,verbose_name = "اطلاعات تکمیلی")
     date = models.DateField(null=True, blank=True, verbose_name = "تاریخ آگهی")
     image = models.ImageField(upload_to='media', default='media/Default.png', null=True, blank=True, verbose_name = "تصویر")
-    # video
-    # active or not
+    video_link = models.URLField(max_length=500, null=True, blank=True, verbose_name = "ویدئو")
+
+
 
     class Meta:
         verbose_name = "ملک"
