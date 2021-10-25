@@ -1,7 +1,6 @@
 
 
 
-
 /* --------------- fonts --------------- */
 
 @font-face {
@@ -30,7 +29,7 @@
 
 .button, button {font-family: "iransans", sans-serif !important;}
 
-.span, span {font-family: "iransans", sans-serif !important;}
+/* .span, span {font-family: "iransans", sans-serif !important;} */
 
 .text, text {font-family: "iransans", sans-serif !important;}
 
