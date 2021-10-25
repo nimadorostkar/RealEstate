@@ -148,14 +148,14 @@
                       <div class="item-entry overflow" dir="rtl">
                           <h6><a href="{{ Item.get_absolute_url }}"> {{ Item }} </a></h6>
                           <div class="dot-hr"></div>
-                          <span class="pull-left"> {{ Item.area_size }} متر  </span>
+
                           <span class="proerty-price pull-right">
                             {% if Item.buy_status == 'خرید' %}
                              <span class="proerty-price pull-right"> {{ Item.price }} تومان </span>
                             {% elif Item.buy_status == 'رهن' %}
                              <span class="proerty-price pull-right"> {{ Item.deposit }} تومان </span>
                             {% elif Item.buy_status == 'اجاره' %}
-                            <small> <span class="proerty-price pull-right"> پیش:{{ Item.deposit }} اجاره:{{ Item.rent }} تومان</span> </small>
+                            <small> <span class="proerty-price pull-right"> ودیعه:{{ Item.deposit }} اجاره:{{ Item.rent }} تومان</span> </small>
                             {% endif %}
                           </span>
                           <p style="display: none;"> {{ Item.additional_information|slice:":120" }}...  </p>
@@ -185,6 +185,8 @@
                               {% else %}
                                 <img src="{% static 'assets/img/icon/balcony.png' %}">
                               {% endif %}
+
+                              <span class="pull-left"> {{ Item.area_size }} متر  </span>
 
                           </div>
                       </div>

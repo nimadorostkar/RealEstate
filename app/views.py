@@ -25,8 +25,8 @@ def index(request):
     latestpost_list = Post.objects.all().order_by('-post_date')[:3]
     img = models.Slider.objects.all()
     item_img = models.ItemImage.objects.all()
-    items = models.Item.objects.all().order_by("-date")[:11]
-    all_items_count = models.Item.objects.all().count()
+    items = models.Item.objects.filter(available=True).order_by("-date")[:11]
+    all_items_count = models.Item.objects.filter(available=True).count()
     all_area_count = models.Area.objects.all().count()
     areas = models.Area.objects.all()
     fav = models.Fav.objects.all()
@@ -152,6 +152,7 @@ class items(generic.ListView):
     model = Item
     template_name = 'items.html'
     context_object_name = 'items'
+    queryset = Item.objects.filter(available=True)
     ordering = ['-date']
     paginate_by = 16
 

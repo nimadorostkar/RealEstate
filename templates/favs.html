@@ -42,7 +42,7 @@
                         <div class="col-sm-6 col-md-4 p0">
                             <div class="box-two proerty-item">
                                 <div class="item-thumb">
-                                    <a href="{{ Item.get_absolute_url }}" ><img src="{{ Fav.item.image.url }}"></a>
+                                    <a href="{{ Fav.item.get_absolute_url }}" ><img src="{{ Fav.item.image.url }}"></a>
                                 </div>
 
                                 <div class="item-entry overflow" dir="rtl">
@@ -55,7 +55,7 @@
                                       {% elif Fav.item.buy_status == 'رهن' %}
                                        <span class="proerty-price pull-right"> {{ Fav.item.deposit }} تومان </span>
                                       {% elif Fav.item.buy_status == 'اجاره' %}
-                                      <small> <span class="proerty-price pull-right"> پیش:{{ Item.deposit }} اجاره:{{ Item.rent }} تومان</span> </small>
+                                      <small> <span class="proerty-price pull-right"> ودیعه:{{ Item.deposit }} اجاره:{{ Item.rent }} تومان</span> </small>
                                       {% endif %}
                                     </span>
                                     <p style="display: none;"> {{ Fav.item.additional_information|slice:":120" }}...  </p>

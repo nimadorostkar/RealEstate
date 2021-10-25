@@ -15,7 +15,7 @@
     <div class="container">
         <div class="row" dir="rtl">
             <div class="page-head-content">
-                <h1 class="page-title"> search </h1>
+                <h1 class="page-title"> جستجو </h1>
             </div>
         </div>
     </div>
@@ -71,7 +71,7 @@
                                       {% elif Item.buy_status == 'رهن' %}
                                        <span class="proerty-price pull-right"> {{ Item.deposit }} تومان </span>
                                       {% elif Item.buy_status == 'اجاره' %}
-                                      <small> <span class="proerty-price pull-right"> پیش:{{ Item.deposit }} اجاره:{{ Item.rent }} تومان</span> </small>
+                                      <small> <span class="proerty-price pull-right"> ودیعه:{{ Item.deposit }} اجاره:{{ Item.rent }} تومان</span> </small>
                                       {% endif %}
                                     </span>
                                     <p style="display: none;"> {{ Item.additional_information|slice:":120" }}...  </p>

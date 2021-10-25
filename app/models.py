@@ -106,7 +106,7 @@ class Item(models.Model):
     storage_room = models.BooleanField(default=True, verbose_name = "انباری" )
     elevator = models.BooleanField(default=False, verbose_name = "آسانسور" )
     balcony = models.BooleanField(default=False, verbose_name = "بالکن" )
-    deposit = models.IntegerField(null=True,blank=True, default='0', verbose_name = "پول پیش")
+    deposit = models.IntegerField(null=True,blank=True, default='0', verbose_name = "ودیعه")
     rent = models.IntegerField(null=True,blank=True, default='0', verbose_name = "اجاره")
     price = models.IntegerField(null=True,blank=True, default='0', verbose_name = "قیمت خرید ")
     area = models.ForeignKey(Area, on_delete=models.CASCADE,null=True, blank=True,verbose_name = "منطقه")
