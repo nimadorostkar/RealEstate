@@ -114,7 +114,7 @@ class Item(models.Model):
     additional_information = models.TextField(max_length=1000,null=True, blank=True,verbose_name = "اطلاعات تکمیلی")
     date = models.DateField(null=True, blank=True, verbose_name = "تاریخ آگهی")
     image = models.ImageField(upload_to='media', default='media/Default.png', null=True, blank=True, verbose_name = "تصویر")
-    video_link = models.URLField(max_length=500, null=True, blank=True, verbose_name = "ویدئو")
+    video_link = models.URLField(max_length=500, null=True, blank=True, verbose_name = "لینک ویدئو")
 
 
 

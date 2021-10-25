@@ -1,10 +1,56 @@
+
+
+
+
+/* --------------- fonts --------------- */
+
+@font-face {
+  font-family: "iransans";
+  src: url("../fonts/IRANSansWeb.eot"),
+    url("../fonts/IRANSansWebd41d.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/IRANSansWeb.woff") format("woff"),
+    url("../fonts/IRANSansWeb.html") format("woff2"),
+    url("../fonts/IRANSansWeb.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.iransans { font-family: "iransans" !important; }
+
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {font-family: "iransans" !important;}
+
+.li, li {font-family: "iransans", sans-serif !important;}
+
+.p, p {font-family: "iransans", sans-serif !important;}
+
+.pre, pre {font-family: "iransans", sans-serif !important;}
+
+.a, a {font-family: "iransans", sans-serif !important;}
+
+.button, button {font-family: "iransans", sans-serif !important;}
+
+.span, span {font-family: "iransans", sans-serif !important;}
+
+.text, text {font-family: "iransans", sans-serif !important;}
+
+.tspan, tspan {font-family: "iransans", sans-serif !important;}
+
+
+/* -------------- font end -----------  */
+
+
+
+
+
+
 html, body {
     width: 100%;
     overflow-x: hidden;
 }
 body {
     height:100%;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'iransans', sans-serif;
     font-weight: 300;
     padding:0;
     margin:0;
