@@ -32,9 +32,9 @@ class ItemImageInline(admin.TabularInline):
     extra = 1
 
 class ItemAdmin(ModelAdminJalaliMixin,ImportExportModelAdmin):
-    list_display = ('available','buy_status','estate_status','building_status','area_size','area', 'date', 'image_tag')
+    list_display = ('buy_status','estate_status','building_status','area_size','area', 'date', 'image_tag', 'available')
     list_filter = ('available',"buy_status", "estate_status", "building_status", "date")
-    search_fields = ['area', 'area_size', 'additional_information']
+    search_fields = ['additional_information']
     raw_id_fields = ('area', 'tags')
     inlines = [ ItemImageInline, ]
 

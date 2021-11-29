@@ -144,7 +144,7 @@
                                           <div class="dot-hr"></div>
                                           <span class="pull-left"> {{ Item.area_size }} متر  </span>
                                           <span class="proerty-price pull-right">
-                                            {% if Item.buy_status == 'خرید' %}
+                                            {% if Item.buy_status == 'فروش' %}
                                              <span class="proerty-price pull-right"> {{ Item.price }} تومان </span>
                                             {% elif Item.buy_status == 'رهن' %}
                                              <span class="proerty-price pull-right"> {{ Item.deposit }} تومان </span>
@@ -198,7 +198,7 @@
                                         <div class="single-property-header">
                                             <h1 class="property-title"> {{ Item }} </h1>
                                             <span class="property-price">
-                                              {% if Item.buy_status == 'خرید' %}
+                                              {% if Item.buy_status == 'فروش' %}
                                                <span class="proerty-price pull-right"> {{ Item.price }} تومان </span>
                                               {% elif Item.buy_status == 'رهن' %}
                                                <span class="proerty-price pull-right"> {{ Item.deposit }} تومان </span>

@@ -50,7 +50,7 @@
                                     <h6><a href="{{ Item.get_absolute_url }}"> {{ Item }} </a></h6>
                                     <div class="dot-hr"></div>
                                     <span class="proerty-price pull-right">
-                                      {% if Item.buy_status == 'خرید' %}
+                                      {% if Item.buy_status == 'فروش' %}
                                        <span class="proerty-price pull-right"> {{ Item.price }} تومان </span>
                                       {% elif Item.buy_status == 'رهن' %}
                                        <span class="proerty-price pull-right"> {{ Item.deposit }} تومان </span>

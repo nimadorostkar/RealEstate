@@ -93,7 +93,7 @@ class Area(MPTTModel):
 #------------------------------------------------------------------------------
 class Item(models.Model):
     available = models.BooleanField(default=True, verbose_name = "موجود" )
-    CHOICES1 = ( ('اجاره','اجاره'), ('خرید','خرید'), ('رهن','رهن') )
+    CHOICES1 = ( ('اجاره','اجاره'), ('فروش','فروش'), ('رهن','رهن') )
     buy_status = models.CharField(max_length=10,choices=CHOICES1,verbose_name = "وضعیت خرید")
     CHOICES2 = ( ('مسکونی','مسکونی'), ('تجاری','تجاری') )
     estate_status = models.CharField(max_length=15,choices=CHOICES2,verbose_name = "وضعیت ملک")
