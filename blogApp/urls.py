@@ -7,7 +7,7 @@ from .views import blog, search, CategoryView, blogdetail
 urlpatterns = [
 path('', blog.as_view(), name="blog"),
 path('search', search, name="search"),
-path('category/<slug>/', CategoryView, name="category"),
+path('category/<slug>/', views.CategoryView, name="category"),
 path('<slug:slug>/send-comment', views.send_comment, name="send_comment"),
 path('<slug:slug>/', blogdetail.as_view(), name="blog-detail"),
 ]

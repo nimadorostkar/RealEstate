@@ -8,6 +8,8 @@ from django.core.paginator import Paginator
 from django.http import HttpResponseNotFound, Http404
 from django.views import generic
 from extra_settings.models import Setting
+from . import models
+
 
 
 
@@ -62,19 +64,19 @@ def search(request):
 
 #------------------------------------------------------------------------------
 def CategoryView(request, slug):
-   category = get_object_or_404(models.Categories, slug=slug)
-   logo = Setting.get('لوگو', default='django-extra-settings')
-   header = Setting.get('تصویر سربرگ (header)', default='django-extra-settings')
-   if Categories.objects.filter(slug=slug).exists():
-      category_posts = Post.objects.filter(category=category).order_by('-post_date')
-      cat_list = Categories.objects.all()
-      latestpost_list = Post.objects.all().order_by('-post_date')[:3]
-      paginator = Paginator(category_posts, 2)
-      page = request.GET.get('page')
-      category_posts = paginator.get_page(page)
-      return render(request, 'category_list.html', {'cats':category, 'category_posts':category_posts, 'cat_list': cat_list, 'latestpost_list':latestpost_list,'logo':logo, 'header':header})
-   else:
-      raise Http404
+    category = get_object_or_404(models.Categories, slug=slug)
+    logo = Setting.get('لوگو', default='django-extra-settings')
+    header = Setting.get('تصویر سربرگ (header)', default='django-extra-settings')
+    if Categories.objects.filter(slug=slug).exists():
+        category_posts = Post.objects.filter(category=category).order_by('-post_date')
+        cat_list = Categories.objects.all()
+        latestpost_list = Post.objects.all().order_by('-post_date')[:3]
+        paginator = Paginator(category_posts, 2)
+        page = request.GET.get('page')
+        category_posts = paginator.get_page(page)
+        return render(request, 'category_list.html', {'cats':category, 'category_posts':category_posts, 'cat_list': cat_list, 'latestpost_list':latestpost_list,'logo':logo, 'header':header})
+    else:
+        raise Http404
 
 
 

@@ -41,7 +41,7 @@
                         <div class="col-sm-6">
                             <p class="author-category">
                                 نویسنده:  <a href="#"> {{post.author.first_name}} </a> |
-                                دسته بندی:  <a href="{% url 'category' category.slug %}"> {{post.category}} </a>
+                                دسته بندی:  <a href="{% url 'category' post.category.slug %}"> {{post.category}} </a>
                             </p>
                         </div>
                         <div class="col-sm-6 right">
