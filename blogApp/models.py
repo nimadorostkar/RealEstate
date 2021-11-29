@@ -34,6 +34,8 @@ class PostComment(models.Model):
 #------------------------------------------------------------------------------
 class Categories(models.Model):
     categoryname = models.CharField(max_length=255)
+    slug = models.CharField(max_length=255, verbose_name="نشانی پیوند (link)")
+
 
     def __str__(self):
         return self.categoryname

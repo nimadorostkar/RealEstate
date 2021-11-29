@@ -41,7 +41,7 @@
                         <div class="col-sm-6">
                             <p class="author-category">
                                 نویسنده:  <a href="#"> {{post.author.first_name}} </a> |
-                                دسته بندی:  <a href="#"> {{post.category}} </a>
+                                دسته بندی:  <a href="{% url 'category' category.slug %}"> {{post.category}} </a>
                             </p>
                         </div>
                         <div class="col-sm-6 right">
@@ -73,7 +73,7 @@
               <ul class="list-group category">
                 <li class="list-group-item active" aria-current="true"> دسته بندی ها </li>
                 {% for categories in cat_list %}
-                <a href="{% url 'category' categories %}" style="text-decoration:none; color:black"><li class="list-group-item">{{categories}} <span class="badge bg-dark">{{categories.category_set.count}}</span></li></a>
+                <a href="{% url 'category' categories.slug %}" style="text-decoration:none; color:black"><li class="list-group-item">{{categories}} <span class="badge bg-dark">{{categories.category_set.count}}</span></li></a>
                 {% endfor %}
               </ul>
               <div class="panel panel-default sidebar-menu wow fadeInRight animated" dir="rtl">
@@ -98,7 +98,7 @@
                       <h3 class="panel-title"> برچسب ها </h3>
                       <div class="button-cuz">
                         {% for categories in cat_list %}
-                        <a href="{% url 'category' categories %}"><button type="button" class="btn btn-outline-dark">{{categories}}</button></a>
+                        <a href="{% url 'category' categories.slug %}"><button type="button" class="btn btn-outline-dark">{{categories}}</button></a>
                         {% endfor %}
                       </div>
                   </div>

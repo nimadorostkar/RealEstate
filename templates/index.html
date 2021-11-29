@@ -36,7 +36,7 @@
                         <div class="form-group">
                             <select name="area" id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="منطقه">
                               {% for Area in areas %}
-                                <option> {{ Area }} </option>
+                                <option data-tokens="{{Area}}"> {{ Area }} </option>
                               {% endfor %}
                             </select>
                         </div>
@@ -421,5 +421,16 @@
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
+
+<script>
+
+
+    $(function() {
+      $('.selectpicker').selectpicker({
+        liveSearch: true
+      });
+    });
+
+</script>
 
 {% endblock javascripts %}

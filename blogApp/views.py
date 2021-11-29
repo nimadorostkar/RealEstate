@@ -1,5 +1,5 @@
 from django.http.response import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from .models import Post, Categories, PostComment
 from django.db.models import Q
@@ -61,17 +61,18 @@ def search(request):
 
 
 #------------------------------------------------------------------------------
-def CategoryView(request, cats):
+def CategoryView(request, slug):
+   category = get_object_or_404(models.Categories, slug=slug)
    logo = Setting.get('لوگو', default='django-extra-settings')
    header = Setting.get('تصویر سربرگ (header)', default='django-extra-settings')
-   if Categories.objects.filter(categoryname=cats).exists():
-      category_posts = Post.objects.filter(category__categoryname=cats).order_by('-post_date')
+   if Categories.objects.filter(slug=slug).exists():
+      category_posts = Post.objects.filter(category=category).order_by('-post_date')
       cat_list = Categories.objects.all()
       latestpost_list = Post.objects.all().order_by('-post_date')[:3]
       paginator = Paginator(category_posts, 2)
       page = request.GET.get('page')
       category_posts = paginator.get_page(page)
-      return render(request, 'category_list.html', {'cats':cats, 'category_posts':category_posts, 'cat_list': cat_list, 'latestpost_list':latestpost_list,'logo':logo, 'header':header})
+      return render(request, 'category_list.html', {'cats':category, 'category_posts':category_posts, 'cat_list': cat_list, 'latestpost_list':latestpost_list,'logo':logo, 'header':header})
    else:
       raise Http404
 
