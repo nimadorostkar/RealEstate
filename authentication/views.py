@@ -8,6 +8,11 @@ from django.contrib.auth.decorators import login_required
 from extra_settings.models import Setting
 from blogApp.models import Post, Categories, PostComment
 
+
+
+
+
+
 #------------------------------------------------------------------------------
 def login_view(request):
     header = Setting.get('تصویر سربرگ (header)', default='django-extra-settings')
@@ -33,6 +38,10 @@ def login_view(request):
             msg = 'خطا در تأیید فرم'
 
     return render(request, "accounts/login.html", {"form": form, "msg" : msg , 'latestpost_list':latestpost_list ,'logo':logo, 'header':header})
+
+
+
+
 
 
 

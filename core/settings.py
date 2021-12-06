@@ -33,7 +33,6 @@ INSTALLED_APPS = [
     'import_export',
     'bootstrapform',
     'extra_settings',
-    'mptt',
     'jalali_date',
     'app',
     'blogApp',

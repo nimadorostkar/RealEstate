@@ -11,6 +11,9 @@ from extensions.utils import jalali_converter
 
 
 
+
+
+
 #------------------------------------------------------------------------------
 class Profile(models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE,unique=True,related_name='profile',verbose_name = "کاربر")
@@ -48,40 +51,12 @@ class Profile(models.Model):
 
 
 #------------------------------------------------------------------------------
-class Tags(models.Model):
-    name=models.CharField(max_length=200,verbose_name = "برچسب")
-
-    class Meta:
-        verbose_name = "برچسب"
-        verbose_name_plural = "برچسب ها"
-
-    def __str__(self):
-        return self.name
-
-
-
-
-
-
-
-#------------------------------------------------------------------------------
-class Area(MPTTModel):
+class Area(models.Model):
     name = models.CharField(max_length=200, unique=True, verbose_name = "نام")
-    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children',verbose_name = "والد")
-
-    class MPTTMeta:
-        level_attr = 'mptt_level'
-        order_insertion_by = ['name']
 
     class Meta:
         verbose_name = "منطقه"
         verbose_name_plural = "مناطق"
-
-    #def get_absolute_url(self):
-        #return reverse('app:category_detail',args=[self.id])
-
-    def __unicode__(self):
-        return u"%s" % (self.name)
 
     def __str__(self):
         return str(self.name)
@@ -93,12 +68,10 @@ class Area(MPTTModel):
 #------------------------------------------------------------------------------
 class Item(models.Model):
     available = models.BooleanField(default=True, verbose_name = "موجود" )
-    CHOICES1 = ( ('اجاره','اجاره'), ('فروش','فروش'), ('رهن','رهن') )
-    buy_status = models.CharField(max_length=10,choices=CHOICES1,verbose_name = "وضعیت خرید")
-    CHOICES2 = ( ('مسکونی','مسکونی'), ('تجاری','تجاری') )
-    estate_status = models.CharField(max_length=15,choices=CHOICES2,verbose_name = "وضعیت ملک")
-    CHOICES3 = ( ('ویلایی','ویلایی'), ('اپارتمانی','اپارتمانی') )
-    building_status = models.CharField(max_length=10,choices=CHOICES3,verbose_name = "وضعیت ساختمان")
+    CHOICES1 = ( ('رهن و اجاره','رهن و اجاره'), ('رهن کامل','رهن کامل'), ('فروش','فروش'), ('پیش فروش','پیش فروش') )
+    buy_status = models.CharField(max_length=10,choices=CHOICES1,verbose_name = "نوع معامله")
+    CHOICES2 = ( ('آپارتمان','آپارتمان'), ('خانه ویلایی','خانه ویلایی'), ('زمین','زمین'), ('مغازه و تجاری','مغازه و تجاری'), ('دفتر کار اداری','دفتر کار اداری'), ('کلنگی','کلنگی'), ('ویلا','ویلا'), ('باغ','باغ') )
+    estate_status = models.CharField(max_length=15,choices=CHOICES2,verbose_name = "نوع ملک")
     area_size = models.IntegerField(null=True,blank=True, verbose_name = "متراژ")
     room_qty = models.IntegerField(null=True,blank=True, verbose_name = "تعداد اتاق")
     building_age = models.IntegerField(null=True,blank=True, verbose_name = "سن بنا")
@@ -108,14 +81,12 @@ class Item(models.Model):
     balcony = models.BooleanField(default=False, verbose_name = "بالکن" )
     deposit = models.IntegerField(null=True,blank=True, default='0', verbose_name = "ودیعه")
     rent = models.IntegerField(null=True,blank=True, default='0', verbose_name = "اجاره")
-    price = models.IntegerField(null=True,blank=True, default='0', verbose_name = "قیمت خرید ")
+    price = models.IntegerField(null=True,blank=True, default='0', verbose_name = "قیمت فروش")
     area = models.ForeignKey(Area, on_delete=models.CASCADE,null=True, blank=True,verbose_name = "منطقه")
-    tags = models.ManyToManyField(Tags, blank=True,verbose_name = "برچسب")
     additional_information = models.TextField(max_length=1000,null=True, blank=True,verbose_name = "اطلاعات تکمیلی")
     date = models.DateField(null=True, blank=True, verbose_name = "تاریخ آگهی")
     image = models.ImageField(upload_to='media', default='media/Default.png', null=True, blank=True, verbose_name = "تصویر")
     video_link = models.URLField(max_length=500, null=True, blank=True, verbose_name = "لینک ویدئو")
-
 
 
     class Meta:
@@ -123,7 +94,7 @@ class Item(models.Model):
         verbose_name_plural = "املاک"
 
     def __str__(self):
-        return str(self.buy_status +" "+ self.building_status +" "+ self.estate_status +" "+ self.area.name )
+        return str(self.buy_status +" "+ self.estate_status +" "+ self.area.name )
 
     def image_tag(self):
         return format_html("<img width=50 src='{}'>".format(self.image.url))

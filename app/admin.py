@@ -1,10 +1,9 @@
 from django.contrib import admin
 from . import models
 from django.contrib.admin.models import LogEntry
-from .models import Profile, Tags, Area, Item, ItemImage, Slider, Fav, Contact
+from .models import Profile, Area, Item, ItemImage, Slider, Fav, Contact
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin, ImportExportMixin
-from mptt.admin import MPTTModelAdmin, TreeRelatedFieldListFilter, DraggableMPTTAdmin
 from jalali_date import datetime2jalali, date2jalali
 from jalali_date.admin import ModelAdminJalaliMixin, StackedInlineJalaliMixin, TabularInlineJalaliMixin
 
@@ -32,8 +31,8 @@ class ItemImageInline(admin.TabularInline):
     extra = 1
 
 class ItemAdmin(ModelAdminJalaliMixin,ImportExportModelAdmin):
-    list_display = ('buy_status','estate_status','building_status','area_size','area', 'date', 'image_tag', 'available')
-    list_filter = ('available',"buy_status", "estate_status", "building_status", "date")
+    list_display = ('image_tag', 'buy_status', 'estate_status', 'area_size', 'area', 'date', 'available')
+    list_filter = ('available',"buy_status", "estate_status", "date")
     search_fields = ['additional_information']
     raw_id_fields = ('area', 'tags')
     inlines = [ ItemImageInline, ]
@@ -46,26 +45,12 @@ admin.site.register(models.Item, ItemAdmin)
 
 
 
-
-
 #------------------------------------------------------------------------------
-class TagsAdmin(ImportExportModelAdmin):
+class AreaAdmin(ImportExportModelAdmin):
     list_display = ('name','name')
     search_fields = ['name']
 
-admin.site.register(models.Tags, TagsAdmin)
-
-
-
-
-#------------------------------------------------------------------------------
-class AreaMPTTModelAdmin(ImportExportMixin, MPTTModelAdmin, TreeRelatedFieldListFilter):
-    mptt_level_indent = 15
-
-admin.site.register(Area, DraggableMPTTAdmin,
-    list_display=('tree_actions', 'indented_title'),
-    list_display_links=('indented_title',),)
-
+admin.site.register(models.Area, AreaAdmin)
 
 
 
