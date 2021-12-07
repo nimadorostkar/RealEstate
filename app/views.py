@@ -15,6 +15,8 @@ from django.urls import reverse
 from django.contrib import messages
 from django.views import generic
 from extra_settings.models import Setting
+from django.contrib.auth.forms import PasswordChangeForm
+
 
 
 
@@ -126,6 +128,10 @@ def profile(request):
 
     context = {'latestpost_list':latestpost_list,'logo':logo, 'header':header}
     return render(request, 'accounts/profile.html', context)
+
+
+
+
 
 
 

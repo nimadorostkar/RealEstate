@@ -2,13 +2,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.forms.utils import ErrorList
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect, request
 from .forms import LoginForm, SignUpForm
 from django.contrib.auth.decorators import login_required
 from extra_settings.models import Setting
 from blogApp.models import Post, Categories, PostComment
-
-
+from app import models
+from app.models import Profile
+from django.contrib import messages
 
 
 
@@ -78,6 +79,26 @@ def register_user(request):
 
 
 
+
+
+
+
+
+
+
+
+
+
+#------------------------------------------------------------------------------
+@login_required(login_url='/login')
+def password_change(request):
+    current_user = request.user
+    if request.method == 'POST':
+        current_user.set_password(request.POST['new_password'])
+        current_user.save()
+        return HttpResponseRedirect('/password_change')
+    context = {'current_user': current_user }
+    return render(request, 'accounts/passchange.html', context)
 
 
 

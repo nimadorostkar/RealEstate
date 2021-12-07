@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %} تغییر رمزعبور {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+{% load extra_settings %}
+
+
+
+
+
+<div style="background:#494C53 url({{ header.url }}) no-repeat scroll center top / cover; color:#FFF; position: relative; min-height: 140px; ">
+  <div class="container">
+      <div class="row">
+          <div class="page-head-content">
+              <h1 dir="rtl" class="page-title">  تغییر رمزعبور  </h1>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- End page header -->
+
+<!-- property area -->
+<div class="content-area user-profiel" style="background-color: #FCFCFC;">&nbsp;
+      <div class="container" dir="rtl" align="right">
+          <div class="row">
+              <div class="col-sm-10 col-sm-offset-1 profiel-container">
+
+                  <form role="form" action="{% url 'password_change' %}" method="post" enctype="multipart/form-data">
+									 	{% csrf_token %}
+                          <div class="profiel-header">
+                              <h3> رمز عبور خود را ویرایش کنید </h3>
+                              <hr>
+                          </div>
+
+
+                          <div class="col-md-12 pr-md-1">
+                            <div class="form-group">
+                              <label> رمز عبور جدید  </label>
+                              <input type="password" class="input-ui pr-2" name="new_password" required>
+                            </div>
+                          </div>
+
+                          <div class="col-sm-5 col-sm-offset-1">
+                              <br>
+                              <button type="submit" class="btn btn-fill btn-primary"> ذخیره </button>
+                          </div>
+                      <br>
+                  </form>
+
+          </div>
+      </div><!-- end row -->
+
+
+  </div>
+
+</div>
+
+
+
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
