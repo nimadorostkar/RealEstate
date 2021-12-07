@@ -111,36 +111,22 @@ def profile(request):
     header = Setting.get('تصویر سربرگ (header)', default='django-extra-settings')
     logo = Setting.get('لوگو', default='django-extra-settings')
     latestpost_list = Post.objects.all().order_by('-post_date')[:3]
-    profile = models.Profile.objects.filter(user=request.user)
+    current_user = request.user
+    profile = models.Profile.objects.filter(user=request.user).first()
     if request.method == 'POST':
-        user_form = UserForm(request.POST, instance=request.user)
-        profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
-        if user_form.is_valid() and profile_form.is_valid():
-            username = user_form.cleaned_data['username']
-            first_name = user_form.cleaned_data['first_name']
-            last_name = user_form.cleaned_data['last_name']
-            email = user_form.cleaned_data['email']
-            password1 = user_form.cleaned_data['password1']
-            password2 = user_form.cleaned_data['password2']
-            phone = profile_form.cleaned_data['phone']
-            address = profile_form.cleaned_data['address']
-            user_photo = profile_form.cleaned_data['user_photo']
-            user_form.save()
-            profile_form.save()
-            context = {'user_form':user_form, 'profile_form':profile_form , 'latestpost_list':latestpost_list,'logo':logo, 'header':header}
-            context['segment'] = 'profile'
+        current_user.username = request.POST['user']
+        current_user.first_name = request.POST['firstname']
+        current_user.last_name = request.POST['lastname']
+        profile.phone = request.POST['phone']
+        profile.email = request.POST['email']
+        profile.address = request.POST['address']
+        if (request.FILES): profile.user_photo = request.FILES['photo']
+        current_user.save()
+        profile.save()
 
-            html_template = loader.get_template( 'accounts/profile.html' )
-            return HttpResponse(html_template.render(context, request))
-    else:
-        user_form = UserForm(instance=request.user)
-        profile_form = ProfileForm(instance=request.user.profile)
+    context = {'latestpost_list':latestpost_list,'logo':logo, 'header':header}
+    return render(request, 'accounts/profile.html', context)
 
-    context = {'user_form':user_form, 'profile_form':profile_form, 'latestpost_list':latestpost_list,'logo':logo, 'header':header}
-    context['segment'] = 'profile'
-
-    html_template = loader.get_template( 'accounts/profile.html' )
-    return HttpResponse(html_template.render(context, request))
 
 
 

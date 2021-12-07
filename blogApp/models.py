@@ -51,7 +51,6 @@ class Categories(models.Model):
 #------------------------------------------------------------------------------
 class Post(models.Model):
     title = models.CharField(max_length=255, verbose_name="عنوان")
-    #title_tag = models.CharField(max_length=255, default='Blog Post', verbose_name="برچسب عنوان")
     slug = models.SlugField(max_length=255, null=True, blank=True, verbose_name="نشانی پیوند (link)")
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="نویسنده")
     img = models.ImageField(upload_to='blog', null=True, verbose_name="تصویر")

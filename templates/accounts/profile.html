@@ -44,39 +44,39 @@
                               <div class="picture-container">
                                   <div class="picture">
                                       <img src="{{ request.user.profile.user_photo.url }}" class="picture-src" id="wizardPicturePreview" title=""/>
-                                      <input name="user_photo" type="file" id="wizard-picture">
+                                      <input name="photo" type="file" id="wizard-picture">
                                   </div>
                                   <h6>تصویر را انتخاب کنید</h6>
                               </div>
                           </div>
                           <div class="row">
 
-          			            <div class="col-md-3 pr-md-1">
+                            <div class="col-md-3 pl-md-1">
           			              <div class="form-group">
-          			                <label> نام کاربری </label>
-          			                <input name="username" type="text" class="form-control" value="{{ request.user.username }}">
+          			                <label> نام خانوادگی </label>
+          			                <input name="lastname" type="text" class="form-control" value="{{ request.user.last_name }}">
           			              </div>
           			            </div>
 
                             <div class="col-md-3 pr-md-1">
           			              <div class="form-group">
           			                <label> نام </label>
-          			                <input name="first_name" type="text" class="form-control" value="{{ request.user.first_name }}">
+          			                <input name="firstname" type="text" class="form-control" value="{{ request.user.first_name }}">
           			              </div>
           			            </div>
 
-
-                            <div class="col-md-3 pl-md-1">
+                            <div class="col-md-3 pr-md-1">
           			              <div class="form-group">
-          			                <label> نام خانوادگی </label>
-          			                <input name="last_name" type="text" class="form-control" value="{{ request.user.last_name }}">
+          			                <label> نام کاربری </label>
+          			                <input name="user" type="text" class="form-control" value="{{ request.user.username }}">
           			              </div>
           			            </div>
+
 
           			            <div class="col-md-3 pr-md-1">
           			              <div class="form-group">
           			                <label> ایمیل </label>
-          			                <input name="email" type="text" class="form-control" placeholder="email" value="{{ request.user.email }}">
+          			                <input name="email" type="email" class="form-control" placeholder="email" value="{{ request.user.email }}">
           			              </div>
           			            </div>
 
@@ -97,20 +97,6 @@
           			            </div>
 
 
-          			            <div class="col-md-3 pr-md-1">
-          			              <div class="form-group">
-          			                <label> رمز عبور </label>
-          			                <input name="password1" type="password" class="form-control" value="{{ request.user.password1 }}">
-          			              </div>
-          			            </div>
-
-          			            <div class="col-md-3 px-md-1">
-          			              <div class="form-group">
-          			                <label> تکرار رمز عبور </label>
-          			                <input name="password2" type="password" class="form-control" value="{{ request.user.password2 }}">
-          			              </div>
-          			            </div>
-
           			          </div>
 
                       </div>
@@ -125,7 +111,13 @@
           </div>
       </div><!-- end row -->
 
+
+      <div style="padding-right:80px;">
+        <a href="#"> <small>   تغییر رمزعبور <i class="fa fa-key"></i>  </small> </a>
+      </div>
+
   </div>
+
 </div>
 
 
