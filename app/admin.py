@@ -34,7 +34,7 @@ class ItemAdmin(ModelAdminJalaliMixin,ImportExportModelAdmin):
     list_display = ('image_tag', 'buy_status', 'estate_status', 'area_size', 'area', 'date', 'available')
     list_filter = ('available',"buy_status", "estate_status", "date")
     search_fields = ['additional_information']
-    raw_id_fields = ('area', 'tags')
+    raw_id_fields = ('area',)
     inlines = [ ItemImageInline, ]
 
 
