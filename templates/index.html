@@ -33,7 +33,16 @@
                         <button class="btn  toggle-btn" type="button"><i class="fa fa-bars"></i></button>
 
                         <div class="form-group">
-                            <input name="text" type="text" class="form-control" placeholder=" کلید واژه ">
+                          <select name="estate_status" id="basic" class="selectpicker show-tick form-control" title="نوع ملک">
+                              <option>آپارتمان</option>
+                              <option>خانه ویلایی</option>
+                              <option>زمین</option>
+                              <option>مغازه و تجاری</option>
+                              <option>دفتر کار اداری</option>
+                              <option>کلنگی</option>
+                              <option>ویلا</option>
+                              <option>باغ</option>
+                          </select>
                         </div>
                         <div class="form-group">
                             <select name="area" id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="منطقه">
@@ -43,10 +52,11 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <select name="buy_status" id="basic" class="selectpicker show-tick form-control" title="وضعیت">
-                                <option>رهن</option>
-                                <option>اجاره</option>
+                            <select name="buy_status" id="basic" class="selectpicker show-tick form-control" title="نوع معامله">
+                                <option>رهن و اجاره</option>
+                                <option>رهن کامل</option>
                                 <option>فروش</option>
+                                <option>پیش فروش</option>
                             </select>
                         </div>
                         <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button>
@@ -165,7 +175,7 @@
                           <p style="display: none;"> {{ Item.additional_information|slice:":120" }}...  </p>
                           <div class="property-icon">
 
-                              <!-- room qty --> 
+                              <!-- room qty -->
                               {% if Item.estate_status == "آپارتمان"  or Item.estate_status == "مغازه و تجاری" or Item.estate_status == "دفتر کار اداری" or Item.estate_status == "خانه ویلایی" or Item.estate_status == "ویلا" %}
                                 <img src="{% static 'assets/img/icon/bed-orange.png' %}">[{{ Item.room_qty }}]
                               {% endif %}
