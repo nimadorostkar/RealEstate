@@ -79,9 +79,9 @@ class Item(models.Model):
     storage_room = models.BooleanField(default=False, verbose_name = "انباری" )
     elevator = models.BooleanField(default=False, verbose_name = "آسانسور" )
     balcony = models.BooleanField(default=False, verbose_name = "بالکن" )
-    deposit = models.IntegerField(null=True,blank=True, default='0', verbose_name = "ودیعه (ریال)")
-    rent = models.IntegerField(null=True,blank=True, default='0', verbose_name = "اجاره (ریال)")
-    price = models.IntegerField(null=True,blank=True, default='0', verbose_name = "قیمت فروش (ریال)")
+    deposit = models.IntegerField(null=True,blank=True, default='0', verbose_name = "ودیعه (تومان)")
+    rent = models.IntegerField(null=True,blank=True, default='0', verbose_name = "اجاره (تومان)")
+    price = models.IntegerField(null=True,blank=True, default='0', verbose_name = "قیمت فروش (تومان)")
     area = models.ForeignKey(Area, on_delete=models.CASCADE,verbose_name = "منطقه")
     additional_information = models.TextField(max_length=2000,null=True, blank=True,verbose_name = "اطلاعات تکمیلی")
     date = models.DateField(auto_now_add=True, verbose_name = "تاریخ آگهی")
@@ -94,7 +94,7 @@ class Item(models.Model):
         verbose_name_plural = "املاک"
 
     def __str__(self):
-        return str(self.buy_status +" "+ self.estate_status +" "+ self.area.name )
+        return str(self.buy_status +" "+ self.estate_status +" در "+ self.area.name )
 
     def image_tag(self):
         return format_html("<img width=50 src='{}'>".format(self.image.url))
