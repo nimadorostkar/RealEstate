@@ -369,7 +369,7 @@
                             <div class="client-text" dir="rtl">
                                <a href="{% url 'blog-detail' post.slug %}"> <h4> {{ post.title }} </h4> </a> <hr>
                                <div align="center"><a href="{% url 'blog-detail' post.slug %}"> <img style="max-height:180px;" src="{{post.img.url}}"> </a></div>
-                                <p> {{post.body | slice:':200' | safe}}... </p>
+                                <p> {{post.body | slice:':200' | safe}}... </p> 
                                 <h4 dir="ltr"><i> {{ post.j_post_date }} </i></h4>
                             </div>
                         </div>

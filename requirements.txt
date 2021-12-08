@@ -17,3 +17,5 @@ django-extra-settings
 django-ckeditor
 graphene
 graphene-django
+django_jalali
+unicodecsv

@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'extra_settings',
     'jalali_date',
     'app',
+    'crm',
     'blogApp',
     'ckeditor'
 ]

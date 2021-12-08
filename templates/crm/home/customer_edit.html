@@ -1,0 +1,130 @@
+{% extends 'crm/layouts/base.html' %}
+
+{% block title %} ویرایش مشتری  {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+    <!-- select search  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="/static/assets/css/bootstrap336.min.css" rel="stylesheet" />
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+
+
+
+<div class="container-fluid py-4">
+
+  <div class="row" dir="rtl">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header pb-0">
+          <h6> ویرایش {{customer.name}} </h6> <p class="text-xs text-secondary mb-0"> تغییرات مد نظر را اعمال کنید  </p> <hr>
+        </div>
+        <div class="card-body px-7 pt-4 pb-2">
+
+               <form action="#" method="post" dir="rtl" align="right">
+                 {% csrf_token %}
+                 <div class="row">
+
+                  <div class="col-md-3 pr-md-4">
+                    <div class="form-group">
+                      <label><p class="text-xs text-secondary mb-0"> نام </p></label>
+                      <input name="name" type="text" value="{{customer.name}}" class="form-control">
+                    </div>
+                  </div>
+
+                  <div class="col-md-3 pr-md-4">
+                    <div class="form-group">
+                      <label><p class="text-xs text-secondary mb-0"> نام شرکت </p></label>
+                      <input name="company" type="text" value="{{customer.company}}" class="form-control">
+                    </div>
+                  </div>
+
+                  <div class="col-md-3 pr-md-4">
+                    <div class="form-group">
+                      <label><p class="text-xs text-secondary mb-0"> تلفن </p></label>
+                      <input name="phone" type="text" value="{{customer.phone}}" class="form-control">
+                    </div>
+                  </div>
+
+                  <div class="col-md-3 pr-md-4">
+                    <div class="form-group">
+                      <label><p class="text-xs text-secondary mb-0"> آدرس </p></label>
+                      <input name="address" type="text" value="{{customer.address}}" class="form-control">
+                    </div>
+                  </div>
+
+                 </div>
+
+                 <div class="row">
+                   <div class="col-md-12 pr-md-4">
+                     <div class="form-group">
+                       <label><p class="text-xs text-secondary mb-0"> اطلاعات تکمیلی </p></label>
+                       <input name="additional_information" type="text" value="{{customer.additional_information}}" class="form-control">
+                     </div>
+                   </div>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-md-2 pr-md-4">
+                        <div class="form-group">
+                          <label><p class="text-xs text-secondary mb-0"> مشتری ویژه </p></label> <br>
+                          <input name="substantial"  type="checkbox" {% if customer.substantial %} checked {% endif%} >
+                        </div>
+                      </div>
+                   <div class="col-md-10 pr-md-4">
+                     <div class="form-group">
+                       <label><p class="text-xs text-secondary mb-0"> تگ محصولی </p></label>
+                         {% for Product in products %}
+                           <label  for="ts1">{{Product}}</label>
+                           <input type="checkbox" name="products" value="{{ Product.pk }}" {% if Product in customer.product_tag.all %} checked {% endif%}  />
+                         {% endfor %}
+                     </div>
+                   </div>
+                  </div>
+
+
+                 <div class="card-footer" align="center">
+                   <button type="submit" class="btn bg-gradient-info my-1 me-1"> ثبت </button>
+                     <a href="{{ link.get_absolute_url }}"> <p style="color:green;"> {{ success }} </p> </a>
+                 </div>
+
+              </form>
+
+         </div>
+       </div>
+     </div>
+   </div>
+
+
+
+
+    {% include "crm/includes/footer.html" %}
+
+
+</div>
+
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script>
+
+
+    $(function() {
+      $('.selectpicker').selectpicker({
+        liveSearch: true
+      });
+    });
+
+</script>
+{% endblock javascripts %}

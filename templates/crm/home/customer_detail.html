@@ -1,0 +1,164 @@
+{% extends 'crm/layouts/base.html' %}
+
+{% block title %} {{ customer.name }} {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="container-fluid">
+      <div class="page-header min-height-150 border-radius-xl mt-4" style="background-image: url('/static/assets/img/bg.png'); background-position-y: 100%;"></div>
+
+      <div class="card card-body blur shadow-blur mx-4 mt-n6">
+        <div class="row gx-4">
+          <div class="col-auto">
+            <div class="avatar avatar-xl position-relative">
+              {% if customer.substantial %}
+                <img src="/static/assets/img/golduser.png" alt="..." class="w-100 border-radius-lg shadow-sm">
+              {% else %}
+                <img src="/static/assets/img/user.png" alt="..." class="w-100 border-radius-lg shadow-sm">
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-auto my-auto">
+            <div class="h-100">
+              <h5 class="mb-1"> {{ customer.name }}  </h5>
+              <p class="mb-0 font-weight-bold text-sm">
+                {{ customer.company }}
+              </p>
+            </div>
+          </div>
+          <div class="col-sm-6 col-8 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">  </div>
+        </div>
+        <div class="nav-wrapper position-relative end-0" dir="rtl">
+          <div class="table-responsive p-0">
+          <table class="table align-items-center mb-0">
+            <thead>
+              <tr>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> شماره تماس </th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> آدرس </th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> توضیحات </th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> تگ محصولی </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="align-middle text-center">
+                  <p> {{ customer.phone }} </p>
+                </td>
+                <td class="align-middle text-center text-sm">
+                  <p> {{ customer.address }} </p>
+                </td>
+                <td class="align-middle text-center">
+                  <p> {{ customer.additional_information|linebreaks }} </p>
+                </td>
+                <td class="align-middle text-center">
+                  <div class="avatar-group text-center mt-2">
+                    {% for product_tag in customer.product_tag.all %}
+                    <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ product_tag.name }}">
+                        <img style="background-color: lightgrey;" alt="{{ product_tag.name }}" src="{{ product_tag.image.url }}">
+                    </a>
+                    {% endfor %}
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <a class="btn btn-link text-dark px-3 mb-0 text-secondary text-xxs" href="{{ customer.get_absolute_edit_url }}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i> ویرایش </a>
+          </div>
+        </div>
+      </div>
+
+
+      <br><br>
+
+      <div class="row" dir="rtl">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <h6> سفارشات این مشتری: </h6>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">  </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> محصول </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> تعداد </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> وضعیت </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> کارشناس فروش </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> تاریخ </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                   {% for Order_request in reqs %}
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <a href="{{ Order_request.get_absolute_url }}">
+                              <h6 class="mb-0 text-sm">
+                                {% if Order_request.customer.substantial %}
+                                  <img src="/static/assets/img/golduser.png" class="avatar avatar-sm me-3">
+                                {% else %}
+                                  <img src="/static/assets/img/user.png" class="avatar avatar-sm me-3">
+                                {% endif %}
+                             </h6>
+                           </a>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <p class="text-xs text-secondary mb-0">
+                          <img src="{{ Order_request.product.image.url }}" class="avatar avatar-sm me-3">
+                          {{ Order_request.product.name }}
+                        </p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-xs text-secondary mb-0"> {{ Order_request.qty }} عدد </p>
+                      </td>
+                      <td class="align-middle text-center">
+                        {% if Order_request.status == 'تکمیل شده' %}
+                          <span class="badge badge-sm bg-gradient-success"> تکمیل شده </span>
+                        {% elif Order_request.status == 'لغو شده' %}
+                          <span class="badge badge-sm bg-gradient-danger"> لغو شده </span>
+                        {% elif Order_request.status == 'دریافت پیش پرداخت' %}
+                          <span class="badge badge-sm bg-gradient-info"> دریافت پیش پرداخت </span>
+                        {% elif Order_request.status == 'جدید' %}
+                          <span class="badge badge-sm bg-gradient-warning"> جدید </span>
+                        {% else %}
+                          <span class="badge badge-sm bg-gradient-secondary"> در حال بررسی </span>
+                        {% endif %}
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-xs text-secondary mb-0"> {{ Order_request.user.first_name }} {{ Order_request.user.last_name }} </p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-xs text-secondary mb-0"> {{ Order_request.date_created|date:'H:i  Y-m-d'  }} </p>
+                      </td>
+                    </tr>
+                   {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+
+
+
+
+      {% include "crm/includes/footer.html" %}
+
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %} {% endblock javascripts %}

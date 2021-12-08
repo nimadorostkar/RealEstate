@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+
+  <meta charset="UTF-8">
+  <title> صورت حساب </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+  <link href="/static/assets/css/invoice.css" rel="stylesheet" />
+
+</head>
+<body>
+
+
+{% load humanize %}
+{% load jalali_tags %}
+
+
+<div class="container invoice">
+  <div class="invoice-header">
+    <div class="row">
+      <div class="col-xs-5">
+        <h3> صورت حساب </h3>
+        <h5 class="text-muted"> شماره: {{ req.id }}  |  تاریخ: {{ now|date:'d-m-Y' }} </h5>
+      </div>
+      <div class="col-xs-7">
+        <div class="media">
+          <ul class="media-body list-unstyled" dir="rtl" >
+            <li><h1 style="padding-right:15px;"> آتـــــــــــروتک </h1></li>
+            <li>
+              <p style="padding-right:15px;padding-top:7px;"> شرکت افق سازان فناوری آترو  </p>
+            </li>
+          </ul>
+          <div class="media-left">
+            <img src="/static/assets/img/biglogo.png" class="media-object logo" alt="...">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="invoice-body">
+    <div class="row" dir="rtl">
+      <div class="col-xs-6">
+        <div class="panel">
+          <div class="panel-heading">
+            <h4 class="text-muted"> اطلاعات مشتری </h4>
+          </div>
+          <div class="panel-body">
+            <dl class="dl-horizontal">
+              <dt> نام </dt>
+              <dd> <span class="text-muted">  آقا/خانم  </span> &nbsp; {{ req.customer.name }} </dd>
+              <dt> نام شرکت </dt>
+              <dd> {{ req.customer.company }} </dd>
+              <dt>تلفن</dt>
+              <dd> {{ req.customer.phone }} </dd>
+              <dt> آدرس </dt>
+              <dd> {{ req.customer.address }} </dd>
+              <dt>&nbsp;</dt>
+              <dd>&nbsp;</dd>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="panel">
+          <div class="panel-heading">
+            <h4 class="text-muted"> اطلاعات شرکت </h4>
+          </div>
+          <div class="panel-body">
+            <dl class="dl-horizontal">
+              <dt>نام شرکت</dt>
+              <dd> شرکت افق سازان فناوری آترو </dd>
+              <dt>نوع شرکت</dt>
+              <dd> مسئولیت محدود </dd>
+              <dt>شماره ثبت</dt>
+              <dd> ۸۴۰۱۰۹ </dd>
+              <dt>تلفن</dt>
+              <dd> ۰۲۱-۳۳۱۸۴۸۶۱ </dd>
+              <dt> کدپستی </dt>
+              <dd> ۱۴۳۱۸۶۳۷۹۶ </dd>
+              <dt> آدرس </dt>
+              <dd> تهران ، تقاطع پاسدار گمنام و نبرد شمالی </dd>
+              <dt>&nbsp;</dt>
+              <dd>&nbsp;</dd>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+<br>
+
+    <div class="panel panel-default" dir="rtl">
+      <div class="panel-heading">
+        <h3 class="panel-title"> خدمات / محصولات </h3>
+      </div>
+      <table class="table table-bordered table-condensed">
+        <thead>
+          <tr>
+            <th class="text-center"> نام </th>
+            <th class="text-center"> تعداد </th>
+            <th class="text-center"> قیمت واحد </th>
+            <th class="text-center"> درصد تخفیف </th>
+            <th class="text-center"> مجموع </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-center"> {{ req.product }} </td>
+            <td class="text-center">
+              <span class="mono"> {{ req.qty }} </span>
+              <small class="text-muted"> عدد </small>
+            </td>
+            <td class="text-center">
+              <span class="mono"> {{ req.product.price|floatformat:0|intcomma:False }} </span>
+              <small class="text-muted"> ریال </small>
+            </td>
+            <td class="text-center">
+              <span class="mono"> {{ req.discount }} </span>
+              <small class="text-muted"> % </small>
+            </td>
+            <td class="text-center">
+              <span class="mono"> {{ total_price|floatformat:0|intcomma:False }} </span>
+              <small class="text-muted"> ریال </small>
+            </td>
+          </tr>
+
+
+
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel panel-default" dir="rtl">
+      <table class="table table-bordered table-condensed">
+        <thead>
+          <tr>
+            <td class="text-center col-xs-1"> مجموع </td>
+            <td class="text-center col-xs-1">  مبلغ دریافتی </td>
+            <td class="text-center col-xs-1"> مانده </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th class="text-center rowtotal mono">
+              <span class="mono"> {{ total_price|floatformat:0|intcomma:False }} </span> <small class="text-muted"> ریال </small>
+            </th>
+            <th class="text-center rowtotal mono">
+              <span class="mono"> {{ total_incoming|floatformat:0|intcomma:False }} </span> <small class="text-muted"> ریال </small>
+            </th>
+            <th class="text-center rowtotal mono">
+              <span class="mono"> {{ remained|floatformat:0|intcomma:False }} </span> <small class="text-muted"> ریال </small>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="panel">
+          <div class="panel-body" dir="rtl">
+             مبلغ فاکتور به شماره شبا IR510180000000009019501881 و یا شماره کارت 6104337659688384 واریز گردد.
+          </div>
+        </div>
+        <br><br>
+        <div align="left" dir="ltr">
+          <small class="text-muted"> مدیر عامل:  پارسا ملک پور </small>
+        </div>
+        <br>
+      </div>
+    </div>
+
+  </div>
+  <div class="invoice-footer" dir="rtl">
+    از اینکه محصولات و خدمات ما را انتخاب کردید متشکریم.
+    <br>
+    <strong> Atrotech.ir </strong>
+  </div>
+</div>
+
+
+
+</body>
+</html>

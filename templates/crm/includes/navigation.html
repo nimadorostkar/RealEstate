@@ -1,0 +1,73 @@
+
+  <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
+    <div class="container-fluid px-3" style="display:flex;">
+        <nav aria-label="breadcrumb">
+            <h6 dir="rtl"><small> نرم افزار مدیریت فروش و ارتباط با مشتریان AtroCRM </small></h6>
+        </nav>
+        <div class="collapse navbar-collapse me-md-0 me-4" id="navbar">
+          <ul class="navbar-nav mb-2 mb-sm-0 ms-sm-auto justify-content-sm-end">
+            <li class="nav-item d-xl-none ps-4 d-flex align-items-center">
+              <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                <div class="sidenav-toggler-inner">
+                  <i class="sidenav-toggler-line"></i>
+                  <i class="sidenav-toggler-line"></i>
+                  <i class="sidenav-toggler-line"></i>
+                </div>
+              </a>
+            </li>
+           {% if request.user.is_superuser %}
+            <li class="nav-item px-4 d-flex align-items-center">
+              <a href="{% url 'admin:index' %}" class="nav-link text-body p-0">
+                <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
+              </a>
+            </li>
+           {% endif %}
+
+            <li class="nav-item dropdown pe-2 d-flex align-items-center">
+              <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                {% if new_req_counts == 0 %}
+                <i class="fa fa-bell cursor-pointer"></i>
+                {% else %}
+                <i style="color:Tomato;" class="fa fa-bell cursor-pointer btn-outline-danger"></i>
+                <sup style="color:Tomato;" class="btn-outline-danger"> <small> {{ new_req_counts }} </small> </sup>
+                {% endif %}
+              </a>
+              <ul class="dropdown-menu px-2 py-3 ms-sm-n4" aria-labelledby="dropdownMenuButton">
+               {% for Order_request in new_reqs %}
+                <li class="mb-2">
+                  <a class="dropdown-item border-radius-md" href="{{ Order_request.get_absolute_url }}">
+                    <div class="d-flex py-1">
+                      <div class="my-auto">
+                        <img src="{{ Order_request.product.image.url }}" class="avatar avatar-sm  me-3 ">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1" dir="rtl">
+                          <span class="font-weight-bold"> {{ Order_request }} </span>
+                        </h6>
+                        <p class="text-xs text-secondary mb-0">
+                          <i class="fa fa-clock me-1"></i>
+                          {{ Order_request.date_created|date:'H:i  Y-m-d' }}
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+               {% endfor %}
+              </ul>
+            </li>
+
+          </ul>
+        </div>
+
+
+        <div class="ms-md-auto ps-md-3 d-flex align-items-center">
+          <form action="{% url 'search' %}" method="post">
+            {% csrf_token %}
+            <div class="bg-white border-radius-lg d-flex">
+              <input type="text" name="q" class="form-control border-0 ps-3" placeholder="اینجا تایپ کنید...">
+              <button class="btn bg-gradient-info my-1 me-1">جستجو</button>
+             </div>
+          </form>
+        </div>
+    </div>
+  </nav>

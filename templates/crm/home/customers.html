@@ -1,0 +1,122 @@
+{% extends 'crm/layouts/base.html' %}
+
+{% block title %} مشتریان {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+
+  <div class="container-fluid py-4">
+
+
+    <div class="row" dir="rtl">
+      <div class="col-12">
+        <div class="card mb-4">
+          <div class="card-header pb-0">
+            <h6> مشتریان  </h6>
+            <a href="{% url 'customer_registration' %}" class="btn"> <img src="/static/assets/img/reqreg.png" width="14px"> <small> ایجاد مشتری جدید </small> </a>
+          </div>
+          <div class="card-body px-0 pt-0 pb-2">
+            <div class="table-responsive p-0">
+              <table class="table align-items-center mb-0">
+                <thead>
+                  <tr>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> نام مشتری </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> شماره تلفن </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> نام شرکت </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> آدرس </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> تگ محصولی </th>
+                  </tr>
+                </thead>
+                <tbody>
+                 {% for Customer in customers %}
+                  <tr>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <a href="{{ Customer.get_absolute_url }}">
+                            <h6 class="mb-0 text-sm">
+                              {% if Customer.substantial %}
+                                <img src="/static/assets/img/golduser.png" class="avatar avatar-sm me-3">
+                              {% else %}
+                                <img src="/static/assets/img/user.png" class="avatar avatar-sm me-3">
+                              {% endif %}
+                              {{ Customer.name }}
+                           </h6>
+                         </a>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="align-middle text-center text-sm">
+                      <p> {{ Customer.phone }} </p>
+                    </td>
+                    <td class="align-middle text-center text-sm">
+                      <p> {{ Customer.company }} </p>
+                    </td>
+                    <td class="align-middle text-center text-sm">
+                      <p> {{ Customer.address }} </p>
+                    </td>
+                    <td>
+                      <div class="avatar-group text-center mt-2">
+                        {% for product_tag in Customer.product_tag.all %}
+                        <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ product_tag.name }}">
+                            <img style="background-color: lightgrey;" alt="{{ product_tag.name }}" src="{{ product_tag.image.url }}">
+                        </a>
+                        {% endfor %}
+                      </div>
+                    </td>
+                  </tr>
+                 {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+     <ul class="pagination">
+       {% if is_paginated %}
+         {% if page_obj.has_previous %}
+           <li class="page-item"><a class="page-link" style="color:black" href="?page=1"><i class="fa fa-arrow-left" aria-hidden="true"></i></a></li>
+           <li class="page-item"><a class="page-link" style="color:black" href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+         {% endif %}
+         {% for num in page_obj.paginator.page_range %}
+           {% if num == page_obj.number %}
+             <li class="page-item active"><a class="page-link" style="color:#ffffff; background-color: black; border-color: black;" href="?page={{num}}">{{num}}</a></li>
+           {% elif num > page_obj.number|add:'-2' and num < page_obj.number|add:'2' %}
+             <li class="page-item"><a class="page-link" style="color:black" href="?page={{num}}">{{num}}</a></li>
+           {% endif %}
+         {% endfor %}
+         {% if page_obj.has_next %}
+           <li class="page-item"><a class="page-link" style="color:black" href="?page={{page_obj.next_page_number}}"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+           <li class="page-item"><a class="page-link" style="color:black" href="?page={{ page_obj.paginator.num_pages }}"><i class="fa fa-arrow-right" aria-hidden="true"></i></a></li>
+         {% endif %}
+       {% endif %}
+      </ul>
+
+
+
+    {% include "crm/includes/footer.html" %}
+
+  </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+  <script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+  </script>
+
+{% endblock javascripts %}

@@ -1,0 +1,137 @@
+{% extends 'crm/layouts/base.html' %}
+
+{% block title %} ویرایش {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+    <!-- select search  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="/static/assets/css/bootstrap336.min.css" rel="stylesheet" />
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+
+
+
+<div class="container-fluid py-4">
+
+  <div class="row" dir="rtl">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header pb-0">
+          <h6>  ویرایش </h6> <p class="text-xs text-secondary mb-0"> ویرایش {{ req }} </p> <hr>
+        </div>
+        <div class="card-body px-7 pt-4 pb-2">
+
+               <form action="#" method="post" dir="rtl" align="right">
+                 {% csrf_token %}
+                 <div class="row">
+
+                   <div class="col-md-4 pr-md-4">
+                     <div class="form-group">
+                       <label><p class="text-xs text-secondary mb-0"> خریدار </p></label>
+                       <select name="customer" class="form-control selectpicker" data-live-search="true">
+                          <option data-tokens="{{req.customer.name}}" value={{req.customer.id}} selected >{{req.customer.name}}</option>
+                         {% for Customer in customers %}
+                          {% if Customer != req.customer %}
+                           <option data-tokens="{{Customer.name}}" value={{Customer.id}}>{{Customer.name}}</option>
+                          {% endif %}
+                         {% endfor %}
+                       </select>
+                     </div>
+                   </div>
+
+                   <div class="col-md-4 pr-md-4">
+                     <div class="form-group">
+                     <label><p class="text-xs text-secondary mb-0"> محصول </p></label>
+                      <select name="product" class="form-control selectpicker" data-live-search="true">
+                        <option data-tokens="{{req.product.name}}" value={{req.product.id}} selected >{{req.product.name}}</option>
+                        {% for Product in products %}
+                         {% if Product != req.product %}
+                          <option data-tokens="{{Product.name}}" value={{Product.id}}>{{Product.name}}</option>
+                         {% endif %}
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-md-2 pr-md-4">
+                    <div class="form-group">
+                      <label><p class="text-xs text-secondary mb-0"> تعداد </p></label>
+                      <input name="qty" type="number" value="{{req.qty}}" class="form-control" required>
+                    </div>
+                  </div>
+
+                   <div class="col-md-2 pl-md-4">
+                     <div class="form-group">
+                       <label><p class="text-xs text-secondary mb-0"> درصد تخفیف </p></label>
+                       <input name="discount" type="number" value="{{req.discount}}" class="form-control" required>
+                     </div>
+                   </div>
+
+                 </div>
+
+                 <div class="row">
+                   <div class="col-md-10 pr-md-4">
+                     <div class="form-group">
+                       <label><p class="text-xs text-secondary mb-0"> توضیحات </p></label>
+                       <input name="description" type="text" value="{{req.description}}" class="form-control">
+                     </div>
+                   </div>
+                   <div class="col-md-2 pr-md-4">
+                     <div class="form-group">
+                       <label><p class="text-xs text-secondary mb-0"> وضعیت </p></label>
+                       <select name="status" class="form-control selectpicker" data-live-search="true">
+                          <option {% if req.status == "تکمیل شده" %} selected {% endif%} data-tokens="تکمیل شده" value="تکمیل شده"> تکمیل شده </option>
+                          <option {% if req.status == "لغو شده" %} selected {% endif%} data-tokens="لغو شده" value="لغو شده"> لغو شده </option>
+                          <option {% if req.status == "دریافت پیش پرداخت" %} selected {% endif%} data-tokens="دریافت پیش پرداخت" value="دریافت پیش پرداخت"> دریافت پیش پرداخت </option>
+                          <option {% if req.status == "در حال بررسی" %} selected {% endif%} data-tokens="در حال بررسی" value="در حال بررسی"> در حال بررسی </option>
+                          <option {% if req.status == "جدید" %} selected {% endif%} data-tokens="جدید" value="جدید"> جدید </option>
+                       </select>
+                     </div>
+                   </div>
+                 </div>
+
+
+                 <div class="card-footer" align="center">
+                   <button type="submit" class="btn bg-gradient-info my-1 me-1"> ثبت </button>
+                   <a href="{{ link.get_absolute_url }}"> <p style="color:green;"> {{ success }} </p> </a>
+                 </div>
+
+              </form>
+
+         </div>
+       </div>
+     </div>
+   </div>
+
+
+
+
+    {% include "crm/includes/footer.html" %}
+
+
+</div>
+
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script>
+
+
+    $(function() {
+      $('.selectpicker').selectpicker({
+        liveSearch: true
+      });
+    });
+
+</script>
+{% endblock javascripts %}

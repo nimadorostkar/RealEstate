@@ -1,0 +1,144 @@
+{% extends 'crm/layouts/base.html' %}
+{% load humanize %}
+
+{% block title %} محصولات {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+   <div class="container-fluid py-4">
+
+     <div class="row" dir="rtl">
+       <div class="col-lg-12 mb-lg-0 mb-4">
+         <div class="card">
+           <div class="card-body p-3">
+             <div class="row">
+               <div class="col-lg-6">
+                 <div class="d-flex flex-column h-100">
+                   <p class="text-lg mb-1 pt-2"><small> محصول </small></p>
+                   <h4 class="font-weight-bolder"> {{ product.name }}  </h4>
+                   <p class="mb-5"> {{ product.description|linebreaks }} </p>
+                   <h5 class="font-weight-bolder"> قیمت: {{ product.price|intcomma:False }}  ریال </h5>
+                   <br>
+                   {% if product.available %}
+                   <p>
+                     <span class="badge badge-sm bg-gradient-success" style="width:70px;">موجود </span>
+                     <small> {{ product.inventory}} عدد </small>
+                  </p>
+                   {% else %}
+                     <span class="badge badge-sm bg-gradient-secondary" style="width:70px;">نا موجود</span>
+                   {% endif %}
+                 </div>
+               </div>
+               <div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
+                 <div class=" border-radius-lg h-100">
+                   <img src="/static/assets/img/shapes/waves-white.svg" class="position-absolute h-100 w-50 top-0 d-lg-block d-none" alt="waves">
+                   <div class="position-relative d-flex align-items-center justify-content-center h-100">
+                     <img class="w-100 position-relative z-index-2 pt-4" src="{{ product.image.url }}">
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+
+
+     <br><br>
+
+
+     <div class="row" dir="rtl">
+       <div class="col-12">
+         <div class="card mb-4">
+           <div class="card-header pb-0">
+             <h6> سفارشات مربوط به این محصول: </h6>
+           </div>
+           <div class="card-body px-0 pt-0 pb-2">
+             <div class="table-responsive p-0">
+               <table class="table align-items-center mb-0">
+                 <thead>
+                   <tr>
+                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> نام مشتری </th>
+                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> محصول </th>
+                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> تعداد </th>
+                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> وضعیت </th>
+                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> کارشناس فروش </th>
+                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> درصد تخفیف </th>
+                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> تاریخ </th>
+                   </tr>
+                 </thead>
+                 <tbody>
+                  {% for Order_request in reqs %}
+                   <tr>
+                     <td>
+                       <div class="d-flex px-2 py-1">
+                         <div class="d-flex flex-column justify-content-center">
+                           <a href="{{ Order_request.get_absolute_url }}">
+                             <h6 class="mb-0 text-sm">
+                               <img src="/static/assets/img/user.png" class="avatar avatar-sm me-3">
+                               {{ Order_request.customer.name }}
+                            </h6>
+                          </a>
+                         </div>
+                       </div>
+                     </td>
+
+                     <td class="align-middle text-center text-sm">
+                       <p class="text-xs text-secondary mb-0"> <img src="{{ Order_request.product.image.url }}" class="avatar avatar-sm me-3"> {{ Order_request.product.name }} </p>
+                     </td>
+
+                     <td class="align-middle text-center">
+                       <p class="text-xs text-secondary mb-0"> {{ Order_request.qty }} عدد </p>
+                     </td>
+
+                     <td class="align-middle text-center">
+                       {% if Order_request.status == 'تکمیل شده' %}
+                         <span class="badge badge-sm bg-gradient-success"> تکمیل شده </span>
+                       {% elif Order_request.status == 'لغو شده' %}
+                         <span class="badge badge-sm bg-gradient-danger"> لغو شده </span>
+                       {% elif Order_request.status == 'دریافت پیش پرداخت' %}
+                         <span class="badge badge-sm bg-gradient-info"> دریافت پیش پرداخت </span>
+                       {% elif Order_request.status == 'جدید' %}
+                         <span class="badge badge-sm bg-gradient-warning"> جدید </span>
+                       {% else %}
+                         <span class="badge badge-sm bg-gradient-secondary"> در حال بررسی </span>
+                       {% endif %}
+                     </td>
+
+                     <td class="align-middle text-center">
+                       <p class="text-xs text-secondary mb-0"> {{ Order_request.user.first_name }} {{ Order_request.user.last_name }} </p>
+                     </td>
+
+                     <td class="align-middle text-center">
+                       <p class="text-xs text-secondary mb-0"> {{ Order_request.discount }} ٪ </p>
+                     </td>
+
+                     <td class="align-middle text-center">
+                       <p class="text-xs text-secondary mb-0"> {{ Order_request.date_created|date:'H:i  Y-m-d' }} </p>
+                     </td>
+
+                   </tr>
+                  {% endfor %}
+                 </tbody>
+               </table>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+
+
+
+
+     {% include "crm/includes/footer.html" %}
+
+   </div>
+
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %} {% endblock javascripts %}

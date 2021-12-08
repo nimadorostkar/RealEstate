@@ -1,0 +1,108 @@
+/* --------------- fonts --------------- */
+
+@font-face {
+  font-family: "iransans";
+  src: url("../fonts/IRANSansWeb.eot"),
+    url("../fonts/IRANSansWebd41d.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/IRANSansWeb.woff") format("woff"),
+    url("../fonts/IRANSansWeb.html") format("woff2"),
+    url("../fonts/IRANSansWeb.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.iransans { font-family: "iransans" !important; }
+
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {font-family: "iransans" !important;}
+
+.li, li {font-family: "iransans", sans-serif !important;}
+
+.p, p {font-family: "iransans", sans-serif !important;}
+
+.pre, pre {font-family: "iransans", sans-serif !important;}
+
+.a, a {font-family: "iransans", sans-serif !important;}
+
+.button, button {font-family: "iransans", sans-serif !important;}
+
+.span, span {font-family: "iransans", sans-serif !important;} */
+
+.text, text {font-family: "iransans", sans-serif !important;}
+
+.tspan, tspan {font-family: "iransans", sans-serif !important;}
+
+
+/* -------------- font end -----------  */
+
+
+
+
+body {
+  background: #EEE;
+  font-family: "iransans" !important;
+  /* font-size:0.9em !important; */
+}
+
+.invoice {
+  width: 970px !important;
+  margin: 50px auto;
+}
+.invoice .invoice-header {
+  padding: 25px 25px 15px;
+}
+.invoice .invoice-header h1 {
+  margin: 0;
+}
+.invoice .invoice-header .media .media-body {
+  font-size: 0.9em;
+  margin: 0;
+}
+.invoice .invoice-body {
+  border-radius: 10px;
+  padding: 25px;
+  background: #FFF;
+}
+.invoice .invoice-footer {
+  padding: 15px;
+  font-size: 0.9em;
+  text-align: center;
+  color: #999;
+}
+
+.logo {
+  max-height: 70px;
+  border-radius: 10px;
+}
+
+.dl-horizontal {
+  margin: 0;
+}
+.dl-horizontal dt {
+  float: right;
+  width: 80px;
+  overflow: hidden;
+  clear: left;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dl-horizontal dd {
+  margin-left: 90px;
+}
+
+.rowamount {
+  padding-top: 15px !important;
+}
+
+.rowtotal {
+  font-size: 1.3em;
+}
+
+.colfix {
+  width: 12%;
+}
+
+.mono {
+  font-family: monospace;
+}
