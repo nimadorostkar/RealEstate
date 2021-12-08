@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
     # The home page
-    path('', views.index, name='home'),
+    path('', views.index, name='crm'),
     path('etc', views.etc, name='etc'),
     path('search',views.search,name='search'),
     # Product

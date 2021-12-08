@@ -2,7 +2,7 @@
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute right-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href="/">
-        <img src="/static/assets/img/logo.png" class="navbar-brand-img h-100 w-15" alt="...">
+        <img src="/static/assets/crm/img/logo.png" class="navbar-brand-img h-100 w-15" alt="...">
         <span class="ms-1 font-weight-bold"> آتـــروتـک </span>
       </a>
     </div>
@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse  w-auto" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item mb-1">
-          <a class="nav-link {% if request.path == '/' %} active {% endif %}" href="/">
+          <a class="nav-link {% if request.path == '/' %} active {% endif %}" href="{% url 'crm' %}">
             <div class="icon icon-shape icon-xs shadow border-radius-sm bg-gradient-light text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>داشبورد </title>
@@ -100,7 +100,7 @@
         <li class="nav-item mb-1">
           <a class="nav-link {% if request.path == '/order_registration' %} active {% endif %}" href="{% url 'order_registration' %}">
             <div class="icon icon-shape icon-xs shadow border-radius-sm bg-gradient-light text-center me-2 d-flex align-items-center justify-content-center">
-              <img src="/static/assets/img/reqreg.png" width="24px">
+              <img src="/static/assets/crm/img/reqreg.png" width="24px">
             </div>
             <span class="nav-link-text ms-1"> ثبت سفارش </span>
           </a>
@@ -117,7 +117,7 @@
             <div class="icon icon-shape icon-xs shadow border-radius-sm bg-gradient-light text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>etc</title>
-                 <img src="/static/assets/img/etc.png" width="20px">
+                 <img src="/static/assets/crm/img/etc.png" width="20px">
               </svg>
             </div>
             <span class="nav-link-text ms-1"> etc. </span>
@@ -130,7 +130,7 @@
             <div class="icon icon-shape icon-xs shadow border-radius-sm bg-gradient-light text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>خروج</title>
-                 <img src="/static/assets/img/logout.png" width="18px">
+                 <img src="/static/assets/crm/img/logout.png" width="18px">
               </svg>
             </div>
             <span class="nav-link-text ms-1"> خروج </span>
