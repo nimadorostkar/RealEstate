@@ -1,6 +1,6 @@
 from django.urls import path, re_path
 from crm import views
-from .views import customers, products, order_requests
+from .views import customers, order_requests, crm_items
 from django.contrib.auth.decorators import login_required
 
 
@@ -11,8 +11,8 @@ urlpatterns = [
     path('etc', views.etc, name='etc'),
     path('search',views.search,name='search'),
     # Product
-    path('products', login_required(products.as_view()), name='products'),
-    path('product_detail/<int:id>/',views.product_detail,name='product_detail'),
+    path('crm_items', crm_items.as_view(), name='crm_items'),
+    path('crm_items_detail/<int:id>/',views.crm_items_detail,name='crm_items_detail'),
     # Customer
     path('customers', login_required(customers.as_view()), name='customers'),
     path('customer_detail/<int:id>/',views.customer_detail,name='customer_detail'),

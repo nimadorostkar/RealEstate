@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from jalali_date.fields import JalaliDateField, SplitJalaliDateTimeField
 from jalali_date.widgets import AdminJalaliDateWidget, AdminSplitJalaliDateTime
-from .models import Order_incomings, Customer, Product
+from .models import Order_incomings, Customer
 from . import models
 
 

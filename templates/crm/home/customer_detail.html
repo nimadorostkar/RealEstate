@@ -8,25 +8,22 @@
 {% block content %}
 
     <div class="container-fluid">
-      <div class="page-header min-height-150 border-radius-xl mt-4" style="background-image: url('/static/assets/img/bg.png'); background-position-y: 100%;"></div>
+      <div class="page-header min-height-150 border-radius-xl mt-4" style="background-image: url('/static/assets/crm/img/bg.png'); background-position-y: 100%;"></div>
 
       <div class="card card-body blur shadow-blur mx-4 mt-n6">
         <div class="row gx-4">
           <div class="col-auto">
             <div class="avatar avatar-xl position-relative">
               {% if customer.substantial %}
-                <img src="/static/assets/img/golduser.png" alt="..." class="w-100 border-radius-lg shadow-sm">
+                <img src="/static/assets/crm/img/golduser.png" alt="..." class="w-100 border-radius-lg shadow-sm">
               {% else %}
-                <img src="/static/assets/img/user.png" alt="..." class="w-100 border-radius-lg shadow-sm">
+                <img src="/static/assets/crm/img/user.png" alt="..." class="w-100 border-radius-lg shadow-sm">
               {% endif %}
             </div>
           </div>
           <div class="col-auto my-auto">
             <div class="h-100">
               <h5 class="mb-1"> {{ customer.name }}  </h5>
-              <p class="mb-0 font-weight-bold text-sm">
-                {{ customer.company }}
-              </p>
             </div>
           </div>
           <div class="col-sm-6 col-8 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">  </div>
@@ -37,9 +34,8 @@
             <thead>
               <tr>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> شماره تماس </th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> آدرس </th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> توضیحات </th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> تگ محصولی </th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> فایل </th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> تاریخ ایجاد </th>
               </tr>
             </thead>
             <tbody>
@@ -47,24 +43,16 @@
                 <td class="align-middle text-center">
                   <p> {{ customer.phone }} </p>
                 </td>
-                <td class="align-middle text-center text-sm">
-                  <p> {{ customer.address }} </p>
+                <td class="align-middle text-center">
+                  <p>  {{ customer.item }} <img src="{{ customer.item.image.url }}" class="avatar avatar-sm me-3"> </p>
                 </td>
                 <td class="align-middle text-center">
-                  <p> {{ customer.additional_information|linebreaks }} </p>
-                </td>
-                <td class="align-middle text-center">
-                  <div class="avatar-group text-center mt-2">
-                    {% for product_tag in customer.product_tag.all %}
-                    <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ product_tag.name }}">
-                        <img style="background-color: lightgrey;" alt="{{ product_tag.name }}" src="{{ product_tag.image.url }}">
-                    </a>
-                    {% endfor %}
-                  </div>
+                  <p> <i class="far fa-calendar-alt me-2"></i> <small> {{ customer.date_created|date:'Y-m-d'  }}</small>  <i class="far fa-clock me-2"></i> <small> {{ customer.date_created|date:'H-i'  }}</small> </p>
                 </td>
               </tr>
             </tbody>
           </table>
+          <p> توضیحات تکمیلی: <small> {{ customer.additional_information|linebreaks }} </small> </p>
           <a class="btn btn-link text-dark px-3 mb-0 text-secondary text-xxs" href="{{ customer.get_absolute_edit_url }}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i> ویرایش </a>
           </div>
         </div>

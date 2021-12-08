@@ -25,9 +25,7 @@
                   <tr>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> نام مشتری </th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> شماره تلفن </th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> نام شرکت </th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> آدرس </th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> تگ محصولی </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> فایل </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -39,9 +37,9 @@
                           <a href="{{ Customer.get_absolute_url }}">
                             <h6 class="mb-0 text-sm">
                               {% if Customer.substantial %}
-                                <img src="/static/assets/img/golduser.png" class="avatar avatar-sm me-3">
+                                <img src="/static/assets/crm/img/golduser.png" class="avatar avatar-sm me-3">
                               {% else %}
-                                <img src="/static/assets/img/user.png" class="avatar avatar-sm me-3">
+                                <img src="/static/assets/crm/img/user.png" class="avatar avatar-sm me-3">
                               {% endif %}
                               {{ Customer.name }}
                            </h6>
@@ -53,19 +51,7 @@
                       <p> {{ Customer.phone }} </p>
                     </td>
                     <td class="align-middle text-center text-sm">
-                      <p> {{ Customer.company }} </p>
-                    </td>
-                    <td class="align-middle text-center text-sm">
-                      <p> {{ Customer.address }} </p>
-                    </td>
-                    <td>
-                      <div class="avatar-group text-center mt-2">
-                        {% for product_tag in Customer.product_tag.all %}
-                        <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ product_tag.name }}">
-                            <img style="background-color: lightgrey;" alt="{{ product_tag.name }}" src="{{ product_tag.image.url }}">
-                        </a>
-                        {% endfor %}
-                      </div>
+                      <p> {{ Customer.item }} <img src="{{ Customer.item.image.url }}" class="avatar avatar-sm me-3"> </p>
                     </td>
                   </tr>
                  {% endfor %}

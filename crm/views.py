@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.shortcuts import render, get_object_or_404, redirect
 from . import models
 from django.contrib.auth.models import User
-from .models import Product, Order_request, Customer, Order_incomings
+from .models import Order_request, Customer, Order_incomings
 from .forms import TimeForm
 from itertools import chain
 from django.contrib.auth import get_user_model
@@ -18,7 +18,7 @@ import jdatetime
 from django.contrib import messages
 from django.views import generic
 from django.utils.decorators import method_decorator
-
+from app.models import Item
 
 
 
@@ -29,7 +29,7 @@ from django.utils.decorators import method_decorator
 def index(request):
     open_reqs_count = models.Order_request.objects.all().exclude(status='تکمیل شده').count()
     customers_count = models.Customer.objects.all().count()
-    products_count = models.Product.objects.all().count()
+    items_count = models.Item.objects.all().count()
     new_order_count = models.Order_request.objects.filter(status='جدید').count()
 
     chartList = list(models.Order_request.objects.filter(status='تکمیل شده').values_list('product_id', flat=True).distinct())
@@ -62,7 +62,7 @@ def index(request):
         chart_product = { 'product':Product.product.name, 'qty':qty_sum}
         chart.append(chart_product)
 
-    context = {'open_reqs_count': open_reqs_count, 'customers_count':customers_count , 'products_count':products_count, 'new_order_count':new_order_count, 'chart':chart }
+    context = {'open_reqs_count': open_reqs_count, 'customers_count':customers_count , 'items_count':items_count, 'new_order_count':new_order_count, 'chart':chart }
 
     html_template = loader.get_template('crm/home/index.html')
     return HttpResponse(html_template.render(context, request))
@@ -109,12 +109,12 @@ def search(request):
 
 
 #------------------------------------------------------------------------------
-class products(generic.ListView):
-    model = Product
-    template_name = 'crm/home/products.html'
-    context_object_name = 'products'
-    queryset = Product.objects.all()
-    ordering = ['-date_created']
+class crm_items(generic.ListView):
+    model = Item
+    template_name = 'crm/home/items.html'
+    context_object_name = 'items'
+    queryset = Item.objects.all()
+    ordering = ['-date']
     paginate_by = 20
 
 
@@ -123,11 +123,11 @@ class products(generic.ListView):
 
 
 @login_required()
-def product_detail(request, id):
-    product = get_object_or_404(models.Product, id=id)
+def crm_items_detail(request, id):
+    item = get_object_or_404(models.Item, id=id)
     reqs = models.Order_request.objects.filter(product=product).order_by('-date_created')
     context = {'product':product, 'reqs':reqs}
-    return render(request, 'crm/home/product_detail.html', context)
+    return render(request, 'crm/home/items_detail.html', context)
 
 
 

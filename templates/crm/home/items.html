@@ -2,7 +2,7 @@
 
 {% load humanize %}
 
-{% block title %} محصولات {% endblock title %}
+{% block title %} فایل ها  {% endblock title %}
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -16,32 +16,32 @@
       <div class="col-12">
         <div class="card mb-4">
           <div class="card-header pb-0">
-            <h6> محصولات </h6>
+            <h6> فایل ها </h6>
           </div>
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
               <table class="table align-items-center mb-0">
                 <thead>
                   <tr>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">نام محصول</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> فایل </th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> وضعیت </th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> قیمت ( ریال ) </th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> تصویر </th>
                   </tr>
                 </thead>
                 <tbody>
-                 {% for Product in products %}
+                 {% for Item in items %}
                   <tr>
                     <td>
                       <div class="d-flex px-2 py-1">
                         <div class="d-flex flex-column justify-content-center">
-                          <a href="{{ Product.get_absolute_url }}"> <h6 class="mb-0 text-sm"> {{ Product.name }} </h6> </a>
-                          <p class="text-xs text-secondary mb-0"> {{ Product.description|slice:":50" }}... </p>
+                          <a href="{{ Item.get_absolute_url }}"> <h6 class="mb-0 text-sm"> {{ Item }} </h6> </a>
+                          <p class="text-xs text-secondary mb-0"> {{ Item.description|slice:":50" }}... </p>
                         </div>
                       </div>
                     </td>
                     <td class="align-middle text-center text-sm">
-                      {% if Product.available %}
+                      {% if Item.available %}
 
                         <p class="text-xs text-secondary mb-0"> <span class="badge badge-sm bg-gradient-success">موجود</span>  <small> {{ Product.inventory}} عدد </small> </p>
                       {% else %}
@@ -49,11 +49,11 @@
                       {% endif %}
                     </td>
                     <td class="align-middle text-center">
-                      <span class="text-secondary text-xs font-weight-bold"> {{ Product.price|floatformat:0|intcomma:False  }} ریال </span>
+                      <span class="text-secondary text-xs font-weight-bold"> {{ Item.price|floatformat:0|intcomma:False  }} ریال </span>
                     </td>
                     <td class="align-middle text-center">
                       <div>
-                        <img src="{{ Product.image.url }}" class="avatar avatar-sm me-3">
+                        <img src="{{ Item.image.url }}" class="avatar avatar-sm me-3">
                       </div>
                     </td>
                   </tr>

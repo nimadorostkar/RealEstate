@@ -1,7 +1,7 @@
 from django.contrib import admin
 from . import models
 from django.contrib.admin.models import LogEntry
-from .models import Product, Customer, Order_request, Order_incomings
+from .models import Customer, Order_request, Order_incomings
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin, ImportExportMixin
 from jalali_date import datetime2jalali, date2jalali
@@ -14,27 +14,12 @@ from .actions import export_as_csv_action
 
 
 #------------------------------------------------------------------------------
-class ProductAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ('name', 'price', 'short_description', 'image_tag', 'available')
-    list_filter = ("available","date_created")
-    search_fields = ['name',]
-    actions = [export_as_csv_action("CSV خروجی", fields=['id','available', 'name', 'inventory', 'price', 'description', 'image' ])]
-
-admin.site.register(models.Product, ProductAdmin)
-
-
-
-
-
-
-
-#------------------------------------------------------------------------------
 class CustomerAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ('name', 'phone', 'company', 'address', 'short_description')
-    list_filter = ("substantial", "date_created", "product_tag")
+    list_display = ('name', 'phone', 'short_description')
+    list_filter = ("substantial", "date_created", "item")
     search_fields = ['name',]
-    raw_id_fields = ('product_tag',)
-    actions = [export_as_csv_action("CSV خروجی", fields=['id', 'name', 'phone', 'company', 'address', 'additional_information', 'substantial' ])]
+    raw_id_fields = ('item',)
+    actions = [export_as_csv_action("CSV خروجی", fields=['id', 'name', 'phone', 'additional_information', "item", 'substantial' ])]
 
 
 admin.site.register(models.Customer, CustomerAdmin)
