@@ -64,6 +64,25 @@ class Area(models.Model):
 
 
 
+
+
+#------------------------------------------------------------------------------
+class Ownership(models.Model):
+    name = models.CharField(max_length=200,null=True, blank=True,verbose_name = "نام")
+    phone = models.CharField(max_length=50,null=True, blank=True,verbose_name = " شماره تماس")
+
+    class Meta:
+        verbose_name = "مالکیت"
+        verbose_name_plural = "مالکیت ها"
+
+    def __str__(self):
+        return str(self.name)
+
+
+
+
+
+
 #------------------------------------------------------------------------------
 class Item(models.Model):
     available = models.BooleanField(default=True, verbose_name = "موجود" )
@@ -86,6 +105,9 @@ class Item(models.Model):
     date = models.DateField(auto_now_add=True, verbose_name = "تاریخ آگهی")
     image = models.ImageField(upload_to='media', default='media/Default.png', null=True, blank=True, verbose_name = "تصویر")
     video_link = models.URLField(max_length=500, null=True, blank=True, verbose_name = "لینک ویدئو")
+    #sales_expert = models.ForeignKey(User, null=True,blank=True, on_delete=models.CASCADE,verbose_name = "کارشناس فروش")
+    #ownership = models.ForeignKey(Ownership, null=True,blank=True, on_delete=models.CASCADE,verbose_name = "مالکیت")
+
 
 
     class Meta:

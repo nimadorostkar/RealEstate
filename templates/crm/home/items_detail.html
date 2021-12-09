@@ -8,47 +8,179 @@
 
 {% block content %}
 
-   <div class="container-fluid py-4">
 
-     <div class="row" dir="rtl">
-       <div class="col-lg-12 mb-lg-0 mb-4">
-         <div class="card">
-           <div class="card-body p-3">
-             <div class="row">
-               <div class="col-lg-6">
-                 <div class="d-flex flex-column h-100">
-                   <p class="text-lg mb-1 pt-2"><small> محصول </small></p>
-                   <h4 class="font-weight-bolder"> {{ item }}  </h4>
-                   <p class="mb-5"> {{ product.description|linebreaks }} </p>
-                   <h5 class="font-weight-bolder"> قیمت: {{ product.price|intcomma:False }}  ریال </h5>
-                   <br>
-                   {% if product.available %}
-                   <p>
-                     <span class="badge badge-sm bg-gradient-success" style="width:70px;">موجود </span>
-                     <small> {{ product.inventory}} عدد </small>
-                  </p>
-                   {% else %}
-                     <span class="badge badge-sm bg-gradient-secondary" style="width:70px;">نا موجود</span>
-                   {% endif %}
-                 </div>
-               </div>
-               <div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
-                 <div class=" border-radius-lg h-100">
-                   <img src="/static/assets/crm/img/shapes/waves-white.svg" class="position-absolute h-100 w-50 top-0 d-lg-block d-none" alt="waves">
-                   <div class="position-relative d-flex align-items-center justify-content-center h-100">
-                     <img class="w-100 position-relative z-index-2 pt-4" src="{{ item.image.url }}">
-                   </div>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
+<div class="container-fluid py-4">
+
+  <div class="row">
+    <div class="col-lg-12 mb-lg-0 mb-4">
+      <div class="card">
+        <div class="card-body p-3">
+          <div class="row">
+            <div class="col-lg-9">
+              <div class="d-flex flex-column h-100">
+                <p class="text-lg mb-1 pt-2 text-bold"> <i class="far fa-calendar-alt me-2"></i> <small> {{ item.date|naturalday }} </small> </p>
+                <h3 dir="rtl" class="font-weight-bolder">
+                  {{ item }}
+                  <a class="btn btn-link text-dark px-3 mb-0 text-secondary text-xxs" href="{{ item.get_absolute_edit_url }}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i> ویرایش </a>
+                  <a class="btn btn-link text-dark px-3 mb-0 text-secondary text-xxs" href="{{ item.get_absolute_url }}"><i class="fas fa-search text-dark me-2" aria-hidden="true"></i> مشاهده فایل در وبسایت </a>
+                </h3>
+                <div align="right" dir="rtl">
+                  {{ item.additional_information|linebreaks }}
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 ms-auto text-center mt-5 mt-lg-0">
+                <div class="position-relative d-flex align-items-center justify-content-center h-100">
+                  <img class="w-100 position-relative z-index-2 pt-4" src="{{ item.image.url }}">
+                </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
 
 
-     <br><br>
+              <div class="table-responsive p-0" dir="rtl">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
 
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> کد فایل </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> وضعیت درخواست </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> نوع معامله </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> نوع ملک </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> منطقه </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> متراژ </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> قیمت </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> وضعیت </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="align-middle text-center">
+                         <h6> {{ item.id  }} </h6>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-xs text-secondary mb-0">
+                          {% if req.status == 'تکمیل شده' %}
+                            <span class="badge badge-sm bg-gradient-success"> تکمیل شده </span>
+                          {% elif req.status == 'لغو شده' %}
+                            <span class="badge badge-sm bg-gradient-danger"> لغو شده </span>
+                          {% elif req.status == 'دریافت پیش پرداخت' %}
+                            <span class="badge badge-sm bg-gradient-info"> دریافت پیش پرداخت </span>
+                          {% elif req.status == 'جدید' %}
+                            <span class="badge badge-sm bg-gradient-warning"> جدید </span>
+                          {% else %}
+                            <span class="badge badge-sm bg-gradient-secondary"> در حال بررسی </span>
+                          {% endif %}
+                        </p>
+                      </td>
+                      <td class="align-middle text-center">
+                         <h6> {{ item.buy_status  }} </h6>
+                      </td>
+                      <td class="align-middle text-center">
+                         <h6> {{ item.estate_status  }} </h6>
+                      </td>
+                      <td class="align-middle text-center">
+                         <h6> {{ item.area  }} </h6>
+                      </td>
+                      <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold"> {{ item.area_size  }} <small> متر </small> </span>
+                      </td>
+                      <td class="align-middle text-center">
+                          {% if item.buy_status == 'فروش' %}
+                            <span class="text-secondary text-xs font-weight-bold"> {{ item.price|floatformat:0|intcomma:False }} تومان </span>
+                          {% elif item.buy_status == 'رهن کامل' %}
+                            <span class="text-secondary text-xs font-weight-bold"> {{ item.deposit|floatformat:0|intcomma:False }} تومان </span>
+                          {% elif item.buy_status == 'پیش فروش' %}
+                            <span class="text-secondary text-xs font-weight-bold"> {{ item.price|floatformat:0|intcomma:False }} تومان </span>
+                          {% elif item.buy_status == 'رهن و اجاره' %}
+                            <small> <span class="text-secondary text-xs font-weight-bold"> ودیعه: {{ item.deposit|floatformat:0|intcomma:False }} &nbsp; اجاره: {{ item.rent|floatformat:0|intcomma:False }} تومان</span> </small>
+                          {% endif %}
+                      </td>
+                      <td class="align-middle text-center">
+                        {% if item.available %}
+                          <p class="text-xs text-secondary mb-0"> <span class="badge badge-sm bg-gradient-success"> موجود </span> </p>
+                        {% else %}
+                          <p class="text-xs text-secondary mb-0"> <span class="badge badge-sm bg-gradient-warning"> ناموجود </span> </p>
+                        {% endif %}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <br>
+
+                <div class="row">
+
+                  <div class="col-lg-6" dir="rtl" align="right">
+                    <p> <span class="text-xs text-secondary mb-0"> کارشناس فروش : </span> {{ item.sales_expert.first_name }} {{ item.sales_expert.last_name }} </p>
+                    <p> <span class="text-xs text-secondary mb-0">   مالک : </span> {{ item.ownership.name }} &nbsp; &nbsp; {{ item.ownership.phone }} </p>
+                  </div>
+
+                  <div class="col-lg-6" align="left">
+                    <div class="card-body position-relative z-index-1 d-flex flex-column h-100 p-3">
+                      <div class="property-icon">
+                        <!-- room qty -->
+                        {% if item.estate_status == "آپارتمان"  or item.estate_status == "مغازه و تجاری" or item.estate_status == "دفتر کار اداری" or item.estate_status == "خانه ویلایی" or item.estate_status == "ویلا" %}
+                          <img src="/static/assets/img/icon/bed-orange.png">[{{ item.room_qty }}]
+                        {% endif %}
+                        <!-- parking -->
+                        {% if item.estate_status == "آپارتمان"  or item.estate_status == "مغازه و تجاری" or item.estate_status == "دفتر کار اداری" or item.estate_status == "خانه ویلایی" or item.estate_status == "ویلا" %}
+                            {% if item.parking %}
+                              <img src="/static/assets/img/icon/cars-orange.png">
+                            {% else %}
+                              <img src="/static/assets/img/icon/cars.png">
+                            {% endif %}
+                        {% endif %}
+                        <!-- elevator -->
+                        {% if item.estate_status == "آپارتمان"  or item.estate_status == "مغازه و تجاری" or item.estate_status == "دفتر کار اداری" %}
+                            {% if item.elevator %}
+                              <img src="/static/assets/img/icon/elevator-orange.png">
+                            {% else %}
+                              <img src="/static/assets/img/icon/elevator.png">
+                            {% endif %}
+                        {% endif %}
+                        <!-- storage room -->
+                        {% if item.estate_status == "آپارتمان"  or item.estate_status == "مغازه و تجاری" or item.estate_status == "دفتر کار اداری" or item.estate_status == "خانه ویلایی" or item.estate_status == "ویلا" %}
+                            {% if item.storage_room %}
+                              <img src="/static/assets/img/icon/warehouse-orange.png">
+                            {% else %}
+                              <img src="/static/assets/img/icon/warehouse.png">
+                            {% endif %}
+                        {% endif %}
+                        <!-- balcony -->
+                        {% if item.estate_status == "آپارتمان"  or item.estate_status == "مغازه و تجاری" or item.estate_status == "دفتر کار اداری" or item.estate_status == "خانه ویلایی" or item.estate_status == "ویلا" %}
+                            {% if item.balcony %}
+                              <img src="/static/assets/img/icon/balcony-orange.png">
+                            {% else %}
+                              <img src="/static/assets/img/icon/balcony.png">
+                            {% endif %}
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+
+
+
+
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+<div class="container-fluid py-4">
 
      <div class="row" dir="rtl">
        <div class="col-12">

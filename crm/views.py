@@ -151,8 +151,8 @@ class customers(generic.ListView):
 @login_required()
 def customer_detail(request, id):
     customer = get_object_or_404(models.Customer, id=id)
-    reqs = models.Order_request.objects.filter(customer=customer).order_by('-date_created')
-    context = {'customer':customer, 'reqs':reqs}
+    #reqs = models.Order_request.objects.filter(customer=customer).order_by('-date_created')
+    context = {'customer':customer}
     return render(request, 'crm/home/customer_detail.html', context)
 
 
