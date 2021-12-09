@@ -51,10 +51,8 @@ class Customer(models.Model):
 class Order_request(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,verbose_name = "کارشناس فروش")
     customer = models.ForeignKey(Customer ,on_delete=models.CASCADE, verbose_name = "خریدار")
-    item = models.ForeignKey(Item ,on_delete=models.CASCADE, verbose_name = "محصول")
-    qty = models.IntegerField(default='1', verbose_name = "تعداد" )
+    item = models.ForeignKey(Item ,on_delete=models.CASCADE, verbose_name = "فایل")
     description = models.TextField(max_length=1000, null=True, blank=True, verbose_name = "توضیحات")
-    discount = models.IntegerField(default='0', verbose_name = "درصد تخفیف" )
     CHOICES = ( ('تکمیل شده','تکمیل شده'), ('لغو شده','لغو شده'), ('دریافت پیش پرداخت','دریافت پیش پرداخت'), ('در حال بررسی','در حال بررسی'), ('جدید','جدید'))
     status = models.CharField(max_length=30,choices=CHOICES, default='جدید', verbose_name = "وضعیت")
     date_created = jmodels.jDateTimeField(auto_now_add=True, verbose_name = "تاریخ")
@@ -62,7 +60,7 @@ class Order_request(models.Model):
 
 
     def __str__(self):
-        return  " سفارش " + self.product.name + ' برای ' + self.customer.name
+        return  " درخواست " + str(self.item) + ' برای ' + self.customer.name
 
     @property
     def short_description(self):
@@ -74,12 +72,9 @@ class Order_request(models.Model):
     def get_absolute_edit_url(self):
         return reverse('order_edit',args=[self.id])
 
-    def get_absolute_invoice_url(self):
-        return reverse('order_invoice',args=[self.id])
-
     class Meta:
-        verbose_name = "سفارش"
-        verbose_name_plural = "سفارشات"
+        verbose_name = "درخواست خرید"
+        verbose_name_plural = "درخواست های خرید"
 
 
 

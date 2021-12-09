@@ -105,8 +105,8 @@ class Item(models.Model):
     date = models.DateField(auto_now_add=True, verbose_name = "تاریخ آگهی")
     image = models.ImageField(upload_to='media', default='media/Default.png', null=True, blank=True, verbose_name = "تصویر")
     video_link = models.URLField(max_length=500, null=True, blank=True, verbose_name = "لینک ویدئو")
-    #sales_expert = models.ForeignKey(User, null=True,blank=True, on_delete=models.CASCADE,verbose_name = "کارشناس فروش")
-    #ownership = models.ForeignKey(Ownership, null=True,blank=True, on_delete=models.CASCADE,verbose_name = "مالکیت")
+    sales_expert = models.ForeignKey(User, null=True,blank=True, on_delete=models.CASCADE,verbose_name = "کارشناس فروش")
+    ownership = models.ForeignKey(Ownership, null=True,blank=True, on_delete=models.CASCADE,verbose_name = "مالکیت")
 
 
 

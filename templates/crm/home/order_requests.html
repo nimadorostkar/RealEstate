@@ -1,6 +1,6 @@
 {% extends 'crm/layouts/base.html' %}
 
-{% block title %} سفارشات {% endblock title %}
+{% block title %} درخواست ها {% endblock title %}
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -13,20 +13,18 @@
       <div class="col-12">
         <div class="card mb-4">
           <div class="card-header pb-0">
-            <h6> سفارشات </h6>
+            <h6> درخواست ها </h6>
           </div>
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
               <table class="table align-items-center mb-0">
                 <thead>
                   <tr>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> نام مشتری </th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> محصول </th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> تعداد </th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> وضعیت </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> مشتری </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> فایل </th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> کارشناس فروش </th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> درصد تخفیف </th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> تاریخ </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> تاریخ ایجاد </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> وضعیت </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -38,9 +36,9 @@
                           <a href="{{ Order_request.get_absolute_url }}">
                             <h6 class="mb-0 text-sm">
                               {% if Order_request.customer.substantial %}
-                                <img src="/static/assets/img/golduser.png" class="avatar avatar-sm me-3">
+                                <img src="/static/assets/crm/img/golduser.png" class="avatar avatar-sm me-3">
                               {% else %}
-                                <img src="/static/assets/img/user.png" class="avatar avatar-sm me-3">
+                                <img src="/static/assets/crm/img/user.png" class="avatar avatar-sm me-3">
                               {% endif %}
                               {{ Order_request.customer.name }}
                            </h6>
@@ -48,41 +46,28 @@
                         </div>
                       </div>
                     </td>
-
                     <td class="align-middle text-center text-sm">
-                      <p class="text-xs text-secondary mb-0"> <img src="{{ Order_request.product.image.url }}" class="avatar avatar-sm me-3"> {{ Order_request.product.name }} </p>
+                      <p class="text-xs text-secondary mb-0"> <img src="{{ Order_request.item.image.url }}" class="avatar avatar-sm me-3"> {{ Order_request.item }} </p>
                     </td>
-
-                    <td class="align-middle text-center">
-                      <p class="text-xs text-secondary mb-0"> {{ Order_request.qty }} عدد </p>
-                    </td>
-
-                    <td class="align-middle text-center">
-                      {% if Order_request.status == 'تکمیل شده' %}
-                        <span class="badge badge-sm bg-gradient-success"> تکمیل شده </span>
-                      {% elif Order_request.status == 'لغو شده' %}
-                        <span class="badge badge-sm bg-gradient-danger"> لغو شده </span>
-                      {% elif Order_request.status == 'دریافت پیش پرداخت' %}
-                        <span class="badge badge-sm bg-gradient-info"> دریافت پیش پرداخت </span>
-                        {% elif Order_request.status == 'جدید' %}
-                          <span class="badge badge-sm bg-gradient-warning"> جدید </span>
-                      {% else %}
-                        <span class="badge badge-sm bg-gradient-secondary"> در حال بررسی </span>
-                      {% endif %}
-                    </td>
-
                     <td class="align-middle text-center">
                       <p class="text-xs text-secondary mb-0"> {{ Order_request.user.first_name }} {{ Order_request.user.last_name }} </p>
                     </td>
-
                     <td class="align-middle text-center">
-                      <p class="text-xs text-secondary mb-0"> {{ Order_request.discount }} ٪ </p>
+                      <p class="text-xxs text-secondary mb-0"> <i class="far fa-calendar-alt me-2"></i> <small> {{ Order_request.date_created|date:'Y-m-d' }} </small>  <i class="far fa-clock me-2"></i> <small> {{ Order_request.date_created|date:'H:i'}} </small> </p>
                     </td>
-
                     <td class="align-middle text-center">
-                      <p class="text-xs text-secondary mb-0"> {{ Order_request.date_created|date:'H:i  Y-m-d' }} </p>
+                      {% if Order_request.status == 'تکمیل شده' %}
+                         <span class="badge badge-sm bg-gradient-success"> تکمیل شده </span>
+                      {% elif Order_request.status == 'لغو شده' %}
+                         <span class="badge badge-sm bg-gradient-danger"> لغو شده </span>
+                      {% elif Order_request.status == 'دریافت پیش پرداخت' %}
+                         <span class="badge badge-sm bg-gradient-info"> دریافت پیش پرداخت </span>
+                      {% elif Order_request.status == 'جدید' %}
+                         <span class="badge badge-sm bg-gradient-warning"> جدید </span>
+                      {% else %}
+                         <span class="badge badge-sm bg-gradient-secondary"> در حال بررسی </span>
+                      {% endif %}
                     </td>
-
                   </tr>
                  {% endfor %}
                 </tbody>

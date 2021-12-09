@@ -303,28 +303,6 @@ def order_edit(request, id):
 
 
 
-#------------------------------------------------------------------------------
-@login_required(login_url="/login/")
-def order_invoice(request, id):
-    req = get_object_or_404(models.Order_request, id=id)
-    now = jdatetime.datetime.now()
-
-    incomings = models.Order_incomings.objects.filter(request=req)
-    total_price = (req.product.price * req.qty) - ((req.product.price * req.qty)*(req.discount/100))
-    total_incoming = sum(incomings.values_list('amount', flat=True))
-    remained = total_price - total_incoming
-
-    context = {'req':req, 'now':now, 'total_price':total_price, 'total_incoming':total_incoming, 'remained':remained }
-    html_template = loader.get_template('crm/home/invoice.html')
-    return HttpResponse(html_template.render(context, request))
-
-
-
-
-
-
-
-
 
 #------------------------------------------------------------------------------
 @login_required(login_url="/login/")

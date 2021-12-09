@@ -1,7 +1,7 @@
 from django.contrib import admin
 from . import models
 from django.contrib.admin.models import LogEntry
-from .models import Profile, Area, Item, ItemImage, Slider, Fav, Contact
+from .models import Profile, Area, Item, ItemImage, Slider, Fav, Contact, Ownership
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin, ImportExportMixin
 from jalali_date import datetime2jalali, date2jalali
@@ -51,6 +51,19 @@ class AreaAdmin(ImportExportModelAdmin):
     search_fields = ['name']
 
 admin.site.register(models.Area, AreaAdmin)
+
+
+
+
+
+
+#------------------------------------------------------------------------------
+class OwnershipAdmin(ImportExportModelAdmin):
+    list_display = ('name','phone')
+    search_fields = ['name']
+
+admin.site.register(models.Ownership, OwnershipAdmin)
+
 
 
 
