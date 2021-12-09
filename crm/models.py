@@ -51,7 +51,7 @@ class Customer(models.Model):
 class Order_request(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,verbose_name = "کارشناس فروش")
     customer = models.ForeignKey(Customer ,on_delete=models.CASCADE, verbose_name = "خریدار")
-    product = models.ForeignKey(Item ,on_delete=models.CASCADE, verbose_name = "محصول")
+    item = models.ForeignKey(Item ,on_delete=models.CASCADE, verbose_name = "محصول")
     qty = models.IntegerField(default='1', verbose_name = "تعداد" )
     description = models.TextField(max_length=1000, null=True, blank=True, verbose_name = "توضیحات")
     discount = models.IntegerField(default='0', verbose_name = "درصد تخفیف" )

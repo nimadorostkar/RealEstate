@@ -23,38 +23,50 @@
               <table class="table align-items-center mb-0">
                 <thead>
                   <tr>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> فایل </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> فایل </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> نوع معامله </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> نوع ملک </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> منطقه </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> متراژ </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> قیمت </th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> وضعیت </th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> قیمت ( ریال ) </th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> تصویر </th>
                   </tr>
                 </thead>
                 <tbody>
                  {% for Item in items %}
                   <tr>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div class="d-flex flex-column justify-content-center">
-                          <a href="{{ Item.get_absolute_url }}"> <h6 class="mb-0 text-sm"> {{ Item }} </h6> </a>
-                          <p class="text-xs text-secondary mb-0"> {{ Item.description|slice:":50" }}... </p>
-                        </div>
-                      </div>
+                    <td class="align-middle text-center">
+                       <a href="{{ Item.get_absolute_crm_url }}"> <img src="{{ Item.image.url }}" class="avatar avatar-sm me-3"> </a>
                     </td>
-                    <td class="align-middle text-center text-sm">
+                    <td class="align-middle text-center">
+                       <h6> {{ Item.buy_status  }} </h6>
+                    </td>
+                    <td class="align-middle text-center">
+                       <h6> {{ Item.estate_status  }} </h6>
+                    </td>
+                    <td class="align-middle text-center">
+                       <h6> {{ Item.area  }} </h6>
+                    </td>
+                    <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold"> {{ Item.area_size  }} <small> متر </small> </span>
+                    </td>
+                    <td class="align-middle text-center">
+                        {% if Item.buy_status == 'فروش' %}
+                          <span class="text-secondary text-xs font-weight-bold"> {{ Item.price|floatformat:0|intcomma:False }} تومان </span>
+                        {% elif Item.buy_status == 'رهن کامل' %}
+                          <span class="text-secondary text-xs font-weight-bold"> {{ Item.deposit|floatformat:0|intcomma:False }} تومان </span>
+                        {% elif Item.buy_status == 'پیش فروش' %}
+                          <span class="text-secondary text-xs font-weight-bold"> {{ Item.price|floatformat:0|intcomma:False }} تومان </span>
+                        {% elif Item.buy_status == 'رهن و اجاره' %}
+                          <small> <span class="text-secondary text-xs font-weight-bold"> ودیعه:{{ Item.deposit|floatformat:0|intcomma:False }} اجاره:{{ Item.rent|floatformat:0|intcomma:False }} تومان</span> </small>
+                        {% endif %}
+                    </td>
+                    <td class="align-middle text-center">
                       {% if Item.available %}
-
-                        <p class="text-xs text-secondary mb-0"> <span class="badge badge-sm bg-gradient-success">موجود</span>  <small> {{ Product.inventory}} عدد </small> </p>
+                        <p class="text-xs text-secondary mb-0"> <span class="badge badge-sm bg-gradient-success"> موجود </span> </p>
                       {% else %}
-                        <span class="badge badge-sm bg-gradient-secondary">نا موجود</span>
+                        <p class="text-xs text-secondary mb-0"> <span class="badge badge-sm bg-gradient-warning"> ناموجود </span> </p>
                       {% endif %}
-                    </td>
-                    <td class="align-middle text-center">
-                      <span class="text-secondary text-xs font-weight-bold"> {{ Item.price|floatformat:0|intcomma:False  }} ریال </span>
-                    </td>
-                    <td class="align-middle text-center">
-                      <div>
-                        <img src="{{ Item.image.url }}" class="avatar avatar-sm me-3">
-                      </div>
                     </td>
                   </tr>
                  {% endfor %}

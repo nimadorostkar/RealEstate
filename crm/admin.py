@@ -36,12 +36,12 @@ class Order_incomingsInline(StackedInlineJalaliMixin, TabularInlineJalaliMixin, 
 
 
 class Order_requestAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ('product','user','customer','short_description','status')
-    list_filter = ("user", 'product','status', 'date_created')
-    search_fields = ['product__name']
-    raw_id_fields = ('product', 'user', 'customer')
+    list_display = ('item','user','customer','short_description','status')
+    list_filter = ("user", 'item','status', 'date_created')
+    search_fields = ['item']
+    raw_id_fields = ('item', 'user', 'customer')
     inlines = [ Order_incomingsInline, ]
-    actions = [export_as_csv_action("CSV خروجی", fields=['id','user', 'customer', 'product', 'qty', 'description', 'discount', 'status' ])]
+    actions = [export_as_csv_action("CSV خروجی", fields=['id','user', 'customer', 'item', 'qty', 'description', 'discount', 'status' ])]
 
 
 

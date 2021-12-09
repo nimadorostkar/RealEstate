@@ -1,7 +1,7 @@
 {% extends 'crm/layouts/base.html' %}
 {% load humanize %}
 
-{% block title %} محصولات {% endblock title %}
+{% block title %} {{ item }}  {% endblock title %}
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -18,7 +18,7 @@
                <div class="col-lg-6">
                  <div class="d-flex flex-column h-100">
                    <p class="text-lg mb-1 pt-2"><small> محصول </small></p>
-                   <h4 class="font-weight-bolder"> {{ product.name }}  </h4>
+                   <h4 class="font-weight-bolder"> {{ item }}  </h4>
                    <p class="mb-5"> {{ product.description|linebreaks }} </p>
                    <h5 class="font-weight-bolder"> قیمت: {{ product.price|intcomma:False }}  ریال </h5>
                    <br>
@@ -34,9 +34,9 @@
                </div>
                <div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
                  <div class=" border-radius-lg h-100">
-                   <img src="/static/assets/img/shapes/waves-white.svg" class="position-absolute h-100 w-50 top-0 d-lg-block d-none" alt="waves">
+                   <img src="/static/assets/crm/img/shapes/waves-white.svg" class="position-absolute h-100 w-50 top-0 d-lg-block d-none" alt="waves">
                    <div class="position-relative d-flex align-items-center justify-content-center h-100">
-                     <img class="w-100 position-relative z-index-2 pt-4" src="{{ product.image.url }}">
+                     <img class="w-100 position-relative z-index-2 pt-4" src="{{ item.image.url }}">
                    </div>
                  </div>
                </div>

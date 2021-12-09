@@ -125,8 +125,8 @@ class crm_items(generic.ListView):
 @login_required()
 def crm_items_detail(request, id):
     item = get_object_or_404(models.Item, id=id)
-    reqs = models.Order_request.objects.filter(product=product).order_by('-date_created')
-    context = {'product':product, 'reqs':reqs}
+    #reqs = models.Order_request.objects.filter(item=item).order_by('-date_created')
+    context = {'item':item}
     return render(request, 'crm/home/items_detail.html', context)
 
 

@@ -13,7 +13,6 @@ from extensions.utils import jalali_converter
 
 
 
-
 #------------------------------------------------------------------------------
 class Profile(models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE,unique=True,related_name='profile',verbose_name = "کاربر")
@@ -101,6 +100,9 @@ class Item(models.Model):
 
     def get_absolute_url(self):
         return reverse('app:items_detail',args=[self.id])
+
+    def get_absolute_crm_url(self):
+        return reverse('crm_items_detail',args=[self.id])
 
 class ItemImage(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='images')
