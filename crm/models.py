@@ -46,7 +46,6 @@ class Customer(models.Model):
 
 
 
-
 #------------------------------------------------------------------------------
 class Order_request(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,verbose_name = "کارشناس فروش")
