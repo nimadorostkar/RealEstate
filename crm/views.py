@@ -32,7 +32,7 @@ def index(request):
     items_count = models.Item.objects.all().count()
     new_order_count = models.Order_request.objects.filter(status='جدید').count()
 
-    chartList = list(models.Order_request.objects.filter(status='تکمیل شده').values_list('product_id', flat=True).distinct())
+    chartList = list(models.Order_request.objects.filter(status='تکمیل شده').values_list('item_id', flat=True).distinct())
     now = jdatetime.datetime.now()
     chart = []
 
@@ -218,9 +218,9 @@ class order_requests(generic.ListView):
 def order_req_detail(request, id):
     req = get_object_or_404(models.Order_request, id=id)
     incomings = models.Order_incomings.objects.filter(request=req)
-    total_price = (req.product.price * req.qty) - ((req.product.price * req.qty)*(req.discount/100))
-    total_incoming = sum(incomings.values_list('amount', flat=True))
-    remained = total_price - total_incoming
+    #total_price = (req.product.price * req.qty) - ((req.product.price * req.qty)*(req.discount/100))
+    #total_incoming = sum(incomings.values_list('amount', flat=True))
+    #remained = total_price - total_incoming
 
     timeform = TimeForm(request.POST)
     if request.method=="POST":
@@ -233,7 +233,9 @@ def order_req_detail(request, id):
             return redirect(req.get_absolute_url())
 
 
-    context = {'req':req, 'incomings':incomings, 'timeform':timeform, 'total_price':total_price, 'total_incoming':total_incoming, 'remained':remained}
+    context = {
+    'req':req, 'incomings':incomings, 'timeform':timeform, #'total_price':total_price, 'total_incoming':total_incoming, 'remained':remained
+    }
     return render(request, 'crm/home/order_req_detail.html', context)
 
 

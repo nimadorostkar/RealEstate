@@ -34,9 +34,8 @@
               </div>
             </div>
             <div class="col-lg-3 ms-auto text-center mt-5 mt-lg-0">
-                <img src="/static/assets/img/shapes/waves-white.svg" class="position-absolute h-100 w-50 top-0 d-lg-block d-none" alt="waves">
                 <div class="position-relative d-flex align-items-center justify-content-center h-100">
-                  <img class="w-100 position-relative z-index-2 pt-4" src="{{ req.product.image.url }}">
+                  <img class="w-100 position-relative z-index-2 pt-4" src="{{ req.item.image.url }}">
                 </div>
             </div>
           </div>
@@ -63,9 +62,9 @@
                         <a href="{{ req.customer.get_absolute_url }}">
                           <h6 class="mb-0 text-sm">
                               {% if req.customer.substantial %}
-                                <img src="/static/assets/img/golduser.png" class="avatar avatar-sm me-3">
+                                <img src="/static/assets/crm/img/golduser.png" class="avatar avatar-sm me-3">
                               {% else %}
-                                <img src="/static/assets/img/user.png" class="avatar avatar-sm me-3">
+                                <img src="/static/assets/crm/img/user.png" class="avatar avatar-sm me-3">
                               {% endif %}
                               {{ req.customer.name }}
                           </h6>
