@@ -44,7 +44,9 @@
                   <p> {{ customer.phone }} </p>
                 </td>
                 <td class="align-middle text-center">
-                  <p>  {{ customer.item }} <img src="{{ customer.item.image.url }}" class="avatar avatar-sm me-3"> </p>
+                  {% if Customer.item %}
+                    <p>  {{ customer.item }} <img src="{{ customer.item.image.url }}" class="avatar avatar-sm me-3"> </p>
+                    {% endif %}
                 </td>
                 <td class="align-middle text-center">
                   <p> <i class="far fa-calendar-alt me-2"></i> <small> {{ customer.date_created|date:'Y-m-d'  }}</small>  <i class="far fa-clock me-2"></i> <small> {{ customer.date_created|date:'H-i'  }}</small> </p>

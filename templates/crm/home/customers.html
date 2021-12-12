@@ -51,7 +51,9 @@
                       <p> {{ Customer.phone }} </p>
                     </td>
                     <td class="align-middle text-center text-sm">
-                      <p> {{ Customer.item }} <img src="{{ Customer.item.image.url }}" class="avatar avatar-sm me-3"> </p>
+                      {% if Customer.item %}
+                        <p> {{ Customer.item }} <img src="{{ Customer.item.image.url }}" class="avatar avatar-sm me-3"> </p>
+                      {% endif %}
                     </td>
                   </tr>
                  {% endfor %}
