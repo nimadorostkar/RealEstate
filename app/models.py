@@ -86,6 +86,7 @@ class Ownership(models.Model):
 #------------------------------------------------------------------------------
 class Item(models.Model):
     available = models.BooleanField(default=True, verbose_name = "موجود" )
+    code = models.CharField(max_length=200, unique=True, verbose_name = "کد فایل")
     CHOICES1 = ( ('رهن و اجاره','رهن و اجاره'), ('رهن کامل','رهن کامل'), ('فروش','فروش'), ('پیش فروش','پیش فروش') )
     buy_status = models.CharField(max_length=30,choices=CHOICES1,verbose_name = "نوع معامله")
     CHOICES2 = ( ('آپارتمان','آپارتمان'), ('خانه ویلایی','خانه ویلایی'), ('زمین','زمین'), ('مغازه و تجاری','مغازه و تجاری'), ('دفتر کار اداری','دفتر کار اداری'), ('کلنگی','کلنگی'), ('ویلا','ویلا'), ('باغ','باغ') )

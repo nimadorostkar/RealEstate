@@ -36,7 +36,11 @@
                  {% for Item in items %}
                   <tr>
                     <td class="align-middle text-center">
-                       <a href="{{ Item.get_absolute_crm_url }}"> <img src="{{ Item.image.url }}" class="avatar avatar-sm me-3"> </a>
+                       <a href="{{ Item.get_absolute_crm_url }}">
+                         <img src="{{ Item.image.url }}" class="avatar avatar-sm me-3">
+                         <span class="text-xxs"> کد: 1002 </span>
+                       </a>
+
                     </td>
                     <td class="align-middle text-center">
                        <h6> {{ Item.buy_status  }} </h6>

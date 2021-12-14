@@ -18,7 +18,7 @@ class Customer(models.Model):
     phone = models.CharField(max_length=200, blank=True, null=True, verbose_name = "تلفن")
     additional_information = models.TextField(max_length=1000,null=True, blank=True,verbose_name = "اطلاعات تکمیلی")
     substantial = models.BooleanField(default=False, verbose_name = "مشتری ویژه" )
-    item = models.ForeignKey(Item , blank=True, null=True, on_delete=models.CASCADE, verbose_name = "فابل")
+    item = models.ManyToManyField(Item , verbose_name = "فابل")
     date_created = jmodels.jDateTimeField(auto_now_add=True, verbose_name = "تاریخ")
 
     def __str__(self):
