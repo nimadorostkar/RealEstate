@@ -90,6 +90,10 @@
 
                                     <ul class="additional-details-list clearfix">
                                         <li>
+                                            <span class="col-xs-6 col-sm-4 col-md-4 add-d-title"> کد </span>
+                                            <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"> {{ Item.code }} </span>
+                                        </li>
+                                        <li>
                                             <span class="col-xs-6 col-sm-4 col-md-4 add-d-title"> سن بنا </span>
                                             <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"> {{ Item.building_age }} </span>
                                         </li>
@@ -226,6 +230,7 @@
                                     <div class="inner-wrapper">
                                         <div class="single-property-header">
                                             <h1 class="property-title"> {{ Item }} </h1>
+                                            <span class="text-xxs"> کد: {{ Item.code  }} </span>
                                             <span class="property-price">
                                               {% if Item.buy_status == 'فروش' %}
                                                <span class="proerty-price pull-right"> {{ Item.price|floatformat:0|intcomma:False }} تومان </span>

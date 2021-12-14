@@ -44,9 +44,14 @@
                   <p> {{ customer.phone }} </p>
                 </td>
                 <td class="align-middle text-center">
-                  {% if Customer.item %}
-                    <p>  {{ customer.item }} <img src="{{ customer.item.image.url }}" class="avatar avatar-sm me-3"> </p>
-                    {% endif %}
+                  <div class="avatar-group mt-2">
+                    {% for item in customer.item.all %}
+                      <span class="text-xs"> {{ item.code }} </span>
+                      <a href="{{ item.get_absolute_crm_url }}" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{item}}">
+                        <img src="{{ item.image.url }}" style="background-color:lightgrey;" alt="{{item}}"> <p class="text-xxs"> {{ item }} </p>
+                      </a>
+                    {% endfor %}
+                  </div>
                 </td>
                 <td class="align-middle text-center">
                   <p> <i class="far fa-calendar-alt me-2"></i> <small> {{ customer.date_created|date:'Y-m-d'  }}</small>  <i class="far fa-clock me-2"></i> <small> {{ customer.date_created|date:'H-i'  }}</small> </p>

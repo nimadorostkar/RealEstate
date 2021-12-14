@@ -45,7 +45,6 @@
                     <tr>
 
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> کد فایل </th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> وضعیت درخواست </th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> نوع معامله </th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> نوع ملک </th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> منطقه </th>
@@ -57,22 +56,7 @@
                   <tbody>
                     <tr>
                       <td class="align-middle text-center">
-                         <h6> {{ item.id  }} </h6>
-                      </td>
-                      <td class="align-middle text-center">
-                        <p class="text-xs text-secondary mb-0">
-                          {% if req.status == 'تکمیل شده' %}
-                            <span class="badge badge-sm bg-gradient-success"> تکمیل شده </span>
-                          {% elif req.status == 'لغو شده' %}
-                            <span class="badge badge-sm bg-gradient-danger"> لغو شده </span>
-                          {% elif req.status == 'دریافت پیش پرداخت' %}
-                            <span class="badge badge-sm bg-gradient-info"> دریافت پیش پرداخت </span>
-                          {% elif req.status == 'جدید' %}
-                            <span class="badge badge-sm bg-gradient-warning"> جدید </span>
-                          {% else %}
-                            <span class="badge badge-sm bg-gradient-secondary"> در حال بررسی </span>
-                          {% endif %}
-                        </p>
+                         <h6> {{ item.code  }} </h6>
                       </td>
                       <td class="align-middle text-center">
                          <h6> {{ item.buy_status  }} </h6>
