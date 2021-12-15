@@ -143,6 +143,14 @@ class customers(generic.ListView):
     ordering = ['-date_created']
     paginate_by = 30
 
+    def get_context_data(self, *args, **kwargs):
+        reqs = Order_request.objects.all()
+        context = super(customers, self).get_context_data(*args, **kwargs)
+        context["reqs"] = reqs
+        return context
+
+
+
 
 
 

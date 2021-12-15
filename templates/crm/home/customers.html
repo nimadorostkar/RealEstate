@@ -23,9 +23,9 @@
               <table class="table align-items-center mb-0">
                 <thead>
                   <tr>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> نام مشتری </th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> شماره تلفن </th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> فایل ها </th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> مشتری </th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> توضیحات تکمیلی </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> فایل های درخواستی </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -42,21 +42,26 @@
                                 <img src="/static/assets/crm/img/user.png" class="avatar avatar-sm me-3">
                               {% endif %}
                               {{ Customer.name }}
+                              <p class="text-xs text-secondary mb-0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ Customer.phone }} </p>
                            </h6>
                          </a>
                         </div>
                       </div>
                     </td>
-                    <td class="align-middle text-center text-sm">
-                      <p> {{ Customer.phone }} </p>
+
+                    <td>
+                      {{ Customer.additional_information|slice:":70" }}...
                     </td>
+
                     <td class="align-middle text-center text-sm">
                       <div class="avatar-group mt-2">
-                        {% for item in Customer.item.all %}
-                          <span class="text-xs"> {{ item.code }} </span>
-                          <a href="{{ item.get_absolute_crm_url }}" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{item}}">
-                            <img src="{{ item.image.url }}" style="background-color:lightgrey;" alt="{{item}}">  <p class="text-xxs"> {{ item }} </p>
+                        {% for Order_request in reqs %}
+                        {% if Order_request.customer == Customer %}
+                          <a href="{{ Order_request.item.get_absolute_crm_url }}">
+                            <img src="{{ Order_request.item.image.url }}" class="avatar avatar-sm me-3">
+                            <span class="text-xxs"> کد: {{ Order_request.item.code  }} </span>
                           </a>
+                        {% endif %}
                         {% endfor %}
                       </div>
                     </td>
