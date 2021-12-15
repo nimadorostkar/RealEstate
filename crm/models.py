@@ -81,16 +81,17 @@ class Order_request(models.Model):
 
 class Order_incomings(models.Model):
     request = models.ForeignKey(Order_request ,on_delete=models.CASCADE, verbose_name = "برای سفارش")
-    amount = models.IntegerField( verbose_name = "قیمت ( ریال )")
-    date_created = jmodels.jDateField(verbose_name = "تاریخ")
+    user = models.ForeignKey(User, on_delete=models.CASCADE,verbose_name = "کارشناس فروش")
+    description = models.CharField(max_length=200 , verbose_name = "توضیحات")
+    date_created = jmodels.jDateTimeField(verbose_name = "تاریخ")
 
 
     def __str__(self):
-      return " مبلغ " + str(self.amount) + " برای " + str(self.request) + " در تاریخ " + str(self.date_created)
-
+      return self.date_created
+      
     class Meta:
-        verbose_name = "مبلغ ورودی سفارش"
-        verbose_name_plural = "مبالغ ورودی سفارش"
+        verbose_name = "پیگیری"
+        verbose_name_plural = "پیگیری ها"
 
 
 
