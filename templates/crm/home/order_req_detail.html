@@ -70,19 +70,17 @@
                         </a>
                       </td>
                       <td class="align-middle text-center">
-
-                            <a href="{{ req.customer.get_absolute_url }}">
-                              <p class="mb-0">
-                                {% if req.customer.substantial %}
-                                  <img src="/static/assets/crm/img/golduser.png" width="20px" height="20px">
-                                {% else %}
-                                  <img src="/static/assets/crm/img/user.png" width="20px" height="20px">
-                                {% endif %}
-                                {{ req.customer.name }}
-                             </p>
-                             <p class="text-xxs text-secondary mb-0"> {{ req.customer.phone }} </p>
-                           </a>
-
+                          <a href="{{ req.customer.get_absolute_url }}">
+                            <p class="mb-0">
+                              {% if req.customer.substantial %}
+                                <img src="/static/assets/crm/img/golduser.png" width="20px" height="20px">
+                              {% else %}
+                                <img src="/static/assets/crm/img/user.png" width="20px" height="20px">
+                              {% endif %}
+                              {{ req.customer.name }}
+                           </p>
+                           <p class="text-xxs text-secondary mb-0"> {{ req.customer.phone }} </p>
+                         </a>
                       </td>
                       <td class="align-middle text-center">
                          <p class="mb-0">  <img src="/static/assets/crm/img/user.png" width="20px" height="20px"> {{ req.item.ownership  }} </p>

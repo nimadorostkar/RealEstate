@@ -125,8 +125,8 @@ class crm_items(generic.ListView):
 @login_required()
 def crm_items_detail(request, id):
     item = get_object_or_404(models.Item, id=id)
-    #reqs = models.Order_request.objects.filter(item=item).order_by('-date_created')
-    context = {'item':item}
+    reqs = models.Order_request.objects.filter(item=item).order_by('-date_created')
+    context = {'item':item, 'reqs':reqs}
     return render(request, 'crm/home/items_detail.html', context)
 
 
@@ -151,8 +151,8 @@ class customers(generic.ListView):
 @login_required()
 def customer_detail(request, id):
     customer = get_object_or_404(models.Customer, id=id)
-    #reqs = models.Order_request.objects.filter(customer=customer).order_by('-date_created')
-    context = {'customer':customer}
+    reqs = models.Order_request.objects.filter(customer=customer).order_by('-date_created')
+    context = {'customer':customer, 'reqs':reqs}
     return render(request, 'crm/home/customer_detail.html', context)
 
 
