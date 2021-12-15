@@ -12,7 +12,7 @@
 {% load jalali_tags %}
 
 
-<br> 
+<br>
 
 <div class="container-fluid py-4">
 
@@ -23,7 +23,7 @@
           <div class="row">
             <div class="col-lg-9">
               <div class="d-flex flex-column h-100">
-                <p class="text-lg mb-1 pt-2 text-bold"> <i class="far fa-calendar-alt me-2"></i> <small> {{ req.date_created|date:'H:i  Y-m-d' }} </small> </p>
+                <p>  <small>{{req.date_created|date:'Y-m-d'}}</small> <i class="far fa-calendar-alt me-2"></i>    <small>{{req.date_created|date:'H-i'}}</small> <i class="far fa-clock me-2"></i> </p>
                 <h3 dir="rtl" class="font-weight-bolder">
                   {{ req }}
                   <a class="btn btn-link text-dark px-3 mb-0 text-secondary text-xxs" href="{{ req.get_absolute_edit_url }}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i> ویرایش </a>

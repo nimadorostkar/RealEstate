@@ -51,6 +51,8 @@ class Order_request(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,verbose_name = "کارشناس فروش")
     customer = models.ForeignKey(Customer ,on_delete=models.CASCADE, verbose_name = "خریدار")
     item = models.ForeignKey(Item ,on_delete=models.CASCADE, verbose_name = "فایل")
+    final_price = models.CharField(max_length=200, default='نامشخص' ,verbose_name = "قیمت نهایی")
+    prepayment = models.CharField(max_length=200, default='نامشخص' , verbose_name = "بیعانه")
     description = models.TextField(max_length=1000, null=True, blank=True, verbose_name = "توضیحات")
     CHOICES = ( ('تکمیل شده','تکمیل شده'), ('لغو شده','لغو شده'), ('دریافت پیش پرداخت','دریافت پیش پرداخت'), ('در حال بررسی','در حال بررسی'), ('جدید','جدید'))
     status = models.CharField(max_length=30,choices=CHOICES, default='جدید', verbose_name = "وضعیت")
