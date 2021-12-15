@@ -1,5 +1,6 @@
 {% extends 'crm/layouts/base.html' %}
 {% load humanize %}
+{% load jalali_tags %}
 
 {% block title %} {{ req }} {% endblock title %}
 
@@ -9,7 +10,7 @@
 {% endblock stylesheets %}
 
 {% block content %}
-{% load jalali_tags %}
+
 
 
 <br>
@@ -21,112 +22,96 @@
       <div class="card">
         <div class="card-body p-3">
           <div class="row">
-            <div class="col-lg-9">
+            <div class="col-lg-12">
               <div class="d-flex flex-column h-100">
                 <p>  <small>{{req.date_created|date:'Y-m-d'}}</small> <i class="far fa-calendar-alt me-2"></i>    <small>{{req.date_created|date:'H-i'}}</small> <i class="far fa-clock me-2"></i> </p>
-                <h3 dir="rtl" class="font-weight-bolder">
+                <h4 dir="rtl" class="font-weight-bolder">
                   {{ req }}
-                  <a class="btn btn-link text-dark px-3 mb-0 text-secondary text-xxs" href="{{ req.get_absolute_edit_url }}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i> ویرایش </a>
-                </h3>
+                  <span class="text-xs px-3 mb-0 text-secondary">
+                    {% if req.status == 'تکمیل شده' %}
+                       <span class="badge badge-sm bg-gradient-success"> تکمیل شده </span>
+                    {% elif req.status == 'لغو شده' %}
+                       <span class="badge badge-sm bg-gradient-danger"> لغو شده </span>
+                    {% elif req.status == 'دریافت پیش پرداخت' %}
+                       <span class="badge badge-sm bg-gradient-info"> دریافت پیش پرداخت </span>
+                    {% elif req.status == 'جدید' %}
+                       <span class="badge badge-sm bg-gradient-warning"> جدید </span>
+                    {% else %}
+                       <span class="badge badge-sm bg-gradient-secondary"> در حال بررسی </span>
+                    {% endif %}
+                   </span>
+                </h4>
                 <div align="right" dir="rtl">
                   {{ req.description|linebreaks }}
                 </div>
               </div>
             </div>
-            <div class="col-lg-3 ms-auto text-center mt-5 mt-lg-0">
-                <div class="position-relative d-flex align-items-center justify-content-center h-100">
-                  <img class="w-100 position-relative z-index-2 pt-4" src="{{ req.item.image.url }}">
-                </div>
-            </div>
           </div>
           <div class="row">
-            <div class="col-lg-12">
-
+            <div class="col-lg-12"> <br>
 
               <div class="table-responsive p-0" dir="rtl">
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> مشتری  </th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> تعداد </th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> قیمت واحد </th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> درصد تخفیف </th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> قیمت کل </th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> مبلغ دریافتی </th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> مانده </th>
+
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> فایل </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> خریدار </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> مالک </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> بیعانه </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> قیمت نهای </th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td class="align-middle text-center">
-                        <a href="{{ req.customer.get_absolute_url }}">
-                          <h6 class="mb-0 text-sm">
-                              {% if req.customer.substantial %}
-                                <img src="/static/assets/crm/img/golduser.png" class="avatar avatar-sm me-3">
-                              {% else %}
-                                <img src="/static/assets/crm/img/user.png" class="avatar avatar-sm me-3">
-                              {% endif %}
-                              {{ req.customer.name }}
-                          </h6>
+                        <a href="{{ req.item.get_absolute_crm_url }}">
+                         <p class="text-xs mb-0"> <img src="{{ req.item.image.url }}" class="avatar avatar-sm me-3"> {{ req.item }} <small> ({{ req.item.code }}) </small> </p>
                         </a>
-                          <p class="text-xs text-secondary mb-0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ req.customer.phone }}</p>
+                      </td>
+                      <td class="align-middle text-center">
+
+                            <a href="{{ req.customer.get_absolute_url }}">
+                              <p class="mb-0">
+                                {% if req.customer.substantial %}
+                                  <img src="/static/assets/crm/img/golduser.png" width="20px" height="20px">
+                                {% else %}
+                                  <img src="/static/assets/crm/img/user.png" width="20px" height="20px">
+                                {% endif %}
+                                {{ req.customer.name }}
+                             </p>
+                             <p class="text-xxs text-secondary mb-0"> {{ req.customer.phone }} </p>
+                           </a>
 
                       </td>
-
                       <td class="align-middle text-center">
-                        <p class="text-xs text-secondary mb-0"> {{ req.qty }} عدد </p>
+                         <p class="mb-0">  <img src="/static/assets/crm/img/user.png" width="20px" height="20px"> {{ req.item.ownership  }} </p>
+                         <p class="text-xxs text-secondary mb-0"> {{ req.item.ownership.phone }} </p>
                       </td>
                       <td class="align-middle text-center">
-                        <p class="text-xs text-secondary mb-0"> {{ req.product.price|intcomma:False }} ریال</p>
+                         <p class="text-xs mb-0"> {{ req.prepayment  }} </p>
                       </td>
                       <td class="align-middle text-center">
-                        <p class="text-xs text-secondary mb-0"> {{ req.discount }} ٪ </p>
-                      </td>
-                      <td class="align-middle text-center">
-                        <p class="text-xs text-secondary mb-0"> {{ total_price|floatformat:0|intcomma:False }} ریال </p>
-                      </td>
-                      <td class="align-middle text-center">
-                        <p class="text-xs text-secondary mb-0"> {{ total_incoming|floatformat:0|intcomma:False }} ریال </p>
-                      </td>
-                      <td class="align-middle text-center">
-                        <p class="text-xs text-secondary mb-0"> {{ remained|floatformat:0|intcomma:False }} ریال </p>
+                        <p class="text-xs mb-0"> {{ req.final_price  }} </p>
                       </td>
                     </tr>
                   </tbody>
                 </table>
+                <br><br>
 
-                <br>
                 <div class="row">
-                  <div class="col-lg-6">
-                    <div class="card-body position-relative z-index-1 d-flex flex-column h-100 p-3">
-                      <a  target="_blank" class="text-info text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="{{ req.get_absolute_invoice_url }}">  صورت حساب   <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>   </a>
-                    </div>
+                  <div class="col-lg-6" dir="rtl" align="right">
+                   <h6>
+                     <span class="text-xxs text-secondary">  کارشناس فروش : </span>
+                     <img src="{{ req.user.profile.user_photo.url }}" width="30px" height="30px"> {{ req.user.first_name }} {{ req.user.last_name }}
+                   </h6>
+
                   </div>
-
-                  <div class="col-lg-6" dir="ltr">
-                    <p> <span class="text-xs text-secondary mb-0"> کارشناس فروش : </span> {{ req.user.first_name }} {{ req.user.last_name }} </p>
-
-                    <p align="left" dir="rtl" class="text-secondary text-xxs"> آخرین ویرایش: {{ req.date_updated|date:'H:i  Y-m-d' }} </p>
-
-                    <p class="text-xs text-secondary mb-0">
-                      {% if req.status == 'تکمیل شده' %}
-                        <span class="badge badge-sm bg-gradient-success"> تکمیل شده </span>
-                      {% elif req.status == 'لغو شده' %}
-                        <span class="badge badge-sm bg-gradient-danger"> لغو شده </span>
-                      {% elif req.status == 'دریافت پیش پرداخت' %}
-                        <span class="badge badge-sm bg-gradient-info"> دریافت پیش پرداخت </span>
-                      {% elif req.status == 'جدید' %}
-                        <span class="badge badge-sm bg-gradient-warning"> جدید </span>
-                      {% else %}
-                        <span class="badge badge-sm bg-gradient-secondary"> در حال بررسی </span>
-                      {% endif %}
-                    </p>
+                  <div class="col-lg-6" align="left">
+                    <a class="badge badge-sm bg-gradient-info  btn btn-link text-dark mb-0 bg-gradient text-xxs" href="{{ req.get_absolute_edit_url }}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i> ویرایش </a>
+                     <p class="text-xxs text-secondary" dir="rtl">  آخرین ویرایش: {{ req.date_updated|date:'Y-m-d' }} ساعت {{ req.date_updated|date:'H-i' }} </p>
                   </div>
                 </div>
-
-
-
-
 
               </div>
 
