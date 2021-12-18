@@ -16,10 +16,9 @@ from .actions import export_as_csv_action
 #------------------------------------------------------------------------------
 class CustomerAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('name', 'phone', 'short_description')
-    list_filter = ("substantial", "date_created", "item")
+    list_filter = ("substantial", "date_created")
     search_fields = ['name',]
-    raw_id_fields = ('item',)
-    actions = [export_as_csv_action("CSV خروجی", fields=['id', 'name', 'phone', 'additional_information', "item", 'substantial' ])]
+    actions = [export_as_csv_action("CSV خروجی", fields=['id', 'name', 'phone', 'additional_information', 'substantial' ])]
 
 
 admin.site.register(models.Customer, CustomerAdmin)
