@@ -13,13 +13,17 @@ from extensions.utils import jalali_converter
 
 
 
+
+
 #------------------------------------------------------------------------------
 class Profile(models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE,unique=True,related_name='profile',verbose_name = "کاربر")
   phone = models.CharField(max_length=50,null=True, blank=True,verbose_name = " شماره تماس  ")
-  address = models.CharField(max_length=3000,null=True, blank=True,verbose_name = " آدرس  ")
+  additional_information = models.TextField(max_length=1000,null=True, blank=True,verbose_name = "اطلاعات تکمیلی")
   user_photo = models.ImageField(default='default.png', upload_to='profile_pics', null=True, blank=True, verbose_name = "تصویر")
-
+  CHOICES = ( ('مشتری','مشتری'), ('مشتری ویژه','مشتری ویژه'), ('کارشناس','کارشناس'), ('مدیر','مدیر') )
+  buy_status = models.CharField(max_length=30,choices=CHOICES,verbose_name = "نوع کاربر")
+  date_created = jmodels.jDateTimeField(auto_now_add=True, verbose_name = "تاریخ")
 
   @receiver(post_save, sender=User)
   def create_user_profile(sender, instance, created, **kwargs):
@@ -30,8 +34,20 @@ class Profile(models.Model):
   def save_user_profile(sender, instance, **kwargs):
       instance.profile.save()
 
+  def get_absolute_url(self):
+      return reverse('customer_detail',args=[self.id])
+
+  def get_absolute_edit_url(self):
+      return reverse('customer_edit',args=[self.id])
+
+
   def image_tag(self):
         return format_html("<img width=50 src='{}'>".format(self.user_photo.url))
+
+  @property
+  def short_description(self):
+      return truncatechars(self.additional_information, 70)
+
 
   def user_name(self):
         return str(self.user)
