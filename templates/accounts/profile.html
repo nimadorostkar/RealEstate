@@ -16,7 +16,7 @@
   <div class="container">
       <div class="row">
           <div class="page-head-content">
-              <h1 dir="rtl" class="page-title"> سلام <span class="orange strong"> {{ request.user.first_name }} </span></h1>
+              <h1 dir="rtl" class="page-title"> سلام <span class="orange strong"> {{ request.user.first_name }} </span>  <small style="font-size:12px;">  وضعیت: {{ request.user.profile.user_type }}  </small> </h1>
           </div>
       </div>
   </div>
@@ -51,48 +51,49 @@
                           </div>
                           <div class="row">
 
-                            <div class="col-md-3 pl-md-1">
-          			              <div class="form-group">
-          			                <label> نام خانوادگی </label>
-          			                <input name="lastname" type="text" class="form-control" value="{{ request.user.last_name }}">
-          			              </div>
-          			            </div>
-
-                            <div class="col-md-3 pr-md-1">
-          			              <div class="form-group">
-          			                <label> نام </label>
-          			                <input name="firstname" type="text" class="form-control" value="{{ request.user.first_name }}">
-          			              </div>
-          			            </div>
-
-                            <div class="col-md-3 pr-md-1">
+                            <div class="col-md-6 pr-md-1">
           			              <div class="form-group">
           			                <label> نام کاربری </label>
           			                <input name="user" type="text" class="form-control" value="{{ request.user.username }}">
           			              </div>
           			            </div>
 
+                            <div class="col-md-6 pr-md-1">
+                              <div class="form-group">
+                                <label> نام </label>
+                                <input name="firstname" type="text" class="form-control" value="{{ request.user.first_name }}">
+                              </div>
+                            </div>
+
+                            <div class="col-md-6 pl-md-1">
+          			              <div class="form-group">
+          			                <label> نام خانوادگی </label>
+          			                <input name="lastname" type="text" class="form-control" value="{{ request.user.last_name }}">
+          			              </div>
+          			            </div>
+
+
+                            <div class="col-md-3 pr-md-1">
+          			              <div class="form-group">
+          			                <label> شماره تماس </label>
+          			                <input name="phone" type="text" class="form-control" placeholder=" شماره تماس " value="{{ request.user.profile.phone }}">
+          			              </div>
+          			            </div>
+
+
 
           			            <div class="col-md-3 pr-md-1">
           			              <div class="form-group">
           			                <label> ایمیل </label>
-          			                <input name="email" type="email" class="form-control" placeholder="email" value="{{ request.user.email }}">
+          			                <input name="email" type="email" class="form-control" placeholder="ایمیل" value="{{ request.user.email }}">
           			              </div>
           			            </div>
 
 
-          			            <div class="col-md-3 pr-md-1">
+          			            <div class="col-md-9 pr-md-1 col-sm-offset-1">
           			              <div class="form-group">
-          			                <label> آدرس </label>
-          			                <input name="address" type="text" class="form-control" placeholder="address" value="{{ request.user.profile.address }}">
-          			              </div>
-          			            </div>
-
-
-          			            <div class="col-md-3 pr-md-1">
-          			              <div class="form-group">
-          			                <label> شماره تماس </label>
-          			                <input name="phone" type="text" class="form-control" placeholder="City" value="{{ request.user.profile.phone }}">
+          			                <label> اطلاعات تکمیلی </label>
+          			                <input name="additional_information" type="text" class="form-control" placeholder="اطلاعات تکمیلی" value="{{ request.user.profile.additional_information }}">
           			              </div>
           			            </div>
 
@@ -101,7 +102,7 @@
 
                       </div>
 
-                      <div class="col-sm-5 col-sm-offset-1">
+                      <div class="col-md-6 pr-md-1 col-sm-offset-1">
                           <br>
                           <button type="submit" class="btn btn-fill btn-primary"> ذخیره </button>
                       </div>

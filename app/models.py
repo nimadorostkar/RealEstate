@@ -57,7 +57,7 @@ class Profile(models.Model):
       verbose_name_plural = "کاربران"
 
   def __str__(self):
-    return self.user_type +"|"+ self.user
+    return self.user_type +"|"+ str(self.user)
 
 
 

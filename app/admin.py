@@ -17,9 +17,12 @@ admin.site.register(LogEntry)
 
 #------------------------------------------------------------------------------
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('user_name','phone','address', 'image_tag')
-    search_fields = ['user_name', 'phone', 'address']
+    list_display = ('image_tag', 'user_type', 'user_name','phone','date_created')
+    list_filter = ('user_type', "date_created")
+    search_fields = ['user_name', 'phone']
 admin.site.register(models.Profile, ProfileAdmin)
+
+
 
 
 

@@ -122,11 +122,12 @@ def profile(request):
         current_user.first_name = request.POST['firstname']
         current_user.last_name = request.POST['lastname']
         profile.phone = request.POST['phone']
-        profile.email = request.POST['email']
-        profile.address = request.POST['address']
+        current_user.email = request.POST['email']
+        profile.additional_information = request.POST['additional_information']
         if (request.FILES): profile.user_photo = request.FILES['photo']
         current_user.save()
         profile.save()
+        return HttpResponseRedirect('/profile')
 
     context = {'latestpost_list':latestpost_list,'logo':logo, 'header':header}
     return render(request, 'accounts/profile.html', context)

@@ -48,8 +48,8 @@ class Customer(models.Model):
 
 #------------------------------------------------------------------------------
 class Order_request(models.Model):
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE,verbose_name = "کارشناس فروش")
-    customer = models.ForeignKey(Profile ,on_delete=models.CASCADE, verbose_name = "خریدار")
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='user_profile', verbose_name = "کارشناس فروش")
+    customer = models.ForeignKey(Profile ,on_delete=models.CASCADE, related_name='customer_profile', verbose_name = "خریدار")
     item = models.ForeignKey(Item ,on_delete=models.CASCADE, verbose_name = "فایل")
     final_price = models.CharField(max_length=200, default='نامشخص' ,verbose_name = "قیمت نهایی")
     prepayment = models.CharField(max_length=200, default='نامشخص' , verbose_name = "بیعانه")
