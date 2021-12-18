@@ -96,7 +96,10 @@ def password_change(request):
     if request.method == 'POST':
         current_user.set_password(request.POST['new_password'])
         current_user.save()
-        return HttpResponseRedirect('/password_change')
+        change_done = "رمز عبور با موفقیت تغییر یافت"
+        context = {'current_user': current_user, 'change_done':change_done }
+        return render(request, 'accounts/passchange.html', context)
+
     context = {'current_user': current_user }
     return render(request, 'accounts/passchange.html', context)
 

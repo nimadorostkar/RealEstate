@@ -108,8 +108,10 @@ def search(request):
 
 
 
-#------------------------------------------------------------------------------
 
+
+
+#------------------------------------------------------------------------------
 @login_required(login_url="/login/")
 def profile(request):
     header = Setting.get('تصویر سربرگ (header)', default='django-extra-settings')
