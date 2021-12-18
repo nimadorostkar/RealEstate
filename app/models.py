@@ -46,7 +46,7 @@ class Profile(models.Model):
 
   @property
   def short_description(self):
-      return truncatechars(self.additional_information, 70)
+      return truncatechars(self.additional_information, 50)
 
 
   def user_name(self):

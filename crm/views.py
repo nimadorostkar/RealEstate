@@ -139,7 +139,7 @@ class customers(generic.ListView):
     model = Profile
     template_name = 'crm/home/customers.html'
     context_object_name = 'customers'
-    queryset = Profile.objects.all()
+    queryset = Profile.objects.filter( Q(user_type='کاربر') | Q(user_type='کاربر ویژه') )
     ordering = ['-date_created']
     paginate_by = 30
 
@@ -158,7 +158,7 @@ class customers(generic.ListView):
 #------------------------------------------------------------------------------
 @login_required()
 def customer_detail(request, id):
-    customer = get_object_or_404(models.Customer, id=id)
+    customer = get_object_or_404(models.Profile, id=id)
     reqs = models.Order_request.objects.filter(customer=customer).order_by('-date_created')
     context = {'customer':customer, 'reqs':reqs}
     return render(request, 'crm/home/customer_detail.html', context)

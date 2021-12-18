@@ -1,56 +1,61 @@
 {% extends 'crm/layouts/base.html' %}
 
-{% block title %} {{ customer.name }} {% endblock title %}
+{% block title %} {{ customer.user.first_name }} {{ customer.user.last_name }}  {% endblock title %}
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
 
-    <div class="container-fluid">
-      <div class="page-header min-height-150 border-radius-xl mt-4" style="background-image: url('/static/assets/crm/img/bg.png'); background-position-y: 100%;"></div>
 
-      <div class="card card-body blur shadow-blur mx-4 mt-n6" dir="rtl">
+<div class="container-fluid">
+  <div class="page-header min-height-150 border-radius-xl mt-4" style="background-image: url('/static/assets/crm/img/bg.png'); background-position-y: 100%;"></div>
+
+  <div class="card card-body blur shadow-blur mx-4 mt-n6" dir="rtl">
+    <div class="row gx-4">
+      <div class="col-auto">
+        <div class="avatar avatar-xl position-relative">
+          <img src="{{ customer.user_photo.url }}"  class="w-100 border-radius-lg shadow-sm">
+        </div>
+      </div>
+      <div class="col-auto my-auto">
+        <div class="h-100">
+          <h5 class="mb-1">
+            {{ customer.user.first_name }} {{ customer.user.last_name }}
+            {% if customer.user_type == 'کاربر ویژه' %} <img src="/static/assets/crm/img/star.png" width="20px" class="me-2"> {% endif %}
+          </h5>
+        </div>
+      </div>
+      <div class="col-sm-6 col-8 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">  </div>
+    </div>
+
+    <div class="nav-wrapper position-relative end-0" dir="rtl"> <br>
 
         <div class="row">
-
-          <div class="col-lg-3">
-            <div class="row gx-4">
-              <div class="col-auto">
-                <div class="avatar avatar-xl position-relative">
-                  {% if customer.substantial %}
-                    <img src="/static/assets/crm/img/golduser.png" alt="..." class="w-100 border-radius-lg shadow-sm">
-                  {% else %}
-                    <img src="/static/assets/crm/img/user.png" alt="..." class="w-100 border-radius-lg shadow-sm">
-                  {% endif %}
-                </div>
-              </div>
-              <div class="col-auto my-auto">
-                <div class="h-100">
-                  <h5 class="mb-1"> {{ customer.name }}  </h5>
-                  <p class="text-xs text-secondary mb-0"> {{ customer.phone }} </p>
-                </div>
-              </div>
-
-            </div>
-            <br>
-            <a class="badge badge-sm bg-gradient-info  btn btn-link text-dark mb-0 bg-gradient text-xxs" href="{{ customer.get_absolute_edit_url }}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i> ویرایش </a>
-          </div>
-
-          <div class="col-lg-8"><br>
-                <p> <span class="text-xxs mb-0 text-secondary"> توضیحات تکمیلی: </span> {{ customer.additional_information|linebreaks }} </p>
-                <div align="left">
-                  <p class="text-xxs text-secondary"> تاریخ ایجاد: <i class="far fa-calendar-alt me-2"></i> <small> {{ customer.date_created|date:'Y-m-d'  }}</small>  <i class="far fa-clock me-2"></i> <small> {{ customer.date_created|date:'H-i'  }}</small> </p>
-                </div>
-          </div>
+          <div class="col-lg-3"> <p> <span class="text-xxs mb-0 text-secondary">  نام کاربری: </span> <br> {{ customer.user.username }} </p> </div>
+          <div class="col-lg-3"> <p> <span class="text-xxs mb-0 text-secondary">  شماره تماس: </span> <br> {{ customer.phone }} </p> </div>
+          <div class="col-lg-3"> <p> <span class="text-xxs mb-0 text-secondary">  ایمیل: </span> <br> {{ customer.user.email }} </p> </div>
+          <div class="col-lg-3"> <p> <span class="text-xxs mb-0 text-secondary">  تاریخ ایجاد: </span> <br> <i class="far fa-calendar-alt me-2"></i> <small> {{ customer.date_created|date:'Y-m-d'  }}</small>  <i class="far fa-clock me-2"></i> <small> {{ customer.date_created|date:'H-i'  }}</small> </p> </div>
         </div>
 
+         <div class="row">
+            <div class="col-lg-12">
+              <p> <span class="text-xxs mb-0 text-secondary"> توضیحات تکمیلی: </span> {{ customer.additional_information|linebreaks }} </p>
+              <div align="left">
+                <a class="badge badge-sm bg-gradient-info  btn btn-link text-dark mb-0 bg-gradient text-xxs" href="{{ customer.get_absolute_edit_url }}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i> ویرایش </a>
+              </div>
+            </div>
+          </div>
+
+     </div>
+
+  </div>
+</div>
 
 
-      </div>
+  <br><br>
 
 
-      <br><br>
 
       <div class="row" dir="rtl">
         <div class="col-12">
