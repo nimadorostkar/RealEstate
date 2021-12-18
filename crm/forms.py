@@ -16,7 +16,12 @@ class TimeForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(TimeForm, self).__init__(*args, **kwargs)
-        self.fields['date_created'] = JalaliDateField( widget=AdminJalaliDateWidget(attrs={'style':'width:15px; height:37px'}) )
+        #self.fields['date_created'] = SplitJalaliDateTimeField( widget=AdminJalaliDateWidget(attrs={'style':'width:15px; height:37px'}) )
+
+
+        self.fields['date_created'] = SplitJalaliDateTimeField(label=('date time'),
+            widget=AdminSplitJalaliDateTime # required, for decompress DatetimeField to JalaliDateField and JalaliTimeField
+        )
         self.fields['date_created'].required = True
         self.fields['date_created'].label = False
 
