@@ -12,7 +12,7 @@ from . import models
 class ProfileForm(forms.ModelForm):
 	class Meta:
 		model = Profile
-		fields = ['phone','address','user_photo']
+		fields = ['phone','additional_information','user_photo', 'user_type']
 
 
 #------------------------------------------------------------------------------

@@ -7,9 +7,8 @@ from django.db.models.signals import post_save
 from django.template.defaultfilters import truncatechars
 from mptt.models import MPTTModel, TreeForeignKey
 from extensions.utils import jalali_converter
-
-
-
+from django.template.defaultfilters import truncatechars
+from django_jalali.db import models as jmodels
 
 
 
@@ -22,8 +21,9 @@ class Profile(models.Model):
   additional_information = models.TextField(max_length=1000,null=True, blank=True,verbose_name = "اطلاعات تکمیلی")
   user_photo = models.ImageField(default='default.png', upload_to='profile_pics', null=True, blank=True, verbose_name = "تصویر")
   CHOICES = ( ('مشتری','مشتری'), ('مشتری ویژه','مشتری ویژه'), ('کارشناس','کارشناس'), ('مدیر','مدیر') )
-  buy_status = models.CharField(max_length=30,choices=CHOICES,verbose_name = "نوع کاربر")
-  date_created = jmodels.jDateTimeField(auto_now_add=True, verbose_name = "تاریخ")
+  user_type = models.CharField(max_length=30,choices=CHOICES,verbose_name = "نوع کاربر")
+  date_created = jmodels.jDateTimeField(auto_now_add=True, verbose_name = "تاریخ ایجاد")
+
 
   @receiver(post_save, sender=User)
   def create_user_profile(sender, instance, created, **kwargs):
@@ -53,11 +53,16 @@ class Profile(models.Model):
         return str(self.user)
 
   class Meta:
-      verbose_name = "پروفایل"
-      verbose_name_plural = " پروفایل ها "
+      verbose_name = "کاربر"
+      verbose_name_plural = "کاربران"
 
   def __str__(self):
-    return "پروفایل : " + str(self.user)
+    return self.user_type +"|"+ self.user
+
+
+
+
+
 
 
 

@@ -6,7 +6,7 @@ from django.dispatch import receiver
 from django.template.defaultfilters import truncatechars
 from django_jalali.db import models as jmodels
 from datetime import datetime
-from app.models import Item
+from app.models import Item, Profile
 
 
 
@@ -48,8 +48,8 @@ class Customer(models.Model):
 
 #------------------------------------------------------------------------------
 class Order_request(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE,verbose_name = "کارشناس فروش")
-    customer = models.ForeignKey(Customer ,on_delete=models.CASCADE, verbose_name = "خریدار")
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE,verbose_name = "کارشناس فروش")
+    customer = models.ForeignKey(Profile ,on_delete=models.CASCADE, verbose_name = "خریدار")
     item = models.ForeignKey(Item ,on_delete=models.CASCADE, verbose_name = "فایل")
     final_price = models.CharField(max_length=200, default='نامشخص' ,verbose_name = "قیمت نهایی")
     prepayment = models.CharField(max_length=200, default='نامشخص' , verbose_name = "بیعانه")
@@ -81,7 +81,7 @@ class Order_request(models.Model):
 
 class Order_incomings(models.Model):
     request = models.ForeignKey(Order_request ,on_delete=models.CASCADE, verbose_name = "برای سفارش")
-    user = models.ForeignKey(User, on_delete=models.CASCADE,verbose_name = "کارشناس فروش")
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE,verbose_name = "کارشناس فروش")
     description = models.CharField(max_length=200 , verbose_name = "توضیحات")
     date_created = jmodels.jDateTimeField(verbose_name = "تاریخ")
 

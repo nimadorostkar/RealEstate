@@ -1,7 +1,7 @@
 from django.contrib import admin
 from . import models
 from django.contrib.admin.models import LogEntry
-from .models import Customer, Order_request, Order_incomings
+from .models import Order_request, Order_incomings
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin, ImportExportMixin
 from jalali_date import datetime2jalali, date2jalali
@@ -12,7 +12,7 @@ from .actions import export_as_csv_action
 
 
 
-
+'''
 #------------------------------------------------------------------------------
 class CustomerAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('name', 'phone', 'short_description')
@@ -22,7 +22,7 @@ class CustomerAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
 
 admin.site.register(models.Customer, CustomerAdmin)
-
+'''
 
 
 

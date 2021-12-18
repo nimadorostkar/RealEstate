@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.shortcuts import render, get_object_or_404, redirect
 from . import models
 from django.contrib.auth.models import User
-from .models import Order_request, Customer, Order_incomings
+from .models import Order_request, Order_incomings
 from .forms import TimeForm
 from itertools import chain
 from django.contrib.auth import get_user_model
@@ -18,7 +18,7 @@ import jdatetime
 from django.contrib import messages
 from django.views import generic
 from django.utils.decorators import method_decorator
-from app.models import Item
+from app.models import Item, Profile
 
 
 
@@ -136,10 +136,10 @@ def crm_items_detail(request, id):
 
 #------------------------------------------------------------------------------
 class customers(generic.ListView):
-    model = Customer
+    model = Profile
     template_name = 'crm/home/customers.html'
     context_object_name = 'customers'
-    queryset = Customer.objects.all()
+    queryset = Profile.objects.all()
     ordering = ['-date_created']
     paginate_by = 30
 
