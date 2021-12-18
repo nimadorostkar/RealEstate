@@ -28,7 +28,7 @@ from app.models import Item, Profile
 @login_required(login_url="/login/")
 def index(request):
     open_reqs_count = models.Order_request.objects.all().exclude(status='تکمیل شده').count()
-    customers_count = models.Customer.objects.all().count()
+    customers_count = models.Profile.objects.filter( Q(user_type='کاربر') | Q(user_type='کاربر ویژه') ).count()
     items_count = models.Item.objects.all().count()
     new_order_count = models.Order_request.objects.filter(status='جدید').count()
 

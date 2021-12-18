@@ -20,8 +20,8 @@ class Profile(models.Model):
   phone = models.CharField(max_length=50,null=True, blank=True,verbose_name = " شماره تماس  ")
   additional_information = models.TextField(max_length=1000,null=True, blank=True,verbose_name = "اطلاعات تکمیلی")
   user_photo = models.ImageField(default='default.png', upload_to='profile_pics', null=True, blank=True, verbose_name = "تصویر")
-  CHOICES = ( ('مشتری','مشتری'), ('مشتری ویژه','مشتری ویژه'), ('کارشناس','کارشناس'), ('مدیر','مدیر') )
-  user_type = models.CharField(max_length=30,choices=CHOICES,verbose_name = "نوع کاربر")
+  CHOICES = ( ('کاربر','کاربر'), ('کاربر ویژه','کاربر ویژه'), ('کارشناس','کارشناس'), ('مدیر','مدیر') )
+  user_type = models.CharField(max_length=30,choices=CHOICES, default='کاربر', verbose_name = "نوع کاربر")
   date_created = jmodels.jDateTimeField(auto_now_add=True, verbose_name = "تاریخ ایجاد")
 
 

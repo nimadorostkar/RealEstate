@@ -61,7 +61,7 @@ class Order_request(models.Model):
 
 
     def __str__(self):
-        return  " درخواست " + str(self.item) + ' برای ' + self.customer.name
+        return  " درخواست " + str(self.item) + ' برای ' + self.customer.user.first_name +' '+ self.customer.user.last_name
 
     @property
     def short_description(self):
