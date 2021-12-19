@@ -19,7 +19,7 @@ from django.contrib import messages
 from django.views import generic
 from django.utils.decorators import method_decorator
 from allauth.utils import generate_unique_username
-from app.models import Item, Profile
+from app.models import Item, Profile, Area
 
 
 
@@ -140,7 +140,8 @@ def crm_items_detail(request, id):
 
 #------------------------------------------------------------------------------
 @login_required(login_url="/login/")
-def rahnoejare_registration(request): 
+def rahnoejare_registration(request):
+    area = Area.objects.all()
     if request.method=="POST":
         first_name = request.POST['fname']
         last_name = request.POST['lname']
@@ -162,10 +163,10 @@ def rahnoejare_registration(request):
         success = 'مشتری جدید ایجاد شد ، مشاهده پروفایل'
         link = get_object_or_404(models.Profile, id=new_profile.id)
 
-        context = {'success':success, 'link':link}
+        context = {'area':area, 'success':success, 'link':link}
         return render(request, 'crm/home/rahnoejare_registration.html', context)
 
-    context = {}
+    context = {'area':area}
     html_template = loader.get_template('crm/home/rahnoejare_registration.html')
     return HttpResponse(html_template.render(context, request))
 
