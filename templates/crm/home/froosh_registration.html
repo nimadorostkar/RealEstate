@@ -1,6 +1,6 @@
 {% extends 'crm/layouts/base.html' %}
 
-{% block title %} ویرایش مشتری  {% endblock title %}
+{% block title %} افزودن فایل {% endblock title %}
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}
@@ -24,7 +24,7 @@
     <div class="col-12">
       <div class="card mb-4">
         <div class="card-header pb-0">
-          <h6> ویرایش {{customer.name}} </h6> <p class="text-xs text-secondary mb-0"> تغییرات مد نظر را اعمال کنید  </p> <hr>
+          <h6>  افزودن فایل  </h6> <p class="text-xs text-secondary mb-0"> اطلاعات فایل جدید را وارد کنید </p> <hr>
         </div>
         <div class="card-body px-7 pt-4 pb-2">
 
@@ -35,28 +35,28 @@
                   <div class="col-md-3 pr-md-4">
                     <div class="form-group">
                       <label><p class="text-xs text-secondary mb-0"> نام </p></label>
-                      <input name="fname" type="text" class="form-control" value="{{ customer.user.first_name }}">
+                      <input name="fname" type="text" class="form-control">
                     </div>
                   </div>
 
                   <div class="col-md-3 pr-md-4">
                     <div class="form-group">
                       <label><p class="text-xs text-secondary mb-0"> نام خانوادگی </p></label>
-                      <input name="lname" type="text" class="form-control" value="{{ customer.user.last_name }}">
+                      <input name="lname" type="text" class="form-control">
                     </div>
                   </div>
 
                   <div class="col-md-3 pr-md-4">
                     <div class="form-group">
                       <label><p class="text-xs text-secondary mb-0"> شماره تماس </p></label>
-                      <input name="phone" type="text" class="form-control" value="{{ customer.phone }}">
+                      <input name="phone" type="text" class="form-control">
                     </div>
                   </div>
 
                   <div class="col-md-3 pr-md-4">
                     <div class="form-group">
                       <label><p class="text-xs text-secondary mb-0"> ایمیل </p></label>
-                      <input name="email" type="email" class="form-control" value="{{ customer.user.email }}">
+                      <input name="email" type="email" class="form-control">
                     </div>
                   </div>
 
@@ -66,7 +66,7 @@
                    <div class="col-md-12 pr-md-4">
                      <div class="form-group">
                        <label><p class="text-xs text-secondary mb-0"> اطلاعات تکمیلی </p></label>
-                       <input name="additional_information" type="text" class="form-control" value="{{ customer.additional_information }}">
+                       <input name="additional_information" type="text" class="form-control">
                      </div>
                    </div>
                   </div>
@@ -76,7 +76,7 @@
                      <div class="col-md-3 pr-md-4">
                          <div class="form-group">
                            <label><p class="text-xs text-secondary mb-0"> مشتری ویژه </p></label>
-                            <input name="substantial" type="checkbox" {% if customer.user_type == "کاربر ویژه" %} checked {% endif %} >
+                           <input name="substantial" type="checkbox">
                          </div>
                      </div>
                    </div>

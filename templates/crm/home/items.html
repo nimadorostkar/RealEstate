@@ -17,7 +17,61 @@
         <div class="card mb-4">
           <div class="card-header pb-0">
             <h6> فایل ها </h6>
-            <a href="{% url 'customer_registration' %}" class="btn"> <img src="/static/assets/crm/img/reqreg.png" width="14px"> <small> افزودن فایل جدید </small> </a>
+
+
+              <a href="javascript:;" class="btn" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"> <img src="/static/assets/crm/img/reqreg.png" width="14px"> <small> افزودن فایل جدید </small> </a>
+              <ul class="dropdown-menu px-2 py-3 ms-sm-n4" aria-labelledby="dropdownMenuButton">
+
+
+                  <li>
+                    <a class="dropdown-item border-radius-md" href="{% url 'rahnoejare_registration' %}">
+                      <div class="d-flex py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <p>
+                           <img src="/static/assets/crm/img/reqreg.png" width="20px"> <small class="text-secondary text-xxs font-weight-bold"> فایل رهن و اجاره </small>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item border-radius-md" href="{% url 'rahn_registration' %}">
+                      <div class="d-flex py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <p>
+                           <img src="/static/assets/crm/img/reqreg.png" width="20px"> <small class="text-secondary text-xxs font-weight-bold"> فایل رهن کامل </small>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item border-radius-md" href="{% url 'froosh_registration' %}">
+                      <div class="d-flex py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <p>
+                           <img src="/static/assets/crm/img/reqreg.png" width="20px"> <small class="text-secondary text-xxs font-weight-bold"> فایل فروش </small>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item border-radius-md" href="{% url 'pishfroosh_registration' %}">
+                      <div class="d-flex py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <p>
+                           <img src="/static/assets/crm/img/reqreg.png" width="20px"> <small class="text-secondary text-xxs font-weight-bold"> فایل پیش فروش </small>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+              </ul>
+
+
+
+
           </div>
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">

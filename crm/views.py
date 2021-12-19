@@ -135,6 +135,81 @@ def crm_items_detail(request, id):
 
 
 
+
+
+
+#------------------------------------------------------------------------------
+@login_required(login_url="/login/")
+def rahnoejare_registration(request): 
+    if request.method=="POST":
+        first_name = request.POST['fname']
+        last_name = request.POST['lname']
+        email = request.POST['email']
+
+        new_user = User()
+        new_user.first_name = first_name
+        new_user.last_name = last_name
+        new_user.email = email
+        new_user.username = generate_unique_username([f'{first_name} {last_name}', email, 'new_user'])
+        new_user.save()
+
+        new_profile = get_object_or_404(models.Profile, user=new_user)
+        new_profile.phone = request.POST['phone']
+        new_profile.additional_information = request.POST['additional_information']
+        new_profile.user_type = substantial
+        new_profile.save()
+
+        success = 'مشتری جدید ایجاد شد ، مشاهده پروفایل'
+        link = get_object_or_404(models.Profile, id=new_profile.id)
+
+        context = {'success':success, 'link':link}
+        return render(request, 'crm/home/rahnoejare_registration.html', context)
+
+    context = {}
+    html_template = loader.get_template('crm/home/rahnoejare_registration.html')
+    return HttpResponse(html_template.render(context, request))
+
+
+
+
+
+#------------------------------------------------------------------------------
+@login_required(login_url="/login/")
+def rahn_registration(request):
+    context = {}
+    html_template = loader.get_template('crm/home/rahn_registration.html')
+    return HttpResponse(html_template.render(context, request))
+
+
+
+
+
+
+
+#------------------------------------------------------------------------------
+@login_required(login_url="/login/")
+def froosh_registration(request):
+    context = {}
+    html_template = loader.get_template('crm/home/froosh_registration.html')
+    return HttpResponse(html_template.render(context, request))
+
+
+
+
+
+#------------------------------------------------------------------------------
+@login_required(login_url="/login/")
+def pishfroosh_registration(request):
+    context = {}
+    html_template = loader.get_template('crm/home/pishfroosh_registration.html')
+    return HttpResponse(html_template.render(context, request))
+
+
+
+
+
+
+
 #------------------------------------------------------------------------------
 class customers(generic.ListView):
     model = Profile
@@ -204,6 +279,47 @@ def customer_registration(request):
     context = {}
     html_template = loader.get_template('crm/home/customer_registration.html')
     return HttpResponse(html_template.render(context, request))
+
+
+
+
+
+
+
+
+
+#------------------------------------------------------------------------------
+@login_required(login_url="/login/")
+def customer_edit(request, id):
+    customer = get_object_or_404(models.Profile, id=id)
+
+    if request.method=="POST":
+
+        if request.POST.get('substantial'):
+            substantial = 'کاربر ویژه'
+        else:
+            substantial = 'کاربر'
+
+        customer.user.first_name = request.POST['fname']
+        customer.user.last_name = request.POST['lname']
+        customer.user.email = request.POST['email']
+        customer.phone = request.POST['phone']
+        customer.additional_information = request.POST['additional_information']
+        customer.user_type = substantial
+        customer.save()
+
+
+        success = 'ویرایش اطلاعات مشتری انجام شد ، مشاهده پروفایل'
+        link = get_object_or_404(models.Profile, id=customer.id)
+
+        context = {'customer':customer, 'success':success, 'link':link}
+        return render(request, 'crm/home/customer_edit.html', context)
+
+    context = {'customer':customer}
+    html_template = loader.get_template('crm/home/customer_edit.html')
+    return HttpResponse(html_template.render(context, request))
+
+
 
 
 
@@ -312,50 +428,6 @@ def order_edit(request, id):
 
 
 
-
-
-
-
-
-#------------------------------------------------------------------------------
-@login_required(login_url="/login/")
-def customer_edit(request, id):
-    customer = get_object_or_404(models.Customer, id=id)
-    products = models.Product.objects.all().order_by('-date_created')
-
-    if request.method=="POST":
-
-        if request.POST.get('substantial'):
-            substantial = True
-        else:
-            substantial = False
-
-        customer.name = request.POST['name']
-        customer.phone = request.POST['phone']
-        customer.company = request.POST['company']
-        customer.address = request.POST['address']
-        customer.additional_information = request.POST['additional_information']
-        customer.substantial = substantial
-        customer.save()
-
-        customer.product_tag.clear()
-
-        get_products = request.POST.getlist('products')
-        for product in get_products:
-           if Product.objects.all().exists():
-              product = Product.objects.get(id=product)
-              customer.product_tag.add(product)
-
-
-        success = 'ویرایش اطلاعات مشتری انجام شد ، مشاهده پروفایل'
-        link = get_object_or_404(models.Customer, id=customer.id)
-
-        context = {'customer':customer, 'products':products, 'success':success, 'link':link}
-        return render(request, 'crm/home/customer_edit.html', context)
-
-    context = {'customer':customer, 'products':products}
-    html_template = loader.get_template('crm/home/customer_edit.html')
-    return HttpResponse(html_template.render(context, request))
 
 
 
