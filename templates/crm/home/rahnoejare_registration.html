@@ -28,7 +28,7 @@
         </div>
         <div class="card-body px-7 pt-4 pb-2">
 
-               <form action="#" method="post" dir="rtl" align="right">
+               <form action="#" method="post" dir="rtl" align="right" enctype="multipart/form-data">
                  {% csrf_token %}
 
                  <div class="row">
@@ -81,21 +81,21 @@
                   <div class="col-md-2 pr-md-4">
                     <div class="form-group">
                       <label><p class="text-xs text-secondary mb-0"> متراژ (متر) </p></label>
-                      <input name="area_size" type="number" class="form-control">
+                      <input name="area_size" type="number" class="form-control" value=0>
                     </div>
                   </div>
 
                   <div class="col-md-2 pr-md-4">
                     <div class="form-group">
                       <label><p class="text-xs text-secondary mb-0"> تعداد اتاق </p></label>
-                      <input name="room_qty" type="number" class="form-control">
+                      <input name="room_qty" type="number" class="form-control" value=0>
                     </div>
                   </div>
 
                   <div class="col-md-2 pr-md-4">
                     <div class="form-group">
                       <label><p class="text-xs text-secondary mb-0"> سن بنا (سال) </p></label>
-                      <input name="building_age" type="number" class="form-control">
+                      <input name="building_age" type="number" class="form-control" value=0>
                     </div>
                   </div>
 
@@ -112,13 +112,13 @@
                    <div class="col-md-2 pr-md-4">
                      <div class="form-group">
                        <label><p class="text-xs text-secondary mb-0"> ودیعه (تومان) </p></label>
-                       <input name="deposit" type="number" class="form-control">
+                       <input name="deposit" type="number" class="form-control" value=0>
                      </div>
                    </div>
                    <div class="col-md-2 pr-md-4">
                      <div class="form-group">
                        <label><p class="text-xs text-secondary mb-0"> اجاره (تومان) </p></label>
-                       <input name="rent" type="number" class="form-control">
+                       <input name="rent" type="number" class="form-control" value=0>
                      </div>
                    </div>
                   </div>
@@ -202,7 +202,7 @@
 
                  <div class="card-footer" align="center">
                    <button type="submit" class="btn bg-gradient-info my-1 me-1"> ثبت </button>
-                     <a href="{{ link.get_absolute_url }}"> <p style="color:green;"> {{ success }} </p> </a>
+                     <a href="{{ link.get_absolute_crm_url }}"> <p style="color:green;"> {{ success }} </p> </a>
                  </div>
 
               </form>

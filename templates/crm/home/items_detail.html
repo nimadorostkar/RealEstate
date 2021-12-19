@@ -47,6 +47,7 @@
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> نوع ملک </th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> منطقه </th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> متراژ </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> سن بنا </th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> قیمت </th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> وضعیت </th>
                     </tr>
@@ -67,6 +68,9 @@
                       </td>
                       <td class="align-middle text-center">
                           <span class="text-secondary text-xs font-weight-bold"> {{ item.area_size  }} <small> متر </small> </span>
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold"> {{ item.building_age  }} </span>
                       </td>
                       <td class="align-middle text-center">
                           {% if item.buy_status == 'فروش' %}
@@ -101,7 +105,7 @@
                   <div class="col-lg-8" align="left">
                     <div class="card-body position-relative z-index-1 d-flex flex-column h-100 p-3">
                       <div class="property-icon">
-                        
+
                         <a class="btn btn-link text-dark text-secondary text-xxs" href="{{ item.get_absolute_url }}"><i class="fas fa-search text-dark me-2" aria-hidden="true"></i> مشاهده فایل در وبسایت </a>
 
                         <!-- room qty -->

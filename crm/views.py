@@ -144,9 +144,6 @@ def rahnoejare_registration(request):
     area = Area.objects.all()
     if request.method=="POST":
 
-        print('--------------------------')
-        print(request.POST['area'])
-
         if request.POST.get('available'):
             available = True
         else:
@@ -189,19 +186,19 @@ def rahnoejare_registration(request):
         item.rent = request.POST['rent']
         item.area = get_object_or_404(Area, id=request.POST['area'])
         item.additional_information = request.POST['additional_information']
-        if (request.FILES): item.image = request.FILES['image']
+        if (request.FILES): item.image = request.FILES['img']
         item.video_link = request.POST['video']
         item.sales_expert = request.user
         item.save()
 
-        new_profile = get_object_or_404(models.Profile, user=new_user)
-        new_profile.phone = request.POST['phone']
-        new_profile.additional_information = request.POST['additional_information']
-        new_profile.user_type = substantial
-        new_profile.save()
+        #new_profile = get_object_or_404(models.Profile, user=new_user)
+        #new_profile.phone = request.POST['phone']
+        #new_profile.additional_information = request.POST['additional_information']
+        #new_profile.user_type = substantial
+        #new_profile.save()
 
-        success = 'مشتری جدید ایجاد شد ، مشاهده پروفایل'
-        link = get_object_or_404(models.Profile, id=new_profile.id)
+        success = 'فایل جدید ایجاد شد ، مشاهده صفحه فایل'
+        link = get_object_or_404(models.Item, id=item.id)
 
         context = {'area':area, 'success':success, 'link':link}
         return render(request, 'crm/home/rahnoejare_registration.html', context)
