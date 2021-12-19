@@ -143,16 +143,56 @@ def crm_items_detail(request, id):
 def rahnoejare_registration(request):
     area = Area.objects.all()
     if request.method=="POST":
-        first_name = request.POST['fname']
-        last_name = request.POST['lname']
-        email = request.POST['email']
 
-        new_user = User()
-        new_user.first_name = first_name
-        new_user.last_name = last_name
-        new_user.email = email
-        new_user.username = generate_unique_username([f'{first_name} {last_name}', email, 'new_user'])
-        new_user.save()
+        print('--------------------------')
+        print(request.POST['area'])
+
+        if request.POST.get('available'):
+            available = True
+        else:
+            available = False
+
+        if request.POST.get('parking'):
+            parking = True
+        else:
+            parking = False
+
+        if request.POST.get('storage_room'):
+            storage_room = True
+        else:
+            storage_room = False
+
+        if request.POST.get('elevator'):
+            elevator = True
+        else:
+            elevator = False
+
+        if request.POST.get('balcony'):
+            balcony = True
+        else:
+            balcony = False
+
+
+        item = Item()
+        item.available = available
+        item.code = request.POST['code']
+        item.buy_status = 'رهن و اجاره'
+        item.estate_status = request.POST['estate_status']
+        item.area_size = request.POST['area_size']
+        item.room_qty = request.POST['room_qty']
+        item.building_age = request.POST['building_age']
+        item.parking = parking
+        item.storage_room = storage_room
+        item.elevator = elevator
+        item.balcony = balcony
+        item.deposit = request.POST['deposit']
+        item.rent = request.POST['rent']
+        item.area = get_object_or_404(Area, id=request.POST['area'])
+        item.additional_information = request.POST['additional_information']
+        if (request.FILES): item.image = request.FILES['image']
+        item.video_link = request.POST['video']
+        item.sales_expert = request.user
+        item.save()
 
         new_profile = get_object_or_404(models.Profile, user=new_user)
         new_profile.phone = request.POST['phone']

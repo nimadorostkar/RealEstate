@@ -30,6 +30,17 @@
 
                <form action="#" method="post" dir="rtl" align="right">
                  {% csrf_token %}
+
+                 <div class="row">
+                   <div class="col-md-3">
+                       <div class="form-group">
+                         <label><p class="text-xs text-secondary mb-0"> قابل مشاهده در سایت </p></label>
+                          <input name="available" type="checkbox" checked>
+                       </div>
+                   </div>
+                 </div>
+
+
                  <div class="row">
 
                   <div class="col-md-2 pr-md-4">
@@ -70,21 +81,21 @@
                   <div class="col-md-2 pr-md-4">
                     <div class="form-group">
                       <label><p class="text-xs text-secondary mb-0"> متراژ (متر) </p></label>
-                      <input name="area_size" type="text" class="form-control">
+                      <input name="area_size" type="number" class="form-control">
                     </div>
                   </div>
 
                   <div class="col-md-2 pr-md-4">
                     <div class="form-group">
                       <label><p class="text-xs text-secondary mb-0"> تعداد اتاق </p></label>
-                      <input name="room_qty" type="email" class="form-control">
+                      <input name="room_qty" type="number" class="form-control">
                     </div>
                   </div>
 
                   <div class="col-md-2 pr-md-4">
                     <div class="form-group">
                       <label><p class="text-xs text-secondary mb-0"> سن بنا (سال) </p></label>
-                      <input name="building_age" type="text" class="form-control">
+                      <input name="building_age" type="number" class="form-control">
                     </div>
                   </div>
 
@@ -101,13 +112,13 @@
                    <div class="col-md-2 pr-md-4">
                      <div class="form-group">
                        <label><p class="text-xs text-secondary mb-0"> ودیعه (تومان) </p></label>
-                       <input name="deposit" type="email" class="form-control">
+                       <input name="deposit" type="number" class="form-control">
                      </div>
                    </div>
                    <div class="col-md-2 pr-md-4">
                      <div class="form-group">
                        <label><p class="text-xs text-secondary mb-0"> اجاره (تومان) </p></label>
-                       <input name="rent" type="email" class="form-control">
+                       <input name="rent" type="number" class="form-control">
                      </div>
                    </div>
                   </div>
@@ -117,13 +128,13 @@
                      <div class="col-md-3 pr-md-4">
                        <div class="form-group">
                          <label><p class="text-xs text-secondary mb-0"> نام مالک </p></label>
-                         <input name="owner_name" type="email" class="form-control">
+                         <input name="owner_name" type="text" class="form-control">
                        </div>
                      </div>
                      <div class="col-md-3 pr-md-4">
                        <div class="form-group">
                          <label><p class="text-xs text-secondary mb-0"> شماره تماس مالک </p></label>
-                         <input name="owner_phone" type="email" class="form-control">
+                         <input name="owner_phone" type="text" class="form-control">
                        </div>
                      </div>
                      <div class="col-md-6 pr-md-4">
