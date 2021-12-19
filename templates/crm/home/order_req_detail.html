@@ -72,12 +72,11 @@
                       <td class="align-middle text-center">
                           <a href="{{ req.customer.get_absolute_url }}">
                             <p class="mb-0">
-                              {% if req.customer.substantial %}
-                                <img src="/static/assets/crm/img/golduser.png" width="20px" height="20px">
-                              {% else %}
-                                <img src="/static/assets/crm/img/user.png" width="20px" height="20px">
+                              <img src="{{ req.customer.user_photo.url }}" class="avatar avatar-sm me-3">
+                              {{ req.customer.user.first_name }} {{ req.customer.user.last_name }}
+                              {% if req.customer.user_type == 'کاربر ویژه' %}
+                                 <img src="/static/assets/crm/img/star.png" width="20px" class="me-2">
                               {% endif %}
-                              {{ req.customer.name }}
                            </p>
                            <p class="text-xxs text-secondary mb-0"> {{ req.customer.phone }} </p>
                          </a>
@@ -101,7 +100,7 @@
                   <div class="col-lg-6" dir="rtl" align="right">
                    <h6>
                      <span class="text-xxs text-secondary">  کارشناس فروش : </span>
-                     <img src="{{ req.user.profile.user_photo.url }}" width="30px" height="30px"> {{ req.user.first_name }} {{ req.user.last_name }}
+                     <img src="{{ req.user.user.profile.user_photo.url }}" width="30px" height="30px"> {{ req.user.user.first_name }} {{ req.user.user.last_name }}
                    </h6>
 
                   </div>

@@ -93,14 +93,17 @@
 
                 <div class="row">
 
-                  <div class="col-lg-6" dir="rtl" align="right">
+                  <div class="col-lg-4" dir="rtl" align="right">
                     <p> <span class="text-xs text-secondary mb-0"> کارشناس فروش : </span> {{ item.sales_expert.first_name }} {{ item.sales_expert.last_name }} </p>
                     <p> <span class="text-xs text-secondary mb-0">   مالک : </span> {{ item.ownership.name }} &nbsp; &nbsp; {{ item.ownership.phone }} </p>
                   </div>
 
-                  <div class="col-lg-6" align="left">
+                  <div class="col-lg-8" align="left">
                     <div class="card-body position-relative z-index-1 d-flex flex-column h-100 p-3">
                       <div class="property-icon">
+                        
+                        <a class="btn btn-link text-dark text-secondary text-xxs" href="{{ item.get_absolute_url }}"><i class="fas fa-search text-dark me-2" aria-hidden="true"></i> مشاهده فایل در وبسایت </a>
+
                         <!-- room qty -->
                         {% if item.estate_status == "آپارتمان"  or item.estate_status == "مغازه و تجاری" or item.estate_status == "دفتر کار اداری" or item.estate_status == "خانه ویلایی" or item.estate_status == "ویلا" %}
                           <img src="/static/assets/img/icon/bed-orange.png">[{{ item.room_qty }}]
@@ -137,15 +140,12 @@
                               <img src="/static/assets/img/icon/balcony.png">
                             {% endif %}
                         {% endif %}
-                        <div align="left">
-                          <br>
-                          <a class="btn btn-link text-dark text-secondary text-xxs" href="{{ item.get_absolute_url }}"><i class="fas fa-search text-dark me-2" aria-hidden="true"></i> مشاهده فایل در وبسایت </a>
-                        </div>
+
                       </div>
+
                     </div>
                   </div>
                 </div>
-
 
               </div>
 

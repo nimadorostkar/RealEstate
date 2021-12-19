@@ -55,12 +55,11 @@
                         <div class="d-flex flex-column justify-content-center">
                           <a href="{{ Order_request.customer.get_absolute_url }}">
                             <h6 class="mb-0 text-sm">
-                              {% if Order_request.customer.substantial %}
-                                <img src="/static/assets/crm/img/golduser.png" class="avatar avatar-sm me-3">
-                              {% else %}
-                                <img src="/static/assets/crm/img/user.png" class="avatar avatar-sm me-3">
+                              <img src="{{ Order_request.customer.user_photo.url }}" class="avatar avatar-sm me-3">
+                              {{ Order_request.customer.user.first_name }} {{ Order_request.customer.user.last_name }}
+                              {% if Order_request.customer.user_type == 'کاربر ویژه' %}
+                                 <img src="/static/assets/crm/img/star.png" width="20px" class="me-2">
                               {% endif %}
-                              {{ Order_request.customer.name }}
                            </h6>
                          </a>
                         </div>
@@ -72,7 +71,7 @@
                       </a>
                     </td>
                     <td class="align-middle text-center">
-                      <p class="text-xs text-secondary mb-0"> {{ Order_request.user.first_name }} {{ Order_request.user.last_name }} </p>
+                      <p class="text-xs text-secondary mb-0"> {{ Order_request.user.user.first_name }} {{ Order_request.user.user.last_name }} </p>
                     </td>
                     <td class="align-middle text-center">
                       <p class="text-xxs text-secondary mb-0"> <i class="far fa-calendar-alt me-2"></i> <small> {{ Order_request.date_created|date:'Y-m-d' }} </small>  <i class="far fa-clock me-2"></i> <small> {{ Order_request.date_created|date:'H:i'}} </small> </p>

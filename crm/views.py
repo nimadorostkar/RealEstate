@@ -18,6 +18,7 @@ import jdatetime
 from django.contrib import messages
 from django.views import generic
 from django.utils.decorators import method_decorator
+from allauth.utils import generate_unique_username
 from app.models import Item, Profile
 
 
@@ -170,35 +171,37 @@ def customer_detail(request, id):
 #------------------------------------------------------------------------------
 @login_required(login_url="/login/")
 def customer_registration(request):
-    products = models.Product.objects.all().order_by('-date_created')
     if request.method=="POST":
 
         if request.POST.get('substantial'):
-            substantial = True
+            substantial = 'کاربر ویژه'
         else:
-            substantial = False
+            substantial = 'کاربر'
 
-        new = Customer()
-        new.name = request.POST['name']
-        new.phone = request.POST['phone']
-        new.company = request.POST['company']
-        new.address = request.POST['address']
-        new.additional_information = request.POST['additional_information']
-        new.substantial = substantial
-        new.save()
-        get_products = request.POST.getlist('products')
-        for product in get_products:
-           if Product.objects.all().exists():
-              product = Product.objects.get(id=product)
-              new.product_tag.add(product)
+        first_name = request.POST['fname']
+        last_name = request.POST['lname']
+        email = request.POST['email']
+
+        new_user = User()
+        new_user.first_name = first_name
+        new_user.last_name = last_name
+        new_user.email = email
+        new_user.username = generate_unique_username([f'{first_name} {last_name}', email, 'new_user'])
+        new_user.save()
+
+        new_profile = get_object_or_404(models.Profile, user=new_user)
+        new_profile.phone = request.POST['phone']
+        new_profile.additional_information = request.POST['additional_information']
+        new_profile.user_type = substantial
+        new_profile.save()
 
         success = 'مشتری جدید ایجاد شد ، مشاهده پروفایل'
-        link = get_object_or_404(models.Customer, id=new.id)
+        link = get_object_or_404(models.Profile, id=new_profile.id)
 
-        context = {'products':products, 'success':success, 'link':link}
+        context = {'success':success, 'link':link}
         return render(request, 'crm/home/customer_registration.html', context)
 
-    context = {'products':products}
+    context = {}
     html_template = loader.get_template('crm/home/customer_registration.html')
     return HttpResponse(html_template.render(context, request))
 
@@ -255,8 +258,8 @@ def order_req_detail(request, id):
 #------------------------------------------------------------------------------
 @login_required(login_url="/login/")
 def order_registration(request):
-    customers = models.Customer.objects.all().order_by('-date_created')
-    products = models.Product.objects.filter(available=True).order_by('-date_created')
+    customers = models.Profile.objects.filter( Q(user_type='کاربر') | Q(user_type='کاربر ویژه') ).order_by('-date_created')
+    products = models.Item.objects.filter(available=True).order_by('-date')
     if request.method=="POST":
         req = Order_request()
         req.user = request.user
