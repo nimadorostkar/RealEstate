@@ -7,7 +7,7 @@
 {% block stylesheets %}
 <style>
   .container { position: relative; }
-  .container .fa-trash-alt { position: absolute; bottom:10; left:10; top:10;  }
+  .container .fa-trash-alt {position: absolute;}
 </style>
 {% endblock stylesheets %}
 
@@ -70,17 +70,17 @@
               <div class="col-lg-3">
                 <span class="text-center text-secondary text-xxs font-weight-bolder opacity-7"> قیمت (تومان)</span>
                 {% if item.buy_status == 'فروش' %}
-                  <h6 class="text-xs"> {{ item.price|floatformat:0|intcomma:False }} تومان </h6>
+                  <h6 class="text-xs"> {{ item.price|floatformat:0|intcomma:False }}  </h6>
                 {% elif item.buy_status == 'رهن کامل' %}
-                  <h6 class="text-xs"> {{ item.deposit|floatformat:0|intcomma:False }} تومان </h6>
+                  <h6 class="text-xs"> {{ item.deposit|floatformat:0|intcomma:False }} </h6>
                 {% elif item.buy_status == 'پیش فروش' %}
-                  <h6 class="text-xs"> {{ item.price|floatformat:0|intcomma:False }} تومان </h6>
+                  <h6 class="text-xs"> {{ item.price|floatformat:0|intcomma:False }} </h6>
                 {% elif item.buy_status == 'رهن و اجاره' %}
                   <small> <h6 class="text-xs"> ودیعه: {{ item.deposit|floatformat:0|intcomma:False }} &nbsp; اجاره: {{ item.rent|floatformat:0|intcomma:False }} </h6> </small>
                 {% endif %}
               </div>
           </div>
-          <br>
+          <hr>
           <div class="row" dir="rtl" align="center">
               <div class="col-lg-2">
                 <span class="text-center text-secondary text-xxs font-weight-bolder opacity-7"> کارشناس فروش </span>
@@ -94,43 +94,49 @@
                     <p class="text-xxs text-secondary mb-0"> {{ item.ownership.phone }} </p>
                 </h6>
               </div>
-              <div class="col-lg-3">
+              <div class="col-lg-1">
+                <span class="text-center text-secondary text-xxs font-weight-bolder opacity-7"> لینک ویدیو </span>
+                <h6 class="text-xs">
+                  <a href="#"><img src="/static/assets/crm/img/video.png" width="25px" height="25px" class="me-2"></a>
+                </h6>
+              </div>
+              <div class="col-lg-2">
                 <span class="text-center text-secondary text-xxs font-weight-bolder opacity-7"> امکانات فایل </span>
                   <div class="property-icon">
                     <!-- room qty -->
                     {% if item.estate_status == "آپارتمان"  or item.estate_status == "مغازه و تجاری" or item.estate_status == "دفتر کار اداری" or item.estate_status == "خانه ویلایی" or item.estate_status == "ویلا" %}
-                      <img src="/static/assets/img/icon/bed-orange.png">[{{ item.room_qty }}]
+                      <img src="/static/assets/img/icon/bed-orange.png" width="18px" height="18px"> <span class="text-secondary text-xxs">[{{ item.room_qty }}]</span>
                     {% endif %}
                     <!-- parking -->
                     {% if item.estate_status == "آپارتمان"  or item.estate_status == "مغازه و تجاری" or item.estate_status == "دفتر کار اداری" or item.estate_status == "خانه ویلایی" or item.estate_status == "ویلا" %}
                         {% if item.parking %}
-                          <img src="/static/assets/img/icon/cars-orange.png">
+                          <img src="/static/assets/img/icon/cars-orange.png" width="20px" height="18px">
                         {% else %}
-                          <img src="/static/assets/img/icon/cars.png">
+                          <img src="/static/assets/img/icon/cars.png" width="20px" height="18px">
                         {% endif %}
                     {% endif %}
                     <!-- elevator -->
                     {% if item.estate_status == "آپارتمان"  or item.estate_status == "مغازه و تجاری" or item.estate_status == "دفتر کار اداری" %}
                         {% if item.elevator %}
-                          <img src="/static/assets/img/icon/elevator-orange.png">
+                          <img src="/static/assets/img/icon/elevator-orange.png" width="15px" height="15px">
                         {% else %}
-                          <img src="/static/assets/img/icon/elevator.png">
+                          <img src="/static/assets/img/icon/elevator.png" width="15px" height="15px">
                         {% endif %}
                     {% endif %}
                     <!-- storage room -->
                     {% if item.estate_status == "آپارتمان"  or item.estate_status == "مغازه و تجاری" or item.estate_status == "دفتر کار اداری" or item.estate_status == "خانه ویلایی" or item.estate_status == "ویلا" %}
                         {% if item.storage_room %}
-                          <img src="/static/assets/img/icon/warehouse-orange.png">
+                          <img src="/static/assets/img/icon/warehouse-orange.png" width="15px" height="15px">
                         {% else %}
-                          <img src="/static/assets/img/icon/warehouse.png">
+                          <img src="/static/assets/img/icon/warehouse.png" width="15px" height="15px">
                         {% endif %}
                     {% endif %}
                     <!-- balcony -->
                     {% if item.estate_status == "آپارتمان"  or item.estate_status == "مغازه و تجاری" or item.estate_status == "دفتر کار اداری" or item.estate_status == "خانه ویلایی" or item.estate_status == "ویلا" %}
                         {% if item.balcony %}
-                          <img src="/static/assets/img/icon/balcony-orange.png">
+                          <img src="/static/assets/img/icon/balcony-orange.png" width="15px" height="15px">
                         {% else %}
-                          <img src="/static/assets/img/icon/balcony.png">
+                          <img src="/static/assets/img/icon/balcony.png" width="15px" height="15px">
                         {% endif %}
                     {% endif %}
                   </div>
@@ -138,13 +144,11 @@
               <div class="col-lg-3 container">
                 <span class="text-center text-secondary text-xxs font-weight-bolder opacity-7"> تصاویر فایل </span>
                 <h6 class="text-xs">
+                    {% for Image in images %}
                      <a href="#"><i class="text-xxs far fa-trash-alt me-2 btn-outline-danger"></i></a>
-                     <img src="{{ item.image.url }}" class="avatar avatar-sm me-2">
-
-                     <a href="#"><i class="text-xxs far fa-trash-alt me-2 btn-outline-danger"></i></a>
-                     <img src="{{ item.image.url }}" class="avatar avatar-sm me-2">
-
-                    <img src="/static/assets/crm/img/add.png" width="30px" height="30px" class="me-3">
+                     <img src="{{ Image.Image.url }}" class="avatar avatar-sm me-2">
+                    {% endfor %}
+                    <a href="#"><img src="/static/assets/crm/img/add.png" width="30px" height="30px" class="me-2"></a>
                 </h6>
               </div>
               <div class="col-lg-2">
@@ -164,8 +168,6 @@
   </div>
 
 </div>
-
-
 
 
 
