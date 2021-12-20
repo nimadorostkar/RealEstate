@@ -19,7 +19,7 @@ from django.contrib import messages
 from django.views import generic
 from django.utils.decorators import method_decorator
 from allauth.utils import generate_unique_username
-from app.models import Item, Profile, Area
+from app.models import Item, Profile, Area, ItemImage, Ownership
 
 
 
@@ -169,6 +169,10 @@ def rahnoejare_registration(request):
         else:
             balcony = False
 
+        owner = Ownership()
+        owner.name = request.POST['owner_name']
+        owner.phone = request.POST['owner_phone']
+        owner.save()
 
         item = Item()
         item.available = available
@@ -189,13 +193,27 @@ def rahnoejare_registration(request):
         if (request.FILES): item.image = request.FILES['img']
         item.video_link = request.POST['video']
         item.sales_expert = request.user
+        item.ownership = owner
         item.save()
 
-        #new_profile = get_object_or_404(models.Profile, user=new_user)
-        #new_profile.phone = request.POST['phone']
-        #new_profile.additional_information = request.POST['additional_information']
-        #new_profile.user_type = substantial
-        #new_profile.save()
+        if request.FILES['img2']:
+            Img2 = ItemImage()
+            Img2.item = item
+            Img2.Image = request.FILES['img2']
+            Img2.save()
+
+        if request.FILES['img3']:
+            Img3 = ItemImage()
+            Img3.item = item
+            Img3.Image = request.FILES['img3']
+            Img3.save()
+
+        if request.FILES['img4']:
+            Img4 = ItemImage()
+            Img4.item = item
+            Img4.Image = request.FILES['img4']
+            Img4.save()
+
 
         success = 'فایل جدید ایجاد شد ، مشاهده صفحه فایل'
         link = get_object_or_404(models.Item, id=item.id)
