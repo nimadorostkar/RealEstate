@@ -126,8 +126,9 @@ class crm_items(generic.ListView):
 @login_required()
 def crm_items_detail(request, id):
     item = get_object_or_404(models.Item, id=id)
+    images = ItemImage.objects.filter(item=item)
     reqs = models.Order_request.objects.filter(item=item).order_by('-date_created')
-    context = {'item':item, 'reqs':reqs}
+    context = {'item':item, 'images':images, 'reqs':reqs}
     return render(request, 'crm/home/items_detail.html', context)
 
 
@@ -143,6 +144,14 @@ def crm_items_detail(request, id):
 def rahnoejare_registration(request):
     area = Area.objects.all()
     if request.method=="POST":
+
+        #if request.FILES['img2'] == 'empty.txt' :
+        #    aa = False
+        #else:
+        #    aa = True
+        #print('--------------')
+        print(request.FILES['img2'])
+
 
         if request.POST.get('available'):
             available = True
@@ -196,23 +205,21 @@ def rahnoejare_registration(request):
         item.ownership = owner
         item.save()
 
-        if request.FILES['img2']:
-            Img2 = ItemImage()
-            Img2.item = item
-            Img2.Image = request.FILES['img2']
-            Img2.save()
 
-        if request.FILES['img3']:
-            Img3 = ItemImage()
-            Img3.item = item
-            Img3.Image = request.FILES['img3']
-            Img3.save()
+        #Img2 = ItemImage()
+        #Img2.item = item
+        #Img2.Image = request.FILES['img2']
+        #Img2.save()
 
-        if request.FILES['img4']:
-            Img4 = ItemImage()
-            Img4.item = item
-            Img4.Image = request.FILES['img4']
-            Img4.save()
+        #Img3 = ItemImage()
+        #Img3.item = item
+        #Img3.Image = request.FILES['img3']
+        #Img3.save()
+
+        #Img4 = ItemImage()
+        #Img4.item = item
+        #Img4.Image = request.FILES['img4']
+        #Img4.save()
 
 
         success = 'فایل جدید ایجاد شد ، مشاهده صفحه فایل'
