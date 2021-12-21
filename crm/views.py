@@ -143,6 +143,7 @@ def crm_items_detail(request, id):
 @login_required(login_url="/login/")
 def rahnoejare_registration(request):
     area = Area.objects.all()
+    defaultcode = (Item.objects.all().last().id)+1
     if request.method=="POST":
 
         if request.POST.get('available'):
@@ -203,7 +204,7 @@ def rahnoejare_registration(request):
         context = {'area':area, 'success':success, 'link':link}
         return render(request, 'crm/home/rahnoejare_registration.html', context)
 
-    context = {'area':area}
+    context = {'area':area, 'defaultcode':defaultcode}
     html_template = loader.get_template('crm/home/rahnoejare_registration.html')
     return HttpResponse(html_template.render(context, request))
 
@@ -214,7 +215,68 @@ def rahnoejare_registration(request):
 #------------------------------------------------------------------------------
 @login_required(login_url="/login/")
 def rahn_registration(request):
-    context = {}
+    area = Area.objects.all()
+    defaultcode = (Item.objects.all().last().id)+1
+    if request.method=="POST":
+
+        if request.POST.get('available'):
+            available = True
+        else:
+            available = False
+
+        if request.POST.get('parking'):
+            parking = True
+        else:
+            parking = False
+
+        if request.POST.get('storage_room'):
+            storage_room = True
+        else:
+            storage_room = False
+
+        if request.POST.get('elevator'):
+            elevator = True
+        else:
+            elevator = False
+
+        if request.POST.get('balcony'):
+            balcony = True
+        else:
+            balcony = False
+
+        owner = Ownership()
+        owner.name = request.POST['owner_name']
+        owner.phone = request.POST['owner_phone']
+        owner.save()
+
+        item = Item()
+        item.available = available
+        item.code = request.POST['code']
+        item.buy_status = 'رهن کامل'
+        item.estate_status = request.POST['estate_status']
+        item.area_size = request.POST['area_size']
+        item.room_qty = request.POST['room_qty']
+        item.building_age = request.POST['building_age']
+        item.parking = parking
+        item.storage_room = storage_room
+        item.elevator = elevator
+        item.balcony = balcony
+        item.deposit = request.POST['deposit']
+        item.area = get_object_or_404(Area, id=request.POST['area'])
+        item.additional_information = request.POST['additional_information']
+        if (request.FILES): item.image = request.FILES['img']
+        item.video_link = request.POST['video']
+        item.sales_expert = request.user
+        item.ownership = owner
+        item.save()
+
+        success = 'فایل جدید ایجاد شد ، مشاهده صفحه فایل'
+        link = get_object_or_404(models.Item, id=item.id)
+
+        context = {'area':area, 'success':success, 'link':link}
+        return render(request, 'crm/home/rahnoejare_registration.html', context)
+
+    context = {'area':area, 'defaultcode':defaultcode}
     html_template = loader.get_template('crm/home/rahn_registration.html')
     return HttpResponse(html_template.render(context, request))
 
@@ -227,7 +289,68 @@ def rahn_registration(request):
 #------------------------------------------------------------------------------
 @login_required(login_url="/login/")
 def froosh_registration(request):
-    context = {}
+    area = Area.objects.all()
+    defaultcode = (Item.objects.all().last().id)+1
+    if request.method=="POST":
+
+        if request.POST.get('available'):
+            available = True
+        else:
+            available = False
+
+        if request.POST.get('parking'):
+            parking = True
+        else:
+            parking = False
+
+        if request.POST.get('storage_room'):
+            storage_room = True
+        else:
+            storage_room = False
+
+        if request.POST.get('elevator'):
+            elevator = True
+        else:
+            elevator = False
+
+        if request.POST.get('balcony'):
+            balcony = True
+        else:
+            balcony = False
+
+        owner = Ownership()
+        owner.name = request.POST['owner_name']
+        owner.phone = request.POST['owner_phone']
+        owner.save()
+
+        item = Item()
+        item.available = available
+        item.code = request.POST['code']
+        item.buy_status = 'فروش'
+        item.estate_status = request.POST['estate_status']
+        item.area_size = request.POST['area_size']
+        item.room_qty = request.POST['room_qty']
+        item.building_age = request.POST['building_age']
+        item.parking = parking
+        item.storage_room = storage_room
+        item.elevator = elevator
+        item.balcony = balcony
+        item.price = request.POST['price']
+        item.area = get_object_or_404(Area, id=request.POST['area'])
+        item.additional_information = request.POST['additional_information']
+        if (request.FILES): item.image = request.FILES['img']
+        item.video_link = request.POST['video']
+        item.sales_expert = request.user
+        item.ownership = owner
+        item.save()
+
+        success = 'فایل جدید ایجاد شد ، مشاهده صفحه فایل'
+        link = get_object_or_404(models.Item, id=item.id)
+
+        context = {'area':area, 'success':success, 'link':link}
+        return render(request, 'crm/home/rahnoejare_registration.html', context)
+
+    context = {'area':area, 'defaultcode':defaultcode}
     html_template = loader.get_template('crm/home/froosh_registration.html')
     return HttpResponse(html_template.render(context, request))
 
@@ -238,7 +361,68 @@ def froosh_registration(request):
 #------------------------------------------------------------------------------
 @login_required(login_url="/login/")
 def pishfroosh_registration(request):
-    context = {}
+    area = Area.objects.all()
+    defaultcode = (Item.objects.all().last().id)+1
+    if request.method=="POST":
+
+        if request.POST.get('available'):
+            available = True
+        else:
+            available = False
+
+        if request.POST.get('parking'):
+            parking = True
+        else:
+            parking = False
+
+        if request.POST.get('storage_room'):
+            storage_room = True
+        else:
+            storage_room = False
+
+        if request.POST.get('elevator'):
+            elevator = True
+        else:
+            elevator = False
+
+        if request.POST.get('balcony'):
+            balcony = True
+        else:
+            balcony = False
+
+        owner = Ownership()
+        owner.name = request.POST['owner_name']
+        owner.phone = request.POST['owner_phone']
+        owner.save()
+
+        item = Item()
+        item.available = available
+        item.code = request.POST['code']
+        item.buy_status = 'پیش فروش'
+        item.estate_status = request.POST['estate_status']
+        item.area_size = request.POST['area_size']
+        item.room_qty = request.POST['room_qty']
+        item.building_age = request.POST['building_age']
+        item.parking = parking
+        item.storage_room = storage_room
+        item.elevator = elevator
+        item.balcony = balcony
+        item.price = request.POST['price']
+        item.area = get_object_or_404(Area, id=request.POST['area'])
+        item.additional_information = request.POST['additional_information']
+        if (request.FILES): item.image = request.FILES['img']
+        item.video_link = request.POST['video']
+        item.sales_expert = request.user
+        item.ownership = owner
+        item.save()
+
+        success = 'فایل جدید ایجاد شد ، مشاهده صفحه فایل'
+        link = get_object_or_404(models.Item, id=item.id)
+
+        context = {'area':area, 'success':success, 'link':link}
+        return render(request, 'crm/home/rahnoejare_registration.html', context)
+
+    context = {'area':area, 'defaultcode':defaultcode}
     html_template = loader.get_template('crm/home/pishfroosh_registration.html')
     return HttpResponse(html_template.render(context, request))
 

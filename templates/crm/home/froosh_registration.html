@@ -9,7 +9,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" rel="stylesheet" />
-    <link href="/static/assets/css/bootstrap336.min.css" rel="stylesheet" />
+    <link href="/static/assets/crm/css/bootstrap336.min.css" rel="stylesheet" />
 
 {% endblock stylesheets %}
 
@@ -24,67 +24,160 @@
     <div class="col-12">
       <div class="card mb-4">
         <div class="card-header pb-0">
-          <h6>  افزودن فایل  </h6> <p class="text-xs text-secondary mb-0"> اطلاعات فایل جدید را وارد کنید </p> <hr>
+          <h6> افزودن فایل فروش </h6> <p class="text-xs text-secondary mb-0"> اطلاعات فایل جدید را وارد کنید </p> <hr>
         </div>
         <div class="card-body px-7 pt-4 pb-2">
 
-               <form action="#" method="post" dir="rtl" align="right">
+               <form action="#" method="post" dir="rtl" align="right" enctype="multipart/form-data">
                  {% csrf_token %}
+
+                 <div class="row">
+                   <div class="col-md-3">
+                       <div class="form-group">
+                         <label><p class="text-xs text-secondary mb-0"> قابل مشاهده در سایت </p></label>
+                          <input name="available" type="checkbox" checked>
+                       </div>
+                   </div>
+                 </div>
+
+
                  <div class="row">
 
-                  <div class="col-md-3 pr-md-4">
+                  <div class="col-md-2 pr-md-4">
                     <div class="form-group">
-                      <label><p class="text-xs text-secondary mb-0"> نام </p></label>
-                      <input name="fname" type="text" class="form-control">
+                      <label><p class="text-xs text-secondary mb-0"> کد فایل </p></label>
+                      <input name="code" type="text" class="form-control" value={{defaultcode}}>
                     </div>
                   </div>
 
                   <div class="col-md-3 pr-md-4">
                     <div class="form-group">
-                      <label><p class="text-xs text-secondary mb-0"> نام خانوادگی </p></label>
-                      <input name="lname" type="text" class="form-control">
+                      <label><p class="text-xs text-secondary mb-0"> منطقه </p> </label>
+                      <a style="color:green;" href="#"> <span style="font-size:12px;">+</span> <span style="font-size:9px;">افزودن جدید</span> </a>
+                      <select name="area" class="form-control selectpicker" data-live-search="true">
+                        {% for Area in area %}
+                          <option data-tokens="{{Area.name}}" value={{Area.id}}>{{Area.name}}</option>
+                        {% endfor %}
+                      </select>
                     </div>
                   </div>
 
                   <div class="col-md-3 pr-md-4">
                     <div class="form-group">
-                      <label><p class="text-xs text-secondary mb-0"> شماره تماس </p></label>
-                      <input name="phone" type="text" class="form-control">
+                      <label><p class="text-xs text-secondary mb-0"> نوع ملک </p></label>
+                      <select name="estate_status" class="form-control selectpicker">
+                          <option value="آپارتمان"> آپارتمان </option>
+                          <option value="خانه ویلایی"> خانه ویلایی </option>
+                          <option value="مغازه و تجاری"> مغازه و تجاری </option>
+                          <option value="دفتر کار اداری"> دفتر کار اداری </option>
+                          <option value="زمین"> زمین </option>
+                          <option value="کلنگی"> کلنگی </option>
+                          <option value="ویلا"> ویلا </option>
+                          <option value="باغ"> باغ </option>
+                      </select>
                     </div>
                   </div>
 
-                  <div class="col-md-3 pr-md-4">
+                  <div class="col-md-2 pr-md-4">
                     <div class="form-group">
-                      <label><p class="text-xs text-secondary mb-0"> ایمیل </p></label>
-                      <input name="email" type="email" class="form-control">
+                      <label><p class="text-xs text-secondary mb-0"> متراژ (متر) </p></label>
+                      <input name="area_size" type="number" class="form-control" value=0>
+                    </div>
+                  </div>
+
+                  <div class="col-md-2 pr-md-4">
+                    <div class="form-group">
+                      <label><p class="text-xs text-secondary mb-0"> تعداد اتاق </p></label>
+                      <input name="room_qty" type="number" class="form-control" value=0>
                     </div>
                   </div>
 
                  </div>
 
                  <div class="row">
-                   <div class="col-md-12 pr-md-4">
+                   <div class="col-md-3 pr-md-4">
                      <div class="form-group">
-                       <label><p class="text-xs text-secondary mb-0"> اطلاعات تکمیلی </p></label>
-                       <input name="additional_information" type="text" class="form-control">
+                       <label><p class="text-xs text-secondary mb-0"> سن بنا (سال) </p></label>
+                       <input name="building_age" type="number" class="form-control" value=0>
+                     </div>
+                   </div>
+
+                   <div class="col-md-3 pr-md-4">
+                     <div class="form-group">
+                       <label><p class="text-xs text-secondary mb-0"> قیمت فروش (تومان) </p></label>
+                       <input name="price" type="number" class="form-control" value=0>
+                     </div>
+                   </div>
+                   <div class="col-md-3 pr-md-4">
+                     <div class="form-group">
+                       <label><p class="text-xs text-secondary mb-0"> نام مالک </p></label>
+                       <input name="owner_name" type="text" class="form-control">
+                     </div>
+                   </div>
+                   <div class="col-md-3 pr-md-4">
+                     <div class="form-group">
+                       <label><p class="text-xs text-secondary mb-0"> شماره تماس مالک </p></label>
+                       <input name="owner_phone" type="text" class="form-control">
                      </div>
                    </div>
                   </div>
 
 
                    <div class="row">
-                     <div class="col-md-3 pr-md-4">
+                     <div class="col-md-8 pr-md-4">
+                       <div class="form-group">
+                         <label><p class="text-xs text-secondary mb-0"> اطلاعات تکمیلی </p></label>
+                         <textarea name="additional_information" class="form-control" rows="4" cols="50"></textarea>
+                       </div>
+                     </div>
+                     <div class="col-md-1">
                          <div class="form-group">
-                           <label><p class="text-xs text-secondary mb-0"> مشتری ویژه </p></label>
-                           <input name="substantial" type="checkbox">
+                           <label><p class="text-xs text-secondary mb-0"> پارکینگ </p></label> <br>
+                            <input name="parking" type="checkbox" {% if customer.user_type == "کاربر ویژه" %} checked {% endif %} >
+                         </div>
+                     </div>
+                     <div class="col-md-1">
+                         <div class="form-group">
+                           <label><p class="text-xs text-secondary mb-0"> آسانسور </p></label> <br>
+                            <input name="elevator" type="checkbox" {% if customer.user_type == "کاربر ویژه" %} checked {% endif %} >
+                         </div>
+                     </div>
+                     <div class="col-md-1">
+                         <div class="form-group">
+                           <label><p class="text-xs text-secondary mb-0"> انباری </p></label> <br>
+                            <input name="storage_room" type="checkbox" {% if customer.user_type == "کاربر ویژه" %} checked {% endif %} >
+                         </div>
+                     </div>
+                     <div class="col-md-1">
+                         <div class="form-group">
+                           <label><p class="text-xs text-secondary mb-0"> بالکن </p></label> <br>
+                            <input name="balcony" type="checkbox" {% if customer.user_type == "کاربر ویژه" %} checked {% endif %} >
                          </div>
                      </div>
                    </div>
 
+                   <div class="row">
+                     <div class="col-md-2 pr-md-4">
+                         <div class="form-group">
+                           <label><p class="text-xs text-secondary"> تصویر  </p></label>
+                           <input name="img" type="file" class="text-xxs" style="color:transparent;">
+                         </div>
+                     </div>
+                     <div class="col-md-5 pr-md-4">
+                         <div class="form-group">
+                           <label><p class="text-xs text-secondary mb-0"> لینک ویدیو  </p></label>
+                           <input name="video" type="url" class="form-control">
+                         </div>
+                     </div>
+
+                   </div>
+
+
+
 
                  <div class="card-footer" align="center">
                    <button type="submit" class="btn bg-gradient-info my-1 me-1"> ثبت </button>
-                     <a href="{{ link.get_absolute_url }}"> <p style="color:green;"> {{ success }} </p> </a>
+                     <a href="{{ link.get_absolute_crm_url }}"> <p style="color:green;"> {{ success }} </p> </a>
                  </div>
 
               </form>
@@ -93,7 +186,6 @@
        </div>
      </div>
    </div>
-
 
 
 
@@ -110,7 +202,6 @@
 
 <script>
 
-
     $(function() {
       $('.selectpicker').selectpicker({
         liveSearch: true
@@ -118,4 +209,6 @@
     });
 
 </script>
+
+
 {% endblock javascripts %}
