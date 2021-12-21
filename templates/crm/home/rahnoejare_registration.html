@@ -103,73 +103,39 @@
                  </div>
 
                  <div class="row">
-                   <div class="col-md-8 pr-md-4">
-                     <div class="form-group">
-                       <label><p class="text-xs text-secondary mb-0"> اطلاعات تکمیلی </p></label>
-                       <textarea name="additional_information" class="form-control" rows="3" cols="50"></textarea>
-                     </div>
-                   </div>
-                   <div class="col-md-2 pr-md-4">
+                   <div class="col-md-3 pr-md-4">
                      <div class="form-group">
                        <label><p class="text-xs text-secondary mb-0"> ودیعه (تومان) </p></label>
                        <input name="deposit" type="number" class="form-control" value=0>
                      </div>
                    </div>
-                   <div class="col-md-2 pr-md-4">
+                   <div class="col-md-3 pr-md-4">
                      <div class="form-group">
                        <label><p class="text-xs text-secondary mb-0"> اجاره (تومان) </p></label>
                        <input name="rent" type="number" class="form-control" value=0>
+                     </div>
+                   </div>
+                   <div class="col-md-3 pr-md-4">
+                     <div class="form-group">
+                       <label><p class="text-xs text-secondary mb-0"> نام مالک </p></label>
+                       <input name="owner_name" type="text" class="form-control">
+                     </div>
+                   </div>
+                   <div class="col-md-3 pr-md-4">
+                     <div class="form-group">
+                       <label><p class="text-xs text-secondary mb-0"> شماره تماس مالک </p></label>
+                       <input name="owner_phone" type="text" class="form-control">
                      </div>
                    </div>
                   </div>
 
 
                    <div class="row">
-                     <div class="col-md-3 pr-md-4">
+                     <div class="col-md-8 pr-md-4">
                        <div class="form-group">
-                         <label><p class="text-xs text-secondary mb-0"> نام مالک </p></label>
-                         <input name="owner_name" type="text" class="form-control">
+                         <label><p class="text-xs text-secondary mb-0"> اطلاعات تکمیلی </p></label>
+                         <textarea name="additional_information" class="form-control" rows="4" cols="50"></textarea>
                        </div>
-                     </div>
-                     <div class="col-md-3 pr-md-4">
-                       <div class="form-group">
-                         <label><p class="text-xs text-secondary mb-0"> شماره تماس مالک </p></label>
-                         <input name="owner_phone" type="text" class="form-control">
-                       </div>
-                     </div>
-                     <div class="col-md-6 pr-md-4">
-                         <div class="form-group">
-                           <label><p class="text-xs text-secondary mb-0"> لینک ویدیو  </p></label>
-                           <input name="video" type="url" class="form-control">
-                         </div>
-                     </div>
-
-                   </div>
-
-                   <div class="row">
-                     <div class="col-md-2 pr-md-4">
-                         <div class="form-group">
-                           <label><p class="text-xs text-secondary mb-0"> تصویر اصلی </p></label>
-                           <input name="img" type="file" class="text-xxs" style="color:transparent;">
-                         </div>
-                     </div>
-                     <div class="col-md-2 pr-md-4">
-                         <div class="form-group">
-                           <label><p class="text-xs text-secondary mb-0"> تصویر دوم </p></label>
-                           <input name="img2" type="file" value="empty.txt" class="text-xxs" style="color:transparent;">
-                         </div>
-                     </div>
-                     <div class="col-md-2 pr-md-4">
-                         <div class="form-group">
-                           <label><p class="text-xs text-secondary mb-0"> تصویر سوم </p></label>
-                           <input name="img3" type="file" class="text-xxs" style="color:transparent;">
-                         </div>
-                     </div>
-                     <div class="col-md-2 pr-md-4">
-                         <div class="form-group">
-                           <label><p class="text-xs text-secondary mb-0"> تصویر چهارم </p></label>
-                           <input name="img4" type="file" class="text-xxs" style="color:transparent;">
-                         </div>
                      </div>
                      <div class="col-md-1">
                          <div class="form-group">
@@ -195,6 +161,22 @@
                             <input name="balcony" type="checkbox" {% if customer.user_type == "کاربر ویژه" %} checked {% endif %} >
                          </div>
                      </div>
+                   </div>
+
+                   <div class="row">
+                     <div class="col-md-2 pr-md-4">
+                         <div class="form-group">
+                           <label><p class="text-xs text-secondary"> تصویر  </p></label>
+                           <input name="img" type="file" class="text-xxs" style="color:transparent;">
+                         </div>
+                     </div>
+                     <div class="col-md-5 pr-md-4">
+                         <div class="form-group">
+                           <label><p class="text-xs text-secondary mb-0"> لینک ویدیو  </p></label>
+                           <input name="video" type="url" class="form-control">
+                         </div>
+                     </div>
+
                    </div>
 
 

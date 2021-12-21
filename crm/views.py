@@ -145,14 +145,6 @@ def rahnoejare_registration(request):
     area = Area.objects.all()
     if request.method=="POST":
 
-        #if request.FILES['img2'] == 'empty.txt' :
-        #    aa = False
-        #else:
-        #    aa = True
-        #print('--------------')
-        print(request.FILES['img2'])
-
-
         if request.POST.get('available'):
             available = True
         else:
@@ -204,23 +196,6 @@ def rahnoejare_registration(request):
         item.sales_expert = request.user
         item.ownership = owner
         item.save()
-
-
-        #Img2 = ItemImage()
-        #Img2.item = item
-        #Img2.Image = request.FILES['img2']
-        #Img2.save()
-
-        #Img3 = ItemImage()
-        #Img3.item = item
-        #Img3.Image = request.FILES['img3']
-        #Img3.save()
-
-        #Img4 = ItemImage()
-        #Img4.item = item
-        #Img4.Image = request.FILES['img4']
-        #Img4.save()
-
 
         success = 'فایل جدید ایجاد شد ، مشاهده صفحه فایل'
         link = get_object_or_404(models.Item, id=item.id)
