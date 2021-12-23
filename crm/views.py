@@ -136,6 +136,21 @@ def crm_items_detail(request, id):
 
 
 
+#------------------------------------------------------------------------------
+@login_required(login_url="/login/")
+def crm_item_edit(request, id):
+    item = get_object_or_404(models.Item, id=id)
+
+    html_template = loader.get_template('crm/home/crm_item_edit.html')
+    return HttpResponse(html_template.render({'item':item}, request))
+
+
+
+
+
+
+
+
 
 
 

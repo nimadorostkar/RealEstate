@@ -130,7 +130,7 @@ class Item(models.Model):
     sales_expert = models.ForeignKey(User, null=True,blank=True, on_delete=models.CASCADE,verbose_name = "کارشناس فروش")
     ownership = models.ForeignKey(Ownership, null=True,blank=True, on_delete=models.CASCADE,verbose_name = "مالکیت")
 
- 
+
 
     class Meta:
         verbose_name = "ملک"
@@ -147,6 +147,9 @@ class Item(models.Model):
 
     def get_absolute_crm_url(self):
         return reverse('crm_items_detail',args=[self.id])
+
+    def get_absolute_edit_url(self):
+        return reverse('crm_item_edit',args=[self.id])
 
 class ItemImage(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='images')
