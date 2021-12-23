@@ -140,9 +140,70 @@ def crm_items_detail(request, id):
 @login_required(login_url="/login/")
 def crm_item_edit(request, id):
     item = get_object_or_404(models.Item, id=id)
+    area = Area.objects.all()
 
+    if request.method=="POST":
+
+        if request.POST.get('available'):
+            available = True
+        else:
+            available = False
+
+        if request.POST.get('parking'):
+            parking = True
+        else:
+            parking = False
+
+        if request.POST.get('storage_room'):
+            storage_room = True
+        else:
+            storage_room = False
+
+        if request.POST.get('elevator'):
+            elevator = True
+        else:
+            elevator = False
+
+        if request.POST.get('balcony'):
+            balcony = True
+        else:
+            balcony = False
+
+        owner = item.ownership
+        owner.name = request.POST['owner_name']
+        owner.phone = request.POST['owner_phone']
+        owner.save()
+
+        item.available = available
+        item.code = request.POST['code']
+        item.buy_status = 'رهن و اجاره'
+        item.estate_status = request.POST['estate_status']
+        item.area_size = request.POST['area_size']
+        item.room_qty = request.POST['room_qty']
+        item.building_age = request.POST['building_age']
+        item.parking = parking
+        item.storage_room = storage_room
+        item.elevator = elevator
+        item.balcony = balcony
+        item.deposit = request.POST['deposit']
+        item.rent = request.POST['rent']
+        item.area = get_object_or_404(Area, id=request.POST['area'])
+        item.additional_information = request.POST['additional_information']
+        if (request.FILES): item.image = request.FILES['img']
+        item.video_link = request.POST['video']
+        item.sales_expert = request.user
+        item.ownership = owner
+        item.save()
+
+        success = 'فایل جدید ایجاد شد ، مشاهده صفحه فایل'
+        link = get_object_or_404(models.Item, id=item.id)
+
+        context = {'area':area, 'success':success, 'link':link}
+        return render(request, 'crm/home/rahnoejare_registration.html', context)
+
+    context = {'item':item, 'area':area}
     html_template = loader.get_template('crm/home/crm_item_edit.html')
-    return HttpResponse(html_template.render({'item':item}, request))
+    return HttpResponse(html_template.render(context, request))
 
 
 

@@ -35,7 +35,7 @@
                    <div class="col-md-3">
                        <div class="form-group">
                          <label><p class="text-xs text-secondary mb-0"> قابل مشاهده در سایت </p></label>
-                          <input name="available" type="checkbox" checked>
+                          <input name="available" type="checkbox"  {% if item.available %} checked {% endif %}>
                        </div>
                    </div>
                  </div>
@@ -48,7 +48,7 @@
                   <div class="col-md-2 pr-md-4">
                     <div class="form-group">
                       <label><p class="text-xs text-secondary mb-0"> کد فایل </p></label>
-                      <input name="code" type="text" class="form-control" value={{defaultcode}}>
+                      <input name="code" type="text" class="form-control" value="{{ item.code }}">
                     </div>
                   </div>
 
@@ -58,7 +58,7 @@
                       <a style="color:green;" href="#"> <span style="font-size:12px;">+</span> <span style="font-size:9px;">افزودن جدید</span> </a>
                       <select name="area" class="form-control selectpicker" data-live-search="true">
                         {% for Area in area %}
-                          <option data-tokens="{{Area.name}}" value={{Area.id}}>{{Area.name}}</option>
+                          <option data-tokens="{{Area.name}}" value={{Area.id}} {% if item.area == Area %} selected {% endif %}>{{Area.name}}</option>
                         {% endfor %}
                       </select>
                     </div>
@@ -68,14 +68,14 @@
                     <div class="form-group">
                       <label><p class="text-xs text-secondary mb-0"> نوع ملک </p></label>
                       <select name="estate_status" class="form-control selectpicker">
-                          <option value="آپارتمان"> آپارتمان </option>
-                          <option value="خانه ویلایی"> خانه ویلایی </option>
-                          <option value="مغازه و تجاری"> مغازه و تجاری </option>
-                          <option value="دفتر کار اداری"> دفتر کار اداری </option>
-                          <option value="زمین"> زمین </option>
-                          <option value="کلنگی"> کلنگی </option>
-                          <option value="ویلا"> ویلا </option>
-                          <option value="باغ"> باغ </option>
+                        <option {% if item.estate_status == 'آپارتمان' %} selected {% endif %} value="آپارتمان"> آپارتمان </option>
+                        <option {% if item.estate_status == 'خانه ویلایی' %} selected {% endif %} value="خانه ویلایی"> خانه ویلایی </option>
+                        <option {% if item.estate_status == 'مغازه و تجاری' %} selected {% endif %} value="مغازه و تجاری"> مغازه و تجاری </option>
+                        <option {% if item.estate_status == 'دفتر کار اداری' %} selected {% endif %} value="دفتر کار اداری"> دفتر کار اداری </option>
+                        <option {% if item.estate_status == 'زمین' %} selected {% endif %} value="زمین"> زمین </option>
+                        <option {% if item.estate_status == 'کلنگی' %} selected {% endif %} value="کلنگی"> کلنگی </option>
+                        <option {% if item.estate_status == 'ویلا' %} selected {% endif %} value="ویلا"> ویلا </option>
+                        <option {% if item.estate_status == 'باغ' %} selected {% endif %} value="باغ"> باغ </option>
                       </select>
                     </div>
                   </div>
@@ -83,21 +83,21 @@
                   <div class="col-md-2 pr-md-4">
                     <div class="form-group">
                       <label><p class="text-xs text-secondary mb-0"> متراژ (متر) </p></label>
-                      <input name="area_size" type="number" class="form-control" value=0>
+                      <input name="area_size" type="number" class="form-control" value="{{ item.area_size }}">
                     </div>
                   </div>
 
                   <div class="col-md-2 pr-md-4">
                     <div class="form-group">
                       <label><p class="text-xs text-secondary mb-0"> تعداد اتاق </p></label>
-                      <input name="room_qty" type="number" class="form-control" value=0>
+                      <input name="room_qty" type="number" class="form-control" value="{{ item.room_qty }}">
                     </div>
                   </div>
 
                   <div class="col-md-2 pr-md-4">
                     <div class="form-group">
                       <label><p class="text-xs text-secondary mb-0"> سن بنا (سال) </p></label>
-                      <input name="building_age" type="number" class="form-control" value=0>
+                      <input name="building_age" type="number" class="form-control" value="{{ item.building_age }}">
                     </div>
                   </div>
 
@@ -108,25 +108,25 @@
                    <div class="col-md-3 pr-md-4">
                      <div class="form-group">
                        <label><p class="text-xs text-secondary mb-0"> ودیعه (تومان) </p></label>
-                       <input name="deposit" type="number" class="form-control" value=0>
+                       <input name="deposit" type="number" class="form-control" value="{{ item.deposit }}">
                      </div>
                    </div>
                    <div class="col-md-3 pr-md-4">
                      <div class="form-group">
                        <label><p class="text-xs text-secondary mb-0"> اجاره (تومان) </p></label>
-                       <input name="rent" type="number" class="form-control" value=0>
+                       <input name="rent" type="number" class="form-control" value="{{ item.rent }}">
                      </div>
                    </div>
                    <div class="col-md-3 pr-md-4">
                      <div class="form-group">
                        <label><p class="text-xs text-secondary mb-0"> نام مالک </p></label>
-                       <input name="owner_name" type="text" class="form-control">
+                       <input name="owner_name" type="text" class="form-control" value="{{ item.ownership.name }}">
                      </div>
                    </div>
                    <div class="col-md-3 pr-md-4">
                      <div class="form-group">
                        <label><p class="text-xs text-secondary mb-0"> شماره تماس مالک </p></label>
-                       <input name="owner_phone" type="text" class="form-control">
+                       <input name="owner_phone" type="text" class="form-control" value="{{ item.ownership.phone }}">
                      </div>
                    </div>
                   </div>
@@ -140,7 +140,7 @@
                    <div class="col-md-2 pr-md-4">
                      <div class="form-group">
                        <label><p class="text-xs text-secondary mb-0"> کد فایل </p></label>
-                       <input name="code" type="text" class="form-control" value={{defaultcode}}>
+                       <input name="code" type="text" class="form-control" value="{{ item.code }}">
                      </div>
                    </div>
 
@@ -150,7 +150,7 @@
                        <a style="color:green;" href="#"> <span style="font-size:12px;">+</span> <span style="font-size:9px;">افزودن جدید</span> </a>
                        <select name="area" class="form-control selectpicker" data-live-search="true">
                          {% for Area in area %}
-                           <option data-tokens="{{Area.name}}" value={{Area.id}}>{{Area.name}}</option>
+                           <option data-tokens="{{Area.name}}" value={{Area.id}} {% if item.area == Area %} selected {% endif %} >{{Area.name}}</option>
                          {% endfor %}
                        </select>
                      </div>
@@ -160,14 +160,14 @@
                      <div class="form-group">
                        <label><p class="text-xs text-secondary mb-0"> نوع ملک </p></label>
                        <select name="estate_status" class="form-control selectpicker">
-                           <option value="آپارتمان"> آپارتمان </option>
-                           <option value="خانه ویلایی"> خانه ویلایی </option>
-                           <option value="مغازه و تجاری"> مغازه و تجاری </option>
-                           <option value="دفتر کار اداری"> دفتر کار اداری </option>
-                           <option value="زمین"> زمین </option>
-                           <option value="کلنگی"> کلنگی </option>
-                           <option value="ویلا"> ویلا </option>
-                           <option value="باغ"> باغ </option>
+                           <option {% if item.estate_status == 'آپارتمان' %} selected {% endif %} value="آپارتمان"> آپارتمان </option>
+                           <option {% if item.estate_status == 'خانه ویلایی' %} selected {% endif %} value="خانه ویلایی"> خانه ویلایی </option>
+                           <option {% if item.estate_status == 'مغازه و تجاری' %} selected {% endif %} value="مغازه و تجاری"> مغازه و تجاری </option>
+                           <option {% if item.estate_status == 'دفتر کار اداری' %} selected {% endif %} value="دفتر کار اداری"> دفتر کار اداری </option>
+                           <option {% if item.estate_status == 'زمین' %} selected {% endif %} value="زمین"> زمین </option>
+                           <option {% if item.estate_status == 'کلنگی' %} selected {% endif %} value="کلنگی"> کلنگی </option>
+                           <option {% if item.estate_status == 'ویلا' %} selected {% endif %} value="ویلا"> ویلا </option>
+                           <option {% if item.estate_status == 'باغ' %} selected {% endif %} value="باغ"> باغ </option>
                        </select>
                      </div>
                    </div>
@@ -175,14 +175,14 @@
                    <div class="col-md-2 pr-md-4">
                      <div class="form-group">
                        <label><p class="text-xs text-secondary mb-0"> متراژ (متر) </p></label>
-                       <input name="area_size" type="number" class="form-control" value=0>
+                       <input name="area_size" type="number" class="form-control" value="{{ item.area_size }}">
                      </div>
                    </div>
 
                    <div class="col-md-2 pr-md-4">
                      <div class="form-group">
                        <label><p class="text-xs text-secondary mb-0"> تعداد اتاق </p></label>
-                       <input name="room_qty" type="number" class="form-control" value=0>
+                       <input name="room_qty" type="number" class="form-control" value="{{ item.room_qty }}">
                      </div>
                    </div>
 
@@ -192,7 +192,7 @@
                     <div class="col-md-3 pr-md-4">
                       <div class="form-group">
                         <label><p class="text-xs text-secondary mb-0"> سن بنا (سال) </p></label>
-                        <input name="building_age" type="number" class="form-control" value=0>
+                        <input name="building_age" type="number" class="form-control" value="{{ item.building_age }}">
                       </div>
                     </div>
 
@@ -200,23 +200,23 @@
                       <div class="form-group">
                         {% if item.buy_status == 'رهن کامل' %}
                           <label><p class="text-xs text-secondary mb-0"> مبلغ رهن کامل (تومان) </p></label>
-                          <input name="deposit" type="number" class="form-control" value=0>
+                          <input name="deposit" type="number" class="form-control" value="{{ item.deposit }}">
                         {% else %}
                           <label><p class="text-xs text-secondary mb-0"> قیمت فروش (تومان) </p></label>
-                          <input name="price" type="number" class="form-control" value=0>
+                          <input name="price" type="number" class="form-control" value="{{ item.price }}">
                         {% endif %}
                       </div>
                     </div>
                     <div class="col-md-3 pr-md-4">
                       <div class="form-group">
                         <label><p class="text-xs text-secondary mb-0"> نام مالک </p></label>
-                        <input name="owner_name" type="text" class="form-control">
+                        <input name="owner_name" type="text" class="form-control" value="{{ item.ownership.name }}">
                       </div>
                     </div>
                     <div class="col-md-3 pr-md-4">
                       <div class="form-group">
                         <label><p class="text-xs text-secondary mb-0"> شماره تماس مالک </p></label>
-                        <input name="owner_phone" type="text" class="form-control">
+                        <input name="owner_phone" type="text" class="form-control" value="{{ item.ownership.phone }}">
                       </div>
                     </div>
                    </div>
@@ -230,31 +230,31 @@
                      <div class="col-md-8 pr-md-4">
                        <div class="form-group">
                          <label><p class="text-xs text-secondary mb-0"> اطلاعات تکمیلی </p></label>
-                         <textarea name="additional_information" class="form-control" rows="4" cols="50"></textarea>
+                         <textarea name="additional_information" class="form-control" rows="4" cols="50"> {{ item.additional_information }} </textarea>
                        </div>
                      </div>
                      <div class="col-md-1">
                          <div class="form-group">
                            <label><p class="text-xs text-secondary mb-0"> پارکینگ </p></label> <br>
-                            <input name="parking" type="checkbox" {% if customer.user_type == "کاربر ویژه" %} checked {% endif %} >
+                            <input name="parking" type="checkbox" {% if item.parking %} checked {% endif %} >
                          </div>
                      </div>
                      <div class="col-md-1">
                          <div class="form-group">
                            <label><p class="text-xs text-secondary mb-0"> آسانسور </p></label> <br>
-                            <input name="elevator" type="checkbox" {% if customer.user_type == "کاربر ویژه" %} checked {% endif %} >
+                            <input name="elevator" type="checkbox" {% if item.elevator%} checked {% endif %} >
                          </div>
                      </div>
                      <div class="col-md-1">
                          <div class="form-group">
                            <label><p class="text-xs text-secondary mb-0"> انباری </p></label> <br>
-                            <input name="storage_room" type="checkbox" {% if customer.user_type == "کاربر ویژه" %} checked {% endif %} >
+                            <input name="storage_room" type="checkbox" {% if item.storage_room %} checked {% endif %} >
                          </div>
                      </div>
                      <div class="col-md-1">
                          <div class="form-group">
                            <label><p class="text-xs text-secondary mb-0"> بالکن </p></label> <br>
-                            <input name="balcony" type="checkbox" {% if customer.user_type == "کاربر ویژه" %} checked {% endif %} >
+                            <input name="balcony" type="checkbox" {% if item.balcony %} checked {% endif %} >
                          </div>
                      </div>
                    </div>
@@ -263,13 +263,13 @@
                      <div class="col-md-2 pr-md-4">
                          <div class="form-group">
                            <label><p class="text-xs text-secondary"> تصویر  </p></label>
-                           <input name="img" type="file" class="text-xxs" style="color:transparent;">
+                           <input name="img" type="file" class="text-xxs" style="color:transparent;" value="{{ item.image.url }}">
                          </div>
                      </div>
                      <div class="col-md-5 pr-md-4">
                          <div class="form-group">
                            <label><p class="text-xs text-secondary mb-0"> لینک ویدیو  </p></label>
-                           <input name="video" type="url" class="form-control">
+                           <input name="video" type="url" class="form-control" value="{{ item.video_link }}">
                          </div>
                      </div>
 
