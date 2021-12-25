@@ -1,6 +1,6 @@
 {% extends 'crm/layouts/base.html' %}
 
-{% block title %} ویرایش {% endblock title %}
+{% block title %} ویرایش درخواست {% endblock title %}
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}
@@ -9,7 +9,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" rel="stylesheet" />
-    <link href="/static/assets/css/bootstrap336.min.css" rel="stylesheet" />
+    <link href="/static/assets/crm/css/bootstrap336.min.css" rel="stylesheet" />
 
 {% endblock stylesheets %}
 
@@ -24,66 +24,59 @@
     <div class="col-12">
       <div class="card mb-4">
         <div class="card-header pb-0">
-          <h6>  ویرایش </h6> <p class="text-xs text-secondary mb-0"> ویرایش {{ req }} </p> <hr>
+          <h6>  ویرایش درخواست  </h6> <p class="text-xs text-secondary mb-0"> ویرایش {{ req }} </p> <hr>
         </div>
         <div class="card-body px-7 pt-4 pb-2">
 
                <form action="#" method="post" dir="rtl" align="right">
                  {% csrf_token %}
-                 <div class="row">
 
-                   <div class="col-md-4 pr-md-4">
+                 <div class="row">
+                   <div class="col-md-6 pr-md-4">
                      <div class="form-group">
-                       <label><p class="text-xs text-secondary mb-0"> خریدار </p></label>
+                       <label><p class="text-xs text-secondary mb-0"> مشتری </p></label>
                        <select name="customer" class="form-control selectpicker" data-live-search="true">
-                          <option data-tokens="{{req.customer.name}}" value={{req.customer.id}} selected >{{req.customer.name}}</option>
                          {% for Customer in customers %}
-                          {% if Customer != req.customer %}
-                           <option data-tokens="{{Customer.name}}" value={{Customer.id}}>{{Customer.name}}</option>
-                          {% endif %}
+                           <option value={{Customer.id}} {% if req.customer == Customer %} selected {% endif %}> {{Customer.user.first_name}} {{Customer.user.last_name}} | {{Customer.phone}}   </option>
                          {% endfor %}
                        </select>
                      </div>
                    </div>
-
-                   <div class="col-md-4 pr-md-4">
+                   <div class="col-md-6 pr-md-4">
                      <div class="form-group">
-                     <label><p class="text-xs text-secondary mb-0"> محصول </p></label>
-                      <select name="product" class="form-control selectpicker" data-live-search="true">
-                        <option data-tokens="{{req.product.name}}" value={{req.product.id}} selected >{{req.product.name}}</option>
-                        {% for Product in products %}
-                         {% if Product != req.product %}
-                          <option data-tokens="{{Product.name}}" value={{Product.id}}>{{Product.name}}</option>
-                         {% endif %}
+                     <label><p class="text-xs text-secondary mb-0"> فایل </p></label>
+                      <select name="item" class="form-control selectpicker" data-live-search="true">
+                        {% for Item in items %}
+                         <option value={{Item.id}} {% if req.item == Item %} selected {% endif %}> {{Item}} | {{Item.code}} </option>
                         {% endfor %}
                       </select>
                     </div>
                   </div>
-
-                  <div class="col-md-2 pr-md-4">
-                    <div class="form-group">
-                      <label><p class="text-xs text-secondary mb-0"> تعداد </p></label>
-                      <input name="qty" type="number" value="{{req.qty}}" class="form-control" required>
-                    </div>
-                  </div>
-
-                   <div class="col-md-2 pl-md-4">
-                     <div class="form-group">
-                       <label><p class="text-xs text-secondary mb-0"> درصد تخفیف </p></label>
-                       <input name="discount" type="number" value="{{req.discount}}" class="form-control" required>
-                     </div>
-                   </div>
-
                  </div>
 
                  <div class="row">
-                   <div class="col-md-10 pr-md-4">
+                   <div class="col-md-12 pr-md-4">
                      <div class="form-group">
-                       <label><p class="text-xs text-secondary mb-0"> توضیحات </p></label>
-                       <input name="description" type="text" value="{{req.description}}" class="form-control">
+                       <label><p class="text-xs text-secondary mb-0"> اطلاعات تکمیلی </p></label>
+                       <textarea name="description" class="form-control" rows="4" cols="50"> {{ req.description }} </textarea>
                      </div>
                    </div>
-                   <div class="col-md-2 pr-md-4">
+                 </div>
+
+                 <div class="row">
+                   <div class="col-md-4 pr-md-4">
+                     <div class="form-group">
+                       <label><p class="text-xs text-secondary mb-0"> بیعانه </p></label>
+                       <input name="prepayment" type="text" class="form-control" value="{{ req.prepayment }}">
+                     </div>
+                   </div>
+                   <div class="col-md-4 pr-md-4">
+                     <div class="form-group">
+                       <label><p class="text-xs text-secondary mb-0"> قیمت نهایی </p></label>
+                       <input name="final_price" type="text" class="form-control" value="{{ req.final_price }}">
+                     </div>
+                   </div>
+                   <div class="col-md-4 pr-md-4">
                      <div class="form-group">
                        <label><p class="text-xs text-secondary mb-0"> وضعیت </p></label>
                        <select name="status" class="form-control selectpicker" data-live-search="true">
@@ -96,6 +89,8 @@
                      </div>
                    </div>
                  </div>
+
+                 <span class="text-xs text-secondary mb-0"> حذف این درخواست </span> &nbsp; <input name="remove" type="checkbox">
 
 
                  <div class="card-footer" align="center">

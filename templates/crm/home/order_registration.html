@@ -1,6 +1,6 @@
 {% extends 'crm/layouts/base.html' %}
 
-{% block title %} ثبت سفارش {% endblock title %}
+{% block title %} ایجاد درخواست {% endblock title %}
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}
@@ -16,65 +16,47 @@
 {% block content %}
 
 
-
-
 <div class="container-fluid py-4">
 
   <div class="row" dir="rtl">
     <div class="col-12">
       <div class="card mb-4">
         <div class="card-header pb-0">
-          <h6>  ثبت سفارش  </h6> <p class="text-xs text-secondary mb-0"> ثبت سفارش جدید </p> <hr>
+          <h6>  ایجاد درخواست  </h6> <p class="text-xs text-secondary mb-0"> ایجاد یک درخواست جدید برای مشتری </p> <hr>
         </div>
         <div class="card-body px-7 pt-4 pb-2">
 
                <form action="#" method="post" dir="rtl" align="right">
                  {% csrf_token %}
-                 <div class="row">
 
-                   <div class="col-md-4 pr-md-4">
+                 <div class="row">
+                   <div class="col-md-6 pr-md-4">
                      <div class="form-group">
-                       <label><p class="text-xs text-secondary mb-0"> خریدار </p></label>
+                       <label><p class="text-xs text-secondary mb-0"> مشتری </p></label>
                        <select name="customer" class="form-control selectpicker" data-live-search="true">
                          {% for Customer in customers %}
-                           <option data-tokens="{{Customer.name}}" value={{Customer.id}}>{{Customer.name}}</option>
+                           <option value={{Customer.id}}> {{Customer.user.first_name}} {{Customer.user.last_name}} | {{Customer.phone}}   </option>
                          {% endfor %}
                        </select>
                      </div>
                    </div>
-
-                   <div class="col-md-4 pr-md-4">
+                   <div class="col-md-6 pr-md-4">
                      <div class="form-group">
-                     <label><p class="text-xs text-secondary mb-0"> محصول </p></label>
-                      <select name="product" class="form-control selectpicker" data-live-search="true">
-                        {% for Product in products %}
-                         <option data-tokens="{{Product.name}}" value={{Product.id}}>{{Product.name}}</option>
+                     <label><p class="text-xs text-secondary mb-0"> فایل </p></label>
+                      <select name="item" class="form-control selectpicker" data-live-search="true">
+                        {% for Item in items %}
+                         <option value={{Item.id}}> {{Item}} | {{Item.code}} </option>
                         {% endfor %}
                       </select>
                     </div>
                   </div>
-
-                  <div class="col-md-2 pr-md-4">
-                    <div class="form-group">
-                      <label><p class="text-xs text-secondary mb-0"> تعداد </p></label>
-                      <input name="qty" type="number" value="1" class="form-control" required>
-                    </div>
-                  </div>
-
-                   <div class="col-md-2 pl-md-4">
-                     <div class="form-group">
-                       <label><p class="text-xs text-secondary mb-0"> درصد تخفیف </p></label>
-                       <input name="discount" type="number" value="0" class="form-control" required>
-                     </div>
-                   </div>
-
                  </div>
 
                  <div class="row">
                    <div class="col-md-12 pr-md-4">
                      <div class="form-group">
-                       <label><p class="text-xs text-secondary mb-0"> توضیحات </p></label>
-                       <input name="description" type="text" class="form-control">
+                       <label><p class="text-xs text-secondary mb-0"> اطلاعات تکمیلی </p></label>
+                       <textarea name="description" class="form-control" rows="4" cols="50"></textarea>
                      </div>
                    </div>
                  </div>

@@ -684,17 +684,14 @@ class order_requests(generic.ListView):
 def order_req_detail(request, id):
     req = get_object_or_404(models.Order_request, id=id)
     incomings = models.Order_incomings.objects.filter(request=req)
-    #total_price = (req.product.price * req.qty) - ((req.product.price * req.qty)*(req.discount/100))
-    #total_incoming = sum(incomings.values_list('amount', flat=True))
-    #remained = total_price - total_incoming
-
     timeform = TimeForm(request.POST)
     if request.method=="POST":
         if timeform.is_valid():
             incoming = Order_incomings()
             incoming.request = req
-            incoming.amount = request.POST['amount']
+            incoming.user = get_object_or_404(models.Profile, user=request.user)
             incoming.date_created = timeform.cleaned_data['date_created']
+            incoming.description = request.POST['description']
             incoming.save()
             return redirect(req.get_absolute_url())
 
@@ -714,22 +711,19 @@ def order_req_detail(request, id):
 @login_required(login_url="/login/")
 def order_registration(request):
     customers = models.Profile.objects.filter( Q(user_type='کاربر') | Q(user_type='کاربر ویژه') ).order_by('-date_created')
-    products = models.Item.objects.filter(available=True).order_by('-date')
+    items = models.Item.objects.all().order_by('-date')
     if request.method=="POST":
         req = Order_request()
-        req.user = request.user
-        req.customer = get_object_or_404(models.Customer, id=request.POST.get('customer'))
-        req.product = get_object_or_404(models.Product, id=request.POST.get('product'))
-        req.qty = request.POST['qty']
-        req.discount = request.POST['discount']
+        req.user = get_object_or_404(models.Profile, id=request.user.id)
+        req.customer = get_object_or_404(models.Profile, id=request.POST.get('customer'))
+        req.item = get_object_or_404(models.Item, id=request.POST.get('item'))
         req.description = request.POST['description']
         req.save()
-        success = 'سفارش جدید ثبت شد ، مشاهده سفارش'
-        link = get_object_or_404(models.Order_request, id=req.id)
-        context = {'customers': customers , 'products':products, 'success':success, 'link':link}
+        success = 'درخواست جدید ثبت شد ، مشاهده صفحه درخواست'
+        context = {'customers': customers , 'items':items, 'success':success, 'link':req}
         return render(request, 'crm/home/order_registration.html', context)
 
-    context = {'customers': customers , 'products':products}
+    context = {'customers': customers , 'items':items}
     html_template = loader.get_template('crm/home/order_registration.html')
     return HttpResponse(html_template.render(context, request))
 
@@ -744,23 +738,29 @@ def order_registration(request):
 @login_required(login_url="/login/")
 def order_edit(request, id):
     req = get_object_or_404(models.Order_request, id=id)
-    customers = models.Customer.objects.all().order_by('-date_created')
-    products = models.Product.objects.all().order_by('-date_created')
+    customers = models.Profile.objects.filter( Q(user_type='کاربر') | Q(user_type='کاربر ویژه') ).order_by('-date_created')
+    items = models.Item.objects.all().order_by('-date')
     if request.method=="POST":
-        req.user = request.user
-        req.customer = get_object_or_404(models.Customer, id=request.POST.get('customer'))
-        req.product = get_object_or_404(models.Product, id=request.POST.get('product'))
-        req.qty = request.POST['qty']
-        req.discount = request.POST['discount']
-        req.description = request.POST['description']
-        req.status = request.POST['status']
-        req.save()
-        success = 'ویرایش سفارش ثبت شد ، مشاهده سفارش'
-        link = get_object_or_404(models.Order_request, id=req.id)
-        context = {'req':req, 'customers': customers , 'products':products, 'success':success, 'link':link}
-        return render(request, 'crm/home/order_edit.html', context)
 
-    context = {'req':req, 'customers': customers , 'products':products}
+        if request.POST.get('remove'):
+            req.delete()
+            return redirect('order_requests')
+
+        else:
+            req.user = get_object_or_404(models.Profile, id=request.user.id)
+            req.customer = get_object_or_404(models.Profile, id=request.POST.get('customer'))
+            req.item = get_object_or_404(models.Item, id=request.POST.get('item'))
+            req.description = request.POST['description']
+            req.final_price = request.POST['final_price']
+            req.prepayment = request.POST['prepayment']
+            req.status = request.POST['status']
+            req.save()
+
+            success = 'ویرایش درخواست ثبت شد ، مشاهده درخواست'
+            context = {'req':req, 'customers': customers , 'items':items, 'success':success, 'link':req}
+            return render(request, 'crm/home/order_edit.html', context)
+
+    context = {'req':req, 'customers': customers , 'items':items}
     html_template = loader.get_template('crm/home/order_edit.html')
     return HttpResponse(html_template.render(context, request))
 

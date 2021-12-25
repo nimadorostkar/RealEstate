@@ -106,7 +106,7 @@
                   </div>
                   <div class="col-lg-6" align="left">
                     <a class="badge badge-sm bg-gradient-info  btn btn-link text-dark mb-0 bg-gradient text-xxs" href="{{ req.get_absolute_edit_url }}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i> ویرایش </a>
-                     <p class="text-xxs text-secondary" dir="rtl">  آخرین ویرایش: {{ req.date_updated|date:'Y-m-d' }} ساعت {{ req.date_updated|date:'H-i' }} </p>
+                     <p class="text-xxs text-secondary" dir="rtl"> {{ req.date_updated|date:'Y-m-d' }} , {{ req.date_updated|date:'H-i' }} </p>
                   </div>
                 </div>
 
@@ -146,14 +146,14 @@
                           <i class="fa fa-check text-info" aria-hidden="true"></i>
                         </div>
                         <div class="col-lg-6" align="left">
-                          <p class="text-xxs text-secondary" dir="rtl"> <i class="far fa-clock me-2 btn-outline-info"></i> {{ Order_incomings.date_created|date:'H-m' }} <i class="far fa-calendar-alt me-2 btn-outline-info"></i> {{ Order_incomings.date_created|date:'Y-m-d' }}   </p>
+                          <p class="text-xxs text-secondary" dir="rtl"> <i class="far fa-clock me-2 btn-outline-info"></i> {{ Order_incomings.date_created|date:"H:i"}} <i class="far fa-calendar-alt me-2 btn-outline-info"></i> {{ Order_incomings.date_created|date:'Y-m-d' }}   </p>
                         </div>
                       </div>
                       <br>
                       <h6 align="right" class="text-secondary"> {{ Order_incomings.description|linebreaks }}  </h6>
                       <div class="row">
                         <div class="col-lg-6" dir="rtl" align="right">
-                          <p class="text-xxs text-secondary" dir="rtl"> <img src="{{ req.user.profile.user_photo.url }}" width="15px" height="15px"> {{ Order_incomings.user.first_name }} {{ Order_incomings.user.last_name }}  </p>
+                          <p class="text-xxs text-secondary" dir="rtl"> <img src="{{ Order_incomings.user.user_photo.url }}" width="15px" height="15px"> {{ Order_incomings.user.user.first_name }} {{ Order_incomings.user.user.last_name }}  </p>
                         </div>
                         <div class="col-lg-6" align="left">
                           <p class="text-xxs text-secondary" dir="rtl"> <i class="far fa-trash-alt me-2 btn-outline-danger"></i> خذف <i class="fas fa-pencil-alt text-dark me-2"></i> ویرایش  </p>
@@ -175,7 +175,7 @@
                       <div class="row">
                         <div class="col-lg-12">
                           <div class="form-group">
-                            <textarea name="amount" rows="2" cols="50" placeholder="توضیحات..." class="form-control" required></textarea>
+                            <textarea name="description" rows="2" cols="50" placeholder="توضیحات..." class="form-control" required></textarea>
                           </div>
                         </div>
 
@@ -183,6 +183,7 @@
                           <div class="form-group">
                             {% for field in timeform %} {{ field }} {% endfor %}
                           </div>
+                          <p class="text-xxs text-secondary" dir="rtl"> فرمت صحیح تاریخ: 00-00-1400 و زمان: 00:00  </p>
                         </div>
 
                       </div>
