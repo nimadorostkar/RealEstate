@@ -176,7 +176,6 @@ def crm_item_edit(request, id):
 
         item.available = available
         item.code = request.POST['code']
-        item.buy_status = 'رهن و اجاره'
         item.estate_status = request.POST['estate_status']
         item.area_size = request.POST['area_size']
         item.room_qty = request.POST['room_qty']
@@ -185,8 +184,17 @@ def crm_item_edit(request, id):
         item.storage_room = storage_room
         item.elevator = elevator
         item.balcony = balcony
-        item.deposit = request.POST['deposit']
-        item.rent = request.POST['rent']
+
+        if item.buy_status == 'فروش':
+            item.price = request.POST['price']
+        elif item.buy_status == 'پیش فروش':
+            item.price = request.POST['price']
+        elif item.buy_status == 'رهن و اجاره':
+            item.deposit = request.POST['deposit']
+            item.rent = request.POST['rent']
+        elif item.buy_status == 'رهن کامل':
+            item.deposit = request.POST['deposit']
+
         item.area = get_object_or_404(Area, id=request.POST['area'])
         item.additional_information = request.POST['additional_information']
         if (request.FILES): item.image = request.FILES['img']
@@ -195,11 +203,10 @@ def crm_item_edit(request, id):
         item.ownership = owner
         item.save()
 
-        success = 'فایل جدید ایجاد شد ، مشاهده صفحه فایل'
-        link = get_object_or_404(models.Item, id=item.id)
+        success = 'ویرایش فایل انجام شد ، مشاهده صفحه فایل'
 
-        context = {'area':area, 'success':success, 'link':link}
-        return render(request, 'crm/home/rahnoejare_registration.html', context)
+        context = {'area':area, 'success':success, 'link':item}
+        return render(request, 'crm/home/crm_item_edit.html', context)
 
     context = {'item':item, 'area':area}
     html_template = loader.get_template('crm/home/crm_item_edit.html')
