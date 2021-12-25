@@ -136,6 +136,27 @@ def crm_items_detail(request, id):
 
 
 
+
+@login_required()
+def addFileImg(request):
+    item = get_object_or_404(models.Item, id=request.POST['item'])
+    
+    newImg=ItemImage()
+    newImg.item = item
+    newImg.Image = request.FILES['img']
+    newImg.save()
+
+    images = ItemImage.objects.filter(item=item)
+    reqs = models.Order_request.objects.filter(item=item).order_by('-date_created')
+
+    context = {'item':item, 'images':images, 'reqs':reqs}
+    return render(request, 'crm/home/items_detail.html', context)
+
+
+
+
+
+
 #------------------------------------------------------------------------------
 @login_required(login_url="/login/")
 def crm_item_edit(request, id):
