@@ -187,7 +187,7 @@
                 <span class="text-center text-secondary text-xxs font-weight-bolder opacity-7"> تصاویر فایل </span>
                 <h6 class="text-xs">
                     {% for Image in images %}
-                     <a href="#"><i class="text-xxs far fa-trash-alt me-2 btn-outline-danger"></i></a>
+                     <a href="{% url 'deleteImg' Image.id %}"><i class="text-xxs far fa-trash-alt me-2 btn-outline-danger"></i></a>
                      <img src="{{ Image.Image.url }}" class="avatar avatar-sm me-2">
                     {% endfor %}
                     <a href="#" id="myBtn"><img src="/static/assets/crm/img/add.png" width="30px" height="30px" class="me-2"></a>

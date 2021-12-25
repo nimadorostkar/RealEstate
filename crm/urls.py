@@ -19,6 +19,7 @@ urlpatterns = [
     path('froosh_registration', views.froosh_registration, name='froosh_registration'),
     path('pishfroosh_registration', views.pishfroosh_registration, name='pishfroosh_registration'),
     path('addFileImg', views.addFileImg, name='addFileImg'),
+    path('deleteImg/<int:id>/',views.deleteImg,name='deleteImg'),
     # Customer
     path('customers', login_required(customers.as_view()), name='customers'),
     path('customer_detail/<int:id>/',views.customer_detail,name='customer_detail'),

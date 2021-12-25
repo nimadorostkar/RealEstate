@@ -140,7 +140,7 @@ def crm_items_detail(request, id):
 @login_required()
 def addFileImg(request):
     item = get_object_or_404(models.Item, id=request.POST['item'])
-    
+
     newImg=ItemImage()
     newImg.item = item
     newImg.Image = request.FILES['img']
@@ -151,6 +151,19 @@ def addFileImg(request):
 
     context = {'item':item, 'images':images, 'reqs':reqs}
     return render(request, 'crm/home/items_detail.html', context)
+
+
+
+
+
+
+
+@login_required()
+def deleteImg(request, id):
+    img = get_object_or_404(ItemImage, id=id)
+    img.delete()
+    #return HttpResponseRedirect('crm/crm_items_detail/{}/'.format(img.item.id))
+    return redirect('crm_items_detail', id=img.item.id)
 
 
 
