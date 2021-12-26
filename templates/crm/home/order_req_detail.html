@@ -7,6 +7,50 @@
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}
   <link rel="stylesheet" href="/static/admin/jquery.ui.datepicker.jalali/themes/base/jquery-ui.min.css">
+
+
+  <style>
+      /* The Modal (background) */
+      .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+      }
+
+      /* Modal Content */
+      .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 50%;
+      }
+
+      /* The Close Button */
+      .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+  </style>
+
+
 {% endblock stylesheets %}
 
 {% block content %}
@@ -156,13 +200,34 @@
                           <p class="text-xxs text-secondary" dir="rtl"> <img src="{{ Order_incomings.user.user_photo.url }}" width="15px" height="15px"> {{ Order_incomings.user.user.first_name }} {{ Order_incomings.user.user.last_name }}  </p>
                         </div>
                         <div class="col-lg-6" align="left">
-                          <p class="text-xxs text-secondary" dir="rtl"> <i class="far fa-trash-alt me-2 btn-outline-danger"></i> خذف <i class="fas fa-pencil-alt text-dark me-2"></i> ویرایش  </p>
+                          <a id="myBtn{{ Order_incomings.id }}" class="badge badge-sm bg-gradient-info  btn btn-link text-dark mb-0 bg-gradient text-xxs" href="#"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i> ویرایش </a>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
+
+                <!-- The Modal -->
+                <div id="myModal{{ Order_incomings.id }}" class="modal">
+                  <!-- Modal content -->
+                  <div class="modal-content" align="right">
+                    <span class="close close{{ Order_incomings.id }}">&times;</span>
+                    <div align="center">
+                      <form action="{% url 'addFileImg' %}" method="post" enctype="multipart/form-data">
+                         {% csrf_token %}
+                          <p> {{ Order_incomings.description|linebreaks }} </p>
+                          <label><p class="text-xs text-secondary"> تصویر جدید را آپلود کنید:   </p></label>
+                          <input name="img" type="file" class="text-xxs">
+                          <input name="item" type="hidden" value="{{ item.id }}">
+                          <br>
+                          <button type="submit" class="btn bg-gradient-info my-1 me-1"> ثبت </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+
                {% endfor %}
+
 
 
 
@@ -217,4 +282,39 @@
 <!-- Specific JS goes HERE -->
 {% block javascripts %}
 <script src="/static/admin/js/django_jalali.min.js"></script>
+
+
+<script>
+ {% for Order_incomings in incomings %}
+
+    // Get the modal
+    var modal{{ Order_incomings.id }} = document.getElementById("myModal"+{{ Order_incomings.id }});
+
+    // Get the button that opens the modal
+    var btn{{ Order_incomings.id }} = document.getElementById("myBtn"+{{ Order_incomings.id }});
+
+    // Get the <span> element that closes the modal
+    var span{{ Order_incomings.id }} = document.getElementsByClassName("close"+{{ Order_incomings.id }})[0];
+
+    // When the user clicks the button, open the modal
+    btn{{ Order_incomings.id }}.onclick = function() {
+    modal{{ Order_incomings.id }}.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span{{ Order_incomings.id }}.onclick = function() {
+    modal{{ Order_incomings.id }}.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+    if (event.target == modal{{ Order_incomings.id }}) {
+      modal{{ Order_incomings.id }}.style.display = "none";
+    }
+    }
+
+ {% endfor %}
+</script>
+
+
 {% endblock javascripts %}

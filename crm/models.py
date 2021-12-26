@@ -93,6 +93,9 @@ class Order_incomings(models.Model):
         verbose_name = "پیگیری"
         verbose_name_plural = "پیگیری ها"
 
+    #def get_absolute_edit_url(self):
+        #return reverse('incomings_edit',args=[self.id])
+
 
 
 

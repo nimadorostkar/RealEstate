@@ -781,6 +781,42 @@ def order_edit(request, id):
 
 
 
+'''
+#------------------------------------------------------------------------------
+@login_required(login_url="/login/")
+def incomings_edit(request, id):
+    req = get_object_or_404(models.Order_request, id=id)
+    customers = models.Profile.objects.filter( Q(user_type='کاربر') | Q(user_type='کاربر ویژه') ).order_by('-date_created')
+    items = models.Item.objects.all().order_by('-date')
+    if request.method=="POST":
+
+        if request.POST.get('remove'):
+            req.delete()
+            return redirect('order_requests')
+
+        else:
+            req.user = get_object_or_404(models.Profile, id=request.user.id)
+            req.customer = get_object_or_404(models.Profile, id=request.POST.get('customer'))
+            req.item = get_object_or_404(models.Item, id=request.POST.get('item'))
+            req.description = request.POST['description']
+            req.final_price = request.POST['final_price']
+            req.prepayment = request.POST['prepayment']
+            req.status = request.POST['status']
+            req.save()
+
+            success = 'ویرایش درخواست ثبت شد ، مشاهده درخواست'
+            context = {'req':req, 'customers': customers , 'items':items, 'success':success, 'link':req}
+            return render(request, 'crm/home/order_edit.html', context)
+
+    context = {'req':req, 'customers': customers , 'items':items}
+    html_template = loader.get_template('crm/home/order_edit.html')
+    return HttpResponse(html_template.render(context, request))
+'''
+
+
+
+
+
 
 
 
