@@ -73,13 +73,21 @@
 
 
                    <div class="row">
-                     <div class="col-md-3 pr-md-4">
+                     <div class="col-md-2 pr-md-4">
                          <div class="form-group">
                            <label><p class="text-xs text-secondary mb-0"> مشتری ویژه </p></label>
                             <input name="substantial" type="checkbox" {% if customer.user_type == "کاربر ویژه" %} checked {% endif %} >
                          </div>
                      </div>
+                     <div class="col-md-2 pr-md-4">
+                         <div class="form-group">
+                           <label><p class="text-xs text-secondary mb-0"> حذف این مشتری  </p></label>
+                            <input name="remove" type="checkbox">
+                         </div>
+                     </div>
                    </div>
+
+
 
 
                  <div class="card-footer" align="center">

@@ -1,0 +1,120 @@
+{% extends 'crm/layouts/base.html' %}
+
+{% block title %} ایجاد کارشناس {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+    <!-- select search  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="/static/assets/css/bootstrap336.min.css" rel="stylesheet" />
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+
+
+
+<div class="container-fluid py-4">
+
+  <div class="row" dir="rtl">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header pb-0">
+          <h6> ایجاد کارشناس </h6> <p class="text-xs text-secondary mb-0"> اطلاعات کارشناس جدید را وارد کنید </p> <hr>
+        </div>
+        <div class="card-body px-7 pt-4 pb-2">
+
+               <form action="#" method="post" dir="rtl" align="right">
+                 {% csrf_token %}
+
+                 <div class="row">
+                   <div class="col-md-3 pr-md-4">
+                     <div class="form-group">
+                       <label><p class="text-xs text-secondary mb-0"> نام </p></label>
+                       <input name="fname" type="text" class="form-control">
+                     </div>
+                   </div>
+                   <div class="col-md-3 pr-md-4">
+                     <div class="form-group">
+                       <label><p class="text-xs text-secondary mb-0"> نام خانوادگی </p></label>
+                       <input name="lname" type="text" class="form-control">
+                     </div>
+                   </div>
+                   <div class="col-md-3 pr-md-4">
+                     <div class="form-group">
+                       <label><p class="text-xs text-secondary mb-0"> نام کاربری </p></label>
+                       <input name="username" type="text" class="form-control">
+                     </div>
+                  </div>
+                   <div class="col-md-3 pr-md-4">
+                     <div class="form-group">
+                       <label><p class="text-xs text-secondary mb-0"> رمزعبور </p></label>
+                       <input name="password" type="password" class="form-control">
+                     </div>
+                   </div>
+                </div>
+
+
+                 <div class="row">
+                   <div class="col-md-3 pr-md-4">
+                     <div class="form-group">
+                       <label><p class="text-xs text-secondary mb-0"> شماره تماس </p></label>
+                       <input name="phone" type="text" class="form-control">
+                     </div>
+                   </div>
+                   <div class="col-md-3 pr-md-4">
+                     <div class="form-group">
+                       <label><p class="text-xs text-secondary mb-0"> ایمیل </p></label>
+                       <input name="email" type="email" class="form-control">
+                     </div>
+                   </div>
+                   <div class="col-md-6 pr-md-4">
+                     <div class="form-group">
+                       <label><p class="text-xs text-secondary mb-0"> اطلاعات تکمیلی </p></label>
+                       <input name="additional_information" type="text" class="form-control">
+                     </div>
+                   </div>
+                 </div>
+
+
+                 <div class="card-footer" align="center">
+                   <button type="submit" class="btn bg-gradient-info my-1 me-1"> ثبت </button>
+                    <p style="color:green;"> {{ success }} </p>
+                 </div>
+
+              </form>
+
+         </div>
+       </div>
+     </div>
+   </div>
+
+
+
+
+    {% include "crm/includes/footer.html" %}
+
+
+</div>
+
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script>
+
+
+    $(function() {
+      $('.selectpicker').selectpicker({
+        liveSearch: true
+      });
+    });
+
+</script>
+{% endblock javascripts %}
