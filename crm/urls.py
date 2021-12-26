@@ -31,5 +31,5 @@ urlpatterns = [
     path('order_req_detail/<int:id>/',views.order_req_detail,name='order_req_detail'),
     path('order_registration', views.order_registration, name='order_registration'),
     path('order_edit/<int:id>/', views.order_edit, name='order_edit'),
-    #path('incomings_edit/<int:id>/', views.incomings_edit, name='incomings_edit'),
+    path('incoming_remove', views.incoming_remove, name='incoming_remove'),
 ]
