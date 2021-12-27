@@ -84,7 +84,7 @@
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> منطقه </th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> متراژ </th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> قیمت </th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> وضعیت </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">  نمایش در سایت  </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -121,9 +121,9 @@
                     </td>
                     <td class="align-middle text-center">
                       {% if Item.available %}
-                        <p class="text-xs text-secondary mb-0"> <span class="badge badge-sm bg-gradient-success"> موجود </span> </p>
+                        <a class="badge badge-sm bg-gradient-success text-xxs" href="{{ Item.get_absolute_url }}"><i class="fas fa-search text-dark me-2" aria-hidden="true"></i> قابل مشاهده </a>
                       {% else %}
-                        <p class="text-xs text-secondary mb-0"> <span class="badge badge-sm bg-gradient-warning"> ناموجود </span> </p>
+                        <p class="text-xs text-secondary mb-0"> <span class="badge badge-sm bg-gradient-warning"> عدم نمایش </span> </p>
                       {% endif %}
                     </td>
                   </tr>
