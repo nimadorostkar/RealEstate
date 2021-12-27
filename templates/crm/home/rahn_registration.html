@@ -53,7 +53,7 @@
                   <div class="col-md-3 pr-md-4">
                     <div class="form-group">
                       <label><p class="text-xs text-secondary mb-0"> منطقه </p> </label>
-                      <a style="color:green;" href="#"> <span style="font-size:12px;">+</span> <span style="font-size:9px;">افزودن جدید</span> </a>
+                      <a style="color:green;" href="{% url 'addarea' %}"> <span style="font-size:12px;">+</span> <span style="font-size:9px;">افزودن جدید</span> </a>
                       <select name="area" class="form-control selectpicker" data-live-search="true">
                         {% for Area in area %}
                           <option data-tokens="{{Area.name}}" value={{Area.id}}>{{Area.name}}</option>
