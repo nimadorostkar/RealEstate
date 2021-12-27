@@ -790,7 +790,7 @@ def incoming_remove(request):
     incoming.delete()
     return redirect(req.get_absolute_url())
 
-    
+
 
 
 
@@ -823,6 +823,25 @@ def sales_expert_registration(request):
     context = {}
     html_template = loader.get_template('crm/home/sales_expert_registration.html')
     return HttpResponse(html_template.render(context, request))
+
+
+
+
+
+
+
+
+#------------------------------------------------------------------------------
+@login_required(login_url="/login/")
+def addarea(request):
+    context = {}
+    if request.method=="POST":
+        area = Area()
+        area.name = request.POST['name']
+        area.save()
+        context = {'success':'منطقه جدید ایجاد شد'}
+
+    return render(request, 'crm/home/addarea.html', context)
 
 
 

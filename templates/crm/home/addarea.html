@@ -1,0 +1,78 @@
+{% extends 'crm/layouts/base.html' %}
+
+{% block title %} افزودن منطقه جدید {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+    <!-- select search  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="/static/assets/crm/css/bootstrap336.min.css" rel="stylesheet" />
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+
+
+
+<div class="container-fluid py-4">
+
+  <div class="row" dir="rtl">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header pb-0">
+          <h6> افزودن منطقه جدید</h6> <p class="text-xs text-secondary mb-0"> اطلاعات منطقه جدید را وارد کنید </p> <hr>
+        </div>
+        <div class="card-body px-7 pt-4 pb-2">
+
+
+
+            <form action="{% url 'addarea' %}" method="post">
+               {% csrf_token %}
+                 <div class="row">
+                   <div class="col-md-3">
+                       <div class="form-group">
+                         <label><p class="text-xs text-secondary mb-0"> نام منطقه </p></label>
+                         <input name="name" type="text" class="form-control">
+                       </div>
+                   </div>
+                 </div>
+                 <div class="card-footer" align="center">
+                   <button type="submit" class="btn bg-gradient-info my-1 me-1"> ثبت </button>
+                    <p style="color:green;"> {{ success }} </p>
+                 </div>
+              </form>
+
+         </div>
+       </div>
+     </div>
+   </div>
+
+
+
+    {% include "crm/includes/footer.html" %}
+
+
+</div>
+
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script>
+
+    $(function() {
+      $('.selectpicker').selectpicker({
+        liveSearch: true
+      });
+    });
+
+</script>
+
+
+{% endblock javascripts %}

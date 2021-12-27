@@ -119,3 +119,21 @@
 
  {% endfor %}
 </script>
+
+
+
+
+
+
+---------------------
+
+
+
+
+
+<form action="{% url 'addarea' %}" method="post">
+   {% csrf_token %}
+   <input name="reqId" type="hidden" value="{{ req.id }}">
+   <input name="incomId" type="hidden" value="{{ Order_incomings.id }}">
+   <button type="submit" style="width:50px;height:9px;border: 0 none transparent;padding:0;margin:0;font-size:7px;">+ افزودن جدید</button>
+</form>
