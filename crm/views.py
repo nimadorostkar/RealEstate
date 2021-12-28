@@ -809,23 +809,25 @@ def order_req_detail(request, id):
     if uProfile.user_type == 'کارشناس' or uProfile.user_type == 'مدیر' :
 
         req = get_object_or_404(models.Order_request, id=id)
-        incomings = models.Order_incomings.objects.filter(request=req)
-        timeform = TimeForm(request.POST)
-        if request.method=="POST":
-            if timeform.is_valid():
-                incoming = Order_incomings()
-                incoming.request = req
-                incoming.user = get_object_or_404(models.Profile, user=request.user)
-                incoming.date_created = timeform.cleaned_data['date_created']
-                incoming.description = request.POST['description']
-                incoming.save()
-                return redirect(req.get_absolute_url())
+        if req.user == uProfile or uProfile.user_type=="مدیر" :
+            incomings = models.Order_incomings.objects.filter(request=req)
+            timeform = TimeForm(request.POST)
+            if request.method=="POST":
+                if timeform.is_valid():
+                    incoming = Order_incomings()
+                    incoming.request = req
+                    incoming.user = get_object_or_404(models.Profile, user=request.user)
+                    incoming.date_created = timeform.cleaned_data['date_created']
+                    incoming.description = request.POST['description']
+                    incoming.save()
+                    return redirect(req.get_absolute_url())
+            context = {
+            'req':req, 'incomings':incomings, 'timeform':timeform, #'total_price':total_price, 'total_incoming':total_incoming, 'remained':remained
+            }
+            return render(request, 'crm/home/order_req_detail.html', context)
 
-
-        context = {
-        'req':req, 'incomings':incomings, 'timeform':timeform, #'total_price':total_price, 'total_incoming':total_incoming, 'remained':remained
-        }
-        return render(request, 'crm/home/order_req_detail.html', context)
+        else:
+            return redirect("order_requests")
 
     else:
         return redirect("/")
