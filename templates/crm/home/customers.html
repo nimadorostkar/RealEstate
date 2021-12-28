@@ -8,6 +8,7 @@
 {% block content %}
 
 
+
   <div class="container-fluid py-4">
 
 
@@ -31,45 +32,50 @@
                 </thead>
                 <tbody>
                  {% for Customer in customers %}
-                  <tr>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div class="d-flex flex-column justify-content-center">
-                          <a href="{{ Customer.get_absolute_url }}">
-                            <h6 class="mb-0 text-sm">
-                              <img src="{{ Customer.user_photo.url }}" class="avatar avatar-sm me-3">
-                              {{ Customer.user.first_name }} {{ Customer.user.last_name }}
-                              {% if Customer.user_type == 'کاربر ویژه' %}
-                                 <img src="/static/assets/crm/img/star.png" width="20px" class="me-2">
-                              {% endif %}
-                           </h6>
-                         </a>
-                        </div>
-                      </div>
-                    </td>
+                     {% if Customer.sales_expert.user == user or uProfile.user_type == 'مدیر' %}
 
-                    <td>
-                      {{ Customer.phone }}
-                    </td>
+                      <tr>
+                        <td>
+                          <div class="d-flex px-2 py-1">
+                            <div class="d-flex flex-column justify-content-center">
+                              <a href="{{ Customer.get_absolute_url }}">
+                                <h6 class="mb-0 text-sm">
+                                  <img src="{{ Customer.user_photo.url }}" class="avatar avatar-sm me-3">
+                                  {{ Customer.user.first_name }} {{ Customer.user.last_name }}
+                                  {% if Customer.user_type == 'کاربر ویژه' %}
+                                     <img src="/static/assets/crm/img/star.png" width="20px" class="me-2">
+                                  {% endif %}
+                               </h6>
+                             </a>
+                            </div>
+                          </div>
+                        </td>
+
+                        <td>
+                          {{ Customer.phone }}
+                        </td>
 
 
-                    <td>
-                      {{ Customer.short_description }}...
-                    </td>
+                        <td>
+                          {{ Customer.short_description }}...
+                        </td>
 
-                    <td class="align-middle text-center text-sm">
-                      <div class="avatar-group mt-2">
-                        {% for Order_request in reqs %}
-                        {% if Order_request.customer == Customer %}
-                          <a href="{{ Order_request.item.get_absolute_crm_url }}">
-                            <img src="{{ Order_request.item.image.url }}" class="avatar avatar-sm me-3">
-                            <span class="text-xxs"> کد: {{ Order_request.item.code  }} </span>
-                          </a>
-                        {% endif %}
-                        {% endfor %}
-                      </div>
-                    </td>
-                  </tr>
+                        <td class="align-middle text-center text-sm">
+                          <div class="avatar-group mt-2">
+                            {% for Order_request in reqs %}
+                            {% if Order_request.customer == Customer %}
+                              <a href="{{ Order_request.item.get_absolute_crm_url }}">
+                                <img src="{{ Order_request.item.image.url }}" class="avatar avatar-sm me-3">
+                                <span class="text-xxs"> کد: {{ Order_request.item.code  }} </span>
+                              </a>
+                            {% endif %}
+                            {% endfor %}
+                          </div>
+                        </td>
+                      </tr>
+
+
+                      {% endif %}
                  {% endfor %}
                 </tbody>
               </table>

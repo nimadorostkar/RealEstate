@@ -141,10 +141,11 @@ class crm_items(generic.ListView):
     ordering = ['-date']
     paginate_by = 20
 
-    def get(self, *args, **kwargs):
+    def get_context_data(self, *args, **kwargs):
         uProfile = get_object_or_404(models.Profile, user=self.request.user)
         if uProfile.user_type == 'کارشناس' or uProfile.user_type == 'مدیر' :
-            context = super(crm_items, self).get(*args, **kwargs)
+            context = super(crm_items, self).get_context_data(*args, **kwargs)
+            context["uProfile"] = uProfile
             return context
         else:
             return redirect('crm')
@@ -632,12 +633,12 @@ class customers(generic.ListView):
     ordering = ['-date_created']
     paginate_by = 30
 
-    def get(self, *args, **kwargs):
+    def get_context_data(self, *args, **kwargs):
         uProfile = get_object_or_404(models.Profile, user=self.request.user)
         if uProfile.user_type == 'کارشناس' or uProfile.user_type == 'مدیر' :
-            reqs = Order_request.objects.all()
-            context = super(customers, self).get(*args, **kwargs)
-            context["reqs"] = reqs
+            context = super(customers, self).get_context_data(*args, **kwargs)
+            context["reqs"] = Order_request.objects.all()
+            context["uProfile"] = uProfile
             return context
         else:
             return redirect('crm')
@@ -778,10 +779,11 @@ class order_requests(generic.ListView):
     ordering = ['-date_created']
     paginate_by = 30
 
-    def get(self, *args, **kwargs):
+    def get_context_data(self, *args, **kwargs):
         uProfile = get_object_or_404(models.Profile, user=self.request.user)
         if uProfile.user_type == 'کارشناس' or uProfile.user_type == 'مدیر' :
-            context = super(order_requests, self).get(*args, **kwargs)
+            context = super(order_requests, self).get_context_data(*args, **kwargs)
+            context["uProfile"] = uProfile
             return context
         else:
             return redirect('crm')
@@ -842,10 +844,10 @@ def order_registration(request):
             req.description = request.POST['description']
             req.save()
             success = 'درخواست جدید ثبت شد ، مشاهده صفحه درخواست'
-            context = {'customers': customers , 'items':items, 'success':success, 'link':req}
+            context = {'customers': customers , 'items':items, 'success':success, 'link':req , 'uProfile':uProfile}
             return render(request, 'crm/home/order_registration.html', context)
 
-        context = {'customers': customers , 'items':items}
+        context = {'customers': customers , 'items':items , 'uProfile':uProfile}
         html_template = loader.get_template('crm/home/order_registration.html')
         return HttpResponse(html_template.render(context, request))
 

@@ -89,44 +89,46 @@
                 </thead>
                 <tbody>
                  {% for Item in items %}
-                  <tr>
-                    <td class="align-middle text-center">
-                       <a href="{{ Item.get_absolute_crm_url }}">
-                         <img src="{{ Item.image.url }}" class="avatar avatar-sm me-3">
-                         <span class="text-xxs"> کد: {{ Item.code  }} </span>
-                       </a>
-                    </td>
-                    <td class="align-middle text-center">
-                       <h6> {{ Item.buy_status  }} </h6>
-                    </td>
-                    <td class="align-middle text-center">
-                       <h6> {{ Item.estate_status  }} </h6>
-                    </td>
-                    <td class="align-middle text-center">
-                       <h6> {{ Item.area  }} </h6>
-                    </td>
-                    <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold"> {{ Item.area_size  }} <small> متر </small> </span>
-                    </td>
-                    <td class="align-middle text-center">
-                        {% if Item.buy_status == 'فروش' %}
-                          <span class="text-secondary text-xs font-weight-bold"> {{ Item.price|floatformat:0|intcomma:False }} تومان </span>
-                        {% elif Item.buy_status == 'رهن کامل' %}
-                          <span class="text-secondary text-xs font-weight-bold"> {{ Item.deposit|floatformat:0|intcomma:False }} تومان </span>
-                        {% elif Item.buy_status == 'پیش فروش' %}
-                          <span class="text-secondary text-xs font-weight-bold"> {{ Item.price|floatformat:0|intcomma:False }} تومان </span>
-                        {% elif Item.buy_status == 'رهن و اجاره' %}
-                          <small> <span class="text-secondary text-xs font-weight-bold"> ودیعه:{{ Item.deposit|floatformat:0|intcomma:False }} اجاره:{{ Item.rent|floatformat:0|intcomma:False }} تومان</span> </small>
-                        {% endif %}
-                    </td>
-                    <td class="align-middle text-center">
-                      {% if Item.available %}
-                        <a class="badge badge-sm bg-gradient-success text-xxs" href="{{ Item.get_absolute_url }}"><i class="fas fa-search text-dark me-2" aria-hidden="true"></i> قابل مشاهده </a>
-                      {% else %}
-                        <p class="text-xs text-secondary mb-0"> <span class="badge badge-sm bg-gradient-warning"> عدم نمایش </span> </p>
-                      {% endif %}
-                    </td>
-                  </tr>
+                   {% if Item.sales_expert == user or uProfile.user_type == 'مدیر' %}
+                      <tr>
+                        <td class="align-middle text-center">
+                           <a href="{{ Item.get_absolute_crm_url }}">
+                             <img src="{{ Item.image.url }}" class="avatar avatar-sm me-3">
+                             <span class="text-xxs"> کد: {{ Item.code  }} </span>
+                           </a>
+                        </td>
+                        <td class="align-middle text-center">
+                           <h6> {{ Item.buy_status  }} </h6>
+                        </td>
+                        <td class="align-middle text-center">
+                           <h6> {{ Item.estate_status  }} </h6>
+                        </td>
+                        <td class="align-middle text-center">
+                           <h6> {{ Item.area  }} </h6>
+                        </td>
+                        <td class="align-middle text-center">
+                            <span class="text-secondary text-xs font-weight-bold"> {{ Item.area_size  }} <small> متر </small> </span>
+                        </td>
+                        <td class="align-middle text-center">
+                            {% if Item.buy_status == 'فروش' %}
+                              <span class="text-secondary text-xs font-weight-bold"> {{ Item.price|floatformat:0|intcomma:False }} تومان </span>
+                            {% elif Item.buy_status == 'رهن کامل' %}
+                              <span class="text-secondary text-xs font-weight-bold"> {{ Item.deposit|floatformat:0|intcomma:False }} تومان </span>
+                            {% elif Item.buy_status == 'پیش فروش' %}
+                              <span class="text-secondary text-xs font-weight-bold"> {{ Item.price|floatformat:0|intcomma:False }} تومان </span>
+                            {% elif Item.buy_status == 'رهن و اجاره' %}
+                              <small> <span class="text-secondary text-xs font-weight-bold"> ودیعه:{{ Item.deposit|floatformat:0|intcomma:False }} اجاره:{{ Item.rent|floatformat:0|intcomma:False }} تومان</span> </small>
+                            {% endif %}
+                        </td>
+                        <td class="align-middle text-center">
+                          {% if Item.available %}
+                            <a class="badge badge-sm bg-gradient-success text-xxs" href="{{ Item.get_absolute_url }}"><i class="fas fa-search text-dark me-2" aria-hidden="true"></i> قابل مشاهده </a>
+                          {% else %}
+                            <p class="text-xs text-secondary mb-0"> <span class="badge badge-sm bg-gradient-warning"> عدم نمایش </span> </p>
+                          {% endif %}
+                        </td>
+                      </tr>
+                    {% endif %}
                  {% endfor %}
                 </tbody>
               </table>

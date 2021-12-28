@@ -11,38 +11,6 @@ from app.models import Item, Profile
 
 
 
-'''
-#------------------------------------------------------------------------------
-class Customer(models.Model):
-    name = models.CharField(max_length=200, verbose_name = "نام")
-    phone = models.CharField(max_length=200, blank=True, null=True, verbose_name = "تلفن")
-    additional_information = models.TextField(max_length=1000,null=True, blank=True,verbose_name = "اطلاعات تکمیلی")
-    substantial = models.BooleanField(default=False, verbose_name = "مشتری ویژه" )
-
-    date_created = jmodels.jDateTimeField(auto_now_add=True, verbose_name = "تاریخ")
-
-    def __str__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return reverse('customer_detail',args=[self.id])
-
-    def get_absolute_edit_url(self):
-        return reverse('customer_edit',args=[self.id])
-
-    @property
-    def short_description(self):
-        return truncatechars(self.additional_information, 70)
-
-    class Meta:
-        verbose_name = "مشتری"
-        verbose_name_plural = "مشتریان"
-'''
-
-
-
-
-
 
 
 
