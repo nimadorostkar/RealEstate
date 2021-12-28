@@ -13,7 +13,7 @@ urlpatterns = [
     path('sales_expert_registration', views.sales_expert_registration, name='sales_expert_registration'),
     path('addarea', views.addarea, name='addarea'),
     # Product
-    path('crm_items', crm_items.as_view(), name='crm_items'),
+    path('crm_items', login_required(crm_items.as_view()), name='crm_items'),
     path('crm_items_detail/<int:id>/',views.crm_items_detail,name='crm_items_detail'),
     path('crm_item_edit/<int:id>/', views.crm_item_edit, name='crm_item_edit'),
     path('rahnoejare_registration', views.rahnoejare_registration, name='rahnoejare_registration'),

@@ -17,7 +17,7 @@ admin.site.register(LogEntry)
 
 #------------------------------------------------------------------------------
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('image_tag', 'user_type', 'user_name','phone','date_created')
+    list_display = ('image_tag', 'user_type', 'user_name','phone','sales_expert')
     list_filter = ('user_type', "date_created")
     search_fields = ['user_name', 'phone']
 admin.site.register(models.Profile, ProfileAdmin)

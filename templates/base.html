@@ -100,7 +100,7 @@
                 {% if user.is_authenticated %}
                 <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.location.replace('{% url 'logout' %}')" data-wow-delay="0.5s"> خروج </button>
                 <button class="navbar-btn nav-button wow fadeInRight login" onclick=" window.location.replace('{% url 'app:profile' %}')" data-wow-delay="0.5s"> پروفایل </button>
-                  {% if request.user.is_superuser %}
+                  {% if userProfile.user_type == 'کارشناس' or userProfile.user_type == 'مدیر' %}
                    <a href="{% url 'crm' %}"> <i class="fa fa-dashboard" style="font-size:20px"></i> CRM </a>
                   {% endif %}
                 {% else %}

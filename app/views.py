@@ -25,6 +25,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 def index(request):
     logo = Setting.get('لوگو', default='django-extra-settings')
     latestpost_list = Post.objects.all().order_by('-post_date')[:3]
+
     img = models.Slider.objects.all()
     item_img = models.ItemImage.objects.all()
     items = models.Item.objects.filter(available=True).order_by("-date")[:11]
@@ -32,10 +33,16 @@ def index(request):
     all_area_count = models.Area.objects.all().count()
     areas = models.Area.objects.all()
     fav = models.Fav.objects.all()
-    context = {'img':img, 'items':items, 'item_img':item_img, 'areas':areas, 'fav':fav, 'latestpost_list':latestpost_list, 'all_items_count':all_items_count, 'all_area_count':all_area_count,'logo':logo}
-    context['segment'] = 'index'
-    html_template = loader.get_template( 'index.html' )
-    return HttpResponse(html_template.render(context, request))
+    context = {'img':img,
+    'items':items,
+    'item_img':item_img,
+    'areas':areas,
+    'fav':fav,
+    'latestpost_list':latestpost_list,
+    'all_items_count':all_items_count,
+    'all_area_count':all_area_count,
+    'logo':logo}
+    return render(request, 'index.html', context)
 
 
 

@@ -22,6 +22,7 @@ class Profile(models.Model):
   user_photo = models.ImageField(default='default.png', upload_to='profile_pics', null=True, blank=True, verbose_name = "تصویر")
   CHOICES = ( ('کاربر','کاربر'), ('کاربر ویژه','کاربر ویژه'), ('کارشناس','کارشناس'), ('مدیر','مدیر') )
   user_type = models.CharField(max_length=30,choices=CHOICES, default='کاربر', verbose_name = "نوع کاربر")
+  sales_expert = models.ForeignKey("Profile", null=True, blank=True, on_delete=models.CASCADE,verbose_name = "کارشناس مربوطه")
   date_created = jmodels.jDateTimeField(auto_now_add=True, verbose_name = "تاریخ ایجاد")
 
 
