@@ -661,10 +661,15 @@ class customers(generic.ListView):
 def customer_detail(request, id):
     uProfile = get_object_or_404(models.Profile, user=request.user)
     if uProfile.user_type == 'کارشناس' or uProfile.user_type == 'مدیر' :
+
         customer = get_object_or_404(models.Profile, id=id)
-        reqs = models.Order_request.objects.filter(customer=customer).order_by('-date_created')
-        context = {'customer':customer, 'reqs':reqs}
-        return render(request, 'crm/home/customer_detail.html', context)
+        if customer.sales_expert == uProfile or uProfile.user_type=="مدیر" :
+            reqs = models.Order_request.objects.filter(customer=customer).order_by('-date_created')
+            context = {'customer':customer, 'reqs':reqs}
+            return render(request, 'crm/home/customer_detail.html', context)
+        else:
+            return redirect("customers")
+
     else:
         return redirect("/")
 
