@@ -160,10 +160,13 @@ def crm_items_detail(request, id):
     uProfile = get_object_or_404(models.Profile, user=request.user)
     if uProfile.user_type == 'کارشناس' or uProfile.user_type == 'مدیر' :
         item = get_object_or_404(models.Item, id=id)
-        images = ItemImage.objects.filter(item=item)
-        reqs = models.Order_request.objects.filter(item=item).order_by('-date_created')
-        context = {'item':item, 'images':images, 'reqs':reqs}
-        return render(request, 'crm/home/items_detail.html', context)
+        if item.sales_expert == request.user or uProfile.user_type=="مدیر" :
+            images = ItemImage.objects.filter(item=item)
+            reqs = models.Order_request.objects.filter(item=item).order_by('-date_created')
+            context = {'item':item, 'images':images, 'reqs':reqs}
+            return render(request, 'crm/home/items_detail.html', context)
+        else:
+            return redirect("crm_items")
     else:
         return redirect("/")
 
