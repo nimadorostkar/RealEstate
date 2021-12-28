@@ -112,7 +112,7 @@
 
 
 
-
+      {% if request.user.is_superuser %}
         <li class="nav-item mb-1">
           <a class="nav-link {% if request.path == '/etc' %} active {% endif %}" href="{% url 'sales_expert_registration' %}">
             <div class="icon icon-shape icon-xs shadow border-radius-sm bg-gradient-light text-center me-2 d-flex align-items-center justify-content-center">
@@ -124,6 +124,7 @@
             <span class="nav-link-text ms-1"> ایجاد کارشناس </span>
           </a>
         </li>
+      {% endif %}
 
 
         <li class="nav-item mb-1">

@@ -20,7 +20,7 @@ from django.views import generic
 from django.utils.decorators import method_decorator
 from allauth.utils import generate_unique_username
 from app.models import Item, Profile, Area, ItemImage, Ownership
-
+from django.contrib.auth.decorators import user_passes_test
 
 
 
@@ -927,7 +927,7 @@ def incoming_remove(request):
 
 
 #------------------------------------------------------------------------------
-@login_required(login_url="/login/")
+@user_passes_test(lambda u: u.is_superuser)
 def sales_expert_registration(request):
     uProfile = get_object_or_404(models.Profile, user=request.user)
     if uProfile.user_type == 'کارشناس' or uProfile.user_type == 'مدیر' :
