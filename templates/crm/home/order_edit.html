@@ -37,7 +37,9 @@
                        <label><p class="text-xs text-secondary mb-0"> مشتری </p></label>
                        <select name="customer" class="form-control selectpicker" data-live-search="true">
                          {% for Customer in customers %}
+                          {% if Customer.sales_expert.user == user or uProfile.user_type == 'مدیر' %}
                            <option value={{Customer.id}} {% if req.customer == Customer %} selected {% endif %}> {{Customer.user.first_name}} {{Customer.user.last_name}} | {{Customer.phone}}   </option>
+                          {% endif %}
                          {% endfor %}
                        </select>
                      </div>
@@ -47,7 +49,9 @@
                      <label><p class="text-xs text-secondary mb-0"> فایل </p></label>
                       <select name="item" class="form-control selectpicker" data-live-search="true">
                         {% for Item in items %}
-                         <option value={{Item.id}} {% if req.item == Item %} selected {% endif %}> {{Item}} | {{Item.code}} </option>
+                         {% if Item.sales_expert == user or uProfile.user_type == 'مدیر' %}
+                          <option value={{Item.id}} {% if req.item == Item %} selected {% endif %}> {{Item}} | {{Item.code}} </option>
+                         {% endif %}
                         {% endfor %}
                       </select>
                     </div>

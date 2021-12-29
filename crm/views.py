@@ -31,42 +31,34 @@ def index(request):
     uProfile = get_object_or_404(models.Profile, user=request.user)
     if uProfile.user_type == 'کارشناس' or uProfile.user_type == 'مدیر' :
 
-        open_reqs_count = models.Order_request.objects.filter(user=uProfile).exclude(status='تکمیل شده').count()
-        customers_count = models.Profile.objects.filter( Q(user_type='کاربر') | Q(user_type='کاربر ویژه') and Q(sales_expert=uProfile ) ).count()
-        items_count = models.Item.objects.filter(sales_expert=request.user).count()
-        new_order_count = models.Order_request.objects.filter( status='جدید' , user=uProfile ).count()
-
-        chartList = list(models.Order_request.objects.filter(status='تکمیل شده').values_list('item_id', flat=True).distinct())
         now = jdatetime.datetime.now()
-        chart = []
 
-        for Order in chartList:
-            products = models.Order_request.objects.filter(status='تکمیل شده' , product__id=Order)
-            qty_sum=[0,0,0,0,0,0,0,0,0]
-            for Product in products:
-                if Product.date_created.year == now.year:
-                    if (now.month - Product.date_created.month)==0:
-                        qty_sum[8] += Product.qty
-                    elif (now.month - Product.date_created.month)==1:
-                        qty_sum[7] += Product.qty
-                    elif (now.month - Product.date_created.month)==2:
-                        qty_sum[6] += Product.qty
-                    elif (now.month - Product.date_created.month)==3:
-                        qty_sum[5] += Product.qty
-                    elif (now.month - Product.date_created.month)==4:
-                        qty_sum[4] += Product.qty
-                    elif (now.month - Product.date_created.month)==5:
-                        qty_sum[3] += Product.qty
-                    elif (now.month - Product.date_created.month)==6:
-                        qty_sum[2] += Product.qty
-                    elif (now.month - Product.date_created.month)==7:
-                        qty_sum[1] += Product.qty
-                    elif (now.month - Product.date_created.month)==8:
-                        qty_sum[0] += Product.qty
-            chart_product = { 'product':Product.product.name, 'qty':qty_sum}
-            chart.append(chart_product)
+        if request.user.is_superuser:
+            open_reqs_count = models.Order_request.objects.all().exclude(status='تکمیل شده').count()
+            customers_count = models.Profile.objects.filter( Q(user_type='کاربر') | Q(user_type='کاربر ویژه') ).count()
+            items_count = models.Item.objects.all().count()
+            new_order_count = models.Order_request.objects.filter(status='جدید').count()
 
-        context = {'open_reqs_count': open_reqs_count, 'customers_count':customers_count , 'items_count':items_count, 'new_order_count':new_order_count, 'chart':chart }
+            incomings = models.Order_incomings.objects.all()
+            chart = []
+            for Incoming in incomings:
+                if Incoming.date_created.year == now.year and Incoming.date_created.month == now.month and Incoming.date_created.day == now.day:
+                    chart.append(Incoming)
+        else:
+            open_reqs_count = models.Order_request.objects.filter(user=uProfile).exclude(status='تکمیل شده').count()
+            customers_count = models.Profile.objects.filter( Q(user_type='کاربر') | Q(user_type='کاربر ویژه') and Q(sales_expert=uProfile ) ).count()
+            items_count = models.Item.objects.filter(sales_expert=request.user).count()
+            new_order_count = models.Order_request.objects.filter( status='جدید' , user=uProfile ).count()
+
+            incomings = models.Order_incomings.objects.filter(user=uProfile)
+            chart = []
+            for Incoming in incomings:
+                if Incoming.date_created.year == now.year and Incoming.date_created.month == now.month and Incoming.date_created.day == now.day:
+                    chart.append(Incoming)
+
+
+
+        context = {'open_reqs_count': open_reqs_count, 'customers_count':customers_count , 'items_count':items_count, 'new_order_count':new_order_count, 'chart':chart, 'now':now }
 
         html_template = loader.get_template('crm/home/index.html')
         return HttpResponse(html_template.render(context, request))
@@ -897,10 +889,10 @@ def order_edit(request, id):
                 req.save()
 
                 success = 'ویرایش درخواست ثبت شد ، مشاهده درخواست'
-                context = {'req':req, 'customers': customers , 'items':items, 'success':success, 'link':req}
+                context = {'req':req, 'customers': customers , 'items':items, 'success':success, 'link':req , 'uProfile':uProfile}
                 return render(request, 'crm/home/order_edit.html', context)
 
-        context = {'req':req, 'customers': customers , 'items':items}
+        context = {'req':req, 'customers': customers , 'items':items , 'uProfile':uProfile}
         html_template = loader.get_template('crm/home/order_edit.html')
         return HttpResponse(html_template.render(context, request))
 
