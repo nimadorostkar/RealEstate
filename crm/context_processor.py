@@ -14,10 +14,18 @@ from app.models import Profile
 
 
 def notification(request):
-    return {
-       'new_reqs': models.Order_request.objects.filter(status='جدید').order_by('-date_created') ,
-       'new_req_counts': models.Order_request.objects.filter(status='جدید').count()
-    }
+    if request.user.is_superuser:
+        return {
+           'new_reqs': models.Order_request.objects.filter(status='جدید').order_by('-date_created') ,
+           'new_req_counts': models.Order_request.objects.filter(status='جدید').count()
+        }
+    elif request.user.is_authenticated:
+        return {
+           'new_reqs': models.Order_request.objects.filter(status='جدید' , user__user=request.user ).order_by('-date_created') ,
+           'new_req_counts': models.Order_request.objects.filter(status='جدید' , user__user=request.user ).count()
+        }
+    else:
+        return { 'userProfile': None }
 
 
 

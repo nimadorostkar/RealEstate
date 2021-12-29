@@ -31,10 +31,10 @@ def index(request):
     uProfile = get_object_or_404(models.Profile, user=request.user)
     if uProfile.user_type == 'کارشناس' or uProfile.user_type == 'مدیر' :
 
-        open_reqs_count = models.Order_request.objects.all().exclude(status='تکمیل شده').count()
-        customers_count = models.Profile.objects.filter( Q(user_type='کاربر') | Q(user_type='کاربر ویژه') ).count()
-        items_count = models.Item.objects.all().count()
-        new_order_count = models.Order_request.objects.filter(status='جدید').count()
+        open_reqs_count = models.Order_request.objects.filter(user=uProfile).exclude(status='تکمیل شده').count()
+        customers_count = models.Profile.objects.filter( Q(user_type='کاربر') | Q(user_type='کاربر ویژه') and Q(sales_expert=uProfile ) ).count()
+        items_count = models.Item.objects.filter(sales_expert=request.user).count()
+        new_order_count = models.Order_request.objects.filter( status='جدید' , user=uProfile ).count()
 
         chartList = list(models.Order_request.objects.filter(status='تکمیل شده').values_list('item_id', flat=True).distinct())
         now = jdatetime.datetime.now()

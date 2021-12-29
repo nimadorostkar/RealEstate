@@ -23,6 +23,8 @@
             </li>
            {% endif %}
 
+           &nbsp;&nbsp;&nbsp;
+
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 {% if new_req_counts == 0 %}
@@ -34,24 +36,26 @@
               </a>
               <ul class="dropdown-menu px-2 py-3 ms-sm-n4" aria-labelledby="dropdownMenuButton">
                {% for Order_request in new_reqs %}
-                <li class="mb-2">
-                  <a class="dropdown-item border-radius-md" href="{{ Order_request.get_absolute_url }}">
-                    <div class="d-flex py-1">
-                      <div class="my-auto">
-                        <img src="{{ Order_request.product.image.url }}" class="avatar avatar-sm  me-3 ">
-                      </div>
-                      <div class="d-flex flex-column justify-content-center">
-                        <h6 class="text-sm font-weight-normal mb-1" dir="rtl">
-                          <span class="font-weight-bold"> {{ Order_request }} </span>
-                        </h6>
-                        <p class="text-xs text-secondary mb-0">
-                          <i class="fa fa-clock me-1"></i>
-                          {{ Order_request.date_created|date:'H:i  Y-m-d' }}
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                </li>
+
+                    <li class="mb-2">
+                      <a class="dropdown-item border-radius-md" href="{{ Order_request.get_absolute_url }}">
+                        <div class="d-flex py-1">
+                          <div class="my-auto">
+                            <img src="{{ Order_request.item.image.url }}" class="avatar avatar-sm  me-3 ">
+                          </div>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="text-xxs font-weight-normal mb-1" dir="rtl">
+                              <span class="font-weight-bold"> {{ Order_request }} </span>
+                            </h6>
+                            <p class="text-xs text-secondary mb-0">
+                              <i class="fa fa-clock me-1"></i>
+                              {{ Order_request.date_created|date:'H:i  Y-m-d' }}
+                            </p>
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+
                {% endfor %}
               </ul>
             </li>
