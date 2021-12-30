@@ -70,8 +70,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'app.context_processor.settings',
                 'crm.context_processor.notification',
-                'crm.context_processor.accessType'  
+                'crm.context_processor.accessType'
             ],
         },
     },

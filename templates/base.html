@@ -60,18 +60,18 @@
   						<div class="col-md-5 col-sm-8  col-xs-12">
   								<div class="header-half header-call">
   										<p>
-  												<span> <i class="fa fa-phone"></i> <a href="tel:{% get_setting 'تلفن ۱' default='django-extra-settings' %}"> {% get_setting 'تلفن ۱' default='django-extra-settings' %} </a> </span>
-                          <span> <i class="fa fa-phone"></i> <a href="tel:{% get_setting 'تلفن ۲' default='django-extra-settings' %}"> {% get_setting 'تلفن ۲' default='django-extra-settings' %} </a> </span>
+  												<span> <i class="fa fa-phone"></i> <a href="tel:{{ settings.phone1 }}"> {{ settings.phone1 }} </a> </span>
+                          <span> <i class="fa fa-phone"></i> <a href="tel:{{ settings.phone2 }}"> {{ settings.phone2 }} </a> </span>
   										</p>
   								</div>
   						</div>
   						<div class="col-md-2 col-md-offset-5  col-sm-3 col-sm-offset-1  col-xs-12">
   								<div class="header-half header-social">
   										<ul class="list-inline">
-                          <li><a href="{% get_setting 'لینک اینستاگرام' default='django-extra-settings' %} "><i class="fa fa-instagram" style="font-size:20px"></i></a></li>
-                          <li><a href="{% get_setting 'لینک تلگرام' default='django-extra-settings' %} "><i class="fa fa-telegram" style="font-size:20px"></i></a></li>
-  												<li><a href="{% get_setting 'لینک توییتر' default='django-extra-settings' %} "><i class="fa fa-twitter" style="font-size:20px"></i></a></li>
-  												<li><a href="{% get_setting 'لینک واتس اپ' default='django-extra-settings' %} "><i class="fa fa-whatsapp" style="font-size:20px"></i></a></li>
+                          <li><a href="{{ settings.instagram }}"><i class="fa fa-instagram" style="font-size:20px"></i></a></li>
+                          <li><a href="{{ settings.telegram }}"><i class="fa fa-telegram" style="font-size:20px"></i></a></li>
+  												<li><a href="{{ settings.twitter }}"><i class="fa fa-twitter" style="font-size:20px"></i></a></li>
+  												<li><a href="{{ settings.whatsapp }}"><i class="fa fa-whatsapp" style="font-size:20px"></i></a></li>
 
   										</ul>
   								</div>
@@ -142,8 +142,8 @@
     												<h4> درباره ما </h4>
     												<div class="footer-title-line"></div>
 
-    												<img src="{{ logo.url }}" alt="" class="wow pulse" data-wow-delay="1s">
-    												<p dir="rtl"> آتروتک با برخوردارى از نيروى انسانى متخصص و پشتوانه علمى و تجربى، با استفاده از آخرين روش هاى فن آورى و مهندسى موفق به ارائه خدمات گسترده و با كيفيت براى مشتريان گرديده  آتروتک با برخوردارى از نيروى انسانى متخصص و پشتوانه علمى و تجربى، با استفاده از آخرين روش هاى فن آورى و مهندسى موفق به ارائه خدمات گسترده و با كيفيت براى مشتريان گرديده </p>
+    												<img src="{{ settings.logo.url }}" alt="{{ settings.title }} " class="wow pulse" data-wow-delay="1s">
+    												<p dir="rtl"> {{ settings.title_below }} </p>
     										</div>
     								</div>
     								<div class="col-md-3 col-sm-6 wow fadeInRight animated">
@@ -188,18 +188,18 @@
     												<h4> در ارتباط باشید </h4>
     												<div class="footer-title-line"></div>
                             <ul class="footer-adress" dir="rtl">
-                                <li> <a href="tel:{% get_setting 'تلفن ۱' default='django-extra-settings' %}"> <i class="fa fa-phone"></i> {% get_setting 'تلفن ۱' default='django-extra-settings' %} </a> </li>
-                                <li> <a href="tel:{% get_setting 'تلفن ۲' default='django-extra-settings' %}"> <i class="fa fa-phone"></i> {% get_setting 'تلفن ۲' default='django-extra-settings' %} </a> </li>
-                                <li> <a href="mailto:{% get_setting 'ایمیل' default='django-extra-settings' %}"> <i class="fa fa-envelope"> </i> {% get_setting 'ایمیل' default='django-extra-settings' %} </a> </li>
-                                <li> <i class="fa fa-map-marker"> </i> {% get_setting 'آدرس' default='django-extra-settings' %} </li>
+                                <li> <a href="tel:{{ settings.phone1 }}"> <i class="fa fa-phone"></i> {{ settings.phone1 }} </a> </li>
+                                <li> <a href="tel:{{ settings.phone2 }}"> <i class="fa fa-phone"></i> {{ settings.phone2 }} </a> </li>
+                                <li> <a href="mailto:{{ settings.email }}"> <i class="fa fa-envelope"> </i> {{ settings.email }} </a> </li>
+                                <li> <i class="fa fa-map-marker"> </i> {{ settings.address }} </li>
                             </ul>
                             <br>
     												<div class="social pull-right">
     														<ul>
-    																<li><a class="wow fadeInUp animated" href="{% get_setting 'لینک واتس اپ' default='django-extra-settings' %}"><i class="fa fa-whatsapp"></i></a></li>
-    																<li><a class="wow fadeInUp animated" href="{% get_setting 'لینک اینستاگرام' default='django-extra-settings' %}" data-wow-delay="0.3s"><i class="fa fa-instagram"></i></a></li>
-    																<li><a class="wow fadeInUp animated" href="{% get_setting 'لینک تلگرام' default='django-extra-settings' %}" data-wow-delay="0.4s"><i class="fa fa-telegram"></i></a></li>
-    																<li><a class="wow fadeInUp animated" href="{% get_setting 'لینک توییتر' default='django-extra-settings' %} " data-wow-delay="0.5s"><i class="fa fa-twitter"></i></a></li>
+    																<li><a class="wow fadeInUp animated" href="{{ settings.whatsapp }}"><i class="fa fa-whatsapp"></i></a></li>
+    																<li><a class="wow fadeInUp animated" href="{{ settings.instagram }}" data-wow-delay="0.3s"><i class="fa fa-instagram"></i></a></li>
+    																<li><a class="wow fadeInUp animated" href="{{ settings.telegram }}" data-wow-delay="0.4s"><i class="fa fa-telegram"></i></a></li>
+    																<li><a class="wow fadeInUp animated" href="{{ settings.twitter }}" data-wow-delay="0.5s"><i class="fa fa-twitter"></i></a></li>
     														</ul>
     												</div>
     										</div>
