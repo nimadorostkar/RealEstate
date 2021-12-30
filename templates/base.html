@@ -167,7 +167,7 @@
     												<div class="footer-title-line"></div>
     												<ul class="footer-blog">
 
-                            {% for post in latestpost_list %}
+                            {% for post in footer_latestpost_list %}
     														<li dir="rtl">
     																<div class="col-md-3 blg-thumb p0">
     																		<a href="{% url 'blog-detail' post.slug %}"> <img src="{{post.img.url}}"> </a>

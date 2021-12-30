@@ -22,7 +22,6 @@ from django.contrib.auth.forms import PasswordChangeForm
 
 #------------------------------------------------------------------------------
 def index(request):
-    latestpost_list = Post.objects.all().order_by('-post_date')[:3]
     img = models.Slider.objects.all()
     item_img = models.ItemImage.objects.all()
     items = models.Item.objects.filter(available=True).order_by("-date")[:11]
@@ -35,7 +34,6 @@ def index(request):
     'item_img':item_img,
     'areas':areas,
     'fav':fav,
-    'latestpost_list':latestpost_list,
     'all_items_count':all_items_count,
     'all_area_count':all_area_count}
     return render(request, 'index.html', context)
@@ -45,7 +43,6 @@ def index(request):
 
 #------------------------------------------------------------------------------
 def search(request):
-    latestpost_list = Post.objects.all().order_by('-post_date')[:3]
     areas = models.Area.objects.all()
     if request.method=="POST":
         search_buy_status = request.POST['buy_status']
@@ -82,12 +79,12 @@ def search(request):
             match = list(chain(general_match & partial_match & price_match ))
 
             if match:
-                return render(request,'search.html', {'sr': match, 'areas':areas, 'latestpost_list':latestpost_list})
+                return render(request,'search.html', {'sr': match, 'areas':areas })
             else:
                 messages.error(request,  '   چیزی یافت نشد ، لطفا مجددا جستجو کنید ' )
         else:
             return HttpResponseRedirect('/search')
-    return render(request, 'search.html', {'areas':areas, 'latestpost_list':latestpost_list})
+    return render(request, 'search.html', {'areas':areas })
 
 
 
@@ -98,7 +95,6 @@ def search(request):
 #------------------------------------------------------------------------------
 @login_required(login_url="/login/")
 def profile(request):
-    latestpost_list = Post.objects.all().order_by('-post_date')[:3]
     current_user = request.user
     profile = models.Profile.objects.filter(user=request.user).first()
     if request.method == 'POST':
@@ -113,7 +109,7 @@ def profile(request):
         profile.save()
         return HttpResponseRedirect('/profile')
 
-    context = {'latestpost_list':latestpost_list}
+    context = {}
     return render(request, 'accounts/profile.html', context)
 
 
@@ -137,16 +133,13 @@ class items(generic.ListView):
 
     def get_context_data(self, *args, **kwargs):
         areas = Area.objects.all()
-        latestpost_list = Post.objects.all().order_by('-post_date')[:3]
         context = super(items, self).get_context_data(*args, **kwargs)
-        context["latestpost_list"] = latestpost_list
         context["areas"] = areas
         return context
 
 
 
 def items_detail(request, id):
-    latestpost_list = Post.objects.all().order_by('-post_date')[:3]
     Item = get_object_or_404(models.Item, id=id)
     item_img = models.ItemImage.objects.filter(item=Item)
     similar_items = models.Item.objects.filter(area=Item.area).order_by("-date")
@@ -169,7 +162,7 @@ def items_detail(request, id):
                 return redirect(Item.get_absolute_url())
     else:
         item_fav=""
-    context = {'Item':Item , 'item_img':item_img , 'similar_items':similar_items, 'item_fav':item_fav, 'latestpost_list':latestpost_list , 'item_sales_expert':item_sales_expert , 'domain': request.get_host() }
+    context = {'Item':Item , 'item_img':item_img , 'similar_items':similar_items, 'item_fav':item_fav , 'item_sales_expert':item_sales_expert , 'domain': request.get_host() }
     return render(request, 'items_detail.html', context)
 
 
@@ -185,8 +178,7 @@ def items_detail(request, id):
 def favs(request):
     favs = models.Fav.objects.filter(user=request.user)
     areas = models.Area.objects.all()
-    latestpost_list = Post.objects.all().order_by('-post_date')[:3]
-    context = {'favs':favs, 'areas':areas, 'latestpost_list':latestpost_list}
+    context = {'favs':favs, 'areas':areas}
     context['segment'] = 'items'
     html_template = loader.get_template( 'favs.html' )
     return HttpResponse(html_template.render(context, request))
@@ -200,8 +192,6 @@ def favs(request):
 
 #------------------------------------------------------------------------------
 def contact(request):
-    latestpost_list = Post.objects.all().order_by('-post_date')[:3]
-
     if request.method == "POST":
         contact_form = ContactForm(data=request.POST)
         if contact_form.is_valid():
@@ -213,7 +203,7 @@ def contact(request):
     else:
         contact_form = ContactForm(data=request.POST)
 
-    context = {'latestpost_list':latestpost_list,'contact_form':contact_form}
+    context = {'contact_form':contact_form}
     context['segment'] = 'contact'
     html_template = loader.get_template( 'contact.html' )
     return HttpResponse(html_template.render(context, request))

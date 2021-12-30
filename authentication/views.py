@@ -15,12 +15,8 @@ from django.contrib import messages
 
 #------------------------------------------------------------------------------
 def login_view(request):
-    latestpost_list = Post.objects.all().order_by('-post_date')[:3]
-
     form = LoginForm(request.POST or None)
-
     msg = None
-
     if request.method == "POST":
 
         if form.is_valid():
@@ -35,7 +31,7 @@ def login_view(request):
         else:
             msg = 'خطا در تأیید فرم'
 
-    return render(request, "accounts/login.html", {"form": form, "msg" : msg , 'latestpost_list':latestpost_list })
+    return render(request, "accounts/login.html", {"form": form, "msg" : msg })
 
 
 
@@ -47,8 +43,6 @@ def login_view(request):
 
 #------------------------------------------------------------------------------
 def register_user(request):
-    latestpost_list = Post.objects.all().order_by('-post_date')[:3]
-
     msg     = None
     success = False
 
@@ -70,7 +64,7 @@ def register_user(request):
     else:
         form = SignUpForm()
 
-    return render(request, "accounts/register.html", {"form": form, "msg" : msg, "success" : success , 'latestpost_list':latestpost_list })
+    return render(request, "accounts/register.html", {"form": form, "msg" : msg, "success" : success })
 
 
 
