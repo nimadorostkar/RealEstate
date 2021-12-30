@@ -14,6 +14,51 @@ from django_jalali.db import models as jmodels
 
 
 
+
+
+
+
+
+#------------------------------------------------------------------------------
+class Settings(models.Model):
+  title = models.CharField(max_length=100, verbose_name = "عنوان")
+  title_below = models.CharField(max_length=300 , null=True, blank=True , verbose_name = "متن زیر عنوان")
+  introduction_text = models.TextField(max_length=2000 , null=True, blank=True , verbose_name = "متن معرفی" )
+  contact_page_text = models.TextField(max_length=2000 , null=True, blank=True , verbose_name = "متن صفحه تماس با ما")
+  experts_number = models.IntegerField(default='1', verbose_name = "تعداد کارشناسان")
+  email = models.EmailField(max_length=200 , null=True , blank=True , verbose_name = "ایمیل")
+  address = models.CharField(max_length=300 , null=True , blank=True , verbose_name = "آدرس")
+  phone1 = models.CharField(max_length=20 , null=True , blank=True , verbose_name = "تلفن ۱")
+  phone2 = models.CharField(max_length=20 , null=True , blank=True , verbose_name = "تلفن ۲")
+  whatsapp_number = models.CharField(max_length=20 , null=True , blank=True , verbose_name = "شماره واتساپ")
+  instagram = models.URLField(max_length=500, null=True, blank=True, verbose_name = "لینک اینستاگرام")
+  telegram = models.URLField(max_length=500, null=True, blank=True, verbose_name = "لینک تلگرام")
+  twitter = models.URLField(max_length=500, null=True, blank=True, verbose_name = "لینک توییتر")
+  whatsapp = models.URLField(max_length=500, null=True, blank=True, verbose_name = "لینک واتس اپ")
+  lat_long = models.CharField(max_length=50 , null=True , blank=True , verbose_name = "lat & long")
+  logo = models.ImageField(default='logo.png', upload_to='logo', null=True, blank=True, verbose_name = "لوگو")
+  header_image = models.ImageField(default='header.png', upload_to='header', null=True, blank=True, verbose_name = "تصویر سربرگ (header)")
+
+  def image_tag(self):
+        return format_html("<img width=50 src='{}'>".format(self.logo.url))
+
+  class Meta:
+      verbose_name = "تنظیمات"
+      verbose_name_plural = "تنظیمات"
+
+  def __str__(self):
+    return self.title
+
+
+
+
+
+
+
+
+
+
+
 #------------------------------------------------------------------------------
 class Profile(models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE,unique=True,related_name='profile',verbose_name = "کاربر")
@@ -197,6 +242,11 @@ class Fav(models.Model):
 
     def __str__(self):
         return self.user.username+'-'+str(self.item.id)
+
+
+
+
+
 
 
 
