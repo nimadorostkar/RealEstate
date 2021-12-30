@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load extra_settings %}
+
 {% load static %}
 {% load humanize %}
 
@@ -9,11 +9,11 @@
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
-{% load extra_settings %}
 
 
 
-<div style="background:#494C53 url({{ header.url }}) no-repeat scroll center top / cover; color:#FFF; position: relative; min-height: 140px; ">
+
+<div style="background:#494C53 url({{ settings.header_image.url }}) no-repeat scroll center top / cover; color:#FFF; position: relative; min-height: 140px; ">
     <div class="container">
         <div class="row" dir="rtl">
             <div class="page-head-content">

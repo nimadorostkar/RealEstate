@@ -14,7 +14,6 @@ from django.db import transaction
 from django.urls import reverse
 from django.contrib import messages
 from django.views import generic
-from extra_settings.models import Setting
 from django.contrib.auth.forms import PasswordChangeForm
 
 
@@ -23,9 +22,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 
 #------------------------------------------------------------------------------
 def index(request):
-    logo = Setting.get('لوگو', default='django-extra-settings')
     latestpost_list = Post.objects.all().order_by('-post_date')[:3]
-
     img = models.Slider.objects.all()
     item_img = models.ItemImage.objects.all()
     items = models.Item.objects.filter(available=True).order_by("-date")[:11]
@@ -40,8 +37,7 @@ def index(request):
     'fav':fav,
     'latestpost_list':latestpost_list,
     'all_items_count':all_items_count,
-    'all_area_count':all_area_count,
-    'logo':logo}
+    'all_area_count':all_area_count}
     return render(request, 'index.html', context)
 
 
@@ -49,8 +45,6 @@ def index(request):
 
 #------------------------------------------------------------------------------
 def search(request):
-    header = Setting.get('تصویر سربرگ (header)', default='django-extra-settings')
-    logo = Setting.get('لوگو', default='django-extra-settings')
     latestpost_list = Post.objects.all().order_by('-post_date')[:3]
     areas = models.Area.objects.all()
     if request.method=="POST":
@@ -70,23 +64,6 @@ def search(request):
         search_area_size = request.POST['area_size']
         search_area_size_rage = search_area_size.split(',')
 
-        '''
-        if request.POST.get('parking'):
-            search_parking = True
-        else:
-            search_parking = False
-
-        if request.POST.get('elevator'):
-            search_elevator = True
-        else:
-            search_elevator = False
-
-        if request.POST.get('storage_room'):
-            search_storage_room = True
-        else:
-            search_storage_room = False
-        '''
-
         if search:
             general_match = models.Item.objects.filter( Q(buy_status__icontains=search_buy_status) & Q(area__name__icontains=search_area) & Q(estate_status__icontains=search_estate_status) )
             partial_match = models.Item.objects.filter( Q(area_size__range=(search_area_size_rage[0],search_area_size_rage[1])) )
@@ -105,12 +82,12 @@ def search(request):
             match = list(chain(general_match & partial_match & price_match ))
 
             if match:
-                return render(request,'search.html', {'sr': match, 'areas':areas, 'latestpost_list':latestpost_list,'logo':logo, 'header':header})
+                return render(request,'search.html', {'sr': match, 'areas':areas, 'latestpost_list':latestpost_list})
             else:
                 messages.error(request,  '   چیزی یافت نشد ، لطفا مجددا جستجو کنید ' )
         else:
             return HttpResponseRedirect('/search')
-    return render(request, 'search.html', {'areas':areas, 'latestpost_list':latestpost_list,'logo':logo, 'header':header})
+    return render(request, 'search.html', {'areas':areas, 'latestpost_list':latestpost_list})
 
 
 
@@ -121,8 +98,6 @@ def search(request):
 #------------------------------------------------------------------------------
 @login_required(login_url="/login/")
 def profile(request):
-    header = Setting.get('تصویر سربرگ (header)', default='django-extra-settings')
-    logo = Setting.get('لوگو', default='django-extra-settings')
     latestpost_list = Post.objects.all().order_by('-post_date')[:3]
     current_user = request.user
     profile = models.Profile.objects.filter(user=request.user).first()
@@ -138,7 +113,7 @@ def profile(request):
         profile.save()
         return HttpResponseRedirect('/profile')
 
-    context = {'latestpost_list':latestpost_list,'logo':logo, 'header':header}
+    context = {'latestpost_list':latestpost_list}
     return render(request, 'accounts/profile.html', context)
 
 
@@ -161,26 +136,22 @@ class items(generic.ListView):
     paginate_by = 16
 
     def get_context_data(self, *args, **kwargs):
-        logo = Setting.get('لوگو', default='django-extra-settings')
-        header = Setting.get('تصویر سربرگ (header)', default='django-extra-settings')
         areas = Area.objects.all()
         latestpost_list = Post.objects.all().order_by('-post_date')[:3]
         context = super(items, self).get_context_data(*args, **kwargs)
         context["latestpost_list"] = latestpost_list
         context["areas"] = areas
-        context["logo"] = logo
-        context["header"] = header
         return context
 
 
 
 def items_detail(request, id):
-    header = Setting.get('تصویر سربرگ (header)', default='django-extra-settings')
-    logo = Setting.get('لوگو', default='django-extra-settings')
     latestpost_list = Post.objects.all().order_by('-post_date')[:3]
     Item = get_object_or_404(models.Item, id=id)
     item_img = models.ItemImage.objects.filter(item=Item)
     similar_items = models.Item.objects.filter(area=Item.area).order_by("-date")
+
+    item_sales_expert = get_object_or_404(models.Profile, user=Item.sales_expert)
 
     if request.user.is_authenticated:
         item_fav = list(models.Fav.objects.filter(user=request.user).values_list('item', flat=True))
@@ -198,7 +169,7 @@ def items_detail(request, id):
                 return redirect(Item.get_absolute_url())
     else:
         item_fav=""
-    context = {'Item':Item , 'item_img':item_img , 'similar_items':similar_items, 'item_fav':item_fav, 'latestpost_list':latestpost_list,'logo':logo, 'header':header}
+    context = {'Item':Item , 'item_img':item_img , 'similar_items':similar_items, 'item_fav':item_fav, 'latestpost_list':latestpost_list , 'item_sales_expert':item_sales_expert , 'domain': request.get_host() }
     return render(request, 'items_detail.html', context)
 
 
@@ -212,12 +183,10 @@ def items_detail(request, id):
 #------------------------------------------------------------------------------
 @login_required(login_url="/login/")
 def favs(request):
-    header = Setting.get('تصویر سربرگ (header)', default='django-extra-settings')
-    logo = Setting.get('لوگو', default='django-extra-settings')
     favs = models.Fav.objects.filter(user=request.user)
     areas = models.Area.objects.all()
     latestpost_list = Post.objects.all().order_by('-post_date')[:3]
-    context = {'favs':favs, 'areas':areas, 'latestpost_list':latestpost_list,'logo':logo, 'header':header}
+    context = {'favs':favs, 'areas':areas, 'latestpost_list':latestpost_list}
     context['segment'] = 'items'
     html_template = loader.get_template( 'favs.html' )
     return HttpResponse(html_template.render(context, request))
@@ -231,8 +200,6 @@ def favs(request):
 
 #------------------------------------------------------------------------------
 def contact(request):
-    header = Setting.get('تصویر سربرگ (header)', default='django-extra-settings')
-    logo = Setting.get('لوگو', default='django-extra-settings')
     latestpost_list = Post.objects.all().order_by('-post_date')[:3]
 
     if request.method == "POST":
@@ -246,7 +213,7 @@ def contact(request):
     else:
         contact_form = ContactForm(data=request.POST)
 
-    context = {'latestpost_list':latestpost_list,'contact_form':contact_form ,'logo':logo, 'header':header}
+    context = {'latestpost_list':latestpost_list,'contact_form':contact_form}
     context['segment'] = 'contact'
     html_template = loader.get_template( 'contact.html' )
     return HttpResponse(html_template.render(context, request))

@@ -1,6 +1,6 @@
 {% load static %}
 {% load bootstrap %}
-{% load extra_settings %}
+
 
 
 <!DOCTYPE html>
@@ -10,7 +10,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>
-      GARO ESTATE | {% block title %}{% endblock %}
+      {{ settings.title }} | {% block title %}{% endblock %}
   </title>
   <meta name="description" content="GARO is a real-estate template">
   <meta name="author" content="Kimarotec">

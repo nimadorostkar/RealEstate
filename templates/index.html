@@ -1,9 +1,9 @@
 {% extends "base.html" %}
-{% load extra_settings %}
+
 {% load static %}
 {% load humanize %}
 
-{% block title %} {% get_setting 'عنوان' default='django-extra-settings' %} {% endblock %}
+{% block title %} {% endblock %}
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -24,8 +24,8 @@
     <div class="slider-content">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
-                <h2> {% get_setting 'عنوان' default='django-extra-settings' %} </h2>
-                <p> {% get_setting 'متن زیر عنوان' default='django-extra-settings' %} </p>
+                <h2> {{ settings.title }} </h2>
+                <p> {{ settings.title_below }}} </p>
                 <div class="search-form wow pulse" data-wow-delay="0.8s">
 
                     <form action="{% url 'app:search' %}" method="post" class="form-inline">
@@ -92,35 +92,6 @@
                                 </div>
                             </div>
                             <hr>
-                  <!--
-                            <div class="search-row">
-
-                                <div class="form-group">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input name="parking" type="checkbox" checked="checked" value="True" > پارکینگ <img src="{% static 'assets/img/icon/cars-orange.png' %}">
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input name="elevator" type="checkbox" checked="checked" value="True" > آسانسور <img src="{% static 'assets/img/icon/elevator-orange.png' %}">
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input name="storage_room" type="checkbox" checked="checked" value="True" > انباری <img src="{% static 'assets/img/icon/warehouse-orange.png' %}">
-                                        </label>
-                                    </div>
-                                </div>
-
-                            </div>
-                      -->
 
                             <button class="btn search-btn prop-btm-sheaerch" type="submit"><i class="fa fa-search"></i></button>
                         </div>
@@ -282,9 +253,7 @@
             </div>
 
             <div class="col-xs-12">
-                <p class="asks-call">
-                  آتروتک با برخوردارى از نيروى انسانى متخصص و پشتوانه علمى و تجربى، با استفاده از آخرين روش هاى فن آورى و مهندسى موفق به ارائه خدمات گسترده و با كيفيت براى مشتريان گرديده .توسعه و بالندگی از طریق بازنگری اهداف، تدوین برنامه‌ها، اولویت‌بندی فعالیت‌ها و بهبود مستمر سرمشق شرکت مهندسى آتروتك بوده و دستیابی به این اهداف، نیازمند ترویج فرهنگ تعالی، حفظ و بهبود ارزش‌ها و اصول اخلاقی شركت و رعایت مسئولیت‌های اجتماعی است.
-                </p>
+                <p class="asks-call"> {{ settings.introduction_text }} </p>
             </div>
         </div>
     </div>
@@ -313,7 +282,7 @@
                                 <span class="fa fa-users"></span>
                             </div>
                             <div class="chart">
-                                <h2 class="percent"> {% get_setting 'تعداد کارشناسان' default='django-extra-settings' %} </h2>
+                                <h2 class="percent"> {{ settings.experts_number }} </h2>
                                 <h5>تعداد کارشناسان</h5>
                             </div>
                         </div>
@@ -369,7 +338,7 @@
                             <div class="client-text" dir="rtl">
                                <a href="{% url 'blog-detail' post.slug %}"> <h4> {{ post.title }} </h4> </a> <hr>
                                <div align="center"><a href="{% url 'blog-detail' post.slug %}"> <img style="max-height:180px;" src="{{post.img.url}}"> </a></div>
-                                <p> {{post.body | slice:':200' | safe}}... </p> 
+                                <p> {{post.body | slice:':200' | safe}}... </p>
                                 <h4 dir="ltr"><i> {{ post.j_post_date }} </i></h4>
                             </div>
                         </div>
@@ -397,23 +366,23 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <h3><i class="fa fa-map-marker"></i> آدرس </h3>
-                             <br> <p> {% get_setting 'آدرس' default='django-extra-settings' %} </p>
+                             <br> <p> {{ settings.address }} </p>
                         </div>
                         <!-- /.col-sm-4 -->
                         <div class="col-sm-4">
                             <h3><i class="fa fa-phone"></i> تماس تلفنی </h3>
                             <br>
                             <p>
-                               <a href="tel:{% get_setting 'تلفن ۱' default='django-extra-settings' %}"> <i class="fa fa-phone"></i> {% get_setting 'تلفن ۱' default='django-extra-settings' %} </a>
+                               <a href="tel:{{ settings.phone1 }}"> <i class="fa fa-phone"></i> {{ settings.phone1 }} </a>
                                <br>
-                               <a href="tel:{% get_setting 'تلفن ۲' default='django-extra-settings' %}"> <i class="fa fa-phone"></i> {% get_setting 'تلفن ۲' default='django-extra-settings' %} </a>
+                               <a href="tel:{{ settings.phone2 }}"> <i class="fa fa-phone"></i> {{ settings.phone2 }} </a>
                             </p>
                         </div>
                         <!-- /.col-sm-4 -->
                         <div class="col-sm-4">
                             <h3><i class="fa fa-envelope"></i> پشتیبانی الکترونیکی </h3>
                             <br>
-                            <p> <a href="mailto:{% get_setting 'ایمیل' default='django-extra-settings' %}"> {% get_setting 'ایمیل' default='django-extra-settings' %} </a> </p>
+                            <p> <a href="mailto:{{ settings.email }}"> {{ settings.email }} </a> </p>
 
                         </div>
                         <!-- /.col-sm-4 -->

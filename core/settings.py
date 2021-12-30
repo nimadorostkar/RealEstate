@@ -32,7 +32,6 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'import_export',
     'bootstrapform',
-    'extra_settings',
     'jalali_date',
     'app',
     'crm',

@@ -13,7 +13,6 @@ Pillow
 django-bootstrap-form
 django-import-export
 django-jalali-date
-django-extra-settings
 django-ckeditor
 graphene
 graphene-django

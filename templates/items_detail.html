@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 
-{% load extra_settings %}
 {% load static %}
 {% load humanize %}
 {% load bootstrap %}
@@ -21,7 +20,7 @@
 
 
 
-        <div style="background:#494C53 url({{ header.url }}) no-repeat scroll center top / cover; color:#FFF; position: relative; min-height: 140px; ">
+        <div style="background:#494C53 url({{ settings.header_image.url }}) no-repeat scroll center top / cover; color:#FFF; position: relative; min-height: 140px; ">
             <div class="container">
                 <div class="row" dir="rtl">
                     <div class="page-head-content">
@@ -336,34 +335,48 @@
 
 
                                         </div>
+
+                                        <div class="dealer-section-space">
+                                            <span> کارشناس فروش این فایل </span>
+                                        </div>
+                                        <div class="clear">
+                                            <div class="col-xs-4 col-sm-4 dealer-face">
+                                                <a href="">
+                                                    <img src="{{ item_sales_expert.user_photo.url }}" class="img-circle">
+                                                </a>
+                                            </div>
+                                            <div class="col-xs-8 col-sm-8 ">
+                                                <h3 class="dealer-name"> {{ Item.sales_expert.first_name }} {{ Item.sales_expert.last_name }}  </h3>
+                                            </div>
+                                            <div class="clear">
+                                                <ul class="dealer-contacts">
+                                                    <li> <a href="tel:{{ settings.phone1 }}"> <i class="fa fa-phone"></i> &nbsp;&nbsp; {{ item_sales_expert.phone }} </a> </li>
+                                                    <li> <a href="mailto:{{ settings.email }}"> <i class="fa fa-envelope"> </i> &nbsp;&nbsp; {{ item_sales_expert.user.email }} </a> </li>
+                                                </ul>
+                                            </div>
+                                        </div><br>
+
+
                                         <div class="dealer-section-space">
                                             <span>اطلاعات تماس ما</span>
                                         </div>
                                         <div class="clear">
                                             <div class="col-xs-4 col-sm-4 dealer-face">
                                                 <a href="">
-                                                    <img src="{{ logo.url }}">
+                                                    <img src="{{ settings.logo.url }}">
                                                 </a>
                                             </div>
                                             <div class="col-xs-8 col-sm-8 ">
-                                                <h3 class="dealer-name"> <a href="{% url 'app:home' %}"> {% get_setting 'عنوان' default='django-extra-settings' %} </a> </h3>
-                                                <div class="dealer-social-media">
-                                                    <a class="twitter" target="_blank" href="{% get_setting 'لینک اینستاگرام' default='django-extra-settings' %}"> <i class="fa fa-instagram"></i> </a>
-                                                    <a class="facebook" target="_blank" href="{% get_setting 'لینک واتس اپ' default='django-extra-settings' %}"> <i class="fa fa-whatsapp"></i> </a>
-                                                    <a class="gplus" target="_blank" href="{% get_setting 'لینک تلگرام' default='django-extra-settings' %}"> <i class="fa fa-telegram"></i> </a>
-                                                    <a class="instagram" target="_blank" href="{% get_setting 'لینک توییتر' default='django-extra-settings' %}"> <i class="fa fa-twitter"></i> </a>
-                                                </div>
-
+                                                <h6 class="dealer-name"> {{ settings.title }} </h6>
                                             </div>
                                         </div>
 
                                         <div class="clear">
                                             <ul class="dealer-contacts">
-                                                <li> <a href="tel:{% get_setting 'تلفن ۱' default='django-extra-settings' %}"> <i class="fa fa-phone"></i> &nbsp;&nbsp; {% get_setting 'تلفن ۱' default='django-extra-settings' %} </a> </li>
-                                                <li> <a href="tel:{% get_setting 'تلفن ۲' default='django-extra-settings' %}"> <i class="fa fa-phone"></i> &nbsp;&nbsp; {% get_setting 'تلفن ۲' default='django-extra-settings' %} </a> </li>
-                                                <li> <a href="mailto:{% get_setting 'ایمیل' default='django-extra-settings' %}"> <i class="fa fa-envelope"> </i> &nbsp;&nbsp; {% get_setting 'ایمیل' default='django-extra-settings' %} </a> </li>
-                                                <li> <a href="whatsapp://send?abid={% get_setting 'شماره واتساپ' default='django-extra-settings' %}&text=سلام. وقت تان بخیر! برای کسب اطلاعات بیشتر و مشاوره در مورد این ملک پیام دادم:  {% get_setting 'آدرس وبسایت' default='django-extra-settings' %}{{Item.get_absolute_url}}"> <i class="fa fa-whatsapp"></i> &nbsp;&nbsp; ارسال پیام در واتساپ برای این ملک </a> </li>
-                                                <li> <a href="#"> <i class="fa fa-map-marker"> </i> &nbsp;&nbsp; {% get_setting 'آدرس' default='django-extra-settings' %} </a> </li>
+                                                <li> <a href="tel:{{ settings.phone1 }}"> <i class="fa fa-phone"></i> &nbsp;&nbsp; {{ settings.phone1 }} </a> </li>
+                                                <li> <a href="tel:{{ settings.phone2 }}"> <i class="fa fa-phone"></i> &nbsp;&nbsp; {{ settings.phone2 }}</a> </li>
+                                                <li> <a href="mailto:{{ settings.email }}"> <i class="fa fa-envelope"> </i> &nbsp;&nbsp; {{ settings.email }} </a> </li>
+                                                <li> <a href="#"> <i class="fa fa-map-marker"> </i> &nbsp;&nbsp; {{ settings.address }} </a> </li>
                                             </ul>
                                         </div>
 
@@ -381,7 +394,7 @@
                                     <fieldset >
                                         <div class="row">
                                             <div class="col-xs-12" dir="ltr">
-                                               <a class="text-decoration-none button btn largesearch-btn" href="whatsapp://send?abid={% get_setting 'شماره واتساپ' default='django-extra-settings' %}&text=سلام. وقت تان بخیر! برای کسب اطلاعات بیشتر و مشاوره در مورد این ملک پیام دادم:  {% get_setting 'آدرس وبسایت' default='django-extra-settings' %}{{Item.get_absolute_url}}"><i class="fab fa-whatsapp-square fs-4"></i> ارسال پیام </a>
+                                               <a class="text-decoration-none button btn largesearch-btn" href="whatsapp://send?abid={{ settings.whatsapp_number }}&text=سلام. وقت تان بخیر! برای کسب اطلاعات بیشتر و مشاوره در مورد این ملک پیام دادم:  {{ domain }}{{Item.get_absolute_url}}"><i class="fab fa-whatsapp-square fs-4"></i>  <i class="fa fa-whatsapp"></i> &nbsp; ارسال پیام در واتساپ برای این ملک  </a>
                                             </div>
                                         </div>
                                     </fieldset>
