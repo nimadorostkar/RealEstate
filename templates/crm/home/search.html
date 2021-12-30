@@ -83,7 +83,7 @@
                   <br><br>
 
 
-                  <p class="text-info  font-weight-bolder"> محصولات </p>
+                  <p class="text-info  font-weight-bolder"> فایل ها </p>
                   <table class="table align-items-center mb-0">
                     <thead>
                       <tr>
@@ -94,13 +94,13 @@
                       </tr>
                     </thead>
                     <tbody>
-                     {% for Product in product %}
+                     {% for Item in item %}
                       <tr>
                         <td>
                           <div class="d-flex px-2 py-1">
                             <div class="d-flex flex-column justify-content-center">
-                              <a href="{{ Product.get_absolute_url }}"> <h6 class="mb-0 text-sm"> {{ Product.name }} </h6> </a>
-                              <p class="text-xs text-secondary mb-0"> {{ Product.description|slice:":50" }}... </p>
+                              <a href="{{ Item.get_absolute_crm_url }}"> <h6 class="mb-0 text-sm"> {{ Item}} </h6> </a>
+                              <p class="text-xs text-secondary mb-0"> {{ Item.additional_information|slice:":50" }}... </p>
                             </div>
                           </div>
                         </td>

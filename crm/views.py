@@ -106,10 +106,10 @@ def search(request):
         if request.method=="POST":
             search = request.POST['q']
             if search:
-                customer = models.Customer.objects.filter(Q(name__icontains=search) | Q(additional_information__icontains=search) | Q(phone__icontains=search) | Q(company__icontains=search) )
-                product = models.Product.objects.filter(Q(name__icontains=search)  | Q(description__icontains=search) )
-                order_req = models.Order_request.objects.filter(Q(customer__name__icontains=search) | Q(product__name__icontains=search) | Q(description__icontains=search))
-                return render(request,'crm/home/search.html', {'customer':customer, 'product':product, 'order_req':order_req})
+                customer = models.Profile.objects.filter(Q(user__first_name__icontains=search) | Q(user__last_name__icontains=search) | Q(additional_information__icontains=search) | Q(phone__icontains=search) )
+                item = models.Item.objects.filter(Q(code__icontains=search)  | Q(additional_information__icontains=search) )
+                order_req = models.Order_request.objects.filter( Q(description__icontains=search))
+                return render(request,'crm/home/search.html', {'customer':customer, 'item':item, 'order_req':order_req})
             else:
                 return HttpResponseRedirect('/search')
         return render(request, 'crm/home/search.html', {})
