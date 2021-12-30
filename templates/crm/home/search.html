@@ -1,5 +1,7 @@
 {% extends 'crm/layouts/base.html' %}
 
+{% load humanize %}
+
 {% block title %} جستجو {% endblock title %}
 
 <!-- Specific CSS goes HERE -->
@@ -32,51 +34,58 @@
                   <table class="table align-items-center mb-0">
                     <thead>
                       <tr>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> نام مشتری </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> شماره تلفن </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> نام شرکت </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> آدرس </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> تگ محصولی </th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> مشتری </th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> شماره تماس </th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> اطلاعات تکمیلی </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> فایل های درخواستی </th>
                       </tr>
                     </thead>
                     <tbody>
                      {% for Customer in customer %}
-                      <tr>
-                        <td>
-                          <div class="d-flex px-2 py-1">
-                            <div class="d-flex flex-column justify-content-center">
-                              <a href="{{ Customer.get_absolute_url }}">
-                                <h6 class="mb-0 text-sm">
-                                  {% if Customer.substantial %}
-                                    <img src="/static/assets/img/golduser.png" class="avatar avatar-sm me-3">
-                                  {% else %}
-                                    <img src="/static/assets/img/user.png" class="avatar avatar-sm me-3">
-                                  {% endif %}
-                                  {{ Customer.name }}
-                               </h6>
-                             </a>
-                            </div>
-                          </div>
-                        </td>
-                        <td class="align-middle text-center text-sm">
-                          <p> {{ Customer.phone }} </p>
-                        </td>
-                        <td class="align-middle text-center text-sm">
-                          <p> {{ Customer.company }} </p>
-                        </td>
-                        <td class="align-middle text-center text-sm">
-                          <p> {{ Customer.address }} </p>
-                        </td>
-                        <td>
-                          <div class="avatar-group text-center mt-2">
-                            {% for product_tag in Customer.product_tag.all %}
-                            <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ product_tag.name }}">
-                                <img style="background-color: lightgrey;" alt="{{ product_tag.name }}" src="{{ product_tag.image.url }}">
-                            </a>
-                            {% endfor %}
-                          </div>
-                        </td>
-                      </tr>
+                         {% if Customer.sales_expert.user == user or uProfile.user_type == 'مدیر' %}
+
+                          <tr>
+                            <td>
+                              <div class="d-flex px-2 py-1">
+                                <div class="d-flex flex-column justify-content-center">
+                                  <a href="{{ Customer.get_absolute_url }}">
+                                    <h6 class="mb-0 text-sm">
+                                      <img src="{{ Customer.user_photo.url }}" class="avatar avatar-sm me-3">
+                                      {{ Customer.user.first_name }} {{ Customer.user.last_name }}
+                                      {% if Customer.user_type == 'کاربر ویژه' %}
+                                         <img src="/static/assets/crm/img/star.png" width="20px" class="me-2">
+                                      {% endif %}
+                                   </h6>
+                                 </a>
+                                </div>
+                              </div>
+                            </td>
+
+                            <td>
+                              {{ Customer.phone }}
+                            </td>
+
+
+                            <td>
+                              {{ Customer.short_description }}...
+                            </td>
+
+                            <td class="align-middle text-center text-sm">
+                              <div class="avatar-group mt-2">
+                                {% for Order_request in reqs %}
+                                {% if Order_request.customer == Customer %}
+                                  <a href="{{ Order_request.item.get_absolute_crm_url }}">
+                                    <img src="{{ Order_request.item.image.url }}" class="avatar avatar-sm me-3">
+                                    <span class="text-xxs"> کد: {{ Order_request.item.code  }} </span>
+                                  </a>
+                                {% endif %}
+                                {% endfor %}
+                              </div>
+                            </td>
+                          </tr>
+
+
+                          {% endif %}
                      {% endfor %}
                     </tbody>
                   </table>
@@ -87,114 +96,57 @@
                   <table class="table align-items-center mb-0">
                     <thead>
                       <tr>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">نام محصول</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> وضعیت </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> قیمت ( ریال ) </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> تصویر </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> فایل </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> نوع معامله </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> نوع ملک </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> منطقه </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> متراژ </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> قیمت </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">  نمایش در سایت  </th>
                       </tr>
                     </thead>
                     <tbody>
                      {% for Item in item %}
-                      <tr>
-                        <td>
-                          <div class="d-flex px-2 py-1">
-                            <div class="d-flex flex-column justify-content-center">
-                              <a href="{{ Item.get_absolute_crm_url }}"> <h6 class="mb-0 text-sm"> {{ Item}} </h6> </a>
-                              <p class="text-xs text-secondary mb-0"> {{ Item.additional_information|slice:":50" }}... </p>
-                            </div>
-                          </div>
-                        </td>
-                        <td class="align-middle text-center text-sm">
-                          {% if Product.available %}
-
-                            <p class="text-xs text-secondary mb-0"> <span class="badge badge-sm bg-gradient-success">موجود</span>  <small> {{ Product.inventory}} عدد </small> </p>
-                          {% else %}
-                            <span class="badge badge-sm bg-gradient-secondary">نا موجود</span>
-                          {% endif %}
-                        </td>
-                        <td class="align-middle text-center">
-                          <span class="text-secondary text-xs font-weight-bold"> {{ Product.price }} ریال </span>
-                        </td>
-                        <td class="align-middle text-center">
-                          <div>
-                            <img src="{{ Product.image.url }}" class="avatar avatar-sm me-3">
-                          </div>
-                        </td>
-                      </tr>
-                     {% endfor %}
-                    </tbody>
-                  </table>
-                  <br><br>
-
-
-                  <p class="text-info  font-weight-bolder"> سفارشات </p>
-                  <table class="table align-items-center mb-0">
-                    <thead>
-                      <tr>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> نام مشتری </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> محصول </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> تعداد </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> وضعیت </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> کارشناس فروش </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> درصد تخفیف </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> تاریخ </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                     {% for Order_request in order_req %}
-                      <tr>
-                        <td>
-                          <div class="d-flex px-2 py-1">
-                            <div class="d-flex flex-column justify-content-center">
-                              <a href="{{ Order_request.get_absolute_url }}">
-                                <h6 class="mb-0 text-sm">
-                                  {% if Order_request.customer.substantial %}
-                                    <img src="/static/assets/img/golduser.png" class="avatar avatar-sm me-3">
-                                  {% else %}
-                                    <img src="/static/assets/img/user.png" class="avatar avatar-sm me-3">
-                                  {% endif %}
-                                  {{ Order_request.customer.name }}
-                               </h6>
-                             </a>
-                            </div>
-                          </div>
-                        </td>
-
-                        <td class="align-middle text-center text-sm">
-                          <p class="text-xs text-secondary mb-0"> <img src="{{ Order_request.product.image.url }}" class="avatar avatar-sm me-3"> {{ Order_request.product.name }} </p>
-                        </td>
-
-                        <td class="align-middle text-center">
-                          <p class="text-xs text-secondary mb-0"> {{ Order_request.qty }} عدد </p>
-                        </td>
-
-                        <td class="align-middle text-center">
-                          {% if Order_request.status == 'تکمیل شده' %}
-                            <span class="badge badge-sm bg-gradient-success"> تکمیل شده </span>
-                          {% elif Order_request.status == 'لغو شده' %}
-                            <span class="badge badge-sm bg-gradient-danger"> لغو شده </span>
-                          {% elif Order_request.status == 'دریافت پیش پرداخت' %}
-                            <span class="badge badge-sm bg-gradient-info"> دریافت پیش پرداخت </span>
-                            {% elif Order_request.status == 'جدید' %}
-                              <span class="badge badge-sm bg-gradient-warning"> جدید </span>
-                          {% else %}
-                            <span class="badge badge-sm bg-gradient-secondary"> در حال بررسی </span>
-                          {% endif %}
-                        </td>
-
-                        <td class="align-middle text-center">
-                          <p class="text-xs text-secondary mb-0"> {{ Order_request.user }} </p>
-                        </td>
-
-                        <td class="align-middle text-center">
-                          <p class="text-xs text-secondary mb-0"> {{ Order_request.discount }} ٪ </p>
-                        </td>
-
-                        <td class="align-middle text-center">
-                          <p class="text-xs text-secondary mb-0"> {{ Order_request.date_created|date:'H:i  Y-m-d' }} </p>
-                        </td>
-
-                      </tr>
+                       {% if Item.sales_expert == user or uProfile.user_type == 'مدیر' %}
+                          <tr>
+                            <td class="align-middle text-center">
+                               <a href="{{ Item.get_absolute_crm_url }}">
+                                 <img src="{{ Item.image.url }}" class="avatar avatar-sm me-3">
+                                 <span class="text-xxs"> کد: {{ Item.code  }} </span>
+                               </a>
+                            </td>
+                            <td class="align-middle text-center">
+                               <h6> {{ Item.buy_status  }} </h6>
+                            </td>
+                            <td class="align-middle text-center">
+                               <h6> {{ Item.estate_status  }} </h6>
+                            </td>
+                            <td class="align-middle text-center">
+                               <h6> {{ Item.area  }} </h6>
+                            </td>
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold"> {{ Item.area_size  }} <small> متر </small> </span>
+                            </td>
+                            <td class="align-middle text-center">
+                                {% if Item.buy_status == 'فروش' %}
+                                  <span class="text-secondary text-xs font-weight-bold"> {{ Item.price|floatformat:0|intcomma:False }} تومان </span>
+                                {% elif Item.buy_status == 'رهن کامل' %}
+                                  <span class="text-secondary text-xs font-weight-bold"> {{ Item.deposit|floatformat:0|intcomma:False }} تومان </span>
+                                {% elif Item.buy_status == 'پیش فروش' %}
+                                  <span class="text-secondary text-xs font-weight-bold"> {{ Item.price|floatformat:0|intcomma:False }} تومان </span>
+                                {% elif Item.buy_status == 'رهن و اجاره' %}
+                                  <small> <span class="text-secondary text-xs font-weight-bold"> ودیعه:{{ Item.deposit|floatformat:0|intcomma:False }} اجاره:{{ Item.rent|floatformat:0|intcomma:False }} تومان</span> </small>
+                                {% endif %}
+                            </td>
+                            <td class="align-middle text-center">
+                              {% if Item.available %}
+                                <a class="badge badge-sm bg-gradient-success text-xxs" href="{{ Item.get_absolute_url }}"><i class="fas fa-search text-dark me-2" aria-hidden="true"></i> قابل مشاهده </a>
+                              {% else %}
+                                <p class="text-xs text-secondary mb-0"> <span class="badge badge-sm bg-gradient-warning"> عدم نمایش </span> </p>
+                              {% endif %}
+                            </td>
+                          </tr>
+                        {% endif %}
                      {% endfor %}
                     </tbody>
                   </table>

@@ -103,13 +103,14 @@ def search(request):
     uProfile = get_object_or_404(models.Profile, user=request.user)
     if uProfile.user_type == 'کارشناس' or uProfile.user_type == 'مدیر' :
 
+        reqs = Order_request.objects.all()
+
         if request.method=="POST":
             search = request.POST['q']
             if search:
-                customer = models.Profile.objects.filter(Q(user__first_name__icontains=search) | Q(user__last_name__icontains=search) | Q(additional_information__icontains=search) | Q(phone__icontains=search) )
-                item = models.Item.objects.filter(Q(code__icontains=search)  | Q(additional_information__icontains=search) )
-                order_req = models.Order_request.objects.filter( Q(description__icontains=search))
-                return render(request,'crm/home/search.html', {'customer':customer, 'item':item, 'order_req':order_req})
+                customer = models.Profile.objects.filter( Q(user__username__icontains=search) | Q(user__first_name__icontains=search) | Q(user__last_name__icontains=search) | Q(additional_information__icontains=search) | Q(phone__icontains=search) | Q(user__email__icontains=search) )
+                item = models.Item.objects.filter( Q(ownership__name__icontains=search) | Q(area__name__icontains=search) | Q(buy_status__icontains=search) | Q(estate_status__icontains=search) | Q(code__icontains=search)  | Q(additional_information__icontains=search) )
+                return render(request,'crm/home/search.html', {'customer':customer, 'item':item, 'reqs':reqs})
             else:
                 return HttpResponseRedirect('/search')
         return render(request, 'crm/home/search.html', {})
