@@ -91,7 +91,7 @@
   								<span class="icon-bar"></span>
   								<span class="icon-bar"></span>
   						</button>
-  						<a class="navbar-brand" href="{% url 'app:home' %}"><img src="{{ logo.url }}" alt=""></a>
+  						<a class="navbar-brand" href="{% url 'app:home' %}"><img src="{{ settings.logo.url }}" alt="{{ settings.title }}"></a>
   				</div>
 
   				<!-- Collect the nav links, forms, and other content for toggling -->
@@ -100,9 +100,6 @@
                 {% if user.is_authenticated %}
                 <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.location.replace('{% url 'logout' %}')" data-wow-delay="0.5s"> خروج </button>
                 <button class="navbar-btn nav-button wow fadeInRight login" onclick=" window.location.replace('{% url 'app:profile' %}')" data-wow-delay="0.5s"> پروفایل </button>
-                  {% if userProfile.user_type == 'کارشناس' or userProfile.user_type == 'مدیر' %}
-                   <a href="{% url 'crm' %}"> <i class="fa fa-dashboard" style="font-size:20px"></i> CRM </a>
-                  {% endif %}
                 {% else %}
                 <button class="navbar-btn nav-button wow bounceInRight" onclick="window.location.replace('{% url 'register' %}')" data-wow-delay="0.4s"> ثبت نام </button>
                 <button class="navbar-btn nav-button wow fadeInRight login" onclick=" window.location.replace('{% url 'login' %}')" data-wow-delay="0.5s"> ورود </button>
@@ -114,6 +111,9 @@
   								<li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/blog"> وبلاگ و اخبار  </a></li>
   								<li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="{% url 'app:favs' %}"> مورد علاقه ها  </a></li>
   								<li class="wow fadeInDown" data-wow-delay="0.4s"><a href="{% url 'app:contact' %}"> تماس با ما </a></li>
+                  {% if userProfile.user_type == 'کارشناس' or userProfile.user_type == 'مدیر' %}
+                   <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="{% url 'crm' %}"> <i class="fa fa-dashboard" style="font-size:18px"></i> پنل کارشناس </a></li>
+                  {% endif %}
   						</ul>
   				</div><!-- /.navbar-collapse -->
   		</div><!-- /.container-fluid -->
