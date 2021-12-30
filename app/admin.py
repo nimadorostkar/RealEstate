@@ -1,7 +1,7 @@
 from django.contrib import admin
 from . import models
 from django.contrib.admin.models import LogEntry
-from .models import Profile, Area, Item, ItemImage, Slider, Fav, Contact, Ownership
+from .models import Profile, Area, Item, ItemImage, Slider, Fav, Contact, Ownership, Settings
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin, ImportExportMixin
 from jalali_date import datetime2jalali, date2jalali
@@ -15,12 +15,31 @@ admin.site.register(LogEntry)
 
 
 
+
+
+
+#------------------------------------------------------------------------------
+class SettingsAdmin(admin.ModelAdmin):
+    list_display = ('image_tag', 'title')
+admin.site.register(models.Settings, SettingsAdmin)
+
+
+
+
+
+
+
+
 #------------------------------------------------------------------------------
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('image_tag', 'user_type', 'user_name','phone','sales_expert')
     list_filter = ('user_type', "date_created")
     search_fields = ['user_name', 'phone']
 admin.site.register(models.Profile, ProfileAdmin)
+
+
+
+
 
 
 
