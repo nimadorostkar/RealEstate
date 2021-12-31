@@ -20,6 +20,7 @@ from django.views import generic
 from django.utils.decorators import method_decorator
 from allauth.utils import generate_unique_username
 from app.models import Item, Profile, Area, ItemImage, Ownership, Settings
+from blogApp.models import Post, Categories
 from django.contrib.auth.decorators import user_passes_test
 
 
@@ -1021,9 +1022,9 @@ def settings_edit(request):
             settings.twitter = request.POST['twitter']
             settings.whatsapp = request.POST['whatsapp']
             settings.lat_long = request.POST['lat_long']
-            settings.logo = request.FILES['logo']
-            settings.header_image = request.FILES['header_image']
-
+            if (request.FILES):
+                settings.logo = request.FILES['logo']
+                settings.header_image = request.FILES['header_image']
             settings.save()
 
             context = { 'settings':settings, 'success':'تغیرات اعمال شد'}
@@ -1041,6 +1042,28 @@ def settings_edit(request):
 
 
 
+
+
+
+
+
+#------------------------------------------------------------------------------
+class crm_blog(generic.ListView):
+    model = Post
+    template_name = 'crm/home/crm_blog.html'
+    context_object_name = 'posts'
+    queryset = Post.objects.all()
+    ordering = ['-post_date']
+    paginate_by = 10
+
+    def get_context_data(self, *args, **kwargs):
+        uProfile = get_object_or_404(models.Profile, user=self.request.user)
+        if uProfile.user_type == 'کارشناس' or uProfile.user_type == 'مدیر' :
+            context = super(crm_blog, self).get_context_data(*args, **kwargs)
+            context["uProfile"] = uProfile
+            return context
+        else:
+            return redirect('crm')
 
 
 

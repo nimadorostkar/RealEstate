@@ -1,0 +1,181 @@
+{% extends 'crm/layouts/base.html' %}
+
+{% load humanize %}
+
+{% block title %} فایل ها  {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+
+  <div class="container-fluid py-4">
+
+    <div class="row" dir="rtl">
+      <div class="col-12">
+        <div class="card mb-4">
+          <div class="card-header pb-0">
+            <h6> پست ها </h6>
+
+
+              <a href="javascript:;" class="btn" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"> <img src="/static/assets/crm/img/reqreg.png" width="14px"> <small> افزودن فایل جدید </small> </a>
+              <ul class="dropdown-menu px-2 py-3 ms-sm-n4" aria-labelledby="dropdownMenuButton">
+
+
+                  <li>
+                    <a class="dropdown-item border-radius-md" href="{% url 'rahnoejare_registration' %}">
+                      <div class="d-flex py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <p>
+                           <img src="/static/assets/crm/img/reqreg.png" width="20px"> <small class="text-secondary text-xxs font-weight-bold"> فایل رهن و اجاره </small>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item border-radius-md" href="{% url 'rahn_registration' %}">
+                      <div class="d-flex py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <p>
+                           <img src="/static/assets/crm/img/reqreg.png" width="20px"> <small class="text-secondary text-xxs font-weight-bold"> فایل رهن کامل </small>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item border-radius-md" href="{% url 'froosh_registration' %}">
+                      <div class="d-flex py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <p>
+                           <img src="/static/assets/crm/img/reqreg.png" width="20px"> <small class="text-secondary text-xxs font-weight-bold"> فایل فروش </small>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item border-radius-md" href="{% url 'pishfroosh_registration' %}">
+                      <div class="d-flex py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <p>
+                           <img src="/static/assets/crm/img/reqreg.png" width="20px"> <small class="text-secondary text-xxs font-weight-bold"> فایل پیش فروش </small>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+              </ul>
+
+
+
+
+          </div>
+          <div class="card-body px-0 pt-0 pb-2">
+            <div class="table-responsive p-0">
+              <table class="table align-items-center mb-0">
+                <thead>
+                  <tr>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> فایل </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> نوع معامله </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> نوع ملک </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> منطقه </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> متراژ </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> قیمت </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">  نمایش در سایت  </th>
+                  </tr>
+                </thead>
+                <tbody>
+                 {% for Item in items %}
+                   {% if Item.sales_expert == user or uProfile.user_type == 'مدیر' %}
+                      <tr>
+                        <td class="align-middle text-center">
+                           <a href="{{ Item.get_absolute_crm_url }}">
+                             <img src="{{ Item.image.url }}" class="avatar avatar-sm me-3">
+                             <span class="text-xxs"> کد: {{ Item.code  }} </span>
+                           </a>
+                        </td>
+                        <td class="align-middle text-center">
+                           <h6> {{ Item.buy_status  }} </h6>
+                        </td>
+                        <td class="align-middle text-center">
+                           <h6> {{ Item.estate_status  }} </h6>
+                        </td>
+                        <td class="align-middle text-center">
+                           <h6> {{ Item.area  }} </h6>
+                        </td>
+                        <td class="align-middle text-center">
+                            <span class="text-secondary text-xs font-weight-bold"> {{ Item.area_size  }} <small> متر </small> </span>
+                        </td>
+                        <td class="align-middle text-center">
+                            {% if Item.buy_status == 'فروش' %}
+                              <span class="text-secondary text-xs font-weight-bold"> {{ Item.price|floatformat:0|intcomma:False }} تومان </span>
+                            {% elif Item.buy_status == 'رهن کامل' %}
+                              <span class="text-secondary text-xs font-weight-bold"> {{ Item.deposit|floatformat:0|intcomma:False }} تومان </span>
+                            {% elif Item.buy_status == 'پیش فروش' %}
+                              <span class="text-secondary text-xs font-weight-bold"> {{ Item.price|floatformat:0|intcomma:False }} تومان </span>
+                            {% elif Item.buy_status == 'رهن و اجاره' %}
+                              <small> <span class="text-secondary text-xs font-weight-bold"> ودیعه:{{ Item.deposit|floatformat:0|intcomma:False }} اجاره:{{ Item.rent|floatformat:0|intcomma:False }} تومان</span> </small>
+                            {% endif %}
+                        </td>
+                        <td class="align-middle text-center">
+                          {% if Item.available %}
+                            <a class="badge badge-sm bg-gradient-success text-xxs" href="{{ Item.get_absolute_url }}"><i class="fas fa-search text-dark me-2" aria-hidden="true"></i> قابل مشاهده </a>
+                          {% else %}
+                            <p class="text-xs text-secondary mb-0"> <span class="badge badge-sm bg-gradient-warning"> عدم نمایش </span> </p>
+                          {% endif %}
+                        </td>
+                      </tr>
+                    {% endif %}
+                 {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ul class="pagination">
+      {% if is_paginated %}
+        {% if page_obj.has_previous %}
+          <li class="page-item"><a class="page-link" style="color:black" href="?page=1"><i class="fa fa-arrow-left" aria-hidden="true"></i></a></li>
+          <li class="page-item"><a class="page-link" style="color:black" href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+          {% if num == page_obj.number %}
+            <li class="page-item active"><a class="page-link" style="color:#ffffff; background-color: black; border-color: black;" href="?page={{num}}">{{num}}</a></li>
+          {% elif num > page_obj.number|add:'-2' and num < page_obj.number|add:'2' %}
+            <li class="page-item"><a class="page-link" style="color:black" href="?page={{num}}">{{num}}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+          <li class="page-item"><a class="page-link" style="color:black" href="?page={{page_obj.next_page_number}}"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+          <li class="page-item"><a class="page-link" style="color:black" href="?page={{ page_obj.paginator.num_pages }}"><i class="fa fa-arrow-right" aria-hidden="true"></i></a></li>
+        {% endif %}
+      {% endif %}
+     </ul>
+
+
+    {% include "crm/includes/footer.html" %}
+
+  </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+  <script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+  </script>
+
+{% endblock javascripts %}

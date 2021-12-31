@@ -18,7 +18,6 @@ from django_jalali.db import models as jmodels
 
 
 
-
 #------------------------------------------------------------------------------
 class Settings(models.Model):
   title = models.CharField(max_length=100, verbose_name = "عنوان")
