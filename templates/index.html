@@ -132,7 +132,7 @@
                           <h6><a href="{{ Item.get_absolute_url }}"> {{ Item }} </a></h6>
                           <div class="dot-hr"></div>
 
-                          <span class="proerty-price pull-right">
+                          <span class="proerty-price pull-right"> 
                             {% if Item.buy_status == 'فروش' %}
                              <span class="proerty-price pull-right"> {{ Item.price|floatformat:0|intcomma:False }} تومان </span>
                              {% elif Item.buy_status == 'رهن کامل' %}

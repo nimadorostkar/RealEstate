@@ -62,19 +62,19 @@ def search(request):
         search_area_size_rage = search_area_size.split(',')
 
         if search:
-            general_match = models.Item.objects.filter( Q(buy_status__icontains=search_buy_status) & Q(area__name__icontains=search_area) & Q(estate_status__icontains=search_estate_status) )
-            partial_match = models.Item.objects.filter( Q(area_size__range=(search_area_size_rage[0],search_area_size_rage[1])) )
-            #checkbox_match = models.Item.objects.filter( Q(parking=search_parking) & Q(elevator=search_elevator) & Q(storage_room=search_storage_room) )
+            general_match = models.Item.objects.filter( Q(buy_status__icontains=search_buy_status) & Q(area__name__icontains=search_area) & Q(estate_status__icontains=search_estate_status) & Q(available=True) )
+            partial_match = models.Item.objects.filter( Q(area_size__range=(search_area_size_rage[0],search_area_size_rage[1])) & Q(available=True) )
+
             if search_buy_status == 'رهن و اجاره':
-                price_match = models.Item.objects.filter( Q(rent__range=(search_rent_rage[0],search_rent_rage[1])) & Q(deposit__range=(search_mortgage_rage[0],search_mortgage_rage[1])) )
+                price_match = models.Item.objects.filter( Q(rent__range=(search_rent_rage[0],search_rent_rage[1])) & Q(deposit__range=(search_mortgage_rage[0],search_mortgage_rage[1]))  & Q(available=True))
             elif search_buy_status == 'فروش':
-                price_match = models.Item.objects.filter( Q(price__range=(search_price_rage[0],search_price_rage[1])) )
+                price_match = models.Item.objects.filter( Q(price__range=(search_price_rage[0],search_price_rage[1])) & Q(available=True))
             elif search_buy_status == 'رهن کامل':
-                price_match = models.Item.objects.filter( Q(deposit__range=(search_mortgage_rage[0],search_mortgage_rage[1])) )
+                price_match = models.Item.objects.filter( Q(deposit__range=(search_mortgage_rage[0],search_mortgage_rage[1]))& Q(available=True) )
             elif search_buy_status == 'پیش فروش':
-                price_match = models.Item.objects.filter( Q(price__range=(search_price_rage[0],search_price_rage[1])) )
+                price_match = models.Item.objects.filter( Q(price__range=(search_price_rage[0],search_price_rage[1])) & Q(available=True))
             else:
-                price_match = models.Item.objects.filter( Q(rent__range=(search_rent_rage[0],search_rent_rage[1])) & Q(deposit__range=(search_mortgage_rage[0],search_mortgage_rage[1])) & Q(price__range=(search_price_rage[0],search_price_rage[1])) )
+                price_match = models.Item.objects.filter( Q(rent__range=(search_rent_rage[0],search_rent_rage[1])) & Q(deposit__range=(search_mortgage_rage[0],search_mortgage_rage[1])) & Q(price__range=(search_price_rage[0],search_price_rage[1]))  & Q(available=True) )
 
             match = list(chain(general_match & partial_match & price_match ))
 
@@ -142,7 +142,7 @@ class items(generic.ListView):
 def items_detail(request, id):
     Item = get_object_or_404(models.Item, id=id)
     item_img = models.ItemImage.objects.filter(item=Item)
-    similar_items = models.Item.objects.filter(area=Item.area).order_by("-date")
+    similar_items = models.Item.objects.filter(available=True, area=Item.area).order_by("-date")
 
     item_sales_expert = get_object_or_404(models.Profile, user=Item.sales_expert)
 
