@@ -19,7 +19,7 @@ from django.contrib import messages
 from django.views import generic
 from django.utils.decorators import method_decorator
 from allauth.utils import generate_unique_username
-from app.models import Item, Profile, Area, ItemImage, Ownership
+from app.models import Item, Profile, Area, ItemImage, Ownership, Settings
 from django.contrib.auth.decorators import user_passes_test
 
 
@@ -992,6 +992,49 @@ def addarea(request):
 
 
 
+
+
+
+
+
+
+
+#------------------------------------------------------------------------------
+@user_passes_test(lambda u: u.is_superuser)
+def settings_edit(request):
+    uProfile = get_object_or_404(models.Profile, user=request.user)
+    if uProfile.user_type == 'کارشناس' or uProfile.user_type == 'مدیر' :
+
+        settings = Settings.objects.all().last()
+        if request.method=="POST":
+            settings.title = request.POST['title']
+            settings.title_below = request.POST['title_below']
+            settings.introduction_text = request.POST['introduction_text']
+            settings.contact_page_text = request.POST['contact_page_text']
+            settings.experts_number = request.POST['experts_number']
+            settings.address = request.POST['address']
+            settings.phone1 = request.POST['phone1']
+            settings.phone2 = request.POST['phone2']
+            settings.whatsapp_number = request.POST['whatsapp_number']
+            settings.instagram = request.POST['instagram']
+            settings.telegram = request.POST['telegram']
+            settings.twitter = request.POST['twitter']
+            settings.whatsapp = request.POST['whatsapp']
+            settings.lat_long = request.POST['lat_long']
+            settings.logo = request.FILES['logo']
+            settings.header_image = request.FILES['header_image']
+
+            settings.save()
+
+            context = { 'settings':settings, 'success':'تغیرات اعمال شد'}
+            return render(request, 'crm/home/settings_edit.html', context)
+
+        context = {'settings':settings}
+        html_template = loader.get_template('crm/home/settings_edit.html')
+        return HttpResponse(html_template.render(context, request))
+
+    else:
+        return redirect("/")
 
 
 
