@@ -1188,6 +1188,30 @@ def crm_post_edit_done(request):
 
 
 
+@login_required(login_url='/login')
+def post_cat(request):
+    uProfile = get_object_or_404(models.Profile, user=request.user)
+    if uProfile.user_type == 'کارشناس' or uProfile.user_type == 'مدیر' :
+
+        if request.method == 'POST':
+            cat = Categories()
+            cat.categoryname = request.POST['categoryname']
+            cat.slug = request.POST['slug']
+            cat.save()
+
+            context = {'success':'دسته بندی جدید اضافه شد'}
+            return render(request, 'crm/home/post_cat.html', context)
+
+        context = {}
+        html_template = loader.get_template('crm/home/post_cat.html')
+        return HttpResponse(html_template.render(context, request))
+
+
+    else:
+        return redirect("/")
+
+
+
 
 
 

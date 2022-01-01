@@ -42,4 +42,5 @@ urlpatterns = [
     path('post_registration', views.post_registration, name='post_registration'),
     path('crm_post_edit',views.crm_post_edit,name='crm_post_edit'),
     path('crm_post_edit_done',views.crm_post_edit_done,name='crm_post_edit_done'),
+    path('post_cat',views.post_cat,name='post_cat'),
 ]
