@@ -17,7 +17,6 @@
 
 
 
-
 <div class="container-fluid py-4">
 
   <div class="row" dir="rtl">
@@ -28,14 +27,14 @@
         </div>
         <div class="card-body px-7 pt-4 pb-2">
 
-               <form action="{% url 'crm_post_edit' %}" method="post" dir="rtl" align="right" enctype="multipart/form-data">
+               <form action="{% url 'crm_post_edit_done' %}" method="post" dir="rtl" align="right" enctype="multipart/form-data">
                  {% csrf_token %}
 
                  <div class="row">
                    <div class="col-md-12 pr-md-4">
                      <div class="form-group">
                        <label><p class="text-xs text-secondary mb-0"> عنوان پست </p></label>
-                       <input name="title" type="text" class="form-control">
+                       <input name="title" type="text" class="form-control" value="{{ Post.title }}">
                      </div>
                    </div>
                    <div class="col-md-4 pr-md-4">
@@ -44,7 +43,7 @@
                        <a style="color:green;" href="{% url 'addarea' %}"> <span style="font-size:12px;">+</span> <span style="font-size:9px;">افزودن جدید</span> </a>
                        <select name="category" class="form-control selectpicker" data-live-search="true">
                          {% for Cat in category %}
-                           <option data-tokens="{{Cat.categoryname}}" value={{Cat.id}}>{{Cat.categoryname}}</option>
+                           <option data-tokens="{{Cat.categoryname}}" value={{Cat.id}} {% if Post.category == Cat %} selected {% endif %}>{{Cat.categoryname}}</option>
                          {% endfor %}
                        </select>
                      </div>
@@ -52,13 +51,13 @@
                    <div class="col-md-4 pr-md-4">
                      <div class="form-group">
                        <label><p class="text-xs text-secondary mb-0"> نشانی پیوند (link) </p></label>
-                       <input name="slug" type="text" class="form-control" placeholder="نشانی مد نظر برای پست">
+                       <input name="slug" type="text" class="form-control" placeholder="نشانی مد نظر برای پست" value="{{ Post.slug }}">
                      </div>
                   </div>
                   <div class="col-md-4 pr-md-4">
                       <div class="form-group">
                           <label><p class="text-xs text-secondary"> تصویر پست </p></label>
-                          <input name="img" type="file" class="text-xxs">
+                          <input name="img" type="file" class="text-xxs" value="{{ Post.img.url }}">
                       </div>
                   </div>
                 </div>
@@ -67,10 +66,12 @@
                   <div class="col-md-12 pr-md-4">
                     <div class="form-group">
                       <label><p class="text-xs text-secondary mb-0"> متن پست </p></label>
-                      <textarea name="body" class="form-control" rows="15" cols="50"> {{ settings.introduction_text }} </textarea>
+                      <textarea name="body" class="form-control" rows="15" cols="50"> {{ Post.body }} </textarea>
                     </div>
                   </div>
                </div>
+
+               <input name="id" type="hidden" value="{{ Post.id }}">
 
 
                  <div class="card-footer" align="center">

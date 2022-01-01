@@ -12,7 +12,6 @@ from . import models
 
 
 
-
 #------------------------------------------------------------------------------
 class blog(generic.ListView):
    model = Post
@@ -98,11 +97,6 @@ def send_comment(request, slug):
     post = Post.objects.filter(id=post_id).first()
     post.comments.add(post_comment)
     return redirect('.')
-
-
-
-
-
 
 
 

@@ -40,5 +40,6 @@ urlpatterns = [
     # Blog
     path('crm_blog', crm_blog.as_view(), name='crm_blog'),
     path('post_registration', views.post_registration, name='post_registration'),
-    path('crm_post_edit/<int:id>/',views.crm_post_edit,name='crm_post_edit'),
+    path('crm_post_edit',views.crm_post_edit,name='crm_post_edit'),
+    path('crm_post_edit_done',views.crm_post_edit_done,name='crm_post_edit_done'),
 ]

@@ -22,7 +22,7 @@ from allauth.utils import generate_unique_username
 from app.models import Item, Profile, Area, ItemImage, Ownership, Settings
 from blogApp.models import Post, Categories
 from django.contrib.auth.decorators import user_passes_test
-
+import blogApp
 
 
 
@@ -1140,26 +1140,52 @@ def post_registration(request):
 
 #------------------------------------------------------------------------------
 @login_required(login_url='/login')
-def crm_post_edit(request, id):
+def crm_post_edit(request):
     uProfile = get_object_or_404(models.Profile, user=request.user)
     if uProfile.user_type == 'کارشناس' or uProfile.user_type == 'مدیر' :
 
-        Post = get_object_or_404(models.Post, id=id)
+        Post = get_object_or_404(blogApp.models.Post, id=request.POST['id'])
+        category = Categories.objects.all()
+
+        html_template = loader.get_template('crm/home/crm_post_edit.html')
+        return HttpResponse(html_template.render({'Post':Post, 'category':category}, request))
+
+    else:
+        return redirect("/")
+
+
+
+@login_required(login_url='/login')
+def crm_post_edit_done(request):
+    uProfile = get_object_or_404(models.Profile, user=request.user)
+    if uProfile.user_type == 'کارشناس' or uProfile.user_type == 'مدیر' :
+
+        Post = get_object_or_404(blogApp.models.Post, id=request.POST['id'])
+        category = Categories.objects.all()
         if request.method == 'POST':
             Post.title = request.POST['title']
             Post.slug = request.POST['slug']
             Post.author = request.user
-            Post.img = request.FILES['img']
+            if (request.FILES): Post.img = request.FILES['img']
             Post.body = request.POST['body']
             Post.category = get_object_or_404(Categories, id=request.POST['category'])
             Post.save()
 
-        else:
-            return render(request, 'crm_post_edit.html', { 'Post':Post } )
+            success = 'تغیرات اعمال شد'
+            context = {'success':success, 'Post':Post, 'category':category}
+            return render(request, 'crm/home/crm_post_edit.html', context)
+
+        context = {'Post':Post, 'category':category}
+        html_template = loader.get_template('crm/home/crm_post_edit.html')
+        return HttpResponse(html_template.render(context, request))
 
 
     else:
         return redirect("/")
+
+
+
+
 
 
 

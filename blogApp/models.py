@@ -6,7 +6,6 @@ from django.db.models.base import Model
 from django.db.models.signals import pre_save
 from core.utils import unique_slug_generator
 from extensions.utils import jalali_converter
-from django.urls import reverse
 
 
 
@@ -64,9 +63,6 @@ class Post(models.Model):
 
     def j_post_date(self):
         return jalali_converter(self.post_date)
-
-    def get_absolute_edit_url(self):
-        return reverse('crm_post_edit',args=[self.id])
 
     class Meta:
       verbose_name = "پست"
