@@ -1103,6 +1103,38 @@ class crm_blog(generic.ListView):
 
 
 
+#------------------------------------------------------------------------------
+@login_required(login_url="/login/")
+def post_registration(request):
+    uProfile = get_object_or_404(models.Profile, user=request.user)
+    if uProfile.user_type == 'کارشناس' or uProfile.user_type == 'مدیر' :
+
+        if request.method=="POST":
+            new_post = Post()
+            new_post.title = request.POST['title']
+            new_post.slug = request.POST['slug']
+            new_post.author = request.user
+            new_post.img = request.FILES['img']
+            new_post.body = request.POST['body']
+            new_post.category = request.POST['category']
+            new_post.save()
+
+            success = 'پست جدید ایجاد شد'
+            context = {'success':success}
+            return render(request, 'crm/home/post_registration.html', context)
+
+        context = {}
+        html_template = loader.get_template('crm/home/post_registration.html')
+        return HttpResponse(html_template.render(context, request))
+
+    else:
+        return redirect("/")
+
+
+
+
+
+
 
 
 

@@ -12,7 +12,6 @@ urlpatterns = [
     path('search',views.search,name='search'),
     path('sales_expert_registration', views.sales_expert_registration, name='sales_expert_registration'),
     path('addarea', views.addarea, name='addarea'),
-    path('crm_blog', crm_blog.as_view(), name='crm_blog'),
     # Items
     path('crm_items', login_required(crm_items.as_view()), name='crm_items'),
     path('crm_items_detail/<int:id>/',views.crm_items_detail,name='crm_items_detail'),
@@ -38,4 +37,7 @@ urlpatterns = [
     path('settings_edit', views.settings_edit, name='settings_edit'),
     path('logoupload', views.logoupload, name='logoupload'),
     path('headerupload', views.headerupload, name='headerupload'),
+    # Blog
+    path('crm_blog', crm_blog.as_view(), name='crm_blog'),
+    path('post_registration', views.post_registration, name='post_registration'),
 ]
