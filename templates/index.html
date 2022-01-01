@@ -25,7 +25,7 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
                 <h2> {{ settings.title }} </h2>
-                <p> {{ settings.title_below }}} </p>
+                <p> {{ settings.title_below }} </p>
                 <div class="search-form wow pulse" data-wow-delay="0.8s">
 
                     <form action="{% url 'app:search' %}" method="post" class="form-inline">
@@ -132,7 +132,7 @@
                           <h6><a href="{{ Item.get_absolute_url }}"> {{ Item }} </a></h6>
                           <div class="dot-hr"></div>
 
-                          <span class="proerty-price pull-right"> 
+                          <span class="proerty-price pull-right">
                             {% if Item.buy_status == 'فروش' %}
                              <span class="proerty-price pull-right"> {{ Item.price|floatformat:0|intcomma:False }} تومان </span>
                              {% elif Item.buy_status == 'رهن کامل' %}

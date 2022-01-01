@@ -137,28 +137,40 @@
                   </div>
                 </div>
 
-                <div class="row">
-                  <div class="col-md-2 pr-md-4">
-                      <div class="form-group">
-                        <label><p class="text-xs text-secondary"> تصویر لوگو </p></label>
-                        <input name="logo" type="file" class="text-xxs" style="color:transparent;" value="{{ settings.logo.url }}">
-                      </div>
-                  </div>
-                  <div class="col-md-2 pr-md-4">
-                      <div class="form-group">
-                        <label><p class="text-xs text-secondary"> تصویر سربرگ (header)  </p></label>
-                        <input name="header_image" type="file" class="text-xxs" style="color:transparent;" value="{{ settings.header_image.url }}">
-                      </div>
-                  </div>
-                </div>
-
-
                  <div class="card-footer" align="center">
                    <button type="submit" class="btn bg-gradient-info my-1 me-1"> ذخیره </button>
                     <p style="color:green;"> {{ success }} </p>
                  </div>
 
               </form>
+
+              <hr>
+
+              <div class="row" align="center" dir="rtl">
+                <div class="col-md-6 pr-md-4">
+                  <form action="#" method="post">
+                      {% csrf_token %}
+                      <div class="form-group">
+                          <label><p class="text-xs text-secondary"> تصویر لوگو </p></label>
+                          <input name="logo" type="file" class="text-xxs" value="{{ settings.logo.url }}">
+                          <br>
+                          <button type="submit" class="btn bg-gradient-secondary my-1 me-1 text-xxs"> آپلود لوگو </button>
+                      </div>
+                  </form>
+                </div>
+                <div class="col-md-6 pr-md-4">
+                  <form action="#" method="post">
+                      {% csrf_token %}
+                      <div class="form-group">
+                          <label><p class="text-xs text-secondary"> تصویر سربرگ (header)  </p></label>
+                          <input name="header_image" type="file" class="text-xxs" value="{{ settings.header_image.url }}">
+                          <br>
+                          <button type="submit" class="btn bg-gradient-secondary my-1 me-1 text-xxs"> آپلود تصویر سربرگ </button>
+                      </div>
+                  </form>
+                </div>
+              </div>
+
 
          </div>
        </div>

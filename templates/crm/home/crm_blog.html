@@ -2,7 +2,8 @@
 
 {% load humanize %}
 
-{% block title %} فایل ها  {% endblock title %}
+
+{% block title %} پست ها {% endblock title %}
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -19,58 +20,7 @@
             <h6> پست ها </h6>
 
 
-              <a href="javascript:;" class="btn" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"> <img src="/static/assets/crm/img/reqreg.png" width="14px"> <small> افزودن فایل جدید </small> </a>
-              <ul class="dropdown-menu px-2 py-3 ms-sm-n4" aria-labelledby="dropdownMenuButton">
-
-
-                  <li>
-                    <a class="dropdown-item border-radius-md" href="{% url 'rahnoejare_registration' %}">
-                      <div class="d-flex py-1">
-                        <div class="d-flex flex-column justify-content-center">
-                          <p>
-                           <img src="/static/assets/crm/img/reqreg.png" width="20px"> <small class="text-secondary text-xxs font-weight-bold"> فایل رهن و اجاره </small>
-                          </p>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item border-radius-md" href="{% url 'rahn_registration' %}">
-                      <div class="d-flex py-1">
-                        <div class="d-flex flex-column justify-content-center">
-                          <p>
-                           <img src="/static/assets/crm/img/reqreg.png" width="20px"> <small class="text-secondary text-xxs font-weight-bold"> فایل رهن کامل </small>
-                          </p>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item border-radius-md" href="{% url 'froosh_registration' %}">
-                      <div class="d-flex py-1">
-                        <div class="d-flex flex-column justify-content-center">
-                          <p>
-                           <img src="/static/assets/crm/img/reqreg.png" width="20px"> <small class="text-secondary text-xxs font-weight-bold"> فایل فروش </small>
-                          </p>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item border-radius-md" href="{% url 'pishfroosh_registration' %}">
-                      <div class="d-flex py-1">
-                        <div class="d-flex flex-column justify-content-center">
-                          <p>
-                           <img src="/static/assets/crm/img/reqreg.png" width="20px"> <small class="text-secondary text-xxs font-weight-bold"> فایل پیش فروش </small>
-                          </p>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-              </ul>
-
-
-
+            <a href="javascript:;" class="btn"> <img src="/static/assets/crm/img/reqreg.png" width="14px"> <small> افزودن پست جدید </small> </a>
 
           </div>
           <div class="card-body px-0 pt-0 pb-2">
@@ -78,57 +28,21 @@
               <table class="table align-items-center mb-0">
                 <thead>
                   <tr>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> فایل </th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> نوع معامله </th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> نوع ملک </th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> منطقه </th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> متراژ </th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> قیمت </th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">  نمایش در سایت  </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> عنوان </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> نویسنده </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> دسته بند </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">  تاریخ </th>
                   </tr>
                 </thead>
                 <tbody>
-                 {% for Item in items %}
-                   {% if Item.sales_expert == user or uProfile.user_type == 'مدیر' %}
+                 {% for Post in posts %}
                       <tr>
-                        <td class="align-middle text-center">
-                           <a href="{{ Item.get_absolute_crm_url }}">
-                             <img src="{{ Item.image.url }}" class="avatar avatar-sm me-3">
-                             <span class="text-xxs"> کد: {{ Item.code  }} </span>
-                           </a>
-                        </td>
-                        <td class="align-middle text-center">
-                           <h6> {{ Item.buy_status  }} </h6>
-                        </td>
-                        <td class="align-middle text-center">
-                           <h6> {{ Item.estate_status  }} </h6>
-                        </td>
-                        <td class="align-middle text-center">
-                           <h6> {{ Item.area  }} </h6>
-                        </td>
-                        <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold"> {{ Item.area_size  }} <small> متر </small> </span>
-                        </td>
-                        <td class="align-middle text-center">
-                            {% if Item.buy_status == 'فروش' %}
-                              <span class="text-secondary text-xs font-weight-bold"> {{ Item.price|floatformat:0|intcomma:False }} تومان </span>
-                            {% elif Item.buy_status == 'رهن کامل' %}
-                              <span class="text-secondary text-xs font-weight-bold"> {{ Item.deposit|floatformat:0|intcomma:False }} تومان </span>
-                            {% elif Item.buy_status == 'پیش فروش' %}
-                              <span class="text-secondary text-xs font-weight-bold"> {{ Item.price|floatformat:0|intcomma:False }} تومان </span>
-                            {% elif Item.buy_status == 'رهن و اجاره' %}
-                              <small> <span class="text-secondary text-xs font-weight-bold"> ودیعه:{{ Item.deposit|floatformat:0|intcomma:False }} اجاره:{{ Item.rent|floatformat:0|intcomma:False }} تومان</span> </small>
-                            {% endif %}
-                        </td>
-                        <td class="align-middle text-center">
-                          {% if Item.available %}
-                            <a class="badge badge-sm bg-gradient-success text-xxs" href="{{ Item.get_absolute_url }}"><i class="fas fa-search text-dark me-2" aria-hidden="true"></i> قابل مشاهده </a>
-                          {% else %}
-                            <p class="text-xs text-secondary mb-0"> <span class="badge badge-sm bg-gradient-warning"> عدم نمایش </span> </p>
-                          {% endif %}
-                        </td>
+                        <td class="align-middle text-center"> <a href="{% url 'blog-detail' Post.slug %}"> <h6> <img src="{{ Post.img.url }}" class="avatar avatar-sm me-3"> {{ Post.title  }} </h6> </a> </td>
+                        <td class="align-middle text-center"> <span> {{ Post.author.first_name }} {{ Post.author.last_name }} </span> </td>
+                        <td class="align-middle text-center"> <span> {{ Post.category }} </span> </td>
+                        <td class="align-middle text-center"> <span class="text-xs"> {{ Post.j_post_date }} </span> </td>
                       </tr>
-                    {% endif %}
+
                  {% endfor %}
                 </tbody>
               </table>

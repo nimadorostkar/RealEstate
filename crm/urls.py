@@ -1,6 +1,6 @@
 from django.urls import path, re_path
 from crm import views
-from .views import customers, order_requests, crm_items
+from .views import customers, order_requests, crm_items, crm_blog
 from django.contrib.auth.decorators import login_required
 
 
@@ -12,9 +12,8 @@ urlpatterns = [
     path('search',views.search,name='search'),
     path('sales_expert_registration', views.sales_expert_registration, name='sales_expert_registration'),
     path('addarea', views.addarea, name='addarea'),
-    path('settings_edit', views.settings_edit, name='settings_edit'),
-    path('crm_blog', views.crm_blog, name='crm_blog'),
-    # Product
+    path('crm_blog', crm_blog.as_view(), name='crm_blog'),
+    # Items
     path('crm_items', login_required(crm_items.as_view()), name='crm_items'),
     path('crm_items_detail/<int:id>/',views.crm_items_detail,name='crm_items_detail'),
     path('crm_item_edit/<int:id>/', views.crm_item_edit, name='crm_item_edit'),
@@ -35,4 +34,8 @@ urlpatterns = [
     path('order_registration', views.order_registration, name='order_registration'),
     path('order_edit/<int:id>/', views.order_edit, name='order_edit'),
     path('incoming_remove', views.incoming_remove, name='incoming_remove'),
+    # Settings
+    path('settings_edit', views.settings_edit, name='settings_edit'),
+    path('logoupload', views.logoupload, name='logoupload'),
+    path('headerupload', views.headerupload, name='headerupload'),
 ]

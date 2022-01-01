@@ -1022,9 +1022,9 @@ def settings_edit(request):
             settings.twitter = request.POST['twitter']
             settings.whatsapp = request.POST['whatsapp']
             settings.lat_long = request.POST['lat_long']
-            if (request.FILES):
-                settings.logo = request.FILES['logo']
-                settings.header_image = request.FILES['header_image']
+            #if (request.FILES):
+            #    settings.logo = request.FILES['logo']
+            #    settings.header_image = request.FILES['header_image']
             settings.save()
 
             context = { 'settings':settings, 'success':'تغیرات اعمال شد'}
@@ -1036,7 +1036,6 @@ def settings_edit(request):
 
     else:
         return redirect("/")
-
 
 
 
@@ -1064,6 +1063,12 @@ class crm_blog(generic.ListView):
             return context
         else:
             return redirect('crm')
+
+
+
+
+
+
 
 
 
