@@ -148,7 +148,7 @@
 
               <div class="row" align="center" dir="rtl">
                 <div class="col-md-6 pr-md-4">
-                  <form action="#" method="post">
+                  <form action="{% url 'logoupload' %}" method="post" enctype="multipart/form-data">
                       {% csrf_token %}
                       <div class="form-group">
                           <label><p class="text-xs text-secondary"> تصویر لوگو </p></label>
@@ -159,7 +159,7 @@
                   </form>
                 </div>
                 <div class="col-md-6 pr-md-4">
-                  <form action="#" method="post">
+                  <form action="{% url 'headerupload' %}" method="post" enctype="multipart/form-data">
                       {% csrf_token %}
                       <div class="form-group">
                           <label><p class="text-xs text-secondary"> تصویر سربرگ (header)  </p></label>

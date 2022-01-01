@@ -1022,9 +1022,6 @@ def settings_edit(request):
             settings.twitter = request.POST['twitter']
             settings.whatsapp = request.POST['whatsapp']
             settings.lat_long = request.POST['lat_long']
-            #if (request.FILES):
-            #    settings.logo = request.FILES['logo']
-            #    settings.header_image = request.FILES['header_image']
             settings.save()
 
             context = { 'settings':settings, 'success':'تغیرات اعمال شد'}
@@ -1037,6 +1034,40 @@ def settings_edit(request):
     else:
         return redirect("/")
 
+
+
+
+
+
+#------------------------------------------------------------------------------
+@user_passes_test(lambda u: u.is_superuser)
+def logoupload(request):
+    uProfile = get_object_or_404(models.Profile, user=request.user)
+    if uProfile.user_type == 'کارشناس' or uProfile.user_type == 'مدیر' :
+
+        settings = Settings.objects.all().last()
+        settings.logo = request.FILES['logo']
+        settings.save()
+        return redirect("/crm/settings_edit")
+
+    else:
+        return redirect("/")
+
+
+
+#------------------------------------------------------------------------------
+@user_passes_test(lambda u: u.is_superuser)
+def headerupload(request):
+    uProfile = get_object_or_404(models.Profile, user=request.user)
+    if uProfile.user_type == 'کارشناس' or uProfile.user_type == 'مدیر' :
+
+        settings = Settings.objects.all().last()
+        settings.header_image = request.FILES['header_image']
+        settings.save()
+        return redirect("/crm/settings_edit")
+
+    else:
+        return redirect("/")
 
 
 
