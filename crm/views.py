@@ -1016,6 +1016,7 @@ def settings_edit(request):
             settings.address = request.POST['address']
             settings.phone1 = request.POST['phone1']
             settings.phone2 = request.POST['phone2']
+            settings.email = request.POST['email']
             settings.whatsapp_number = request.POST['whatsapp_number']
             settings.instagram = request.POST['instagram']
             settings.telegram = request.POST['telegram']
