@@ -1109,6 +1109,8 @@ def post_registration(request):
     uProfile = get_object_or_404(models.Profile, user=request.user)
     if uProfile.user_type == 'کارشناس' or uProfile.user_type == 'مدیر' :
 
+        category = Categories.objects.all()
+
         if request.method=="POST":
             new_post = Post()
             new_post.title = request.POST['title']
@@ -1116,19 +1118,50 @@ def post_registration(request):
             new_post.author = request.user
             new_post.img = request.FILES['img']
             new_post.body = request.POST['body']
-            new_post.category = request.POST['category']
+            new_post.category = get_object_or_404(Categories, id=request.POST['category'])
             new_post.save()
 
             success = 'پست جدید ایجاد شد'
-            context = {'success':success}
+            context = {'success':success, 'category':category}
             return render(request, 'crm/home/post_registration.html', context)
 
-        context = {}
+        context = {'category':category}
         html_template = loader.get_template('crm/home/post_registration.html')
         return HttpResponse(html_template.render(context, request))
 
     else:
         return redirect("/")
+
+
+
+
+
+
+
+#------------------------------------------------------------------------------
+@login_required(login_url='/login')
+def crm_post_edit(request, id):
+    uProfile = get_object_or_404(models.Profile, user=request.user)
+    if uProfile.user_type == 'کارشناس' or uProfile.user_type == 'مدیر' :
+
+        Post = get_object_or_404(models.Post, id=id)
+        if request.method == 'POST':
+            Post.title = request.POST['title']
+            Post.slug = request.POST['slug']
+            Post.author = request.user
+            Post.img = request.FILES['img']
+            Post.body = request.POST['body']
+            Post.category = get_object_or_404(Categories, id=request.POST['category'])
+            Post.save()
+
+        else:
+            return render(request, 'crm_post_edit.html', { 'Post':Post } )
+
+
+    else:
+        return redirect("/")
+
+
 
 
 

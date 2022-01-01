@@ -6,7 +6,7 @@ from django.db.models.base import Model
 from django.db.models.signals import pre_save
 from core.utils import unique_slug_generator
 from extensions.utils import jalali_converter
-
+from django.urls import reverse
 
 
 
@@ -50,7 +50,7 @@ class Categories(models.Model):
 
 #------------------------------------------------------------------------------
 class Post(models.Model):
-    title = models.CharField(max_length=255, verbose_name="عنوان") 
+    title = models.CharField(max_length=255, verbose_name="عنوان")
     slug = models.SlugField(max_length=255, null=True, blank=True, verbose_name="نشانی پیوند (link)")
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="نویسنده")
     img = models.ImageField(upload_to='blog', null=True, verbose_name="تصویر")
@@ -64,6 +64,9 @@ class Post(models.Model):
 
     def j_post_date(self):
         return jalali_converter(self.post_date)
+
+    def get_absolute_edit_url(self):
+        return reverse('crm_post_edit',args=[self.id])
 
     class Meta:
       verbose_name = "پست"

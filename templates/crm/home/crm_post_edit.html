@@ -1,6 +1,6 @@
 {% extends 'crm/layouts/base.html' %}
 
-{% block title %} پست جدید {% endblock title %}
+{% block title %} ویرایش {{ Post.title }} {% endblock title %}
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}
@@ -24,11 +24,11 @@
     <div class="col-12">
       <div class="card mb-4">
         <div class="card-header pb-0">
-          <h6> پست جدید  </h6> <p class="text-xs text-secondary mb-0"> پست جدید را ایجاد کنید... </p> <hr>
+          <h6>  ویرایش {{ Post.title }}  </h6> <p class="text-xs text-secondary mb-0">پست را ویرایش کنید و تغییرات را اعمال کنید </p> <hr>
         </div>
         <div class="card-body px-7 pt-4 pb-2">
 
-               <form action="{% url 'post_registration' %}" method="post" dir="rtl" align="right" enctype="multipart/form-data">
+               <form action="{% url 'crm_post_edit' %}" method="post" dir="rtl" align="right" enctype="multipart/form-data">
                  {% csrf_token %}
 
                  <div class="row">

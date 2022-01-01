@@ -105,4 +105,17 @@ def send_comment(request, slug):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 # End
