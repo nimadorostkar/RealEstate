@@ -61,6 +61,18 @@ def search(request):
         search_area_size = request.POST['area_size']
         search_area_size_rage = search_area_size.split(',')
 
+        print('-------------------')
+        print(' search_buy_status ')
+        print(search_buy_status)
+        print('-------------------')
+        print(' search_estate_status ')
+        print(search_estate_status)
+        print('-------------------')
+        print(' search_area ')
+        print(search_area)
+
+
+
         if search:
             general_match = models.Item.objects.filter( Q(buy_status__icontains=search_buy_status) & Q(area__name__icontains=search_area) & Q(estate_status__icontains=search_estate_status)  )
             partial_match = models.Item.objects.filter( Q(area_size__range=(search_area_size_rage[0],search_area_size_rage[1])) )
