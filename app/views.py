@@ -61,6 +61,7 @@ def search(request):
         search_area_size = request.POST['area_size']
         search_area_size_rage = search_area_size.split(',')
 
+
         print('-------------------')
         print(' search_buy_status ')
         print(search_buy_status)
@@ -70,7 +71,6 @@ def search(request):
         print('-------------------')
         print(' search_area ')
         print(search_area)
-
 
 
         if search:
