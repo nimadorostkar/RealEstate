@@ -19,7 +19,7 @@ from django.contrib import messages
 from django.views import generic
 from django.utils.decorators import method_decorator
 from allauth.utils import generate_unique_username
-from app.models import Item, Profile, Area, ItemImage, Ownership, Settings
+from app.models import Item, Profile, Area, ItemImage, Ownership, Settings, Contact
 from blogApp.models import Post, Categories
 from django.contrib.auth.decorators import user_passes_test
 import blogApp
@@ -1156,6 +1156,7 @@ def crm_post_edit(request):
 
 
 
+#------------------------------------------------------------------------------
 @login_required(login_url='/login')
 def crm_post_edit_done(request):
     uProfile = get_object_or_404(models.Profile, user=request.user)
@@ -1164,17 +1165,21 @@ def crm_post_edit_done(request):
         Post = get_object_or_404(blogApp.models.Post, id=request.POST['id'])
         category = Categories.objects.all()
         if request.method == 'POST':
-            Post.title = request.POST['title']
-            Post.slug = request.POST['slug']
-            Post.author = request.user
-            if (request.FILES): Post.img = request.FILES['img']
-            Post.body = request.POST['body']
-            Post.category = get_object_or_404(Categories, id=request.POST['category'])
-            Post.save()
+            if request.POST.get('remove'):
+                Post.delete()
+                return redirect('crm_blog')
+            else:
+                Post.title = request.POST['title']
+                Post.slug = request.POST['slug']
+                Post.author = request.user
+                if (request.FILES): Post.img = request.FILES['img']
+                Post.body = request.POST['body']
+                Post.category = get_object_or_404(Categories, id=request.POST['category'])
+                Post.save()
 
-            success = 'تغیرات اعمال شد'
-            context = {'success':success, 'Post':Post, 'category':category}
-            return render(request, 'crm/home/crm_post_edit.html', context)
+                success = 'تغیرات اعمال شد'
+                context = {'success':success, 'Post':Post, 'category':category}
+                return render(request, 'crm/home/crm_post_edit.html', context)
 
         context = {'Post':Post, 'category':category}
         html_template = loader.get_template('crm/home/crm_post_edit.html')
@@ -1189,6 +1194,7 @@ def crm_post_edit_done(request):
 
 
 
+#------------------------------------------------------------------------------
 @login_required(login_url='/login')
 def post_cat(request):
     uProfile = get_object_or_404(models.Profile, user=request.user)
@@ -1212,6 +1218,22 @@ def post_cat(request):
         return redirect("/")
 
 
+
+
+
+
+
+#------------------------------------------------------------------------------
+@user_passes_test(lambda u: u.is_superuser)
+def contacts(request):
+    uProfile = get_object_or_404(models.Profile, user=request.user)
+    if uProfile.user_type == 'کارشناس' or uProfile.user_type == 'مدیر' :
+
+        context = {'contacts':Contact.objects.all() }
+        return render(request, 'crm/home/contacts.html', context)
+
+    else:
+        return redirect("/")
 
 
 

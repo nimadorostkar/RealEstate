@@ -256,6 +256,8 @@ class Contact(models.Model):
     name = models.CharField(max_length=80, verbose_name="نام")
     phone = models.CharField(max_length=50,verbose_name = " شماره تماس  ")
     body = models.TextField(verbose_name="متن پیام")
+    CHOICES = ( ('جدید','جدید'), ('برسی شده','برسی شده') )
+    status = models.CharField(max_length=30,choices=CHOICES, default='جدید', verbose_name = "وضعیت")
     created_on = models.DateTimeField(auto_now_add=True)
 
     def j_created_on(self):

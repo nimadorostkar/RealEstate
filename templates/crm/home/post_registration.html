@@ -35,14 +35,14 @@
                    <div class="col-md-12 pr-md-4">
                      <div class="form-group">
                        <label><p class="text-xs text-secondary mb-0"> عنوان پست </p></label>
-                       <input name="title" type="text" class="form-control">
+                       <input name="title" type="text" class="form-control" required>
                      </div>
                    </div>
                    <div class="col-md-4 pr-md-4">
                      <div class="form-group">
                        <label><p class="text-xs text-secondary mb-0"> دسته بندی </p></label>
                        <a style="color:green;" href="{% url 'post_cat' %}"> <span style="font-size:12px;">+</span> <span style="font-size:9px;">افزودن جدید</span> </a>
-                       <select name="category" class="form-control selectpicker" data-live-search="true">
+                       <select name="category" class="form-control selectpicker" data-live-search="true" required>
                          {% for Cat in category %}
                            <option data-tokens="{{Cat.categoryname}}" value={{Cat.id}}>{{Cat.categoryname}}</option>
                          {% endfor %}
@@ -52,13 +52,13 @@
                    <div class="col-md-4 pr-md-4">
                      <div class="form-group">
                        <label><p class="text-xs text-secondary mb-0"> نشانی پیوند (link) </p></label>
-                       <input name="slug" type="text" class="form-control" placeholder="نشانی مد نظر برای پست">
+                       <input name="slug" type="text" class="form-control" placeholder="نشانی مد نظر برای پست" required>
                      </div>
                   </div>
                   <div class="col-md-4 pr-md-4">
                       <div class="form-group">
                           <label><p class="text-xs text-secondary"> تصویر پست </p></label>
-                          <input name="img" type="file" class="text-xxs">
+                          <input name="img" type="file" class="text-xxs" required>
                       </div>
                   </div>
                 </div>
@@ -67,7 +67,7 @@
                   <div class="col-md-12 pr-md-4">
                     <div class="form-group">
                       <label><p class="text-xs text-secondary mb-0"> متن پست </p></label>
-                      <textarea name="body" class="form-control" rows="15" cols="50"> </textarea>
+                      <textarea name="body" class="form-control" rows="15" cols="50" required> </textarea>
                     </div>
                   </div>
                </div>
