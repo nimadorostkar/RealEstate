@@ -263,6 +263,9 @@ class Contact(models.Model):
     def j_created_on(self):
         return jalali_converter(self.created_on)
 
+    def get_absolute_url(self):
+        return reverse('contact_detail',args=[self.id])
+
     class Meta:
       verbose_name = "تماس"
       verbose_name_plural = "تماس ها"

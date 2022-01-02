@@ -1241,6 +1241,24 @@ def contacts(request):
 
 
 
+#------------------------------------------------------------------------------
+@user_passes_test(lambda u: u.is_superuser)
+def contact_detail(request, id):
+    uProfile = get_object_or_404(models.Profile, user=request.user)
+    if uProfile.user_type == 'کارشناس' or uProfile.user_type == 'مدیر' :
+
+        contact = get_object_or_404(Contact, id=id)
+        contact.status = 'برسی شده'
+        contact.save()
+
+        html_template = loader.get_template('crm/home/contact_detail.html')
+        return HttpResponse(html_template.render({'contact':contact}, request))
+
+    else:
+        return redirect("/")
+
+
+
 
 
 

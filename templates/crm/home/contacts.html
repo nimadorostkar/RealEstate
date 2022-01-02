@@ -34,7 +34,7 @@
                 <tbody>
                  {% for Contact in contacts %}
                       <tr>
-                        <td class="align-middle text-center"> <a href="#"> <h6> {{ Contact.name  }} </h6> </a> </td>
+                        <td class="align-middle text-center"> <a href="{{ Contact.get_absolute_url }}"> <h6> {{ Contact.name  }} </h6> </a> </td>
                         <td class="align-middle text-center"> <span> {{ Contact.phone }}  </span> </td>
                         <td class="align-middle text-center"> <span class="text-xs"> {{ Contact.j_created_on }} </span> </td>
                         <td class="align-middle text-center">
@@ -45,7 +45,6 @@
                           {% endif %}
                         </td>
                       </tr>
-
                  {% endfor %}
                 </tbody>
               </table>

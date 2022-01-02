@@ -1,0 +1,65 @@
+{% extends 'crm/layouts/base.html' %}
+
+{% block title %} پیام {{ contact }} {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+    <!-- select search  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="/static/assets/css/bootstrap336.min.css" rel="stylesheet" />
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+
+
+
+<div class="container-fluid py-4">
+
+  <div class="row" dir="rtl">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header pb-0">
+          <br>
+          <h6> <span class="text-xs text-secondary mb-0"> پیام </span> {{ contact }}  <span class="text-xs text-secondary mb-0"> ( {{ contact.phone }} ) </span> </h6>
+          <br>
+          {{ contact.body }}
+          <br><br>
+          <div align="left">
+            <p class="text-xs text-secondary mb-0"> {{ contact.j_created_on }} </p>
+          </div>
+          <br><br>
+        </div>
+       </div>
+     </div>
+   </div>
+
+
+
+
+    {% include "crm/includes/footer.html" %}
+
+
+</div>
+
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script>
+
+
+    $(function() {
+      $('.selectpicker').selectpicker({
+        liveSearch: true
+      });
+    });
+
+</script>
+{% endblock javascripts %}

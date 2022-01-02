@@ -12,7 +12,6 @@ urlpatterns = [
     path('search',views.search,name='search'),
     path('sales_expert_registration', views.sales_expert_registration, name='sales_expert_registration'),
     path('addarea', views.addarea, name='addarea'),
-    path('contacts', views.contacts, name='contacts'),
     # Items
     path('crm_items', login_required(crm_items.as_view()), name='crm_items'),
     path('crm_items_detail/<int:id>/',views.crm_items_detail,name='crm_items_detail'),
@@ -44,4 +43,7 @@ urlpatterns = [
     path('crm_post_edit',views.crm_post_edit,name='crm_post_edit'),
     path('crm_post_edit_done',views.crm_post_edit_done,name='crm_post_edit_done'),
     path('post_cat',views.post_cat,name='post_cat'),
+    # Contact
+    path('contacts', views.contacts, name='contacts'),
+    path('contact_detail/<int:id>/', views.contact_detail, name='contact_detail'),
 ]
