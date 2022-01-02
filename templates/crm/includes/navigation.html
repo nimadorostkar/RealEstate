@@ -12,7 +12,7 @@
         </nav>
         <div class="collapse navbar-collapse me-md-0 me-4" id="navbar">
           <ul class="navbar-nav mb-2 mb-sm-0 ms-sm-auto justify-content-sm-end">
-            <li class="nav-item d-xl-none ps-4 d-flex align-items-center">
+            <li class="nav-item d-xl-none pe-2 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
                 <div class="sidenav-toggler-inner">
                   <i class="sidenav-toggler-line"></i>
@@ -21,8 +21,20 @@
                 </div>
               </a>
             </li>
+
+            &nbsp;&nbsp;
+
+            <li class="nav-item pe-2 d-flex align-items-center">
+              <a href="/" class="nav-link text-body p-0">
+                <i class="fa fa-home fixed-plugin-button-nav cursor-pointer"></i>
+              </a>
+            </li>
+
+             &nbsp;&nbsp;
+
+
            {% if request.user.is_superuser %}
-            <li class="nav-item px-4 d-flex align-items-center">
+            <li class="nav-item pe-2 d-flex align-items-center">
               <a href="{% url 'admin:index' %}" class="nav-link text-body p-0">
                 <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
               </a>
