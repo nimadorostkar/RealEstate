@@ -75,18 +75,9 @@ def search(request):
             elif search_buy_status == 'پیش فروش':
                 price_match = models.Item.objects.filter( Q(price__range=(search_price_rage[0],search_price_rage[1])) )
             else:
-                price_match = models.Item.objects.filter( Q(rent__range=(search_rent_rage[0],search_rent_rage[1])) & Q(deposit__range=(search_mortgage_rage[0],search_mortgage_rage[1])) & Q(price__range=(search_price_rage[0],search_price_rage[1]))   )
+                price_match = models.Item.objects.filter( Q(rent__range=(search_rent_rage[0],search_rent_rage[1])) & Q(deposit__range=(search_mortgage_rage[0],search_mortgage_rage[1])) & Q(price__range=(search_price_rage[0],search_price_rage[1]))  )
 
             match = list(chain(general_match & partial_match & price_match ))
-
-            print('------------------------------------ general: ')
-            print(general_match)
-            print('------------------------------------ partial: ')
-            print(partial_match)
-            print('-------------------------------------- price: ')
-            print(price_match)
-            print('---------------------------------------- all: ')
-            print(match)
 
             if match:
                 return render(request,'search.html', {'sr': match, 'areas':areas })
@@ -95,7 +86,6 @@ def search(request):
         else:
             return HttpResponseRedirect('/search')
     return render(request, 'search.html', {'areas':areas })
-
 
 
 
