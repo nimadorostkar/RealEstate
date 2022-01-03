@@ -62,17 +62,6 @@ def search(request):
         search_area_size_rage = search_area_size.split(',')
 
 
-        print('-------------------')
-        print(' search_buy_status ')
-        print(search_buy_status)
-        print('-------------------')
-        print(' search_estate_status ')
-        print(search_estate_status)
-        print('-------------------')
-        print(' search_area ')
-        print(search_area)
-
-
         if search:
             general_match = models.Item.objects.filter( Q(buy_status__icontains=search_buy_status) & Q(area__name__icontains=search_area) & Q(estate_status__icontains=search_estate_status)  )
             partial_match = models.Item.objects.filter( Q(area_size__range=(search_area_size_rage[0],search_area_size_rage[1])) )
@@ -89,6 +78,15 @@ def search(request):
                 price_match = models.Item.objects.filter( Q(rent__range=(search_rent_rage[0],search_rent_rage[1])) & Q(deposit__range=(search_mortgage_rage[0],search_mortgage_rage[1])) & Q(price__range=(search_price_rage[0],search_price_rage[1]))   )
 
             match = list(chain(general_match & partial_match & price_match ))
+
+            print('------------------------------------ general: ')
+            print(general_match)
+            print('------------------------------------ partial: ')
+            print(partial_match)
+            print('-------------------------------------- price: ')
+            print(price_match)
+            print('---------------------------------------- all: ')
+            print(match)
 
             if match:
                 return render(request,'search.html', {'sr': match, 'areas':areas })
