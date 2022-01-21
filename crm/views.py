@@ -934,29 +934,33 @@ def incoming_remove(request):
 @user_passes_test(lambda u: u.is_superuser)
 def sales_expert_registration(request):
     uProfile = get_object_or_404(models.Profile, user=request.user)
+    msg = None
+
     if uProfile.user_type == 'کارشناس' or uProfile.user_type == 'مدیر' :
 
         if request.method=="POST":
+            if request.POST["username"] in models.User.objects.all().values_list('username',flat=True):
+                msg = 'نام کاربری وارد شده قبلاً استفاده شده، لطفاً نام دیگری وارد کنید'
+            else:
+                new_user = User()
+                new_user.first_name = request.POST['fname']
+                new_user.last_name = request.POST['lname']
+                new_user.email = request.POST['email']
+                new_user.username = request.POST['username']
+                new_user.set_password(request.POST['password'])
+                new_user.save()
 
-            new_user = User()
-            new_user.first_name = request.POST['fname']
-            new_user.last_name = request.POST['lname']
-            new_user.email = request.POST['email']
-            new_user.username = request.POST['username']
-            new_user.set_password(request.POST['password'])
-            new_user.save()
+                new_profile = get_object_or_404(models.Profile, user=new_user)
+                new_profile.phone = request.POST['phone']
+                new_profile.additional_information = request.POST['additional_information']
+                new_profile.user_type = 'کارشناس'
+                new_profile.save()
 
-            new_profile = get_object_or_404(models.Profile, user=new_user)
-            new_profile.phone = request.POST['phone']
-            new_profile.additional_information = request.POST['additional_information']
-            new_profile.user_type = 'کارشناس'
-            new_profile.save()
+                success = 'کارشناس جدید با نام کاربری: '+ request.POST['username'] +' و رمزعبور: '+ request.POST['password'] +' ایجاد شد'
+                context = {'success':success}
+                return render(request, 'crm/home/sales_expert_registration.html', context)
 
-            success = 'کارشناس جدید با نام کاربری: '+ request.POST['username'] +' و رمزعبور: '+ request.POST['password'] +' ایجاد شد'
-            context = {'success':success}
-            return render(request, 'crm/home/sales_expert_registration.html', context)
-
-        context = {}
+        context = {"msg":msg}
         html_template = loader.get_template('crm/home/sales_expert_registration.html')
         return HttpResponse(html_template.render(context, request))
 
