@@ -46,7 +46,7 @@
                   <div class="col-md-2 pr-md-4">
                     <div class="form-group">
                       <label><p class="text-xs text-secondary mb-0"> کد فایل </p></label>
-                      <input name="code" type="text" class="form-control" value={{defaultcode}}>
+                      <input name="code" type="text" class="form-control" required>
                     </div>
                   </div>
 
@@ -177,6 +177,7 @@
 
                  <div class="card-footer" align="center">
                    <button type="submit" class="btn bg-gradient-info my-1 me-1"> ثبت </button>
+                     <p style="color:red;"> {% if msg %} {{ msg | safe }} {% else %} {% endif %} </p>
                      <a href="{{ link.get_absolute_crm_url }}"> <p style="color:green;"> {{ success }} </p> </a>
                  </div>
 
