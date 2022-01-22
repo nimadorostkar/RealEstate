@@ -1112,25 +1112,27 @@ class crm_blog(generic.ListView):
 @login_required(login_url="/login/")
 def post_registration(request):
     uProfile = get_object_or_404(models.Profile, user=request.user)
+    msg = None
     if uProfile.user_type == 'کارشناس' or uProfile.user_type == 'مدیر' :
-
         category = Categories.objects.all()
-
         if request.method=="POST":
-            new_post = Post()
-            new_post.title = request.POST['title']
-            new_post.slug = request.POST['slug']
-            new_post.author = request.user
-            new_post.img = request.FILES['img']
-            new_post.body = request.POST['body']
-            new_post.category = get_object_or_404(Categories, id=request.POST['category'])
-            new_post.save()
+            if request.POST["slug"] in Post.objects.all().values_list('slug',flat=True):
+                msg = 'نشانی پیوند وارد شده قبلاً استفاده شده، لطفاً آدرس لینک دیگری وارد کنید'
+            else:
+                new_post = Post()
+                new_post.title = request.POST['title']
+                new_post.slug = request.POST['slug']
+                new_post.author = request.user
+                new_post.img = request.FILES['img']
+                new_post.body = request.POST['body']
+                new_post.category = get_object_or_404(Categories, id=request.POST['category'])
+                new_post.save()
 
-            success = 'پست جدید ایجاد شد'
-            context = {'success':success, 'category':category}
-            return render(request, 'crm/home/post_registration.html', context)
+                success = 'پست جدید ایجاد شد'
+                context = {'success':success, 'category':category}
+                return render(request, 'crm/home/post_registration.html', context)
 
-        context = {'category':category}
+        context = {'category':category, "msg":msg }
         html_template = loader.get_template('crm/home/post_registration.html')
         return HttpResponse(html_template.render(context, request))
 
@@ -1168,13 +1170,13 @@ def crm_post_edit_done(request):
 
         Post = get_object_or_404(blogApp.models.Post, id=request.POST['id'])
         category = Categories.objects.all()
+
         if request.method == 'POST':
             if request.POST.get('remove'):
                 Post.delete()
                 return redirect('crm_blog')
             else:
                 Post.title = request.POST['title']
-                Post.slug = request.POST['slug']
                 Post.author = request.user
                 if (request.FILES): Post.img = request.FILES['img']
                 Post.body = request.POST['body']

@@ -67,7 +67,7 @@
                   <div class="col-md-12 pr-md-4">
                     <div class="form-group">
                       <label><p class="text-xs text-secondary mb-0"> متن پست </p></label>
-                      <textarea name="body" class="form-control" rows="15" cols="50" required> </textarea>
+                      <textarea name="body" class="form-control" rows="6" cols="50" required> </textarea>
                     </div>
                   </div>
                </div>
@@ -76,6 +76,7 @@
                  <div class="card-footer" align="center">
                    <button type="submit" class="btn bg-gradient-info my-1 me-1"> ذخیره </button>
                     <p style="color:green;"> {{ success }} </p>
+                    <p style="color:red;"> {% if msg %} {{ msg | safe }} {% else %} {% endif %} </p>
                  </div>
 
               </form>

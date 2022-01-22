@@ -48,12 +48,6 @@
                        </select>
                      </div>
                    </div>
-                   <div class="col-md-4 pr-md-4">
-                     <div class="form-group">
-                       <label><p class="text-xs text-secondary mb-0"> نشانی پیوند (link) </p></label>
-                       <input name="slug" type="text" class="form-control" placeholder="نشانی مد نظر برای پست" value="{{ Post.slug }}">
-                     </div>
-                  </div>
                   <div class="col-md-4 pr-md-4">
                       <div class="form-group">
                           <label><p class="text-xs text-secondary"> تصویر پست </p></label>
@@ -66,7 +60,7 @@
                   <div class="col-md-12 pr-md-4">
                     <div class="form-group">
                       <label><p class="text-xs text-secondary mb-0"> متن پست </p></label>
-                      <textarea name="body" class="form-control" rows="15" cols="50"> {{ Post.body }} </textarea>
+                      <textarea name="body" class="form-control" rows="7" cols="50"> {{ Post.body }} </textarea>
                     </div>
                   </div>
                </div>
