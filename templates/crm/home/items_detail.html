@@ -68,7 +68,7 @@
           <div class="row">
             <div class="col-lg-9">
               <div class="d-flex flex-column h-100">
-                <p class="text-lg mb-1 pt-2 text-bold"> <i class="far fa-calendar-alt me-2"></i> <small> {{ item.date|date:'Y-m-d' }} </small> </p>
+                <p class="text-lg mb-1 pt-2 text-bold"> <i class="far fa-calendar-alt me-2"></i> <small> {{ item.date|date:'Y,m,d' }} </small> </p>
                 <h3 dir="rtl" class="font-weight-bolder">
                   {{ item }}
                   <a class="badge badge-sm bg-gradient-info  btn btn-link text-dark  bg-gradient text-xxs" href="{{ item.get_absolute_edit_url }}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i> ویرایش </a>
