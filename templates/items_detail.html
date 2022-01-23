@@ -62,11 +62,11 @@
 
                                            {% for ItemImage in item_img %}
                                              <li data-thumb="{{ ItemImage.Image.url }}">
-                                                 <img src="{{ ItemImage.Image.url }}"/>
+                                                 <img style="max-height:400px;width:auto;" src="{{ ItemImage.Image.url }}"/>
                                              </li>
                                            {% endfor %}
                                            <li data-thumb="{{ Item.image.url }}">
-                                               <img src="{{ Item.image.url }}"/>
+                                               <img style="max-height:400px;width:auto;" src="{{ Item.image.url }}"/>
                                            </li>
 
                                         </ul>

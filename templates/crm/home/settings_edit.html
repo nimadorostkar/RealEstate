@@ -152,7 +152,7 @@
                       {% csrf_token %}
                       <div class="form-group">
                           <label><p class="text-xs text-secondary"> تصویر لوگو </p></label>
-                          <input name="logo" type="file" class="text-xxs" value="{{ settings.logo.url }}">
+                          <input name="logo" type="file" class="text-xxs" required>
                           <br>
                           <button type="submit" class="btn bg-gradient-secondary my-1 me-1 text-xxs"> آپلود لوگو </button>
                       </div>
@@ -163,7 +163,7 @@
                       {% csrf_token %}
                       <div class="form-group">
                           <label><p class="text-xs text-secondary"> تصویر سربرگ (header)  </p></label>
-                          <input name="header_image" type="file" class="text-xxs" value="{{ settings.header_image.url }}">
+                          <input name="header_image" type="file" class="text-xxs" required>
                           <br>
                           <button type="submit" class="btn bg-gradient-secondary my-1 me-1 text-xxs"> آپلود تصویر سربرگ </button>
                       </div>

@@ -614,7 +614,7 @@ def pishfroosh_registration(request):
                 link = get_object_or_404(models.Item, id=item.id)
 
                 context = {'area':area, 'success':success, 'link':link, 'msg':msg }
-                return render(request, 'crm/home/rahnoejare_registration.html', context)
+                return render(request, 'crm/home/pishfroosh_registration.html', context)
 
         context = {'area':area, 'msg':msg }
         html_template = loader.get_template('crm/home/pishfroosh_registration.html')
