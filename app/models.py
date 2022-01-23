@@ -5,7 +5,6 @@ from django.urls import reverse
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.template.defaultfilters import truncatechars
-from mptt.models import MPTTModel, TreeForeignKey
 from extensions.utils import jalali_converter
 from django.template.defaultfilters import truncatechars
 from django_jalali.db import models as jmodels
