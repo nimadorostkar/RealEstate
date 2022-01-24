@@ -12,6 +12,9 @@ from . import models
 
 
 
+
+
+
 #------------------------------------------------------------------------------
 class blog(generic.ListView):
    model = Post
@@ -84,6 +87,7 @@ class blogdetail(DetailView):
       context["cat_list"] = cat_list
       context["latestpost_list"] = latestpost_list
       return context
+
 
 
 
