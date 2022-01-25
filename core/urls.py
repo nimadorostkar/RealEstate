@@ -9,6 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("authentication.urls")),
     path('', include("app.urls")),
+    path('', include('django_pwa.urls')),
     path('blog/', include('blogApp.urls')),
     path('crm/', include('crm.urls')),
 ]
