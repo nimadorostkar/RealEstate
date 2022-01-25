@@ -6,7 +6,7 @@ class CreateMetaTemplateTagTest(TestCase):
     def setUp(self):
         context = Context({})
         template_to_render = Template(
-            '{% load pwa %}'
+            '{% load pwa_webpush %}'
             '{% progressive_web_app_meta %}'
         )
         self.rendered_template = template_to_render.render(context)

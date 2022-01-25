@@ -1,9 +1,5 @@
 <!DOCTYPE html>
 
-{% load pwa %}
-{% progressive_web_app_meta %}
-
-
 <html lang="en">
 
 <head>
@@ -12,9 +8,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="/static/assets/crm/img/logo.png' %}">
   <link rel="icon" type="image/png" href="/static/assets/crm/img/logo.png' %}">
 
-  <title>
-    {{ settings.title }} | {% block title %}{% endblock %}
-  </title>
+  <title> {{ settings.title }} | {% block title %}{% endblock %} </title>
 
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <link href="/static/assets/crm/css/nucleo-icons.css' %}" rel="stylesheet" />
@@ -47,6 +41,5 @@
 
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
-
 </body>
 </html>

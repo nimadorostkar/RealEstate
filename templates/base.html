@@ -5,16 +5,11 @@
 
 <!DOCTYPE html>
 
-{% load pwa %}
-{% progressive_web_app_meta %} 
-
 <html class="no-js">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>
-      {{ settings.title }}  {% block title %}{% endblock %}
-  </title>
+  <title> {{ settings.title }}  {% block title %}{% endblock %} </title>
   <meta name="description" content="{{ settings.introduction_text }}">
   <meta name="author" content="Nima Dorostkar">
   <meta name="keyword" content="real estate, atrotech, amlak.app , nima dorostkar, {{ settings.title }} ">
