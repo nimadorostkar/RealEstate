@@ -6,11 +6,12 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),          # Django admin route
-    path("", include("authentication.urls")), # Auth routes - login / register
-    path("", include("app.urls")),            # UI Kits Html files
+    path('admin/', admin.site.urls),
+    path('', include("authentication.urls")),
+    path('', include("app.urls")),
+    path('', include('pwa.urls')),
     path('blog/', include('blogApp.urls')),
-    path('crm/', include('crm.urls'))
+    path('crm/', include('crm.urls')),
 ]
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

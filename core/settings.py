@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'authentication',
+    'pwa',
     'django.contrib.humanize',
     'import_export',
     'bootstrapform',
@@ -115,22 +116,6 @@ JALALI_DATE_DEFAULTS = {
 
 
 
-# EXTRA SETTINGS
-# https://pypi.org/project/django-extra-settings/
-
-
-# if True the template tag will fallback to django.conf.settings,
-# very useful to retrieve conf settings such as DEBUG.
-EXTRA_SETTINGS_FALLBACK_TO_CONF_SETTINGS = True
-# the upload_to path value of settings of type 'file'
-EXTRA_SETTINGS_FILE_UPLOAD_TO = 'files'
-# the upload_to path value of settings of type 'image'
-EXTRA_SETTINGS_IMAGE_UPLOAD_TO = 'images'
-
-
-
-
-
 
 
 WSGI_APPLICATION = 'core.wsgi.application'
@@ -162,6 +147,55 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
+
+
+
+
+# PWA
+
+PWA_APP_NAME = 'املاک اَپ'
+PWA_APP_DESCRIPTION = "دستیار اختصاصی مشاوران املاک"
+PWA_APP_THEME_COLOR = '#fff'
+PWA_APP_BACKGROUND_COLOR = '#5f4dee'
+PWA_APP_DISPLAY = 'standalone'
+PWA_APP_SCOPE = '/'
+PWA_APP_ORIENTATION = 'any'
+PWA_APP_START_URL = '/'
+PWA_APP_STATUS_BAR_COLOR = 'default'
+PWA_APP_ICONS = [
+	{
+		'src': 'static/assets/crm/img/amlak.png',
+		'sizes': '160x160'
+	}
+]
+PWA_APP_ICONS_APPLE = [
+	{
+		'src': 'static/assets/crm/img/amlak.png',
+		'sizes': '160x160'
+	}
+]
+PWA_APP_SPLASH_SCREEN = [
+	{
+		'src': 'static/assets/crm/img/amlak.png',
+		'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)'
+	}
+]
+PWA_APP_DIR = 'rtl'
+PWA_APP_LANG = 'fa-ir'
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # Internationalization
@@ -196,6 +230,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_COOKIE_HTTPONLY = True
 
-
+PWA_SERVICE_WORKER_PATH = os.path.join(CORE_DIR, 'static/assets/js', 'serviceworker.js')
 
 #############################################################
