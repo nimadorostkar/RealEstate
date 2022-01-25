@@ -19,4 +19,3 @@ graphene-django
 django_jalali
 unicodecsv
 django-allauth
-django-pwa-webpush

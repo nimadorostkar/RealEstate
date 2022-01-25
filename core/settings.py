@@ -29,7 +29,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'authentication',
-    'django_pwa',
     'django.contrib.humanize',
     'import_export',
     'bootstrapform',
@@ -115,75 +114,6 @@ JALALI_DATE_DEFAULTS = {
 
 
 
-#---------------------------------------- P W A -------------------
-PWA_NAME = 'املاک اَپ'
-PWA_SHORT_NAME = 'Amlak.App'
-PWA_ICONS = [
-    {
-        'src': '/static/assets/crm/img/amlak.png',
-        "sizes": "128x128",
-        "type": "image/png"
-    }, {
-        'src': '/static/assets/crm/img/amlak.png',
-        "sizes": "144x144",
-        "type": "image/png"
-    }, {
-        'src': '/static/assets/crm/img/amlak.png',
-        "sizes": "152x152",
-        "type": "image/png"
-    }, {
-        'src': '/static/assets/crm/img/amlak.png',
-        "sizes": "192x192",
-        "type": "image/png"
-    }, {
-        'src': '/static/assets/crm/img/amlak.png',
-        "sizes": "256x256",
-        "type": "image/png"
-    }, {
-        'src': '/static/assets/crm/img/amlak.png',
-        "sizes": "512x512",
-        "type": "image/png"
-    }
-]
-
-
-'''
-PWA_APP_NAME = 'املاک اَپ'
-PWA_APP_DESCRIPTION = "دستیار اختصاصی مشاوران املاک"
-PWA_APP_THEME_COLOR = '#4f3cda'
-PWA_APP_BACKGROUND_COLOR = '#ffffff'
-PWA_APP_DISPLAY = 'standalone'
-PWA_APP_SCOPE = '/'
-PWA_APP_ORIENTATION = 'any'
-PWA_APP_START_URL = '/'
-PWA_APP_STATUS_BAR_COLOR = 'default'
-PWA_APP_ICONS = [
-    {
-        'src': '/static/assets/crm/img/amlak.png',
-        'sizes': '160x160'
-    }
-]
-PWA_APP_ICONS_APPLE = [
-    {
-        'src': '/static/assets/crm/img/amlak.png',
-        'sizes': '160x160'
-    }
-]
-PWA_APP_SPLASH_SCREEN = [
-    {
-        'src': '/static/assets/crm/img/amlak.png',
-        'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)'
-    }
-]
-PWA_APP_DIR = 'rtl'
-PWA_APP_LANG = 'fa-ir'
-'''
-
-
-
-
-
-
 
 
 WSGI_APPLICATION = 'core.wsgi.application'
@@ -248,7 +178,5 @@ MEDIA_URL = '/media/' # Public URL at the browser
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_COOKIE_HTTPONLY = True
-
-PWA_WORKER_LOCATION = os.path.join('static', 'django_pwa_demo', 'service-worker.js')
 
 #############################################################

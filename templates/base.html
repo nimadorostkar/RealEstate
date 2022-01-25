@@ -1,7 +1,5 @@
 {% load static %}
 {% load bootstrap %}
-{% load pwa_extras %}
-
 
 <!DOCTYPE html>
 
@@ -10,7 +8,6 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title> {{ settings.title }}  {% block title %}{% endblock %} </title>
-  {% load_manifest %}
   <meta name="description" content="{{ settings.introduction_text }}">
   <meta name="author" content="Nima Dorostkar">
   <meta name="keyword" content="real estate, atrotech, amlak.app , nima dorostkar, {{ settings.title }} ">
@@ -255,7 +252,6 @@
     <!-- Specific Page JS goes HERE  -->
     {% block javascripts %}{% endblock javascripts %}
 
-    {% load_worker %}
 
 </body>
 </html>
