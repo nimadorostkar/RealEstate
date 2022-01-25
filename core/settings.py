@@ -116,6 +116,10 @@ JALALI_DATE_DEFAULTS = {
 
 
 
+
+
+
+
 WSGI_APPLICATION = 'core.wsgi.application'
 
 # Database
@@ -180,3 +184,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CSRF_COOKIE_HTTPONLY = True
 
 #############################################################
+
+
+# PWA
+# https://github.com/svvitale/django-progressive-web-app
+# https://django-simple-pwa.readthedocs.io/fa/latest/quickstart.html
+
+
+
+
+
+
+
+
+
+# End
