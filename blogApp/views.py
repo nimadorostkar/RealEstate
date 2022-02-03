@@ -14,7 +14,6 @@ from . import models
 
 
 
-
 #------------------------------------------------------------------------------
 class blog(generic.ListView):
    model = Post
