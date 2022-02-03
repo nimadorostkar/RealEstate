@@ -26,6 +26,9 @@ import blogApp
 
 
 
+
+
+
 #------------------------------------------------------------------------------
 @login_required(login_url="/login/")
 def index(request):
@@ -48,7 +51,7 @@ def index(request):
         else:
             open_reqs_count = models.Order_request.objects.filter(user=uProfile).exclude(status='تکمیل شده').count()
             customers_count = models.Profile.objects.filter( Q(user_type='کاربر') | Q(user_type='کاربر ویژه') and Q(sales_expert=uProfile ) ).count()
-            items_count = models.Item.objects.filter(sales_expert=request.user).count()
+            items_count = models.Item.objects.all().count()
             new_order_count = models.Order_request.objects.filter( status='جدید' , user=uProfile ).count()
 
             incomings = models.Order_incomings.objects.filter(user=uProfile)
@@ -154,16 +157,12 @@ def crm_items_detail(request, id):
     uProfile = get_object_or_404(models.Profile, user=request.user)
     if uProfile.user_type == 'کارشناس' or uProfile.user_type == 'مدیر' :
         item = get_object_or_404(models.Item, id=id)
-        if item.sales_expert == request.user or uProfile.user_type=="مدیر" :
-            images = ItemImage.objects.filter(item=item)
-            reqs = models.Order_request.objects.filter(item=item).order_by('-date_created')
-            context = {'item':item, 'images':images, 'reqs':reqs}
-            return render(request, 'crm/home/items_detail.html', context)
-        else:
-            return redirect("crm_items")
+        images = ItemImage.objects.filter(item=item)
+        reqs = models.Order_request.objects.filter(item=item).order_by('-date_created')
+        context = {'item':item, 'images':images, 'reqs':reqs}
+        return render(request, 'crm/home/items_detail.html', context)
     else:
         return redirect("/")
-
 
 
 

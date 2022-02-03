@@ -89,7 +89,7 @@
                 </thead>
                 <tbody>
                  {% for Item in items %}
-                   {% if Item.sales_expert == user or uProfile.user_type == 'مدیر' %}
+
                       <tr>
                         <td class="align-middle text-center">
                            <a href="{{ Item.get_absolute_crm_url }}">
@@ -128,7 +128,7 @@
                           {% endif %}
                         </td>
                       </tr>
-                    {% endif %}
+
                  {% endfor %}
                 </tbody>
               </table>
