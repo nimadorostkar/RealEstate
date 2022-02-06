@@ -29,6 +29,7 @@ import blogApp
 
 
 
+
 #------------------------------------------------------------------------------
 @login_required(login_url="/login/")
 def index(request):
@@ -1268,6 +1269,8 @@ def contact_detail(request, id):
 
     else:
         return redirect("/")
+
+
 
 
 

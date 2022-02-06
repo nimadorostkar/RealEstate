@@ -12,7 +12,6 @@ from app.models import Profile, Contact
 
 
 
-
 def notification(request):
     if request.user.is_superuser:
         return {
