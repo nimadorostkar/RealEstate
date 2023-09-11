@@ -4,7 +4,6 @@ from unipath import Path
 import dj_database_url
 
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).parent
 CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -115,11 +114,6 @@ JALALI_DATE_DEFAULTS = {
 
 
 
-
-
-
-
-
 WSGI_APPLICATION = 'core.wsgi.application'
 
 # Database
@@ -149,7 +143,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -189,8 +182,6 @@ CSRF_COOKIE_HTTPONLY = True
 # PWA
 # https://github.com/svvitale/django-progressive-web-app
 # https://django-simple-pwa.readthedocs.io/fa/latest/quickstart.html
-
-
 
 
 
