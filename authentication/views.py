@@ -11,10 +11,6 @@ from app.models import Profile
 from django.contrib import messages
 
 
-
-
-
-
 #------------------------------------------------------------------------------
 def login_view(request):
     form = LoginForm(request.POST or None)
@@ -34,12 +30,6 @@ def login_view(request):
             msg = 'خطا در تأیید فرم'
 
     return render(request, "accounts/login.html", {"form": form, "msg" : msg })
-
-
-
-
-
-
 
 
 
@@ -71,15 +61,6 @@ def register_user(request):
 
 
 
-
-
-
-
-
-
-
-
-
 #------------------------------------------------------------------------------
 @login_required(login_url='/login')
 def password_change(request):
@@ -96,11 +77,3 @@ def password_change(request):
 
 
 
-
-
-
-
-
-
-
-# End
